@@ -1,0 +1,112 @@
+export const POSITIONS = [
+  "P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "DH", "EH",
+] as const;
+
+export const AT_BAT_RESULTS = {
+  hits: ["single", "double", "triple", "home_run"] as const,
+  walks: ["walk", "hbp", "ibb", "catchers_interference"] as const,
+  outs: [
+    "strikeout_swinging", "strikeout_looking",
+    "groundout", "flyout", "lineout", "popout",
+    "fielders_choice", "double_play",
+    "sacrifice_fly", "sacrifice_bunt",
+  ] as const,
+  errors: ["error"] as const,
+};
+
+export const ALL_RESULTS = [
+  ...AT_BAT_RESULTS.hits,
+  ...AT_BAT_RESULTS.walks,
+  ...AT_BAT_RESULTS.outs,
+  ...AT_BAT_RESULTS.errors,
+] as const;
+
+export const RESULT_LABELS: Record<string, string> = {
+  single: "1B",
+  double: "2B",
+  triple: "3B",
+  home_run: "HR",
+  walk: "BB",
+  hbp: "HBP",
+  ibb: "IBB",
+  strikeout_swinging: "K",
+  strikeout_looking: "KL",
+  groundout: "GO",
+  flyout: "FO",
+  lineout: "LO",
+  popout: "PO",
+  fielders_choice: "FC",
+  double_play: "DP",
+  sacrifice_fly: "SF",
+  sacrifice_bunt: "SAC",
+  error: "E",
+  catchers_interference: "CI",
+};
+
+export const RESULT_COLORS: Record<string, string> = {
+  single: "#22c55e",
+  double: "#3b82f6",
+  triple: "#f97316",
+  home_run: "#ef4444",
+  walk: "#a855f7",
+  hbp: "#a855f7",
+  groundout: "#6b7280",
+  flyout: "#6b7280",
+  lineout: "#6b7280",
+  popout: "#6b7280",
+  strikeout_swinging: "#6b7280",
+  strikeout_looking: "#6b7280",
+  fielders_choice: "#6b7280",
+  double_play: "#6b7280",
+  sacrifice_fly: "#6b7280",
+  sacrifice_bunt: "#6b7280",
+  error: "#eab308",
+  catchers_interference: "#a855f7",
+};
+
+export const LEVELS = [
+  { value: "little_league", label: "Little League" },
+  { value: "travel", label: "Travel Ball" },
+  { value: "rec", label: "Recreational" },
+  { value: "high_school", label: "High School" },
+  { value: "college", label: "College" },
+] as const;
+
+export const PITCH_RESULTS = [
+  "called_strike",
+  "swinging_strike",
+  "foul",
+  "ball",
+  "in_play",
+  "hit_by_pitch",
+] as const;
+
+export const PITCH_RESULT_LABELS: Record<string, string> = {
+  called_strike: "Called Strike",
+  swinging_strike: "Swinging Strike",
+  foul: "Foul",
+  ball: "Ball",
+  in_play: "In Play",
+  hit_by_pitch: "HBP",
+};
+
+export const PITCH_RESULT_SHORT: Record<string, string> = {
+  called_strike: "CS",
+  swinging_strike: "SS",
+  foul: "F",
+  ball: "B",
+  in_play: "IP",
+  hit_by_pitch: "HBP",
+};
+
+export const PITCH_RESULT_COLORS: Record<string, string> = {
+  called_strike: "#ef4444",
+  swinging_strike: "#dc2626",
+  foul: "#f97316",
+  ball: "#3b82f6",
+  in_play: "#22c55e",
+  hit_by_pitch: "#a855f7",
+};
+
+export const SUBSCRIPTION_PRICE = 29.99;
+export const SUBSCRIPTION_PLAN = "annual";

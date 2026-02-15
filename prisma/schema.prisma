@@ -1,0 +1,277 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ AUTH & USER ============
+
+model User {
+  id          String   @id @default(cuid())
+  firebaseUid String   @unique @map("firebase_uid")
+  email       String   @unique
+  displayName String?  @map("display_name")
+  theme       String   @default("dark")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  organizations Organization[]
+  subscription  Subscription?
+
+  @@map("users")
+}
+
+// ============ SUBSCRIPTION ============
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String    @unique @map("user_id")
+  stripeCustomerId     String    @unique @map("stripe_customer_id")
+  stripeSubscriptionId String?   @unique @map("stripe_subscription_id")
+  plan                 String    @default("annual")
+  status               String    @default("active")
+  currentPeriodEnd     DateTime? @map("current_period_end")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+// ============ ORGANIZATION ============
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  ownerId   String   @map("owner_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  teams Team[]
+
+  @@map("organizations")
+}
+
+// ============ TEAM ============
+
+model Team {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+  name           String
+  sport          String   @default("baseball")
+  level          String   @default("little_league")
+  defaultInnings Int      @default(6) @map("default_innings")
+  logoUrl        String?  @map("logo_url")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  players      Player[]
+  seasons      Season[]
+  games        Game[]
+
+  @@map("teams")
+}
+
+// ============ SEASON ============
+
+model Season {
+  id        String    @id @default(cuid())
+  teamId    String    @map("team_id")
+  name      String
+  startDate DateTime? @map("start_date") @db.Date
+  endDate   DateTime? @map("end_date") @db.Date
+  isActive  Boolean   @default(true) @map("is_active")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  team  Team   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  games Game[]
+
+  @@map("seasons")
+}
+
+// ============ PLAYER ============
+
+model Player {
+  id                String   @id @default(cuid())
+  teamId            String   @map("team_id")
+  firstName         String   @map("first_name")
+  lastName          String   @map("last_name")
+  jerseyNumber      Int?     @map("jersey_number")
+  bats              String   @default("right")
+  throwsHand        String   @default("right") @map("throws_hand")
+  primaryPosition   String?  @map("primary_position")
+  secondaryPosition String?  @map("secondary_position")
+  isActive          Boolean  @default(true) @map("is_active")
+  graduationYear    Int?     @map("graduation_year")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  team                Team                @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  lineupEntries       LineupEntry[]
+  atBats              AtBat[]
+  pitchingAppearances PitchingAppearance[]
+
+  @@map("players")
+}
+
+// ============ GAME ============
+
+model Game {
+  id                  String   @id @default(cuid())
+  teamId              String   @map("team_id")
+  seasonId            String?  @map("season_id")
+  opponentName        String   @map("opponent_name")
+  gameDate            DateTime @map("game_date") @db.Date
+  gameTime            String?  @map("game_time")
+  location            String?
+  isHome              Boolean  @default(true) @map("is_home")
+  inningsCount        Int      @default(6) @map("innings_count")
+  status              String   @default("scheduled")
+  ourScore            Int      @default(0) @map("our_score")
+  opponentScore       Int      @default(0) @map("opponent_score")
+  currentInning       Int      @default(1) @map("current_inning")
+  isTopOfInning       Boolean  @default(true) @map("is_top_of_inning")
+  outsInCurrentInning Int      @default(0) @map("outs_in_current_inning")
+  notes               String?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  team             Team                @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  season           Season?             @relation(fields: [seasonId], references: [id], onDelete: SetNull)
+  lineupEntries    LineupEntry[]
+  atBats           AtBat[]
+  pitchingAppearances PitchingAppearance[]
+  opponentPitchers OpponentPitcher[]
+  opponentBatters  OpponentBatter[]
+
+  @@map("games")
+}
+
+// ============ OPPONENT PITCHER ============
+
+model OpponentPitcher {
+  id          String @id @default(cuid())
+  gameId      String @map("game_id")
+  name        String
+  throwsHand  String @default("right") @map("throws_hand")
+  orderInGame Int    @default(1) @map("order_in_game")
+
+  game   Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  atBats AtBat[]
+
+  @@map("opponent_pitchers")
+}
+
+// ============ OPPONENT BATTER ============
+
+model OpponentBatter {
+  id           String @id @default(cuid())
+  gameId       String @map("game_id")
+  name         String
+  jerseyNumber Int?   @map("jersey_number")
+  bats         String @default("right")
+  orderInGame  Int    @default(1) @map("order_in_game")
+
+  game   Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  atBats AtBat[]
+
+  @@map("opponent_batters")
+}
+
+// ============ LINEUP ENTRY ============
+
+model LineupEntry {
+  id                String   @id @default(cuid())
+  gameId            String   @map("game_id")
+  playerId          String   @map("player_id")
+  battingOrder      Int      @map("batting_order")
+  position          String
+  isStarter         Boolean  @default(true) @map("is_starter")
+  enteredGameInning Int?     @map("entered_game_inning")
+  exitedGameInning  Int?     @map("exited_game_inning")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("lineup_entries")
+}
+
+// ============ AT-BAT ============
+
+model AtBat {
+  id                String   @id @default(cuid())
+  gameId            String   @map("game_id")
+  playerId          String?  @map("player_id")
+  opponentBatterId  String?  @map("opponent_batter_id")
+  opponentPitcherId String?  @map("opponent_pitcher_id")
+  inning            Int
+  isTop             Boolean  @map("is_top")
+  atBatNumberInGame Int      @map("at_bat_number_in_game")
+  result            String
+  rbi               Int      @default(0)
+  runnerScored      Boolean  @default(false) @map("runner_scored")
+  pitchCount        Int?     @map("pitch_count")
+  stolenBases       Int      @default(0) @map("stolen_bases")
+  caughtStealing    Int      @default(0) @map("caught_stealing")
+  hitLocationX      Float?   @map("hit_location_x")
+  hitLocationY      Float?   @map("hit_location_y")
+  notes             String?
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  game            Game             @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  player          Player?          @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  opponentBatter  OpponentBatter?  @relation(fields: [opponentBatterId], references: [id], onDelete: SetNull)
+  opponentPitcher OpponentPitcher? @relation(fields: [opponentPitcherId], references: [id], onDelete: SetNull)
+  pitches         Pitch[]
+
+  @@map("at_bats")
+}
+
+// ============ PITCH ============
+
+model Pitch {
+  id          String   @id @default(cuid())
+  atBatId     String   @map("at_bat_id")
+  pitchNumber Int      @map("pitch_number")
+  result      String
+  locationX   Float?   @map("location_x")
+  locationY   Float?   @map("location_y")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  atBat AtBat @relation(fields: [atBatId], references: [id], onDelete: Cascade)
+
+  @@map("pitches")
+}
+
+// ============ PITCHING APPEARANCE ============
+
+model PitchingAppearance {
+  id              String   @id @default(cuid())
+  gameId          String   @map("game_id")
+  playerId        String   @map("player_id")
+  appearanceOrder Int      @default(1) @map("appearance_order")
+  outsRecorded    Int      @default(0) @map("outs_recorded")
+  hitsAllowed     Int      @default(0) @map("hits_allowed")
+  runsAllowed     Int      @default(0) @map("runs_allowed")
+  earnedRuns      Int      @default(0) @map("earned_runs")
+  walks           Int      @default(0)
+  strikeouts      Int      @default(0)
+  homeRunsAllowed Int      @default(0) @map("home_runs_allowed")
+  pitchesThrown   Int?     @map("pitches_thrown")
+  hitBatters      Int      @default(0) @map("hit_batters")
+  wildPitches     Int      @default(0) @map("wild_pitches")
+  notes           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  @@map("pitching_appearances")
+}
