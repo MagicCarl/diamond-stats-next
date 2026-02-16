@@ -58,7 +58,10 @@ export default function SettingsPage() {
         <ul className="mt-3 space-y-1 text-xs text-gray-500">
           <li>Unlimited teams &amp; seasons</li>
           <li>Live scoring with pitch tracking</li>
+          <li>Real-time sync across devices</li>
           <li>Spray charts &amp; advanced stats</li>
+          <li>Inning-by-inning box score</li>
+          <li>Opponent roster auto-load</li>
           <li>Opponent batter tracking &amp; splits</li>
         </ul>
       </Card>

@@ -253,25 +253,30 @@ export default function BoxScorePage() {
           Play-by-Play
         </h3>
         <div className="space-y-1">
-          {game.atBats.map((ab: { id: string; player: { firstName: string; lastName: string }; result: string; rbi: number; stolenBases: number; isTop: boolean; inning: number }) => (
-            <div
-              key={ab.id}
-              className="flex items-center justify-between rounded px-2 py-1 text-sm odd:bg-gray-50 dark:odd:bg-gray-800/50"
-            >
-              <span>
-                <span className="font-medium">
-                  {ab.player.firstName} {ab.player.lastName}
+          {game.atBats.map((ab: { id: string; player?: { firstName: string; lastName: string }; opponentBatter?: { name: string }; result: string; rbi: number; stolenBases: number; isTop: boolean; inning: number }) => {
+            const batterName = ab.player
+              ? `${ab.player.firstName} ${ab.player.lastName}`
+              : ab.opponentBatter?.name || "Unknown";
+            return (
+              <div
+                key={ab.id}
+                className="flex items-center justify-between rounded px-2 py-1 text-sm odd:bg-gray-50 dark:odd:bg-gray-800/50"
+              >
+                <span>
+                  <span className="font-medium">
+                    {batterName}
+                  </span>
+                  {" - "}
+                  {RESULT_LABELS[ab.result] || ab.result}
+                  {ab.rbi > 0 && ` (${ab.rbi} RBI)`}
+                  {ab.stolenBases > 0 && ` (${ab.stolenBases} SB)`}
                 </span>
-                {" - "}
-                {RESULT_LABELS[ab.result] || ab.result}
-                {ab.rbi > 0 && ` (${ab.rbi} RBI)`}
-                {ab.stolenBases > 0 && ` (${ab.stolenBases} SB)`}
-              </span>
-              <span className="text-xs text-gray-400">
-                {ab.isTop ? "T" : "B"}{ab.inning}
-              </span>
-            </div>
-          ))}
+                <span className="text-xs text-gray-400">
+                  {ab.isTop ? "T" : "B"}{ab.inning}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </Card>
     </div>

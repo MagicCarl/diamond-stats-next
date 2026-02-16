@@ -12,9 +12,10 @@ export default function InstructionsPage() {
         <h2 className="mb-3 text-lg font-semibold">Getting Started</h2>
         <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
           <li>
-            <strong>Create a Team</strong> &mdash; From the Dashboard, tap{" "}
-            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ New Team</span>{" "}
-            and enter your team name and level (Little League, Travel, Recreational, High School, or College).
+            <strong>Create or Select a Team</strong> &mdash; From the Dashboard, tap{" "}
+            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ New Team</span>.
+            If you already have teams, you&apos;ll see a list of your existing teams to quickly switch between them. Tap any team to go to its page, or tap{" "}
+            <strong>+ Create New Team</strong> to add a new one with a team name and level (Little League, Travel, Recreational, High School, or College).
           </li>
           <li>
             <strong>Add Players</strong> &mdash; Open your team page and tap{" "}
@@ -35,6 +36,7 @@ export default function InstructionsPage() {
             <strong>Schedule a Game</strong> &mdash; Tap{" "}
             <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ New Game</span>,
             enter the opponent name, game date, time, location, whether you&apos;re home or away, and the number of innings. Optionally assign the game to a season.
+            The home/away selection affects the default batting order &mdash; as the home team, your team bats in the bottom of the inning; as the away team, you bat in the top.
           </li>
         </ol>
       </Card>
@@ -55,6 +57,7 @@ export default function InstructionsPage() {
           <li>
             <strong>Add Opponent Batters</strong> &mdash; Switch to <strong>Opponent Batting</strong> mode and tap{" "}
             <strong>+ Add Batter</strong> to add opposing batters with their name, jersey number, and batting hand. You can add these as each batter comes up.
+            <em> If you&apos;ve played this opponent before, their roster is automatically loaded from the previous game</em>, so you won&apos;t need to re-enter them.
           </li>
         </ol>
       </Card>
@@ -105,8 +108,13 @@ export default function InstructionsPage() {
         </p>
 
         <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Automatic Inning Tracking</h3>
-        <p className="text-sm text-gray-700 dark:text-gray-300">
+        <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
           Three outs automatically end the half-inning. The app switches from Top to Bottom (or Bottom to Top with an inning increment). Outs reset to zero for the new half-inning. Double plays count as 2 outs.
+        </p>
+
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Real-Time Sync</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          The live scoring page automatically refreshes every 3 seconds. This means multiple people can follow the same game from different devices &mdash; one person scores at the field while coaches or parents see updates in real time on their own phone or computer.
         </p>
       </Card>
 
@@ -143,7 +151,7 @@ export default function InstructionsPage() {
       <Card>
         <h2 className="mb-3 text-lg font-semibold">At-Bat Results</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Select one of these outcomes for each at-bat:
+          Select one of these outcomes for each at-bat. Each button shows the abbreviation with the full name displayed below it for quick reference:
         </p>
 
         <div className="space-y-4 text-sm">
@@ -293,7 +301,7 @@ export default function InstructionsPage() {
           Every game has a box score that you can view during or after the game. The box score includes:
         </p>
         <ul className="mb-3 list-inside list-disc space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li><strong>Game Header</strong> &mdash; Opponent name, date, final score, and game status.</li>
+          <li><strong>Inning-by-Inning Scoreboard</strong> &mdash; A traditional baseball scoreboard showing runs scored in each inning, with columns for total Runs (R), Hits (H), and Errors (E). The away team is on top, home team on bottom, and the current inning is highlighted in blue.</li>
           <li><strong>Batting Stats Table</strong> &mdash; Each player in your lineup with AB, H, R (runs scored), RBI, BB, K (strikeouts), SB, and AVG for that game.</li>
           <li><strong>Play-by-Play Log</strong> &mdash; Chronological list of every at-bat showing the batter, result, RBI, stolen bases, and inning marker (e.g., T1, B3).</li>
         </ul>
@@ -402,6 +410,9 @@ export default function InstructionsPage() {
           <p>
             <strong>Game Status</strong> &mdash; Games show as &ldquo;Scheduled&rdquo; before any at-bats, &ldquo;In Progress&rdquo; with the current inning during the game, and &ldquo;Final&rdquo; after you end the game.
           </p>
+          <p>
+            <strong>Delete All Games</strong> &mdash; From your team&apos;s page, scroll below the games list to find the red <strong>Delete All Games</strong> button. This permanently removes all games and their stats for the team. A confirmation dialog will appear before anything is deleted. This is useful when starting a fresh season or cleaning up test data.
+          </p>
         </div>
       </Card>
 
@@ -459,8 +470,10 @@ export default function InstructionsPage() {
           <li>Record pitch locations during opponent at-bats to analyze your pitcher&apos;s tendencies and strike zone command.</li>
           <li>Check the Stats Search page regularly to see how your team performs against different opponents and pitcher types.</li>
           <li>Use the <strong>Undo Last</strong> button right away if you record something incorrectly &mdash; it&apos;s easier to fix in the moment.</li>
-          <li>Have a second person help &mdash; one person watches the game, the other records on the app.</li>
+          <li>Have a second person help &mdash; one person watches the game, the other records on the app. With real-time sync, both devices stay up to date automatically.</li>
+          <li>When facing a repeat opponent, their batter roster loads automatically &mdash; saving you time on game day setup.</li>
           <li>Use dark mode at outdoor games for better screen visibility in bright sunlight.</li>
+          <li>Check the box score during the game to see the traditional inning-by-inning scoreboard with R/H/E columns, just like a real ballpark.</li>
         </ul>
       </Card>
     </div>

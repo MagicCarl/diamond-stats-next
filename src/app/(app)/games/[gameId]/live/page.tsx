@@ -1227,34 +1227,34 @@ function ResultButtons({
           {AT_BAT_RESULTS.hits.map((result) => (
             <button
               key={result}
-              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
-              className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex flex-col items-center rounded-lg border px-2 py-1.5 transition-colors ${
                 selectedResult === result
                   ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                   : "border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
               }`}
             >
-              {RESULT_LABELS[result]}
+              <span className="text-sm font-medium">{RESULT_LABELS[result]}</span>
+              <span className="text-[10px] leading-tight text-gray-400">{RESULT_FULL_NAMES[result]}</span>
             </button>
           ))}
         </div>
       </div>
       <div>
         <p className="mb-1 text-xs font-medium text-gray-500 uppercase">Walks</p>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {AT_BAT_RESULTS.walks.map((result) => (
             <button
               key={result}
-              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
-              className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex flex-col items-center rounded-lg border px-2 py-1.5 transition-colors ${
                 selectedResult === result
                   ? "border-purple-500 bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
                   : "border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
               }`}
             >
-              {RESULT_LABELS[result]}
+              <span className="text-sm font-medium">{RESULT_LABELS[result]}</span>
+              <span className="text-[10px] leading-tight text-gray-400">{RESULT_FULL_NAMES[result]}</span>
             </button>
           ))}
         </div>
@@ -1265,15 +1265,15 @@ function ResultButtons({
           {AT_BAT_RESULTS.outs.map((result) => (
             <button
               key={result}
-              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
-              className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex flex-col items-center rounded-lg border px-1 py-1.5 transition-colors ${
                 selectedResult === result
                   ? "border-gray-500 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                   : "border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
               }`}
             >
-              {RESULT_LABELS[result]}
+              <span className="text-sm font-medium">{RESULT_LABELS[result]}</span>
+              <span className="text-[10px] leading-tight text-gray-400">{RESULT_FULL_NAMES[result]}</span>
             </button>
           ))}
         </div>
