@@ -62,7 +62,10 @@ export default function LoginPage() {
         router.push("/dashboard");
       }
     } catch (error: any) {
-      if (error.code === "auth/popup-closed-by-user" || error.code === "auth/cancelled-popup-request") {
+      if (
+        error.code === "auth/popup-closed-by-user" ||
+        error.code === "auth/cancelled-popup-request"
+      ) {
         setError("");
       } else if (error.code === "auth/popup-blocked") {
         setShowBrowserWarning(true);
@@ -90,7 +93,7 @@ export default function LoginPage() {
     try {
       await sendPasswordResetEmail(auth, forgotEmail);
       setForgotMessage(
-        "Password reset email sent! Check your inbox and follow the link to reset your password."
+        "Password reset email sent! Check your inbox and follow the link to reset your password.",
       );
       setTimeout(() => {
         setShowForgotPassword(false);
@@ -99,7 +102,7 @@ export default function LoginPage() {
       }, 3000);
     } catch {
       setForgotMessage(
-        "Error sending reset email. Make sure the email is registered."
+        "Error sending reset email. Make sure the email is registered.",
       );
     } finally {
       setForgotLoading(false);
@@ -223,11 +226,7 @@ export default function LoginPage() {
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                className="flex-1"
-                disabled={forgotLoading}
-              >
+              <Button type="submit" className="flex-1" disabled={forgotLoading}>
                 {forgotLoading ? "Sending..." : "Send Reset Link"}
               </Button>
             </div>
