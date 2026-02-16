@@ -19,6 +19,7 @@ interface TeamDetail {
   level: string;
   players: Player[];
   games: Game[];
+  _count: { players: number; games: number };
 }
 
 export default function TeamDetailPage() {
@@ -47,6 +48,8 @@ export default function TeamDetailPage() {
   });
   const [showCreateSeason, setShowCreateSeason] = useState(false);
   const [seasonName, setSeasonName] = useState("");
+  const [showDeleteGames, setShowDeleteGames] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const fetchTeam = async () => {
     try {
@@ -156,6 +159,21 @@ export default function TeamDetailPage() {
       fetchTeam();
     } catch {
       // handle
+    }
+  };
+
+  const handleDeleteAllGames = async () => {
+    setDeleting(true);
+    try {
+      await apiFetch(`/api/teams/${teamId}/games`, {
+        method: "DELETE",
+      });
+      setShowDeleteGames(false);
+      fetchTeam();
+    } catch {
+      // handle
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -272,7 +290,7 @@ export default function TeamDetailPage() {
       {/* Games */}
       <section>
         <h2 className="mb-3 text-lg font-semibold">
-          Recent Games ({team.games.length})
+          Recent Games ({team._count?.games ?? team.games.length})
         </h2>
 
         {team.games.length === 0 ? (
@@ -317,6 +335,17 @@ export default function TeamDetailPage() {
                 </Card>
               </Link>
             ))}
+          </div>
+        )}
+
+        {team.games.length > 0 && (
+          <div className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
+            <button
+              onClick={() => setShowDeleteGames(true)}
+              className="w-full rounded-lg bg-red-600 px-4 py-3 text-center font-medium text-white hover:bg-red-700"
+            >
+              Delete All Games ({team._count?.games ?? team.games.length})
+            </button>
           </div>
         )}
       </section>
@@ -439,6 +468,28 @@ export default function TeamDetailPage() {
             </Button>
           </div>
         </form>
+      </Modal>
+
+      {/* Delete All Games Confirmation */}
+      <Modal
+        isOpen={showDeleteGames}
+        onClose={() => setShowDeleteGames(false)}
+        title="Delete All Games"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            This will permanently delete all {team._count?.games ?? team.games.length} game(s) and their stats for <strong>{team.name}</strong>. Your team roster will be preserved.
+          </p>
+          <p className="text-sm font-medium text-red-600">This cannot be undone.</p>
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" onClick={() => setShowDeleteGames(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleDeleteAllGames} disabled={deleting}>
+              {deleting ? "Deleting..." : "Delete All Games"}
+            </Button>
+          </div>
+        </div>
       </Modal>
 
       {/* Edit Player Modal */}

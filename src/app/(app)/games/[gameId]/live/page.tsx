@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useApi } from "@/hooks/useApi";
-import { AtBatRecord, LineupEntryRecord, OpponentPitcherRecord, OpponentBatterRecord, PitchRecord, Player } from "@/types";
+import { AtBatRecord, LineupEntryRecord, OpponentPitcherRecord, OpponentBatterRecord, PitchRecord, Player, Team } from "@/types";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
@@ -87,10 +87,55 @@ export default function LiveScoringPage() {
   const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
   const [lineupDraft, setLineupDraft] = useState<{ playerId: string; position: string }[]>([]);
 
+  const rosterAutoLoadedRef = useRef(false);
+  const initialModeSetRef = useRef(false);
+
   const fetchGame = useCallback(async () => {
     try {
-      const data = await apiFetch(`/api/games/${gameId}`);
+      let data = await apiFetch(`/api/games/${gameId}`);
+
+      // Auto-load opponent roster from a matching team on the dashboard (runs once, before setting state)
+      if (!rosterAutoLoadedRef.current) {
+        rosterAutoLoadedRef.current = true;
+        if (!data.opponentBatters || data.opponentBatters.length === 0) {
+          try {
+            const teams: Team[] = await apiFetch("/api/teams");
+            const opponentName = data.opponentName.toLowerCase();
+            const matchingTeam = teams.find(
+              (t) => t.name.toLowerCase() === opponentName && t.id !== data.teamId
+            );
+            if (matchingTeam) {
+              const players: Player[] = await apiFetch(`/api/teams/${matchingTeam.id}/players`);
+              if (players.length > 0) {
+                for (const player of players) {
+                  await apiFetch(`/api/games/${gameId}/opponent-batters`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                      name: `${player.firstName} ${player.lastName}`,
+                      jerseyNumber: player.jerseyNumber,
+                      bats: player.bats,
+                    }),
+                  });
+                }
+                data = await apiFetch(`/api/games/${gameId}`);
+              }
+            }
+          } catch {
+            // Auto-load failed — user can still add batters manually
+          }
+        }
+      }
+
       setGame(data);
+
+      // Set default scoring mode on first load (home team bats last)
+      if (!initialModeSetRef.current) {
+        initialModeSetRef.current = true;
+        if (data.atBats.length === 0) {
+          setScoringMode(data.isHome ? "opponent_batting" : "our_batting");
+        }
+      }
+
       if (data.opponentPitchers.length > 0 && !selectedPitcherId) {
         setSelectedPitcherId(data.opponentPitchers[data.opponentPitchers.length - 1].id);
       }
@@ -118,6 +163,15 @@ export default function LiveScoringPage() {
   useEffect(() => {
     fetchGame();
   }, [fetchGame]);
+
+  // Poll for updates every 3 seconds so other devices see changes in real time
+  useEffect(() => {
+    if (!game || game.status === "final") return;
+    const interval = setInterval(() => {
+      fetchGame();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [game?.status, fetchGame]);
 
   // Our batting
   const activeBatterIndex = manualBatterIndex ?? currentBatterIndex;
