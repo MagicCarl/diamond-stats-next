@@ -18,7 +18,7 @@ export function useApi() {
         headers.Authorization = `Bearer ${freshToken}`;
       }
 
-      const res = await fetch(url, { ...options, headers });
+      const res = await fetch(url, { ...options, headers, cache: "no-store" });
 
       if (!res.ok) {
         const error = await res.json().catch(() => ({ error: "Request failed" }));

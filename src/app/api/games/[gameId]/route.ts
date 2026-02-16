@@ -44,7 +44,9 @@ export async function GET(
     return NextResponse.json({ error: "Game not found" }, { status: 404 });
   }
 
-  return NextResponse.json(game);
+  return NextResponse.json(game, {
+    headers: { "Cache-Control": "no-store, max-age=0" },
+  });
 }
 
 export async function PUT(

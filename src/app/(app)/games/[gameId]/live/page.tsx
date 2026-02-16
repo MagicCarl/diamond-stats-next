@@ -1227,6 +1227,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.hits.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`flex flex-col items-center rounded-lg border px-2 py-1.5 transition-colors ${
                 selectedResult === result
@@ -1246,6 +1247,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.walks.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`flex flex-col items-center rounded-lg border px-2 py-1.5 transition-colors ${
                 selectedResult === result
@@ -1265,6 +1267,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.outs.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`flex flex-col items-center rounded-lg border px-1 py-1.5 transition-colors ${
                 selectedResult === result
