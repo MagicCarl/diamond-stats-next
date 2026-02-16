@@ -81,6 +81,47 @@ export default function BoxScorePage() {
 
   const boxLines = Array.from(playerMap.values());
 
+  // Build inning-by-inning scoreboard
+  const innings = game.inningsCount || 6;
+  const ourRunsByInning: number[] = Array(innings).fill(0);
+  const oppRunsByInning: number[] = Array(innings).fill(0);
+  let ourHits = 0;
+  let oppHits = 0;
+  let ourErrors = 0;
+  let oppErrors = 0;
+
+  for (const ab of game.atBats) {
+    const inningIdx = Math.min(ab.inning - 1, innings - 1);
+    const isOurBatting = !!ab.playerId;
+    const isHit = (AT_BAT_RESULTS.hits as readonly string[]).includes(ab.result);
+    const isError = ab.result === "error";
+
+    if (isOurBatting) {
+      if (ab.runnerScored) ourRunsByInning[inningIdx]++;
+      if (isHit) ourHits++;
+      if (isError) oppErrors++;
+    } else {
+      if (ab.runnerScored) oppRunsByInning[inningIdx]++;
+      if (isHit) oppHits++;
+      if (isError) ourErrors++;
+    }
+  }
+
+  // Team display names
+  const oppTeamName = game.opponentName;
+
+  // Top row = away team, bottom row = home team
+  const topName = game.isHome ? oppTeamName : "Us";
+  const botName = game.isHome ? "Us" : oppTeamName;
+  const topRuns = game.isHome ? oppRunsByInning : ourRunsByInning;
+  const botRuns = game.isHome ? ourRunsByInning : oppRunsByInning;
+  const topR = game.isHome ? game.opponentScore : game.ourScore;
+  const botR = game.isHome ? game.ourScore : game.opponentScore;
+  const topH = game.isHome ? oppHits : ourHits;
+  const botH = game.isHome ? ourHits : oppHits;
+  const topE = game.isHome ? oppErrors : ourErrors;
+  const botE = game.isHome ? ourErrors : oppErrors;
+
   return (
     <div className="mx-auto max-w-2xl space-y-4">
       <Link
@@ -90,21 +131,79 @@ export default function BoxScorePage() {
         &larr; Back to Game
       </Link>
 
+      {/* Inning-by-inning scoreboard */}
       <Card>
-        <div className="mb-4 text-center">
-          <p className="text-sm text-gray-500">
-            {new Date(game.gameDate).toLocaleDateString()}
-          </p>
-          <p className="text-xl font-bold">
-            {game.isHome ? "vs" : "@"} {game.opponentName}
-          </p>
-          <p className="text-2xl font-bold">
-            {game.ourScore} - {game.opponentScore}
-          </p>
-          <p className="text-sm text-gray-500">
-            {game.status === "final" ? "Final" : `In Progress`}
-          </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                <th className="px-2 py-1.5 text-left font-medium"></th>
+                {Array.from({ length: innings }, (_, i) => (
+                  <th
+                    key={i}
+                    className={`min-w-[28px] px-1.5 py-1.5 text-center font-medium ${
+                      game.currentInning === i + 1 && game.status !== "final"
+                        ? "text-blue-500"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    {i + 1}
+                  </th>
+                ))}
+                <th className="min-w-[32px] border-l border-gray-300 px-2 py-1.5 text-center font-semibold dark:border-gray-600">R</th>
+                <th className="min-w-[32px] px-2 py-1.5 text-center font-semibold">H</th>
+                <th className="min-w-[32px] px-2 py-1.5 text-center font-semibold">E</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Away team (top of inning) */}
+              <tr className="border-b border-gray-100 dark:border-gray-800">
+                <td className="whitespace-nowrap px-2 py-1.5 text-xs font-medium uppercase tracking-wide text-gray-500">{topName}</td>
+                {topRuns.map((r, i) => {
+                  const played = game.status === "final" || game.currentInning > i + 1 || (game.currentInning === i + 1 && !game.isTopOfInning);
+                  return (
+                    <td
+                      key={i}
+                      className={`px-1.5 py-1.5 text-center ${
+                        game.currentInning === i + 1 && game.status !== "final" ? "font-bold text-blue-500" : ""
+                      }`}
+                    >
+                      {played ? r : "\u2014"}
+                    </td>
+                  );
+                })}
+                <td className="border-l border-gray-300 px-2 py-1.5 text-center font-bold dark:border-gray-600">{topR}</td>
+                <td className="px-2 py-1.5 text-center">{topH}</td>
+                <td className="px-2 py-1.5 text-center">{topE}</td>
+              </tr>
+              {/* Home team (bottom of inning) */}
+              <tr>
+                <td className="whitespace-nowrap px-2 py-1.5 text-xs font-medium uppercase tracking-wide text-blue-500">{botName}</td>
+                {botRuns.map((r, i) => {
+                  const played = game.status === "final" || game.currentInning > i + 1 || (game.currentInning === i + 1 && game.isTopOfInning === false);
+                  return (
+                    <td
+                      key={i}
+                      className={`px-1.5 py-1.5 text-center ${
+                        game.currentInning === i + 1 && game.status !== "final" ? "font-bold text-blue-500" : ""
+                      }`}
+                    >
+                      {played ? r : "\u2014"}
+                    </td>
+                  );
+                })}
+                <td className="border-l border-gray-300 px-2 py-1.5 text-center font-bold dark:border-gray-600">{botR}</td>
+                <td className="px-2 py-1.5 text-center">{botH}</td>
+                <td className="px-2 py-1.5 text-center">{botE}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <p className="mt-2 text-center text-xs text-gray-500">
+          {game.status === "final"
+            ? "Final"
+            : `In Progress \u2014 ${game.isTopOfInning ? "Top" : "Bot"} ${game.currentInning}`}
+        </p>
       </Card>
 
       <Card>

@@ -43,6 +43,28 @@ export const RESULT_LABELS: Record<string, string> = {
   catchers_interference: "CI",
 };
 
+export const RESULT_FULL_NAMES: Record<string, string> = {
+  single: "Single",
+  double: "Double",
+  triple: "Triple",
+  home_run: "Home Run",
+  walk: "Base on Balls",
+  hbp: "Hit By Pitch",
+  ibb: "Intentional Walk",
+  strikeout_swinging: "Strikeout (Swinging)",
+  strikeout_looking: "Strikeout (Looking)",
+  groundout: "Ground Out",
+  flyout: "Fly Out",
+  lineout: "Line Out",
+  popout: "Pop Out",
+  fielders_choice: "Fielder's Choice",
+  double_play: "Double Play",
+  sacrifice_fly: "Sacrifice Fly",
+  sacrifice_bunt: "Sacrifice Bunt",
+  error: "Error",
+  catchers_interference: "Catcher's Interference",
+};
+
 export const RESULT_COLORS: Record<string, string> = {
   single: "#22c55e",
   double: "#3b82f6",

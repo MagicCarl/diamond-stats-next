@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
 import Spinner from "@/components/ui/Spinner";
-import { RESULT_LABELS, AT_BAT_RESULTS, PITCH_RESULTS, PITCH_RESULT_LABELS, PITCH_RESULT_COLORS } from "@/lib/constants";
+import { RESULT_LABELS, RESULT_FULL_NAMES, AT_BAT_RESULTS, PITCH_RESULTS, PITCH_RESULT_LABELS, PITCH_RESULT_COLORS } from "@/lib/constants";
 import SprayChartDiamond from "@/components/spray-chart/SprayChartDiamond";
 import StrikeZone from "@/components/pitch-chart/StrikeZone";
 
@@ -1227,6 +1227,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.hits.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 selectedResult === result
@@ -1245,6 +1246,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.walks.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 selectedResult === result
@@ -1263,6 +1265,7 @@ function ResultButtons({
           {AT_BAT_RESULTS.outs.map((result) => (
             <button
               key={result}
+              title={RESULT_FULL_NAMES[result]}
               onClick={() => onSelectResult(result)}
               className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 selectedResult === result
