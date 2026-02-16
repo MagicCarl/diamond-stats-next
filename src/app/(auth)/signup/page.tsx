@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
@@ -12,6 +13,7 @@ import {
 import { auth } from "@/lib/firebase-client";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import Modal from "@/components/ui/Modal";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -20,6 +22,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showBrowserWarning, setShowBrowserWarning] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,8 +35,21 @@ export default function SignupPage() {
         await updateProfile(cred.user, { displayName: name });
       }
       router.push("/dashboard");
-    } catch {
-      setError("Could not create account. Email may already be in use.");
+    } catch (err: any) {
+      // If email already exists, just sign them in
+      if (err.code === "auth/email-already-in-use") {
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+          router.push("/dashboard");
+          return;
+        } catch {
+          setError("Account already exists. Please sign in with your password.");
+        }
+      } else if (err.code === "auth/weak-password") {
+        setError("Password must be at least 6 characters.");
+      } else {
+        setError("Could not create account. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -41,12 +57,25 @@ export default function SignupPage() {
 
   const handleGoogleSignup = async () => {
     setError("");
+
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes("duckduckgo") || ua.includes("brave")) {
+      setShowBrowserWarning(true);
+      return;
+    }
+
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       router.push("/dashboard");
-    } catch {
-      setError("Google sign-up failed");
+    } catch (err: any) {
+      if (err.code === "auth/popup-closed-by-user" || err.code === "auth/cancelled-popup-request") {
+        return;
+      } else if (err.code === "auth/popup-blocked") {
+        setShowBrowserWarning(true);
+      } else {
+        setShowBrowserWarning(true);
+      }
     }
   };
 
@@ -112,6 +141,26 @@ export default function SignupPage() {
             Sign in
           </Link>
         </p>
+
+        <Modal
+          isOpen={showBrowserWarning}
+          onClose={() => setShowBrowserWarning(false)}
+          title="Browser Not Supported"
+        >
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Google sign-in is not supported in this browser due to its privacy
+              settings. Please sign up with email and password instead, or
+              try using Safari, Chrome, or Firefox.
+            </p>
+            <Button
+              className="w-full"
+              onClick={() => setShowBrowserWarning(false)}
+            >
+              Got it
+            </Button>
+          </div>
+        </Modal>
       </div>
     </div>
   );

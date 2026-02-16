@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Diamond Stats - Baseball Stats Tracker",
+  title: "My Baseball Stats - Baseball Stats Tracker",
   description: "Track and analyze baseball stats for your team",
 };
 

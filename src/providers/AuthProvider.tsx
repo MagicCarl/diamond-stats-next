@@ -40,13 +40,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const idToken = await firebaseUser.getIdToken();
         setToken(idToken);
         // Upsert user in our database
-        await fetch("/api/auth/verify", {
+        const verifyRes = await fetch("/api/auth/verify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
           },
         });
+        if (!verifyRes.ok) {
+          const body = await verifyRes.json().catch(() => ({}));
+          console.error("Auth verify failed:", verifyRes.status, body);
+        }
       } else {
         setToken(null);
       }

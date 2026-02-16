@@ -1,11 +1,9 @@
 "use client";
 
-import { useAuth } from "@/providers/AuthProvider";
 import { useCallback } from "react";
+import { auth } from "@/lib/firebase-client";
 
 export function useApi() {
-  const { token } = useAuth();
-
   const apiFetch = useCallback(
     async (url: string, options: RequestInit = {}) => {
       const headers: Record<string, string> = {
@@ -13,8 +11,11 @@ export function useApi() {
         ...(options.headers as Record<string, string>),
       };
 
-      if (token) {
-        headers.Authorization = `Bearer ${token}`;
+      // Always get a fresh token directly from Firebase Auth
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const freshToken = await currentUser.getIdToken();
+        headers.Authorization = `Bearer ${freshToken}`;
       }
 
       const res = await fetch(url, { ...options, headers });
@@ -26,7 +27,7 @@ export function useApi() {
 
       return res.json();
     },
-    [token]
+    []
   );
 
   return { apiFetch };

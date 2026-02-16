@@ -10,7 +10,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen">
       <header className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-xl font-bold">Diamond Stats</h1>
+        <h1 className="text-xl font-bold">My Baseball Stats</h1>
         <div className="flex items-center gap-3">
           <ThemeToggle />
           {user ? (

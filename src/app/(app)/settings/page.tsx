@@ -43,8 +43,8 @@ export default function SettingsPage() {
         </h3>
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-medium">Diamond Stats Annual</p>
-            <p className="text-sm text-gray-500">$29.99/year &middot; All features included</p>
+            <p className="font-medium">My Baseball Stats Annual</p>
+            <p className="text-sm text-gray-500">$35/year &middot; All features included</p>
           </div>
           <a
             href="https://www.paypal.com/paypalme/carlrandrews"

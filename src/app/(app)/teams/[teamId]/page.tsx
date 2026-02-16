@@ -36,6 +36,15 @@ export default function TeamDetailPage() {
     primaryPosition: "",
   });
   const [saving, setSaving] = useState(false);
+  const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
+  const [editForm, setEditForm] = useState({
+    firstName: "",
+    lastName: "",
+    jerseyNumber: "",
+    bats: "right",
+    throwsHand: "right",
+    primaryPosition: "",
+  });
   const [showCreateSeason, setShowCreateSeason] = useState(false);
   const [seasonName, setSeasonName] = useState("");
 
@@ -96,6 +105,41 @@ export default function TeamDetailPage() {
       });
       setSeasonName("");
       setShowCreateSeason(false);
+      fetchTeam();
+    } catch {
+      // handle
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const openEditModal = (player: Player) => {
+    setEditingPlayer(player);
+    setEditForm({
+      firstName: player.firstName,
+      lastName: player.lastName,
+      jerseyNumber: player.jerseyNumber?.toString() ?? "",
+      bats: player.bats,
+      throwsHand: player.throwsHand,
+      primaryPosition: player.primaryPosition || "",
+    });
+  };
+
+  const handleEditPlayer = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingPlayer) return;
+    setSaving(true);
+    try {
+      await apiFetch(`/api/teams/${teamId}/players/${editingPlayer.id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          ...editForm,
+          jerseyNumber: editForm.jerseyNumber
+            ? parseInt(editForm.jerseyNumber)
+            : null,
+        }),
+      });
+      setEditingPlayer(null);
       fetchTeam();
     } catch {
       // handle
@@ -202,12 +246,20 @@ export default function TeamDetailPage() {
                     <td className="px-3 py-2 capitalize">{player.bats}</td>
                     <td className="px-3 py-2 capitalize">{player.throwsHand}</td>
                     <td className="px-3 py-2">
-                      <button
-                        onClick={() => handleDeletePlayer(player.id)}
-                        className="text-xs text-red-500 hover:underline"
-                      >
-                        Remove
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => openEditModal(player)}
+                          className="text-xs text-blue-500 hover:underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeletePlayer(player.id)}
+                          className="text-xs text-red-500 hover:underline"
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -384,6 +436,96 @@ export default function TeamDetailPage() {
             </Button>
             <Button type="submit" disabled={saving}>
               {saving ? "Creating..." : "Create Season"}
+            </Button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* Edit Player Modal */}
+      <Modal
+        isOpen={!!editingPlayer}
+        onClose={() => setEditingPlayer(null)}
+        title="Edit Player"
+      >
+        <form onSubmit={handleEditPlayer} className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <Input
+              id="editFirstName"
+              label="First Name"
+              value={editForm.firstName}
+              onChange={(e) =>
+                setEditForm({ ...editForm, firstName: e.target.value })
+              }
+              required
+            />
+            <Input
+              id="editLastName"
+              label="Last Name"
+              value={editForm.lastName}
+              onChange={(e) =>
+                setEditForm({ ...editForm, lastName: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <Input
+              id="editJerseyNumber"
+              label="Jersey #"
+              type="number"
+              value={editForm.jerseyNumber}
+              onChange={(e) =>
+                setEditForm({ ...editForm, jerseyNumber: e.target.value })
+              }
+            />
+            <Select
+              id="editBats"
+              label="Bats"
+              value={editForm.bats}
+              onChange={(e) =>
+                setEditForm({ ...editForm, bats: e.target.value })
+              }
+              options={[
+                { value: "right", label: "Right" },
+                { value: "left", label: "Left" },
+                { value: "switch", label: "Switch" },
+              ]}
+            />
+            <Select
+              id="editThrows"
+              label="Throws"
+              value={editForm.throwsHand}
+              onChange={(e) =>
+                setEditForm({ ...editForm, throwsHand: e.target.value })
+              }
+              options={[
+                { value: "right", label: "Right" },
+                { value: "left", label: "Left" },
+              ]}
+            />
+          </div>
+          <Select
+            id="editPosition"
+            label="Primary Position"
+            value={editForm.primaryPosition}
+            onChange={(e) =>
+              setEditForm({ ...editForm, primaryPosition: e.target.value })
+            }
+            options={[
+              { value: "", label: "Select..." },
+              ...POSITIONS.map((p) => ({ value: p, label: p })),
+            ]}
+          />
+          <div className="flex justify-end gap-3">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={() => setEditingPlayer(null)}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" disabled={saving}>
+              {saving ? "Saving..." : "Save Changes"}
             </Button>
           </div>
         </form>

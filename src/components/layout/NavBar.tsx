@@ -28,7 +28,7 @@ export default function NavBar() {
               href="/dashboard"
               className="text-lg font-bold text-gray-900 dark:text-white"
             >
-              Diamond Stats
+              My Baseball Stats
             </Link>
             <div className="hidden gap-1 md:flex">
               {navLinks.map((link) => (

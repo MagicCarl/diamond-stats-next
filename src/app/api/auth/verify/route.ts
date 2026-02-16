@@ -27,7 +27,11 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ user });
-  } catch {
-    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  } catch (error: any) {
+    console.error("Auth verify error:", error?.message || error);
+    return NextResponse.json(
+      { error: "Invalid token", details: error?.message || "Unknown error" },
+      { status: 401 }
+    );
   }
 }

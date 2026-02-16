@@ -12,18 +12,37 @@ export interface AuthUser {
 
 export async function getAuthUser(req: NextRequest): Promise<AuthUser | null> {
   const authHeader = req.headers.get("authorization");
-  if (!authHeader?.startsWith("Bearer ")) return null;
+  if (!authHeader?.startsWith("Bearer ")) {
+    console.error("[getAuthUser] No Bearer token in Authorization header");
+    return null;
+  }
 
   const token = authHeader.split("Bearer ")[1];
-  if (!token) return null;
+  if (!token) {
+    console.error("[getAuthUser] Empty token after Bearer");
+    return null;
+  }
 
   try {
     const decoded = await getAdminAuth().verifyIdToken(token);
-    const user = await prisma.user.findUnique({
+    console.log("[getAuthUser] Token verified for uid:", decoded.uid);
+    // Find or create user — ensures it works even if /api/auth/verify was blocked
+    const user = await prisma.user.upsert({
       where: { firebaseUid: decoded.uid },
+      update: {
+        email: decoded.email || "",
+        displayName: decoded.name || null,
+      },
+      create: {
+        firebaseUid: decoded.uid,
+        email: decoded.email || "",
+        displayName: decoded.name || null,
+      },
     });
+    console.log("[getAuthUser] User found/created:", user.id);
     return user;
-  } catch {
+  } catch (error) {
+    console.error("[getAuthUser] Error:", error instanceof Error ? error.message : error);
     return null;
   }
 }

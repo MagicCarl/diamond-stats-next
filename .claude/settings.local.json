@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(kill:*)",
+      "Bash(npx vercel:*)",
+      "Bash(npm install:*)",
+      "Bash(sudo npm install:*)",
+      "Bash(npx:*)",
+      "Bash(node -e:*)",
+      "Bash(curl:*)",
+      "Bash(nc:*)",
+      "Bash(echo:*)",
+      "Bash(nslookup:*)",
+      "Bash(python3:*)",
+      "Bash(head:*)"
+    ]
+  }
+}

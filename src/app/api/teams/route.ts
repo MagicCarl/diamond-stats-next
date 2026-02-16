@@ -22,7 +22,18 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const user = await getAuthUser(req);
-  if (!user) return unauthorized();
+  if (!user) {
+    // Temporary debug info
+    const authHeader = req.headers.get("authorization");
+    return NextResponse.json({
+      error: "Unauthorized",
+      debug: {
+        hasAuthHeader: !!authHeader,
+        headerPrefix: authHeader?.substring(0, 15) || "none",
+        tokenLength: authHeader ? authHeader.split("Bearer ")[1]?.length || 0 : 0,
+      },
+    }, { status: 401 });
+  }
 
   const body = await req.json();
   const { name, sport = "baseball", level = "little_league" } = body;
