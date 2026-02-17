@@ -32,6 +32,13 @@ export async function POST(req: NextRequest) {
   const user = await getAuthUser(req);
   if (!user) return unauthorized();
 
+  if (!user.isPaid) {
+    return NextResponse.json(
+      { error: "Purchase required to create games" },
+      { status: 403 }
+    );
+  }
+
   const body = await req.json();
 
   if (!body.teamId || !body.opponentName?.trim() || !body.gameDate) {

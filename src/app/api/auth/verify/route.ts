@@ -26,7 +26,15 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ user });
+    return NextResponse.json({
+      user: {
+        id: user.id,
+        email: user.email,
+        displayName: user.displayName,
+        isPaid: user.isPaid,
+        isAdmin: user.isAdmin,
+      },
+    });
   } catch (error: any) {
     console.error("Auth verify error:", error?.message || error);
     return NextResponse.json(

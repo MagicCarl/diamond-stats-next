@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import { Team, Season } from "@/types";
 import Button from "@/components/ui/Button";
@@ -13,6 +15,7 @@ export default function NewGamePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const teamId = searchParams.get("teamId");
+  const { appUser } = useAuth();
   const { apiFetch } = useApi();
 
   const [teams, setTeams] = useState<Team[]>([]);
@@ -57,6 +60,33 @@ export default function NewGamePage() {
       setSaving(false);
     }
   };
+
+  if (appUser && !appUser.isPaid) {
+    return (
+      <div className="mx-auto max-w-lg">
+        <h1 className="mb-6 text-2xl font-bold">New Game</h1>
+        <Card className="text-center">
+          <p className="text-gray-600 dark:text-gray-400">
+            Purchase the app to create games and start scoring.
+          </p>
+          <a
+            href="https://www.paypal.com/paypalme/carlrandrews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            Purchase Now - $39
+          </a>
+          <Link
+            href="/dashboard"
+            className="mt-2 block text-sm text-gray-500 hover:underline"
+          >
+            Back to Dashboard
+          </Link>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-lg">

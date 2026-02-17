@@ -8,6 +8,8 @@ export interface AuthUser {
   email: string;
   displayName: string | null;
   theme: string;
+  isPaid: boolean;
+  isAdmin: boolean;
 }
 
 export async function getAuthUser(req: NextRequest): Promise<AuthUser | null> {

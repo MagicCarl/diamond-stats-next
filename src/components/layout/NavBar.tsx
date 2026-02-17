@@ -15,7 +15,7 @@ const navLinks = [
 
 export default function NavBar() {
   const pathname = usePathname();
-  const { user, logout } = useAuth();
+  const { user, appUser, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -44,6 +44,19 @@ export default function NavBar() {
                   {link.label}
                 </Link>
               ))}
+              {appUser?.isAdmin && (
+                <Link
+                  href="/admin"
+                  className={clsx(
+                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    pathname.startsWith("/admin")
+                      ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                      : "text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                  )}
+                >
+                  Admin
+                </Link>
+              )}
             </div>
           </div>
 
@@ -86,6 +99,20 @@ export default function NavBar() {
               {link.label}
             </Link>
           ))}
+          {appUser?.isAdmin && (
+            <Link
+              href="/admin"
+              onClick={() => setMobileOpen(false)}
+              className={clsx(
+                "block rounded-lg px-3 py-2 text-sm font-medium",
+                pathname.startsWith("/admin")
+                  ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                  : "text-gray-600 dark:text-gray-400"
+              )}
+            >
+              Admin
+            </Link>
+          )}
           {user && (
             <button
               onClick={() => { logout(); setMobileOpen(false); }}

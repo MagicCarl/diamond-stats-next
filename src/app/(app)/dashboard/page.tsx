@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import { Team } from "@/types";
 import Button from "@/components/ui/Button";
@@ -14,6 +15,7 @@ import Spinner from "@/components/ui/Spinner";
 import { LEVELS } from "@/lib/constants";
 
 export default function DashboardPage() {
+  const { appUser } = useAuth();
   const { apiFetch } = useApi();
   const router = useRouter();
   const [teams, setTeams] = useState<Team[]>([]);
@@ -77,6 +79,21 @@ export default function DashboardPage() {
 
   return (
     <div>
+      {appUser && !appUser.isPaid && (
+        <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800 dark:bg-amber-900/20">
+          <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
+            You&apos;re in view-only mode. Purchase the app to create games and start scoring.
+          </p>
+          <a
+            href="https://www.paypal.com/paypalme/carlrandrews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 inline-block text-sm font-medium text-amber-700 underline hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-300"
+          >
+            Purchase Now - $39 one-time
+          </a>
+        </div>
+      )}
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">My Teams</h1>
         <Button onClick={() => { setShowTeamModal(true); setModalView(teams.length > 0 ? "pick" : "create"); setError(null); }}>+ New Team</Button>
