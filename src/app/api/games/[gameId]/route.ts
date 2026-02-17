@@ -14,6 +14,7 @@ export async function GET(
   const game = await prisma.game.findFirst({
     where: { id: gameId, team: { organization: { ownerId: user.id } } },
     include: {
+      team: { select: { name: true } },
       lineupEntries: {
         include: { player: true },
         orderBy: { battingOrder: "asc" },

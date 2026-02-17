@@ -13,12 +13,19 @@ import Modal from "@/components/ui/Modal";
 import Spinner from "@/components/ui/Spinner";
 import { POSITIONS } from "@/lib/constants";
 
+interface Season {
+  id: string;
+  name: string;
+  createdAt: string;
+}
+
 interface TeamDetail {
   id: string;
   name: string;
   level: string;
   players: Player[];
   games: Game[];
+  seasons: Season[];
   _count: { players: number; games: number };
 }
 
@@ -177,6 +184,15 @@ export default function TeamDetailPage() {
     }
   };
 
+  const handleDeleteSeason = async (seasonId: string) => {
+    try {
+      await apiFetch(`/api/seasons/${seasonId}`, { method: "DELETE" });
+      fetchTeam();
+    } catch {
+      // handle
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center py-20">
@@ -286,6 +302,30 @@ export default function TeamDetailPage() {
           </div>
         )}
       </section>
+
+      {/* Seasons */}
+      {team.seasons.length > 0 && (
+        <section className="mb-8">
+          <h2 className="mb-3 text-lg font-semibold">Seasons</h2>
+          <div className="space-y-2">
+            {team.seasons.map((season) => (
+              <Card key={season.id} className="flex items-center justify-between">
+                <span className="font-medium">{season.name}</span>
+                <button
+                  onClick={() => {
+                    if (confirm(`Delete season "${season.name}"? Games in this season will be preserved but no longer assigned to it.`)) {
+                      handleDeleteSeason(season.id);
+                    }
+                  }}
+                  className="text-xs text-red-500 hover:text-red-700"
+                >
+                  Delete
+                </button>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Games */}
       <section>

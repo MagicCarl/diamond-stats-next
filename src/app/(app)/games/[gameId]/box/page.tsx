@@ -108,11 +108,12 @@ export default function BoxScorePage() {
   }
 
   // Team display names
+  const ourTeamName = game.team?.name || "Us";
   const oppTeamName = game.opponentName;
 
   // Top row = away team, bottom row = home team
-  const topName = game.isHome ? oppTeamName : "Us";
-  const botName = game.isHome ? "Us" : oppTeamName;
+  const topName = game.isHome ? oppTeamName : ourTeamName;
+  const botName = game.isHome ? ourTeamName : oppTeamName;
   const topRuns = game.isHome ? oppRunsByInning : ourRunsByInning;
   const botRuns = game.isHome ? ourRunsByInning : oppRunsByInning;
   const topR = game.isHome ? game.opponentScore : game.ourScore;
