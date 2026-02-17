@@ -31,6 +31,7 @@ export default function InstructionsPage() {
             <strong>Create a Season</strong> &mdash; Tap{" "}
             <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ Season</span>{" "}
             on your team page to add a season (e.g., &ldquo;Spring 2026&rdquo;). Seasons let you group games and filter stats over time.
+            To remove a season entered incorrectly, tap the red <strong>Delete</strong> link next to it in the Seasons list on your team page. Games in that season are preserved.
           </li>
           <li>
             <strong>Schedule a Game</strong> &mdash; Tap{" "}
@@ -229,6 +230,14 @@ export default function InstructionsPage() {
             <strong>Hit Location</strong> &mdash; For any batted ball (hit or out in play), tap the spray chart diamond to mark where the ball was hit or fielded.
           </p>
         </div>
+
+        <h3 className="mt-4 mb-2 text-sm font-semibold text-gray-500 uppercase">Editing a Previous At-Bat</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Need to add a stolen base or caught stealing after you&apos;ve already moved to the next batter?
+          Tap any entry in the <strong>Game Log</strong> to expand it. Use the SB and CS +/- buttons to update
+          the values, then tap <strong>Save</strong>. This is useful when a runner steals a base or gets picked off
+          while the next batter is at the plate.
+        </p>
       </Card>
 
       {/* Opponent Tracking */}
