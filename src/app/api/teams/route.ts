@@ -37,7 +37,9 @@ export async function GET(req: NextRequest) {
     })
   );
 
-  return NextResponse.json(enriched);
+  return NextResponse.json(enriched, {
+    headers: { "Cache-Control": "no-store, max-age=0" },
+  });
 }
 
 export async function POST(req: NextRequest) {

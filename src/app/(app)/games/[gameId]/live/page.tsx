@@ -87,6 +87,11 @@ export default function LiveScoringPage() {
   const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
   const [lineupDraft, setLineupDraft] = useState<{ playerId: string; position: string }[]>([]);
 
+  // Edit at-bat state (for adding SB/CS to previous at-bats)
+  const [editingAtBatId, setEditingAtBatId] = useState<string | null>(null);
+  const [editSB, setEditSB] = useState(0);
+  const [editCS, setEditCS] = useState(0);
+
   const rosterAutoLoadedRef = useRef(false);
   const initialModeSetRef = useRef(false);
 
@@ -290,6 +295,20 @@ export default function LiveScoringPage() {
       await apiFetch(`/api/games/${gameId}/at-bats/${lastAtBat.id}`, {
         method: "DELETE",
       });
+      await fetchGame();
+    } catch {
+      // handle
+    }
+  };
+
+  const handleEditAtBat = async () => {
+    if (!editingAtBatId) return;
+    try {
+      await apiFetch(`/api/games/${gameId}/at-bats/${editingAtBatId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ stolenBases: editSB, caughtStealing: editCS }),
+      });
+      setEditingAtBatId(null);
       await fetchGame();
     } catch {
       // handle
@@ -934,53 +953,93 @@ export default function LiveScoringPage() {
 
           {/* Game Log */}
           <Card>
-            <h3 className="mb-2 text-sm font-semibold">Game Log</h3>
+            <h3 className="mb-2 text-sm font-semibold">Game Log <span className="font-normal text-gray-400">(tap to edit SB/CS)</span></h3>
             {game.atBats.length === 0 ? (
               <p className="text-sm text-gray-400">No at-bats recorded yet</p>
             ) : (
-              <div className="max-h-60 space-y-1 overflow-y-auto">
+              <div className="max-h-72 space-y-1 overflow-y-auto">
                 {[...game.atBats].reverse().map((ab) => {
                   const isOurs = !!ab.playerId;
                   const batterName = isOurs
                     ? `${ab.player?.firstName} ${ab.player?.lastName}`
                     : ab.opponentBatter?.name || "Unknown";
+                  const isEditing = editingAtBatId === ab.id;
                   return (
-                    <div
-                      key={ab.id}
-                      className={`flex items-center justify-between rounded px-2 py-1 text-sm ${
-                        isOurs
-                          ? "odd:bg-gray-50 dark:odd:bg-gray-800/50"
-                          : "odd:bg-red-50/50 dark:odd:bg-red-900/10"
-                      }`}
-                    >
-                      <span>
-                        {!isOurs && (
-                          <span className="mr-1 text-xs text-red-500">[OPP]</span>
-                        )}
-                        <span className="font-medium">{batterName}</span>
-                        {" - "}
-                        <span className="text-gray-600 dark:text-gray-400">
-                          {RESULT_LABELS[ab.result] || ab.result}
+                    <div key={ab.id}>
+                      <div
+                        onClick={() => {
+                          if (isEditing) {
+                            setEditingAtBatId(null);
+                          } else {
+                            setEditingAtBatId(ab.id);
+                            setEditSB(ab.stolenBases);
+                            setEditCS(ab.caughtStealing);
+                          }
+                        }}
+                        className={`flex cursor-pointer items-center justify-between rounded px-2 py-1 text-sm ${
+                          isEditing
+                            ? "bg-blue-50 dark:bg-blue-900/20"
+                            : isOurs
+                            ? "odd:bg-gray-50 dark:odd:bg-gray-800/50"
+                            : "odd:bg-red-50/50 dark:odd:bg-red-900/10"
+                        }`}
+                      >
+                        <span>
+                          {!isOurs && (
+                            <span className="mr-1 text-xs text-red-500">[OPP]</span>
+                          )}
+                          <span className="font-medium">{batterName}</span>
+                          {" - "}
+                          <span className="text-gray-600 dark:text-gray-400">
+                            {RESULT_LABELS[ab.result] || ab.result}
+                          </span>
+                          {ab.rbi > 0 && (
+                            <span className="ml-1 text-xs text-green-600">
+                              ({ab.rbi} RBI)
+                            </span>
+                          )}
+                          {ab.stolenBases > 0 && (
+                            <span className="ml-1 text-xs text-blue-600">
+                              ({ab.stolenBases} SB)
+                            </span>
+                          )}
+                          {ab.caughtStealing > 0 && (
+                            <span className="ml-1 text-xs text-red-600">
+                              ({ab.caughtStealing} CS)
+                            </span>
+                          )}
+                          {ab.pitches && ab.pitches.length > 0 && (
+                            <span className="ml-1 text-xs text-gray-400">
+                              ({ab.pitches.length}p)
+                            </span>
+                          )}
                         </span>
-                        {ab.rbi > 0 && (
-                          <span className="ml-1 text-xs text-green-600">
-                            ({ab.rbi} RBI)
-                          </span>
-                        )}
-                        {ab.stolenBases > 0 && (
-                          <span className="ml-1 text-xs text-blue-600">
-                            ({ab.stolenBases} SB)
-                          </span>
-                        )}
-                        {ab.pitches && ab.pitches.length > 0 && (
-                          <span className="ml-1 text-xs text-gray-400">
-                            ({ab.pitches.length}p)
-                          </span>
-                        )}
-                      </span>
-                      <span className="text-xs text-gray-400">
-                        {ab.isTop ? "Top" : "Bot"} {ab.inning}
-                      </span>
+                        <span className="text-xs text-gray-400">
+                          {ab.isTop ? "Top" : "Bot"} {ab.inning}
+                        </span>
+                      </div>
+                      {isEditing && (
+                        <div className="flex items-center gap-4 rounded-b bg-blue-50 px-3 py-2 dark:bg-blue-900/20">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-300">SB</span>
+                            <button onClick={() => setEditSB(Math.max(0, editSB - 1))} className="rounded bg-gray-200 px-1.5 py-0.5 text-xs dark:bg-gray-700">-</button>
+                            <span className="w-4 text-center text-sm font-medium">{editSB}</span>
+                            <button onClick={() => setEditSB(editSB + 1)} className="rounded bg-gray-200 px-1.5 py-0.5 text-xs dark:bg-gray-700">+</button>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-medium text-gray-600 dark:text-gray-300">CS</span>
+                            <button onClick={() => setEditCS(Math.max(0, editCS - 1))} className="rounded bg-gray-200 px-1.5 py-0.5 text-xs dark:bg-gray-700">-</button>
+                            <span className="w-4 text-center text-sm font-medium">{editCS}</span>
+                            <button onClick={() => setEditCS(editCS + 1)} className="rounded bg-gray-200 px-1.5 py-0.5 text-xs dark:bg-gray-700">+</button>
+                          </div>
+                          <button
+                            onClick={handleEditAtBat}
+                            className="ml-auto rounded bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
