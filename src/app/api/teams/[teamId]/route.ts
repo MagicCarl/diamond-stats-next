@@ -20,7 +20,7 @@ export async function GET(
       players: { where: { isActive: true }, orderBy: { jerseyNumber: "asc" } },
       seasons: { orderBy: { createdAt: "desc" } },
       games: { orderBy: { gameDate: "desc" }, take: 20 },
-      _count: { select: { players: true, games: true } },
+      _count: { select: { players: { where: { isActive: true } }, games: true } },
     },
   });
 

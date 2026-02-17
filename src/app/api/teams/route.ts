@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
       organization: { ownerId: user.id },
     },
     include: {
-      _count: { select: { players: true, games: true } },
+      _count: { select: { players: { where: { isActive: true } }, games: true } },
       seasons: { where: { isActive: true }, take: 1 },
     },
     orderBy: { createdAt: "desc" },
@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
       organizationId: org.id,
     },
     include: {
-      _count: { select: { players: true, games: true } },
+      _count: { select: { players: { where: { isActive: true } }, games: true } },
     },
   });
 
