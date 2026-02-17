@@ -17,7 +17,27 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: "desc" },
   });
 
-  return NextResponse.json(teams);
+  // Also count games played AGAINST each team (by opponent name match)
+  const enriched = await Promise.all(
+    teams.map(async (team) => {
+      const gamesAsOpponent = await prisma.game.count({
+        where: {
+          teamId: { not: team.id },
+          team: { organization: { ownerId: user.id } },
+          opponentName: { equals: team.name, mode: "insensitive" },
+        },
+      });
+      return {
+        ...team,
+        _count: {
+          ...team._count,
+          games: team._count.games + gamesAsOpponent,
+        },
+      };
+    })
+  );
+
+  return NextResponse.json(enriched);
 }
 
 export async function POST(req: NextRequest) {
