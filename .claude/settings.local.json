@@ -13,7 +13,15 @@
       "Bash(echo:*)",
       "Bash(nslookup:*)",
       "Bash(python3:*)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(du -sh:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(git -C \"/Users/carlandrews/Desktop/diamond-stats-next\" log --oneline -10)",
+      "Bash(mdfind:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
