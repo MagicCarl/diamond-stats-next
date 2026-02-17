@@ -1,11 +1,40 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
+const features = [
+  {
+    icon: "\u26BE",
+    title: "Live Game Scoring",
+    description:
+      "Score games in real-time from your phone at the field. Track every at-bat, stolen base, and pitching change.",
+    image: "/screenshots/live-scoring.png",
+  },
+  {
+    icon: "\uD83D\uDCCA",
+    title: "Season Stats",
+    description:
+      "Automatic calculation of AVG, OBP, SLG, OPS, and more. Filter stats by opponent, pitcher, and handedness.",
+    image: "/screenshots/season-stats.png",
+  },
+  {
+    icon: "\uD83C\uDFAF",
+    title: "Spray Charts",
+    description:
+      "See where your players hit the ball. Per-game and season-long spray charts with color-coded hit types.",
+    image: "/screenshots/spray-chart.png",
+  },
+];
+
 export default function LandingPage() {
   const { user } = useAuth();
+  const [previewFeature, setPreviewFeature] = useState<string | null>(null);
+
+  const activeFeature = features.find((f) => f.title === previewFeature);
 
   return (
     <div className="min-h-screen">
@@ -41,42 +70,23 @@ export default function LandingPage() {
           player performance for your Little League or youth baseball team.
         </p>
 
-        <div className="mt-10 flex justify-center gap-4">
-          <Link
-            href={user ? "/dashboard" : "/signup"}
-            className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
-          >
-            Get Started Free
-          </Link>
-        </div>
-
         <div className="mt-20 grid gap-8 text-left sm:grid-cols-3">
-          <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-            <div className="mb-3 text-3xl">&#9918;</div>
-            <h3 className="text-lg font-semibold">Live Game Scoring</h3>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Score games in real-time from your phone at the field. Track every
-              at-bat, stolen base, and pitching change.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-            <div className="mb-3 text-3xl">&#128202;</div>
-            <h3 className="text-lg font-semibold">Season Stats</h3>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Automatic calculation of AVG, OBP, SLG, OPS, and more. Filter
-              stats by opponent, pitcher, and handedness.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-            <div className="mb-3 text-3xl">&#127919;</div>
-            <h3 className="text-lg font-semibold">Spray Charts</h3>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              See where your players hit the ball. Per-game and season-long
-              spray charts with color-coded hit types.
-            </p>
-          </div>
+          {features.map((feature) => (
+            <button
+              key={feature.title}
+              onClick={() => setPreviewFeature(feature.title)}
+              className="rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:shadow-lg hover:border-blue-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
+            >
+              <div className="mb-3 text-3xl">{feature.icon}</div>
+              <h3 className="text-lg font-semibold">{feature.title}</h3>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                {feature.description}
+              </p>
+              <span className="mt-3 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">
+                See example &rarr;
+              </span>
+            </button>
+          ))}
         </div>
 
         <div className="mx-auto mt-20 max-w-md rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
@@ -104,6 +114,39 @@ export default function LandingPage() {
           </a>
         </div>
       </main>
+
+      {/* Feature preview modal */}
+      {activeFeature && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+          onClick={() => setPreviewFeature(null)}
+        >
+          <div
+            className="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl bg-white p-6 dark:bg-gray-800"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setPreviewFeature(null)}
+              className="absolute right-4 top-4 rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h3 className="mb-4 text-xl font-bold">{activeFeature.title}</h3>
+            <Image
+              src={activeFeature.image}
+              alt={activeFeature.title}
+              width={800}
+              height={600}
+              className="w-full rounded-lg"
+            />
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+              {activeFeature.description}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
