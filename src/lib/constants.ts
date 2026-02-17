@@ -3,7 +3,7 @@ export const POSITIONS = [
 ] as const;
 
 export const AT_BAT_RESULTS = {
-  hits: ["single", "double", "triple", "home_run"] as const,
+  hits: ["single", "double", "triple", "home_run", "ground_rule_double"] as const,
   walks: ["walk", "hbp", "ibb", "catchers_interference"] as const,
   outs: [
     "strikeout_swinging", "strikeout_looking",
@@ -26,6 +26,7 @@ export const RESULT_LABELS: Record<string, string> = {
   double: "2B",
   triple: "3B",
   home_run: "HR",
+  ground_rule_double: "GRD",
   walk: "BB",
   hbp: "HBP",
   ibb: "IBB",
@@ -48,6 +49,7 @@ export const RESULT_FULL_NAMES: Record<string, string> = {
   double: "Double",
   triple: "Triple",
   home_run: "Home Run",
+  ground_rule_double: "Ground Rule Double",
   walk: "Base on Balls",
   hbp: "Hit By Pitch",
   ibb: "Intentional Walk",
@@ -70,6 +72,7 @@ export const RESULT_COLORS: Record<string, string> = {
   double: "#3b82f6",
   triple: "#f97316",
   home_run: "#ef4444",
+  ground_rule_double: "#3b82f6",
   walk: "#a855f7",
   hbp: "#a855f7",
   groundout: "#6b7280",

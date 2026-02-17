@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
@@ -25,7 +27,22 @@ export default function LoginPage() {
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotMessage, setForgotMessage] = useState("");
-  const [showBrowserWarning, setShowBrowserWarning] = useState(false);
+
+  // Handle Google redirect result on page load
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result?.user) {
+          router.push("/dashboard");
+        }
+      })
+      .catch((err) => {
+        if (err.code !== "auth/popup-closed-by-user") {
+          console.error("Google redirect error:", err);
+          setError("Google sign-in failed. Please try again.");
+        }
+      });
+  }, [router]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,37 +61,34 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     setError("");
-
-    // Detect browsers that block Google sign-in popups
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.includes("duckduckgo") || ua.includes("brave")) {
-      setShowBrowserWarning(true);
-      return;
-    }
-
     setGoogleLoading(true);
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
+      // Try popup first (faster UX)
       const result = await signInWithPopup(auth, provider);
       if (result.user) {
         router.push("/dashboard");
       }
-    } catch (error: any) {
+    } catch (err: any) {
       if (
-        error.code === "auth/popup-closed-by-user" ||
-        error.code === "auth/cancelled-popup-request"
+        err.code === "auth/popup-closed-by-user" ||
+        err.code === "auth/cancelled-popup-request"
       ) {
-        setError("");
-      } else if (error.code === "auth/popup-blocked") {
-        setShowBrowserWarning(true);
-      } else if (error.code === "auth/operation-not-allowed") {
+        // User closed popup, do nothing
+      } else if (err.code === "auth/operation-not-allowed") {
         setError("Google sign-in is not enabled. Please contact support.");
-      } else if (error.code === "auth/network-request-failed") {
+      } else if (err.code === "auth/network-request-failed") {
         setError("Network error. Please check your connection and try again.");
       } else {
-        setShowBrowserWarning(true);
+        // Popup blocked or failed — fall back to redirect (works on all browsers)
+        try {
+          await signInWithRedirect(auth, provider);
+          return; // Page will reload after redirect
+        } catch {
+          setError("Google sign-in failed. Please try again or use email.");
+        }
       }
     } finally {
       setGoogleLoading(false);
@@ -233,25 +247,6 @@ export default function LoginPage() {
           </form>
         </Modal>
 
-        <Modal
-          isOpen={showBrowserWarning}
-          onClose={() => setShowBrowserWarning(false)}
-          title="Browser Not Supported"
-        >
-          <div className="space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Google sign-in is not supported in this browser due to its privacy
-              settings. Please sign in with your email and password instead, or
-              try using Safari, Chrome, or Firefox.
-            </p>
-            <Button
-              className="w-full"
-              onClick={() => setShowBrowserWarning(false)}
-            >
-              Got it
-            </Button>
-          </div>
-        </Modal>
       </div>
     </div>
   );

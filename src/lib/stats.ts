@@ -47,7 +47,7 @@ export function calcBattingStats(
 ): BattingStats {
   const hits = atBats.filter((ab) => isHit(ab.result)).length;
   const singles = atBats.filter((ab) => ab.result === "single").length;
-  const doubles = atBats.filter((ab) => ab.result === "double").length;
+  const doubles = atBats.filter((ab) => ab.result === "double" || ab.result === "ground_rule_double").length;
   const triples = atBats.filter((ab) => ab.result === "triple").length;
   const homeRuns = atBats.filter((ab) => ab.result === "home_run").length;
   const walks = atBats.filter(
