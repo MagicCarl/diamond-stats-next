@@ -451,6 +451,24 @@ export default function LiveScoringPage() {
     }
   }
 
+  // Auto-select result when pitch count reaches strikeout or walk
+  useEffect(() => {
+    if (countStrikes >= 3 && !oppSelectedResult) {
+      // Find the last strike pitch to determine looking vs swinging
+      const lastStrikePitch = [...currentPitches].reverse().find(
+        (p) => p.result === "called_strike" || p.result === "swinging_strike"
+      );
+      setOppSelectedResult(
+        lastStrikePitch?.result === "called_strike"
+          ? "strikeout_looking"
+          : "strikeout_swinging"
+      );
+    } else if (countBalls >= 4 && !oppSelectedResult) {
+      const lastPitch = currentPitches[currentPitches.length - 1];
+      setOppSelectedResult(lastPitch?.result === "hit_by_pitch" ? "hbp" : "walk");
+    }
+  }, [countStrikes, countBalls, currentPitches, oppSelectedResult]);
+
   return (
     <div className="space-y-4">
       {/* Header */}
