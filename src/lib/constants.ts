@@ -133,5 +133,5 @@ export const PITCH_RESULT_COLORS: Record<string, string> = {
   hit_by_pitch: "#a855f7",
 };
 
-export const SUBSCRIPTION_PRICE = 29.99;
-export const SUBSCRIPTION_PLAN = "annual";
+export const PURCHASE_PRICE = 39;
+export const PURCHASE_TYPE = "one-time";

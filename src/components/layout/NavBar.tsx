@@ -11,7 +11,6 @@ const navLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/stats/search", label: "Stats Search" },
   { href: "/instructions", label: "Instructions" },
-  { href: "/settings", label: "Settings" },
 ];
 
 export default function NavBar() {

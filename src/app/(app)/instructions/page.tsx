@@ -453,18 +453,15 @@ export default function InstructionsPage() {
         </ol>
       </Card>
 
-      {/* Settings */}
+      {/* Quick Reference */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Settings</h2>
+        <h2 className="mb-3 text-lg font-semibold">Quick Reference</h2>
         <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
           <p>
-            <strong>Dark Mode</strong> &mdash; Toggle between light and dark themes from the Settings page. Dark mode is great for outdoor games with bright sunlight.
+            <strong>Dark Mode</strong> &mdash; Toggle between light and dark themes using the sun/moon icon in the toolbar. Dark mode is great for outdoor games with bright sunlight.
           </p>
           <p>
-            <strong>Profile</strong> &mdash; View your email and display name. Your account is linked to your Google or email/password sign-in.
-          </p>
-          <p>
-            <strong>Sign Out</strong> &mdash; Log out from your account.
+            <strong>Sign Out</strong> &mdash; Click &quot;Sign Out&quot; in the navigation bar to log out from your account.
           </p>
         </div>
       </Card>

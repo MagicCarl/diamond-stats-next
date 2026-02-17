@@ -78,6 +78,31 @@ export default function LandingPage() {
             </p>
           </div>
         </div>
+
+        <div className="mx-auto mt-20 max-w-md rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
+          <h3 className="text-2xl font-bold">Get All Features</h3>
+          <div className="mt-4">
+            <span className="text-4xl font-bold">$39</span>
+            <span className="ml-1 text-gray-500 dark:text-gray-400">one-time</span>
+          </div>
+          <ul className="mt-6 space-y-2 text-left text-sm text-gray-600 dark:text-gray-400">
+            <li>Unlimited teams &amp; seasons</li>
+            <li>Live scoring with pitch tracking</li>
+            <li>Real-time sync across devices</li>
+            <li>Spray charts &amp; advanced stats</li>
+            <li>Inning-by-inning box score</li>
+            <li>Opponent roster auto-load</li>
+            <li>Opponent batter tracking &amp; splits</li>
+          </ul>
+          <a
+            href="https://www.paypal.com/paypalme/carlrandrews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
+          >
+            Purchase Now
+          </a>
+        </div>
       </main>
     </div>
   );
