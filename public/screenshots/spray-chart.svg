@@ -28,7 +28,7 @@
   <path d="M 400 520 L 130 250 A 340 340 0 0 1 670 250 L 400 520 Z" fill="#15803d" opacity="0.25"/>
 
   <!-- Infield diamond -->
-  <polygon points="400,520 280,400 400,280 520,400" fill="#92400e" opacity="0.2" stroke="#a16207" stroke-width="1" opacity="0.4"/>
+  <polygon points="400,520 280,400 400,280 520,400" fill="#92400e" fill-opacity="0.2" stroke="#a16207" stroke-width="1" stroke-opacity="0.4"/>
 
   <!-- Base paths -->
   <line x1="400" y1="520" x2="280" y2="400" stroke="#a16207" stroke-width="1.5" opacity="0.5"/>

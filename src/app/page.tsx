@@ -11,21 +11,24 @@ const features = [
     title: "Live Game Scoring",
     description:
       "Score games in real-time from your phone at the field. Track every at-bat, stolen base, and pitching change.",
-    image: "/screenshots/live-scoring.svg",
+    imageLight: "/screenshots/live-scoring-light.svg",
+    imageDark: "/screenshots/live-scoring.svg",
   },
   {
     icon: "\uD83D\uDCCA",
     title: "Season Stats",
     description:
       "Automatic calculation of AVG, OBP, SLG, OPS, and more. Filter stats by opponent, pitcher, and handedness.",
-    image: "/screenshots/season-stats.svg",
+    imageLight: "/screenshots/season-stats-light.svg",
+    imageDark: "/screenshots/season-stats.svg",
   },
   {
     icon: "\uD83C\uDFAF",
     title: "Spray Charts",
     description:
       "See where your players hit the ball. Per-game and season-long spray charts with color-coded hit types.",
-    image: "/screenshots/spray-chart.svg",
+    imageLight: "/screenshots/spray-chart-light.svg",
+    imageDark: "/screenshots/spray-chart.svg",
   },
 ];
 
@@ -135,9 +138,15 @@ export default function LandingPage() {
             <h3 className="mb-4 text-xl font-bold">{activeFeature.title}</h3>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={activeFeature.image}
+              src={activeFeature.imageLight}
               alt={activeFeature.title}
-              className="w-full rounded-lg"
+              className="w-full rounded-lg dark:hidden"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeFeature.imageDark}
+              alt={activeFeature.title}
+              className="hidden w-full rounded-lg dark:block"
             />
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
               {activeFeature.description}
