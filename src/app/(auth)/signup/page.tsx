@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -8,8 +8,6 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
@@ -23,22 +21,6 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Handle Google redirect result on page load
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result?.user) {
-          router.push("/dashboard");
-        }
-      })
-      .catch((err) => {
-        if (err.code !== "auth/popup-closed-by-user") {
-          console.error("Google redirect error:", err);
-          setError("Google sign-in failed. Please try again.");
-        }
-      });
-  }, [router]);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,29 +59,27 @@ export default function SignupPage() {
     provider.setCustomParameters({ prompt: "select_account" });
 
     try {
-      // Try popup first (faster UX)
       const result = await signInWithPopup(auth, provider);
       if (result.user) {
         router.push("/dashboard");
       }
     } catch (err: any) {
+      console.error("Google sign-in error:", err.code, err.message);
       if (
         err.code === "auth/popup-closed-by-user" ||
         err.code === "auth/cancelled-popup-request"
       ) {
         // User closed popup, do nothing
       } else if (err.code === "auth/operation-not-allowed") {
-        setError("Google sign-in is not enabled. Please contact support.");
+        setError("Google sign-in is not enabled for this app. Enable it in Firebase Console → Authentication → Sign-in method → Google.");
       } else if (err.code === "auth/network-request-failed") {
         setError("Network error. Please check your connection and try again.");
+      } else if (err.code === "auth/unauthorized-domain") {
+        setError("This domain is not authorized for Google sign-in. Add it in Firebase Console → Authentication → Settings → Authorized domains.");
+      } else if (err.code === "auth/popup-blocked") {
+        setError("Popup was blocked by your browser. Please allow popups for this site and try again.");
       } else {
-        // Popup blocked or failed — fall back to redirect
-        try {
-          await signInWithRedirect(auth, provider);
-          return;
-        } catch {
-          setError("Google sign-in failed. Please try again or use email.");
-        }
+        setError(`Google sign-in failed (${err.code || "unknown"}). Please try again.`);
       }
     }
   };
