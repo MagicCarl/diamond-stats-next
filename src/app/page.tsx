@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -134,11 +133,10 @@ export default function LandingPage() {
               </svg>
             </button>
             <h3 className="mb-4 text-xl font-bold">{activeFeature.title}</h3>
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={activeFeature.image}
               alt={activeFeature.title}
-              width={800}
-              height={600}
               className="w-full rounded-lg"
             />
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
