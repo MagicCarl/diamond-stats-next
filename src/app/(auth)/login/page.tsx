@@ -68,7 +68,7 @@ export default function LoginPage() {
       } else if (err.code === "auth/popup-blocked") {
         setError("Popup was blocked by your browser. Please allow popups for this site and try again.");
       } else {
-        setError(`Google sign-in failed (${err.code || "unknown"}). Please try again.`);
+        setError(`Google sign-in failed: ${err.message || err.code || JSON.stringify(err)}`);
       }
     } finally {
       setGoogleLoading(false);
