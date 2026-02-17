@@ -21,7 +21,10 @@
       "Bash(mdfind:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(cat:*)",
+      "Bash(1:*)"
     ]
   }
 }
