@@ -12,21 +12,21 @@ const features = [
     title: "Live Game Scoring",
     description:
       "Score games in real-time from your phone at the field. Track every at-bat, stolen base, and pitching change.",
-    image: "/screenshots/live-scoring.png",
+    image: "/screenshots/live-scoring.svg",
   },
   {
     icon: "\uD83D\uDCCA",
     title: "Season Stats",
     description:
       "Automatic calculation of AVG, OBP, SLG, OPS, and more. Filter stats by opponent, pitcher, and handedness.",
-    image: "/screenshots/season-stats.png",
+    image: "/screenshots/season-stats.svg",
   },
   {
     icon: "\uD83C\uDFAF",
     title: "Spray Charts",
     description:
       "See where your players hit the ball. Per-game and season-long spray charts with color-coded hit types.",
-    image: "/screenshots/spray-chart.png",
+    image: "/screenshots/spray-chart.svg",
   },
 ];
 

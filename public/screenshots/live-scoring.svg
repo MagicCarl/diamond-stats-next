@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    </style>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="600" fill="#111827" rx="12"/>
+
+  <!-- Scoreboard Card -->
+  <rect x="40" y="20" width="720" height="100" rx="10" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="120" y="48" fill="#9ca3af" font-size="12" text-anchor="middle">Home</text>
+  <text x="120" y="80" fill="white" font-size="36" font-weight="bold" text-anchor="middle">7</text>
+  <text x="400" y="48" fill="#9ca3af" font-size="12" text-anchor="middle">Top 4</text>
+  <text x="400" y="70" fill="#9ca3af" font-size="11" text-anchor="middle">vs Eastside Eagles</text>
+  <!-- Outs -->
+  <circle cx="375" cy="90" r="6" fill="#eab308"/>
+  <circle cx="395" cy="90" r="6" fill="#eab308"/>
+  <circle cx="415" cy="90" r="6" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+  <text x="438" y="94" fill="#9ca3af" font-size="10">outs</text>
+  <text x="680" y="48" fill="#9ca3af" font-size="12" text-anchor="middle">Away</text>
+  <text x="680" y="80" fill="white" font-size="36" font-weight="bold" text-anchor="middle">4</text>
+
+  <!-- Now Batting Card -->
+  <rect x="40" y="135" width="720" height="440" rx="10" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="60" y="162" fill="#6b7280" font-size="10" text-transform="uppercase" letter-spacing="1">NOW BATTING</text>
+  <text x="60" y="188" fill="white" font-size="20" font-weight="bold">#24 Marcus Rivera</text>
+  <text x="680" y="188" fill="#9ca3af" font-size="13" text-anchor="end">SS | Spot #3</text>
+
+  <!-- Pitcher -->
+  <text x="60" y="215" fill="#6b7280" font-size="11">Pitcher:</text>
+  <rect x="110" y="203" width="140" height="20" rx="4" fill="#374151"/>
+  <text x="120" y="217" fill="#d1d5db" font-size="11">Jake Thompson (R)</text>
+
+  <!-- Hits Section -->
+  <text x="60" y="250" fill="#6b7280" font-size="10" text-transform="uppercase" letter-spacing="1">HITS</text>
+  <!-- Hit buttons row -->
+  <rect x="60" y="260" width="85" height="50" rx="8" fill="#052e16" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="102" y="282" fill="#4ade80" font-size="14" font-weight="600" text-anchor="middle">1B</text>
+  <text x="102" y="300" fill="#6b7280" font-size="8" text-anchor="middle">Single</text>
+
+  <rect x="155" y="260" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="197" y="282" fill="white" font-size="14" font-weight="600" text-anchor="middle">2B</text>
+  <text x="197" y="300" fill="#6b7280" font-size="8" text-anchor="middle">Double</text>
+
+  <rect x="250" y="260" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="292" y="282" fill="white" font-size="14" font-weight="600" text-anchor="middle">3B</text>
+  <text x="292" y="300" fill="#6b7280" font-size="8" text-anchor="middle">Triple</text>
+
+  <rect x="345" y="260" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="387" y="282" fill="white" font-size="14" font-weight="600" text-anchor="middle">HR</text>
+  <text x="387" y="300" fill="#6b7280" font-size="8" text-anchor="middle">Home Run</text>
+
+  <!-- Walks Section -->
+  <text x="60" y="335" fill="#6b7280" font-size="10" text-transform="uppercase" letter-spacing="1">WALKS</text>
+  <rect x="60" y="345" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="102" y="367" fill="white" font-size="14" font-weight="600" text-anchor="middle">BB</text>
+  <text x="102" y="385" fill="#6b7280" font-size="8" text-anchor="middle">Walk</text>
+
+  <rect x="155" y="345" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="197" y="367" fill="white" font-size="14" font-weight="600" text-anchor="middle">HBP</text>
+  <text x="197" y="385" fill="#6b7280" font-size="8" text-anchor="middle">Hit By Pitch</text>
+
+  <rect x="250" y="345" width="85" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="292" y="367" fill="white" font-size="14" font-weight="600" text-anchor="middle">IBB</text>
+  <text x="292" y="385" fill="#6b7280" font-size="8" text-anchor="middle">Intent. Walk</text>
+
+  <!-- Outs Section -->
+  <text x="60" y="420" fill="#6b7280" font-size="10" text-transform="uppercase" letter-spacing="1">OUTS</text>
+  <rect x="60" y="430" width="68" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="94" y="452" fill="white" font-size="12" font-weight="600" text-anchor="middle">GO</text>
+  <text x="94" y="468" fill="#6b7280" font-size="7" text-anchor="middle">Groundout</text>
+
+  <rect x="136" y="430" width="68" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="170" y="452" fill="white" font-size="12" font-weight="600" text-anchor="middle">FO</text>
+  <text x="170" y="468" fill="#6b7280" font-size="7" text-anchor="middle">Flyout</text>
+
+  <rect x="212" y="430" width="68" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="246" y="452" fill="white" font-size="12" font-weight="600" text-anchor="middle">K</text>
+  <text x="246" y="468" fill="#6b7280" font-size="7" text-anchor="middle">Strikeout</text>
+
+  <rect x="288" y="430" width="68" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="322" y="452" fill="white" font-size="12" font-weight="600" text-anchor="middle">KL</text>
+  <text x="322" y="468" fill="#6b7280" font-size="7" text-anchor="middle">K Looking</text>
+
+  <rect x="364" y="430" width="68" height="50" rx="8" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="398" y="452" fill="white" font-size="12" font-weight="600" text-anchor="middle">FC</text>
+  <text x="398" y="468" fill="#6b7280" font-size="7" text-anchor="middle">Fielder's Ch</text>
+
+  <!-- Extras Row -->
+  <line x1="60" y1="500" x2="740" y2="500" stroke="#374151" stroke-width="1"/>
+  <text x="60" y="525" fill="#6b7280" font-size="11">RBI</text>
+  <rect x="90" y="512" width="28" height="24" rx="4" fill="#374151"/>
+  <text x="104" y="528" fill="white" font-size="12" text-anchor="middle">-</text>
+  <text x="130" y="528" fill="white" font-size="14" font-weight="600">0</text>
+  <rect x="148" y="512" width="28" height="24" rx="4" fill="#374151"/>
+  <text x="162" y="528" fill="white" font-size="12" text-anchor="middle">+</text>
+
+  <text x="200" y="525" fill="#6b7280" font-size="11">Scored</text>
+  <rect x="250" y="512" width="42" height="24" rx="6" fill="#1f2937" stroke="#374151" stroke-width="1"/>
+  <text x="271" y="528" fill="#9ca3af" font-size="11" text-anchor="middle">No</text>
+
+  <text x="320" y="525" fill="#6b7280" font-size="11">SB</text>
+  <rect x="340" y="512" width="28" height="24" rx="4" fill="#374151"/>
+  <text x="354" y="528" fill="white" font-size="12" text-anchor="middle">-</text>
+  <text x="380" y="528" fill="white" font-size="14" font-weight="600">0</text>
+  <rect x="398" y="512" width="28" height="24" rx="4" fill="#374151"/>
+  <text x="412" y="528" fill="white" font-size="12" text-anchor="middle">+</text>
+
+  <!-- Buttons -->
+  <rect x="60" y="550" width="120" height="36" rx="8" fill="#374151"/>
+  <text x="120" y="572" fill="white" font-size="13" text-anchor="middle">Undo Last</text>
+  <rect x="195" y="550" width="545" height="36" rx="8" fill="#2563eb"/>
+  <text x="467" y="572" fill="white" font-size="13" font-weight="600" text-anchor="middle">Record At-Bat</text>
+</svg>
