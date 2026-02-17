@@ -28,7 +28,41 @@ export async function GET(
     return NextResponse.json({ error: "Team not found" }, { status: 404 });
   }
 
-  return NextResponse.json(team);
+  // Also find games where this team appears as the opponent
+  const gamesAsOpponent = await prisma.game.findMany({
+    where: {
+      teamId: { not: teamId },
+      team: { organization: { ownerId: user.id } },
+      opponentName: { equals: team.name, mode: "insensitive" },
+    },
+    include: {
+      team: { select: { name: true } },
+    },
+    orderBy: { gameDate: "desc" },
+    take: 20,
+  });
+
+  // Flip perspective for opponent games: swap scores, flip home/away
+  const flippedGames = gamesAsOpponent.map((g) => ({
+    ...g,
+    opponentName: g.team.name,
+    ourScore: g.opponentScore,
+    opponentScore: g.ourScore,
+    isHome: !g.isHome,
+  }));
+
+  // Merge and sort by date
+  const allGames = [...team.games, ...flippedGames]
+    .sort((a, b) => new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime())
+    .slice(0, 20);
+
+  const totalGames = team._count.games + gamesAsOpponent.length;
+
+  return NextResponse.json({
+    ...team,
+    games: allGames,
+    _count: { ...team._count, games: totalGames },
+  });
 }
 
 export async function PUT(
