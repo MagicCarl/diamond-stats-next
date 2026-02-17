@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getOutsProduced } from "@/lib/stats";
 
 export async function PATCH(
   req: NextRequest,
@@ -59,6 +60,50 @@ export async function DELETE(
   if (result.count === 0) {
     return NextResponse.json({ error: "At-bat not found" }, { status: 404 });
   }
+
+  // Recalculate game state from all remaining at-bats
+  const remainingAtBats = await prisma.atBat.findMany({
+    where: { gameId },
+    orderBy: { atBatNumberInGame: "asc" },
+  });
+
+  let outs = 0;
+  let inning = 1;
+  let isTop = true;
+  let ourScore = 0;
+  let oppScore = 0;
+
+  for (const ab of remainingAtBats) {
+    const isOurs = !!ab.playerId;
+    if (ab.runnerScored) {
+      if (isOurs) ourScore += 1;
+      else oppScore += 1;
+    }
+    if (isOurs) ourScore += ab.rbi;
+    else oppScore += ab.rbi;
+
+    outs += getOutsProduced(ab.result);
+    if (outs >= 3) {
+      outs = 0;
+      if (isTop) {
+        isTop = false;
+      } else {
+        isTop = true;
+        inning += 1;
+      }
+    }
+  }
+
+  await prisma.game.update({
+    where: { id: gameId },
+    data: {
+      outsInCurrentInning: outs,
+      currentInning: inning,
+      isTopOfInning: isTop,
+      ourScore,
+      opponentScore: oppScore,
+    },
+  });
 
   return NextResponse.json({ success: true });
 }

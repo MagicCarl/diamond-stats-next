@@ -94,6 +94,10 @@ export default function LiveScoringPage() {
 
   const rosterAutoLoadedRef = useRef(false);
   const initialModeSetRef = useRef(false);
+  const selectedPitcherIdRef = useRef(selectedPitcherId);
+  const selectedOurPitcherIdRef = useRef(selectedOurPitcherId);
+  selectedPitcherIdRef.current = selectedPitcherId;
+  selectedOurPitcherIdRef.current = selectedOurPitcherId;
 
   const fetchGame = useCallback(async () => {
     try {
@@ -141,7 +145,7 @@ export default function LiveScoringPage() {
         }
       }
 
-      if (data.opponentPitchers.length > 0 && !selectedPitcherId) {
+      if (data.opponentPitchers.length > 0 && !selectedPitcherIdRef.current) {
         setSelectedPitcherId(data.opponentPitchers[data.opponentPitchers.length - 1].id);
       }
       // Advance our batter: cycle through lineup based on our team's at-bats
@@ -155,7 +159,7 @@ export default function LiveScoringPage() {
         setCurrentOppBatterIndex(oppAtBats.length % data.opponentBatters.length);
       }
       // Set our pitcher if available
-      if (data.pitchingAppearances?.length > 0 && !selectedOurPitcherId) {
+      if (data.pitchingAppearances?.length > 0 && !selectedOurPitcherIdRef.current) {
         setSelectedOurPitcherId(data.pitchingAppearances[data.pitchingAppearances.length - 1].id);
       }
     } catch {
@@ -163,7 +167,7 @@ export default function LiveScoringPage() {
     } finally {
       setLoading(false);
     }
-  }, [apiFetch, gameId, selectedPitcherId, selectedOurPitcherId]);
+  }, [apiFetch, gameId]);
 
   useEffect(() => {
     fetchGame();
@@ -209,7 +213,7 @@ export default function LiveScoringPage() {
 
   // Our batting
   const activeBatterIndex = manualBatterIndex ?? currentBatterIndex;
-  const currentBatter = game?.lineupEntries[activeBatterIndex];
+  const currentBatter = game?.lineupEntries?.[activeBatterIndex];
 
   // Opponent batting
   const activeOppBatterIndex = manualOppBatterIndex ?? currentOppBatterIndex;
@@ -593,8 +597,8 @@ export default function LiveScoringPage() {
                           {manualBatterIndex !== null ? "Selected Player" : "Now Batting"}
                         </p>
                         <p className="text-lg font-bold">
-                          #{currentBatter?.player.jerseyNumber ?? "-"}{" "}
-                          {currentBatter?.player.firstName} {currentBatter?.player.lastName}
+                          #{currentBatter?.player?.jerseyNumber ?? "-"}{" "}
+                          {currentBatter?.player?.firstName} {currentBatter?.player?.lastName}
                         </p>
                       </div>
                       <div className="text-right text-sm text-gray-500">
@@ -772,7 +776,7 @@ export default function LiveScoringPage() {
                         >
                           {game.pitchingAppearances.map((pa) => (
                             <option key={pa.id} value={pa.id}>
-                              {pa.player?.firstName} {pa.player?.lastName}
+                              {pa.player ? `${pa.player.firstName} ${pa.player.lastName}` : "Unknown"}
                             </option>
                           ))}
                         </select>
@@ -990,7 +994,7 @@ export default function LiveScoringPage() {
                 {[...game.atBats].reverse().map((ab) => {
                   const isOurs = !!ab.playerId;
                   const batterName = isOurs
-                    ? `${ab.player?.firstName} ${ab.player?.lastName}`
+                    ? (ab.player ? `${ab.player.firstName} ${ab.player.lastName}` : "Unknown")
                     : ab.opponentBatter?.name || "Unknown";
                   const isEditing = editingAtBatId === ab.id;
                   return (
