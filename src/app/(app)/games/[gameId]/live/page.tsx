@@ -178,6 +178,35 @@ export default function LiveScoringPage() {
     return () => clearInterval(interval);
   }, [game?.status, fetchGame]);
 
+  // Auto-select result when pitch count reaches strikeout or walk
+  useEffect(() => {
+    if (currentPitches.length === 0) return;
+    let balls = 0;
+    let strikes = 0;
+    for (const p of currentPitches) {
+      if (p.result === "ball" || p.result === "hit_by_pitch") {
+        balls++;
+      } else if (p.result === "called_strike" || p.result === "swinging_strike") {
+        strikes++;
+      } else if (p.result === "foul") {
+        if (strikes < 2) strikes++;
+      }
+    }
+    if (strikes >= 3 && !oppSelectedResult) {
+      const lastStrikePitch = [...currentPitches].reverse().find(
+        (p) => p.result === "called_strike" || p.result === "swinging_strike"
+      );
+      setOppSelectedResult(
+        lastStrikePitch?.result === "called_strike"
+          ? "strikeout_looking"
+          : "strikeout_swinging"
+      );
+    } else if (balls >= 4 && !oppSelectedResult) {
+      const lastPitch = currentPitches[currentPitches.length - 1];
+      setOppSelectedResult(lastPitch?.result === "hit_by_pitch" ? "hbp" : "walk");
+    }
+  }, [currentPitches, oppSelectedResult]);
+
   // Our batting
   const activeBatterIndex = manualBatterIndex ?? currentBatterIndex;
   const currentBatter = game?.lineupEntries[activeBatterIndex];
@@ -450,24 +479,6 @@ export default function LiveScoringPage() {
       if (countStrikes < 2) countStrikes++;
     }
   }
-
-  // Auto-select result when pitch count reaches strikeout or walk
-  useEffect(() => {
-    if (countStrikes >= 3 && !oppSelectedResult) {
-      // Find the last strike pitch to determine looking vs swinging
-      const lastStrikePitch = [...currentPitches].reverse().find(
-        (p) => p.result === "called_strike" || p.result === "swinging_strike"
-      );
-      setOppSelectedResult(
-        lastStrikePitch?.result === "called_strike"
-          ? "strikeout_looking"
-          : "strikeout_swinging"
-      );
-    } else if (countBalls >= 4 && !oppSelectedResult) {
-      const lastPitch = currentPitches[currentPitches.length - 1];
-      setOppSelectedResult(lastPitch?.result === "hit_by_pitch" ? "hbp" : "walk");
-    }
-  }, [countStrikes, countBalls, currentPitches, oppSelectedResult]);
 
   return (
     <div className="space-y-4">
