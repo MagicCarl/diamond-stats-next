@@ -133,7 +133,7 @@ export default function AdminPage() {
                       <button
                         onClick={() => togglePaid(u.id, u.isPaid)}
                         disabled={toggling === u.id}
-                        className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+                        className={`w-20 rounded py-1 text-center text-xs font-medium transition-colors ${
                           u.isPaid
                             ? "bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
@@ -143,7 +143,7 @@ export default function AdminPage() {
                       </button>
                       <button
                         onClick={() => setDeletingUser(u)}
-                        className="rounded px-3 py-1 text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                        className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
                       >
                         Delete
                       </button>
