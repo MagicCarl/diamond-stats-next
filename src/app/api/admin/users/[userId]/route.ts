@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod/v4";
+
+const patchUserSchema = z.object({
+  isPaid: z.boolean().optional(),
+});
 
 export async function PATCH(
   req: NextRequest,
@@ -13,7 +18,11 @@ export async function PATCH(
   }
 
   const { userId } = await params;
-  const body = await req.json();
+  const parsed = patchUserSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const updated = await prisma.user.update({
     where: { id: userId },

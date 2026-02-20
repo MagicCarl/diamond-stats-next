@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod/v4";
+
+const updateTeamSchema = z.object({
+  name: z.string().trim().min(1, "Team name is required").max(100),
+  sport: z.string().trim().min(1).max(50).optional(),
+  level: z.string().trim().min(1).max(50).optional(),
+  defaultInnings: z.number().int().min(1).max(20).optional(),
+});
 
 export async function GET(
   req: NextRequest,
@@ -73,7 +81,11 @@ export async function PUT(
   if (!user) return unauthorized();
 
   const { teamId } = await params;
-  const body = await req.json();
+  const parsed = updateTeamSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const team = await prisma.team.updateMany({
     where: {

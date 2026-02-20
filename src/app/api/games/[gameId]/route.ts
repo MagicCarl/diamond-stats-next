@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod/v4";
+
+const updateGameSchema = z.object({
+  status: z.enum(["scheduled", "in_progress", "completed", "cancelled"]).optional(),
+  ourScore: z.number().int().min(0).optional(),
+  opponentScore: z.number().int().min(0).optional(),
+  currentInning: z.number().int().min(1).optional(),
+  isTopOfInning: z.boolean().optional(),
+  outsInCurrentInning: z.number().int().min(0).max(3).optional(),
+  notes: z.string().max(1000).nullable().optional(),
+});
 
 export async function GET(
   req: NextRequest,
@@ -58,7 +69,11 @@ export async function PUT(
   if (!user) return unauthorized();
 
   const { gameId } = await params;
-  const body = await req.json();
+  const parsed = updateGameSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const result = await prisma.game.updateMany({
     where: { id: gameId, team: { organization: { ownerId: user.id } } },

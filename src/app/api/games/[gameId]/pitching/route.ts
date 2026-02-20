@@ -1,6 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod/v4";
+
+const updatePitchingSchema = z.object({
+  id: z.string().min(1, "id required"),
+  outsRecorded: z.number().int().min(0).optional(),
+  hitsAllowed: z.number().int().min(0).optional(),
+  runsAllowed: z.number().int().min(0).optional(),
+  earnedRuns: z.number().int().min(0).optional(),
+  walks: z.number().int().min(0).optional(),
+  strikeouts: z.number().int().min(0).optional(),
+  homeRunsAllowed: z.number().int().min(0).optional(),
+  pitchesThrown: z.number().int().min(0).nullable().optional(),
+  hitBatters: z.number().int().min(0).optional(),
+});
 
 export async function GET(
   req: NextRequest,
@@ -71,11 +85,11 @@ export async function PUT(
   if (!user) return unauthorized();
 
   const { gameId } = await params;
-  const body = await req.json();
-
-  if (!body.id) {
-    return NextResponse.json({ error: "id required" }, { status: 400 });
+  const parsed = updatePitchingSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+  const body = parsed.data;
 
   const result = await prisma.pitchingAppearance.updateMany({
     where: {

@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod/v4";
+
+const updatePlayerSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required").max(50),
+  lastName: z.string().trim().min(1, "Last name is required").max(50),
+  jerseyNumber: z.number().int().min(0).max(99).nullable().optional(),
+  bats: z.enum(["left", "right", "switch"]).optional(),
+  throwsHand: z.enum(["left", "right"]).optional(),
+  primaryPosition: z.string().trim().max(20).nullable().optional(),
+  secondaryPosition: z.string().trim().max(20).nullable().optional(),
+});
 
 export async function PUT(
   req: NextRequest,
@@ -18,7 +29,11 @@ export async function PUT(
     return NextResponse.json({ error: "Team not found" }, { status: 404 });
   }
 
-  const body = await req.json();
+  const parsed = updatePlayerSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const player = await prisma.player.updateMany({
     where: { id: playerId, teamId },

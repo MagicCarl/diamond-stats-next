@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getOutsProduced } from "@/lib/stats";
+import { z } from "zod/v4";
+
+const patchAtBatSchema = z.object({
+  stolenBases: z.number().int().min(0).optional(),
+  caughtStealing: z.number().int().min(0).optional(),
+  rbi: z.number().int().min(0).optional(),
+  runnerScored: z.boolean().optional(),
+});
 
 export async function PATCH(
   req: NextRequest,
@@ -11,7 +19,11 @@ export async function PATCH(
   if (!user) return unauthorized();
 
   const { gameId, atBatId } = await params;
-  const body = await req.json();
+  const parsed = patchAtBatSchema.safeParse(await req.json());
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+  const body = parsed.data;
 
   const game = await prisma.game.findFirst({
     where: { id: gameId, team: { organization: { ownerId: user.id } } },
