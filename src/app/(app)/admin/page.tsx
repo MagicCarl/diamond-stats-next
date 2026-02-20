@@ -104,7 +104,6 @@ export default function AdminPage() {
                 <th className="pb-2 pr-4">Email</th>
                 <th className="pb-2 pr-4">Signed Up</th>
                 <th className="pb-2 pr-4">Teams</th>
-                <th className="pb-2 pr-4">Paid</th>
                 <th className="pb-2">Action</th>
               </tr>
             </thead>
@@ -129,36 +128,25 @@ export default function AdminPage() {
                   <td className="py-2 pr-4 text-gray-500">
                     {u._count.organizations}
                   </td>
-                  <td className="py-2 pr-4">
-                    {u.isPaid ? (
-                      <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                        Paid
-                      </span>
-                    ) : (
-                      <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400">
-                        Free
-                      </span>
-                    )}
-                  </td>
                   <td className="py-2">
                     <div className="flex gap-2">
-                      {!u.isPaid && (
-                        <button
-                          onClick={() => togglePaid(u.id, u.isPaid)}
-                          disabled={toggling === u.id}
-                          className="rounded px-3 py-1 text-xs font-medium transition-colors bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
-                        >
-                          {toggling === u.id ? "..." : "Mark Paid"}
-                        </button>
-                      )}
-                      {!u.isAdmin && (
-                        <button
-                          onClick={() => setDeletingUser(u)}
-                          className="rounded px-3 py-1 text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
-                        >
-                          Delete
-                        </button>
-                      )}
+                      <button
+                        onClick={() => togglePaid(u.id, u.isPaid)}
+                        disabled={toggling === u.id}
+                        className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
+                          u.isPaid
+                            ? "bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                            : "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                        }`}
+                      >
+                        {toggling === u.id ? "..." : u.isPaid ? "Mark Paid" : "Not Paid"}
+                      </button>
+                      <button
+                        onClick={() => setDeletingUser(u)}
+                        className="rounded px-3 py-1 text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
