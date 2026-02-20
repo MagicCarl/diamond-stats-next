@@ -34,6 +34,26 @@ export async function PATCH(
     return NextResponse.json({ error: "At-bat not found" }, { status: 404 });
   }
 
+  // Recalculate game score when RBI is edited
+  if (body.rbi !== undefined) {
+    const allAtBats = await prisma.atBat.findMany({
+      where: { gameId },
+      orderBy: { atBatNumberInGame: "asc" },
+    });
+
+    let ourScore = 0;
+    let oppScore = 0;
+    for (const ab of allAtBats) {
+      if (ab.playerId) ourScore += ab.rbi;
+      else oppScore += ab.rbi;
+    }
+
+    await prisma.game.update({
+      where: { id: gameId },
+      data: { ourScore, opponentScore: oppScore },
+    });
+  }
+
   return NextResponse.json({ success: true });
 }
 
@@ -75,10 +95,7 @@ export async function DELETE(
 
   for (const ab of remainingAtBats) {
     const isOurs = !!ab.playerId;
-    if (ab.runnerScored) {
-      if (isOurs) ourScore += 1;
-      else oppScore += 1;
-    }
+    // RBI counts the runs scored on this play
     if (isOurs) ourScore += ab.rbi;
     else oppScore += ab.rbi;
 

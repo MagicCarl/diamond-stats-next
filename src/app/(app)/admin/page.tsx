@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
+import Modal from "@/components/ui/Modal";
+import Button from "@/components/ui/Button";
 import Spinner from "@/components/ui/Spinner";
 
 interface AdminUser {
@@ -24,6 +26,8 @@ export default function AdminPage() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [toggling, setToggling] = useState<string | null>(null);
+  const [deletingUser, setDeletingUser] = useState<AdminUser | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -51,6 +55,22 @@ export default function AdminPage() {
       // handle
     } finally {
       setToggling(null);
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    if (!deletingUser) return;
+    setDeleteLoading(true);
+    try {
+      await apiFetch(`/api/admin/users/${deletingUser.id}`, {
+        method: "DELETE",
+      });
+      setUsers((prev) => prev.filter((u) => u.id !== deletingUser.id));
+      setDeletingUser(null);
+    } catch {
+      // handle
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
@@ -121,21 +141,25 @@ export default function AdminPage() {
                     )}
                   </td>
                   <td className="py-2">
-                    <button
-                      onClick={() => togglePaid(u.id, u.isPaid)}
-                      disabled={toggling === u.id}
-                      className={`rounded px-3 py-1 text-xs font-medium transition-colors ${
-                        u.isPaid
-                          ? "bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
-                          : "bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
-                      }`}
-                    >
-                      {toggling === u.id
-                        ? "..."
-                        : u.isPaid
-                        ? "Revoke"
-                        : "Mark Paid"}
-                    </button>
+                    <div className="flex gap-2">
+                      {!u.isPaid && (
+                        <button
+                          onClick={() => togglePaid(u.id, u.isPaid)}
+                          disabled={toggling === u.id}
+                          className="rounded px-3 py-1 text-xs font-medium transition-colors bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
+                        >
+                          {toggling === u.id ? "..." : "Mark Paid"}
+                        </button>
+                      )}
+                      {!u.isAdmin && (
+                        <button
+                          onClick={() => setDeletingUser(u)}
+                          className="rounded px-3 py-1 text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -143,6 +167,27 @@ export default function AdminPage() {
           </table>
         </div>
       </Card>
+
+      <Modal
+        isOpen={!!deletingUser}
+        onClose={() => setDeletingUser(null)}
+        title="Delete User"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            This will permanently delete <strong>{deletingUser?.displayName || deletingUser?.email}</strong> and all their data (organizations, teams, games, and stats).
+          </p>
+          <p className="text-sm font-medium text-red-600">This cannot be undone.</p>
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" onClick={() => setDeletingUser(null)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleDeleteUser} disabled={deleteLoading}>
+              {deleteLoading ? "Deleting..." : "Delete User"}
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

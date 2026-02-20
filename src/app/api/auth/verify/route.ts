@@ -35,10 +35,9 @@ export async function POST(req: NextRequest) {
         isAdmin: user.isAdmin,
       },
     });
-  } catch (error: any) {
-    console.error("Auth verify error:", error?.message || error);
+  } catch {
     return NextResponse.json(
-      { error: "Invalid token", details: error?.message || "Unknown error" },
+      { error: "Invalid token" },
       { status: 401 }
     );
   }

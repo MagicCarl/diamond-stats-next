@@ -50,7 +50,7 @@ export default function InstructionsPage() {
         </p>
         <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
           <li>
-            <strong>Set Your Lineup</strong> &mdash; Tap <strong>Set Lineup</strong> on the live scoring page. Add players from your roster to the batting order, assign each a defensive position for this game, and drag to reorder. Save when you&apos;re ready.
+            <strong>Set Your Lineup</strong> &mdash; Tap <strong>Set Lineup</strong> on the live scoring page. Add players from your roster to the batting order, assign each a defensive position for this game, and use the up/down arrows to reorder. Save when you&apos;re ready.
           </li>
           <li>
             <strong>Add Opponent Pitchers</strong> &mdash; When your team is batting, use the pitcher dropdown and tap <strong>+ New</strong> to add the starting pitcher&apos;s name and throwing hand (Left or Right). You can add relief pitchers as the game progresses.
@@ -383,7 +383,7 @@ export default function InstructionsPage() {
           </div>
           <div>
             <h3 className="font-semibold">On-Base Percentage (OBP)</h3>
-            <p>(Hits + Walks + HBP + CI) &divide; Plate Appearances. Measures how often a batter reaches base safely.</p>
+            <p>(Hits + Walks + HBP + CI) &divide; (At-Bats + Walks + HBP + Sacrifice Flies + CI). Measures how often a batter reaches base safely.</p>
           </div>
           <div>
             <h3 className="font-semibold">Slugging Percentage (SLG)</h3>

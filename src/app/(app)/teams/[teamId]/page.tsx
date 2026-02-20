@@ -159,6 +159,7 @@ export default function TeamDetailPage() {
   };
 
   const handleDeletePlayer = async (playerId: string) => {
+    if (!confirm("Remove this player from the roster? Their game stats will also be deleted.")) return;
     try {
       await apiFetch(`/api/teams/${teamId}/players/${playerId}`, {
         method: "DELETE",

@@ -83,6 +83,8 @@ export default function LiveScoringPage() {
   const [newBatterNumber, setNewBatterNumber] = useState("");
   const [newBatterHand, setNewBatterHand] = useState("right");
   const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showEndGameConfirm, setShowEndGameConfirm] = useState(false);
   const [showLineupSetup, setShowLineupSetup] = useState(false);
   const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
   const [lineupDraft, setLineupDraft] = useState<{ playerId: string; position: string }[]>([]);
@@ -222,6 +224,7 @@ export default function LiveScoringPage() {
   const handleRecordAtBat = async () => {
     if (!selectedResult || !currentBatter || !game) return;
     setSubmitting(true);
+    setErrorMsg("");
 
     try {
       await apiFetch(`/api/games/${gameId}/at-bats`, {
@@ -249,7 +252,7 @@ export default function LiveScoringPage() {
 
       await fetchGame();
     } catch {
-      // handle
+      setErrorMsg("Failed to record at-bat. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -258,6 +261,7 @@ export default function LiveScoringPage() {
   const handleRecordOppAtBat = async () => {
     if (!oppSelectedResult || !currentOppBatter || !game) return;
     setSubmitting(true);
+    setErrorMsg("");
 
     try {
       const atBat = await apiFetch(`/api/games/${gameId}/at-bats`, {
@@ -297,7 +301,7 @@ export default function LiveScoringPage() {
 
       await fetchGame();
     } catch {
-      // handle
+      setErrorMsg("Failed to record opponent at-bat. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -499,7 +503,7 @@ export default function LiveScoringPage() {
             <Button variant="ghost" size="sm">Box Score</Button>
           </Link>
           {!isFinal && (
-            <Button variant="danger" size="sm" onClick={handleEndGame}>
+            <Button variant="danger" size="sm" onClick={() => setShowEndGameConfirm(true)}>
               End Game
             </Button>
           )}
@@ -546,6 +550,12 @@ export default function LiveScoringPage() {
           </div>
         </div>
       </Card>
+
+      {errorMsg && (
+        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
+          {errorMsg}
+        </div>
+      )}
 
       {isFinal ? (
         <Card className="text-center">
@@ -1294,6 +1304,35 @@ export default function LiveScoringPage() {
               disabled={lineupDraft.length === 0}
             >
               Save Lineup ({lineupDraft.length} players)
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* End Game Confirmation Modal */}
+      <Modal
+        isOpen={showEndGameConfirm}
+        onClose={() => setShowEndGameConfirm(false)}
+        title="End Game?"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            This will mark the game as final with a score of{" "}
+            <strong>{game.ourScore} - {game.opponentScore}</strong>.
+            This action cannot be undone.
+          </p>
+          <div className="flex justify-end gap-3">
+            <Button variant="secondary" onClick={() => setShowEndGameConfirm(false)}>
+              Cancel
+            </Button>
+            <Button
+              variant="danger"
+              onClick={async () => {
+                setShowEndGameConfirm(false);
+                await handleEndGame();
+              }}
+            >
+              End Game
             </Button>
           </div>
         </div>

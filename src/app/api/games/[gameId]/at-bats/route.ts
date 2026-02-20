@@ -77,14 +77,8 @@ export async function POST(
   // Determine if this at-bat is for our team or opponent
   const isOurTeamBatting = !!body.playerId;
 
-  // Add runs
-  if (body.runnerScored) {
-    if (isOurTeamBatting) {
-      newScore += 1;
-    } else {
-      newOppScore += 1;
-    }
-  }
+  // Add runs: RBI counts the runs scored on this play.
+  // runnerScored tracks whether the batter scored (a stat), not an additional run.
   if (isOurTeamBatting) {
     newScore += body.rbi || 0;
   } else {

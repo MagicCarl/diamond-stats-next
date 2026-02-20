@@ -41,6 +41,10 @@ export async function POST(
     orderBy: { orderInGame: "desc" },
   });
 
+  if (!body.name?.trim()) {
+    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  }
+
   const pitcher = await prisma.opponentPitcher.create({
     data: {
       gameId,

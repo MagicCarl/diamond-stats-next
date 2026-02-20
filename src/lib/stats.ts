@@ -75,9 +75,11 @@ export function calcBattingStats(
   const totalBases = singles + doubles * 2 + triples * 3 + homeRuns * 4;
 
   const avg = officialAtBats > 0 ? hits / officialAtBats : 0;
+  // OBP = (H + BB + HBP + CI) / (AB + BB + HBP + SF + CI)
+  const obpDenominator = officialAtBats + walks + hbp + sacFlies + ci;
   const obp =
-    plateAppearances > 0
-      ? (hits + walks + hbp + ci) / plateAppearances
+    obpDenominator > 0
+      ? (hits + walks + hbp + ci) / obpDenominator
       : 0;
   const slg = officialAtBats > 0 ? totalBases / officialAtBats : 0;
   const sbPct = sb + cs > 0 ? sb / (sb + cs) : 0;

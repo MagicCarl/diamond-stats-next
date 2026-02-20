@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
 import Button from "@/components/ui/Button";
@@ -16,6 +17,13 @@ import Modal from "@/components/ui/Modal";
 
 export default function LoginPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) router.replace("/dashboard");
+    });
+    return () => unsubscribe();
+  }, [router]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -52,23 +60,19 @@ export default function LoginPage() {
       if (result.user) {
         router.push("/dashboard");
       }
-    } catch (err: any) {
-      console.error("Google sign-in error:", err.code, err.message);
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code;
       if (
-        err.code === "auth/popup-closed-by-user" ||
-        err.code === "auth/cancelled-popup-request"
+        code === "auth/popup-closed-by-user" ||
+        code === "auth/cancelled-popup-request"
       ) {
         // User closed popup, do nothing
-      } else if (err.code === "auth/operation-not-allowed") {
-        setError("Google sign-in is not enabled for this app. Enable it in Firebase Console → Authentication → Sign-in method → Google.");
-      } else if (err.code === "auth/network-request-failed") {
+      } else if (code === "auth/network-request-failed") {
         setError("Network error. Please check your connection and try again.");
-      } else if (err.code === "auth/unauthorized-domain") {
-        setError("This domain is not authorized for Google sign-in. Add it in Firebase Console → Authentication → Settings → Authorized domains.");
-      } else if (err.code === "auth/popup-blocked") {
+      } else if (code === "auth/popup-blocked") {
         setError("Popup was blocked by your browser. Please allow popups for this site and try again.");
       } else {
-        setError(`Google sign-in failed: ${err.message || err.code || JSON.stringify(err)}`);
+        setError("Google sign-in failed. Please try again.");
       }
     } finally {
       setGoogleLoading(false);

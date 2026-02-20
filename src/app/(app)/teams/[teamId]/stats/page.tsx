@@ -108,8 +108,8 @@ export default function TeamStatsPage() {
             {
               label: "Win %",
               value:
-                record.games > 0
-                  ? ((record.wins / record.games) * 100).toFixed(0) + "%"
+                record.wins + record.losses > 0
+                  ? ((record.wins / (record.wins + record.losses)) * 100).toFixed(0) + "%"
                   : "-",
               color: "",
             },

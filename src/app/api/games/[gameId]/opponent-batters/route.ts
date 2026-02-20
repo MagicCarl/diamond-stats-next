@@ -41,10 +41,14 @@ export async function POST(
     orderBy: { orderInGame: "desc" },
   });
 
+  if (!body.name?.trim()) {
+    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+  }
+
   const batter = await prisma.opponentBatter.create({
     data: {
       gameId,
-      name: body.name,
+      name: body.name.trim(),
       jerseyNumber: body.jerseyNumber ?? null,
       bats: body.bats || "right",
       orderInGame: (lastBatter?.orderInGame || 0) + 1,

@@ -39,11 +39,13 @@ export default function GameSprayChartPage() {
     .filter((ab: { hitLocationX: number | null; hitLocationY: number | null }) =>
       ab.hitLocationX != null && ab.hitLocationY != null
     )
-    .map((ab: { hitLocationX: number; hitLocationY: number; result: string; player: { firstName: string; lastName: string } }) => ({
+    .map((ab: { hitLocationX: number; hitLocationY: number; result: string; player?: { firstName: string; lastName: string } | null; opponentBatter?: { name: string } | null }) => ({
       x: ab.hitLocationX,
       y: ab.hitLocationY,
       result: ab.result,
-      playerName: `${ab.player.firstName} ${ab.player.lastName}`,
+      playerName: ab.player
+        ? `${ab.player.firstName} ${ab.player.lastName}`
+        : ab.opponentBatter?.name || "Unknown",
     }));
 
   const legendItems = [

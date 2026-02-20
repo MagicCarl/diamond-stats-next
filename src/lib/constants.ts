@@ -75,6 +75,7 @@ export const RESULT_COLORS: Record<string, string> = {
   ground_rule_double: "#3b82f6",
   walk: "#a855f7",
   hbp: "#a855f7",
+  ibb: "#a855f7",
   groundout: "#6b7280",
   flyout: "#6b7280",
   lineout: "#6b7280",

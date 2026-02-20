@@ -15,36 +15,39 @@ export interface AuthUser {
 export async function getAuthUser(req: NextRequest): Promise<AuthUser | null> {
   const authHeader = req.headers.get("authorization");
   if (!authHeader?.startsWith("Bearer ")) {
-    console.error("[getAuthUser] No Bearer token in Authorization header");
     return null;
   }
 
   const token = authHeader.split("Bearer ")[1];
   if (!token) {
-    console.error("[getAuthUser] Empty token after Bearer");
     return null;
   }
 
   try {
     const decoded = await getAdminAuth().verifyIdToken(token);
-    console.log("[getAuthUser] Token verified for uid:", decoded.uid);
-    // Find or create user — ensures it works even if /api/auth/verify was blocked
-    const user = await prisma.user.upsert({
+    if (!decoded.email) {
+      return null;
+    }
+    // Look up existing user first (fast read), fall back to upsert if not found
+    let user = await prisma.user.findUnique({
       where: { firebaseUid: decoded.uid },
-      update: {
-        email: decoded.email || "",
-        displayName: decoded.name || null,
-      },
-      create: {
-        firebaseUid: decoded.uid,
-        email: decoded.email || "",
-        displayName: decoded.name || null,
-      },
     });
-    console.log("[getAuthUser] User found/created:", user.id);
+    if (!user) {
+      user = await prisma.user.upsert({
+        where: { firebaseUid: decoded.uid },
+        update: {
+          email: decoded.email,
+          displayName: decoded.name || null,
+        },
+        create: {
+          firebaseUid: decoded.uid,
+          email: decoded.email,
+          displayName: decoded.name || null,
+        },
+      });
+    }
     return user;
-  } catch (error) {
-    console.error("[getAuthUser] Error:", error instanceof Error ? error.message : error);
+  } catch {
     return null;
   }
 }

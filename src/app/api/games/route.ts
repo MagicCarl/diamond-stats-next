@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
       gameTime: body.gameTime || null,
       location: body.location || null,
       isHome: body.isHome ?? true,
-      inningsCount: body.inningsCount || team.defaultInnings,
+      inningsCount: body.inningsCount ?? team.defaultInnings,
     },
   });
 

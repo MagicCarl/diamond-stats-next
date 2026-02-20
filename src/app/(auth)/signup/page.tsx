@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
 import Button from "@/components/ui/Button";
@@ -16,11 +16,19 @@ import Input from "@/components/ui/Input";
 
 export default function SignupPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) router.replace("/dashboard");
+    });
+    return () => unsubscribe();
+  }, [router]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,17 +41,11 @@ export default function SignupPage() {
         await updateProfile(cred.user, { displayName: name });
       }
       router.push("/dashboard");
-    } catch (err: any) {
-      // If email already exists, just sign them in
-      if (err.code === "auth/email-already-in-use") {
-        try {
-          await signInWithEmailAndPassword(auth, email, password);
-          router.push("/dashboard");
-          return;
-        } catch {
-          setError("Account already exists. Please sign in with your password.");
-        }
-      } else if (err.code === "auth/weak-password") {
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code;
+      if (code === "auth/email-already-in-use") {
+        setError("An account with this email already exists. Please sign in instead.");
+      } else if (code === "auth/weak-password") {
         setError("Password must be at least 6 characters.");
       } else {
         setError("Could not create account. Please try again.");
@@ -55,6 +57,7 @@ export default function SignupPage() {
 
   const handleGoogleSignup = async () => {
     setError("");
+    setGoogleLoading(true);
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
 
@@ -63,24 +66,22 @@ export default function SignupPage() {
       if (result.user) {
         router.push("/dashboard");
       }
-    } catch (err: any) {
-      console.error("Google sign-in error:", err.code, err.message);
+    } catch (err: unknown) {
+      const code = (err as { code?: string })?.code;
       if (
-        err.code === "auth/popup-closed-by-user" ||
-        err.code === "auth/cancelled-popup-request"
+        code === "auth/popup-closed-by-user" ||
+        code === "auth/cancelled-popup-request"
       ) {
         // User closed popup, do nothing
-      } else if (err.code === "auth/operation-not-allowed") {
-        setError("Google sign-in is not enabled for this app. Enable it in Firebase Console → Authentication → Sign-in method → Google.");
-      } else if (err.code === "auth/network-request-failed") {
+      } else if (code === "auth/network-request-failed") {
         setError("Network error. Please check your connection and try again.");
-      } else if (err.code === "auth/unauthorized-domain") {
-        setError("This domain is not authorized for Google sign-in. Add it in Firebase Console → Authentication → Settings → Authorized domains.");
-      } else if (err.code === "auth/popup-blocked") {
+      } else if (code === "auth/popup-blocked") {
         setError("Popup was blocked by your browser. Please allow popups for this site and try again.");
       } else {
-        setError(`Google sign-in failed: ${err.message || err.code || JSON.stringify(err)}`);
+        setError("Google sign-in failed. Please try again.");
       }
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -136,8 +137,9 @@ export default function SignupPage() {
           variant="secondary"
           className="w-full"
           onClick={handleGoogleSignup}
+          disabled={googleLoading}
         >
-          Continue with Google
+          {googleLoading ? "Signing up..." : "Continue with Google"}
         </Button>
 
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">

@@ -24,7 +24,13 @@
       "Bash(git push:*)",
       "Bash(git status:*)",
       "Bash(cat:*)",
-      "Bash(1:*)"
+      "Bash(1:*)",
+      "WebFetch(domain:www.aitooldiscovery.com)",
+      "WebFetch(domain:blog.starmorph.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:support.claude.com)",
+      "Bash(git -C /Users/carlandrews/Desktop/diamond-stats-next worktree list)",
+      "Bash(npm run build:*)"
     ]
   }
 }

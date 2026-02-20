@@ -26,26 +26,28 @@ export default function TeamSprayChartPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      apiFetch(`/api/teams/${teamId}`),
-      apiFetch(`/api/teams/${teamId}/stats`),
-    ])
-      .then(([team]) => {
+    apiFetch(`/api/teams/${teamId}`)
+      .then((team) => {
         setPlayers(team.players);
-        // Fetch all games to get spray chart data
+        // Fetch all games with at-bats included
         return apiFetch(`/api/games?teamId=${teamId}`);
       })
       .then(async (games) => {
+        // Fetch all game details in parallel instead of sequentially
+        const gameDetails = await Promise.all(
+          games.map((game: { id: string }) => apiFetch(`/api/games/${game.id}`))
+        );
         const allHits: HitData[] = [];
-        for (const game of games) {
-          const gameDetail = await apiFetch(`/api/games/${game.id}`);
+        for (const gameDetail of gameDetails) {
           for (const ab of gameDetail.atBats) {
             if (ab.hitLocationX != null && ab.hitLocationY != null) {
               allHits.push({
                 x: ab.hitLocationX,
                 y: ab.hitLocationY,
                 result: ab.result,
-                playerName: `${ab.player.firstName} ${ab.player.lastName}`,
+                playerName: ab.player
+                  ? `${ab.player.firstName} ${ab.player.lastName}`
+                  : ab.opponentBatter?.name || "Unknown",
               });
             }
           }

@@ -31,6 +31,7 @@ export default function NewGamePage() {
     inningsCount: 6,
   });
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     apiFetch("/api/teams").then(setTeams).catch(() => {});
@@ -48,6 +49,7 @@ export default function NewGamePage() {
     e.preventDefault();
     setSaving(true);
 
+    setError("");
     try {
       const game = await apiFetch("/api/games", {
         method: "POST",
@@ -55,7 +57,7 @@ export default function NewGamePage() {
       });
       router.push(`/games/${game.id}/live`);
     } catch {
-      // handle
+      setError("Failed to create game. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -91,6 +93,12 @@ export default function NewGamePage() {
   return (
     <div className="mx-auto max-w-lg">
       <h1 className="mb-6 text-2xl font-bold">New Game</h1>
+
+      {error && (
+        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
+          {error}
+        </div>
+      )}
 
       <Card>
         <form onSubmit={handleSubmit} className="space-y-4">

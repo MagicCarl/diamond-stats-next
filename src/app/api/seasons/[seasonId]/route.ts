@@ -20,13 +20,14 @@ export async function DELETE(
     return NextResponse.json({ error: "Season not found" }, { status: 404 });
   }
 
-  // Unlink games from this season, then delete the season
-  await prisma.game.updateMany({
-    where: { seasonId },
-    data: { seasonId: null },
+  // Unlink games from this season, then delete the season (in a transaction)
+  await prisma.$transaction(async (tx) => {
+    await tx.game.updateMany({
+      where: { seasonId },
+      data: { seasonId: null },
+    });
+    await tx.season.delete({ where: { id: seasonId } });
   });
-
-  await prisma.season.delete({ where: { id: seasonId } });
 
   return NextResponse.json({ success: true });
 }

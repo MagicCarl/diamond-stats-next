@@ -37,18 +37,23 @@ export async function PUT(
     return NextResponse.json({ error: "Game not found" }, { status: 404 });
   }
 
-  // Replace all lineup entries
-  await prisma.lineupEntry.deleteMany({ where: { gameId } });
+  if (!Array.isArray(body.lineup)) {
+    return NextResponse.json({ error: "lineup must be an array" }, { status: 400 });
+  }
 
-  const entries = await prisma.lineupEntry.createMany({
-    data: body.lineup.map(
-      (entry: { playerId: string; battingOrder: number; position: string }) => ({
-        gameId,
-        playerId: entry.playerId,
-        battingOrder: entry.battingOrder,
-        position: entry.position,
-      })
-    ),
+  // Replace all lineup entries atomically
+  const entries = await prisma.$transaction(async (tx) => {
+    await tx.lineupEntry.deleteMany({ where: { gameId } });
+    return tx.lineupEntry.createMany({
+      data: body.lineup.map(
+        (entry: { playerId: string; battingOrder: number; position: string }) => ({
+          gameId,
+          playerId: entry.playerId,
+          battingOrder: entry.battingOrder,
+          position: entry.position,
+        })
+      ),
+    });
   });
 
   return NextResponse.json({ count: entries.count });
