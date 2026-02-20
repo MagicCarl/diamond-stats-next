@@ -64,12 +64,13 @@ export default function LandingPage() {
 
       <main className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h2 className="text-5xl font-bold tracking-tight">
-          Track Your Team&apos;s
-          <span className="text-blue-600"> Stats</span>
+          Every At-Bat. Every Game.
+          <span className="text-blue-600"> Every Season.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          The simplest way to track batting stats, view spray charts, and analyze
-          player performance for your Little League or youth baseball team.
+          The easiest way to score games live, track batting and pitching stats,
+          and give your youth baseball team the pro treatment &mdash; all from
+          your phone. One-time purchase. No subscriptions.
         </p>
 
         <div className="mt-20 grid gap-8 text-left sm:grid-cols-3">
