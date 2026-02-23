@@ -46,6 +46,10 @@ export async function getAuthUser(req: NextRequest): Promise<AuthUser | null> {
         },
       });
     }
+    // Block soft-deleted users from all access
+    if (user.deletedAt) {
+      return null;
+    }
     return user;
   } catch {
     return null;

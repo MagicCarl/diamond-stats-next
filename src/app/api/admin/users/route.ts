@@ -17,6 +17,7 @@ export async function GET(req: NextRequest) {
       displayName: true,
       isPaid: true,
       isAdmin: true,
+      deletedAt: true,
       createdAt: true,
       _count: { select: { organizations: true } },
     },

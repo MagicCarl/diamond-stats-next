@@ -26,6 +26,14 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Block soft-deleted users from signing in
+    if (user.deletedAt) {
+      return NextResponse.json(
+        { error: "Account suspended" },
+        { status: 403 }
+      );
+    }
+
     return NextResponse.json({
       user: {
         id: user.id,

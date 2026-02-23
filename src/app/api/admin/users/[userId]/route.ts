@@ -5,6 +5,7 @@ import { z } from "zod/v4";
 
 const patchUserSchema = z.object({
   isPaid: z.boolean().optional(),
+  deletedAt: z.null().optional(),
 });
 
 export async function PATCH(
@@ -28,6 +29,7 @@ export async function PATCH(
     where: { id: userId },
     data: {
       ...(body.isPaid !== undefined && { isPaid: body.isPaid }),
+      ...(body.deletedAt === null && { deletedAt: null }),
     },
     select: {
       id: true,
@@ -35,6 +37,7 @@ export async function PATCH(
       displayName: true,
       isPaid: true,
       isAdmin: true,
+      deletedAt: true,
       createdAt: true,
     },
   });
@@ -64,9 +67,21 @@ export async function DELETE(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  // Cascade delete: User -> Organizations -> Teams -> (Players, Games, etc.)
-  // Prisma cascade handles this since Organization.ownerId -> User.id has onDelete: Cascade
-  await prisma.user.delete({ where: { id: userId } });
+  // Soft-delete: set deletedAt timestamp instead of destroying data
+  // User will be blocked from signing in by getAuthUser() and /api/auth/verify
+  const updated = await prisma.user.update({
+    where: { id: userId },
+    data: { deletedAt: new Date() },
+    select: {
+      id: true,
+      email: true,
+      displayName: true,
+      isPaid: true,
+      isAdmin: true,
+      deletedAt: true,
+      createdAt: true,
+    },
+  });
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(updated);
 }

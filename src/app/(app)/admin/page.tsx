@@ -15,6 +15,7 @@ interface AdminUser {
   displayName: string | null;
   isPaid: boolean;
   isAdmin: boolean;
+  deletedAt: string | null;
   createdAt: string;
   _count: { organizations: number };
 }
@@ -28,6 +29,7 @@ export default function AdminPage() {
   const [toggling, setToggling] = useState<string | null>(null);
   const [deletingUser, setDeletingUser] = useState<AdminUser | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [restoringUser, setRestoringUser] = useState<string | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -62,15 +64,34 @@ export default function AdminPage() {
     if (!deletingUser) return;
     setDeleteLoading(true);
     try {
-      await apiFetch(`/api/admin/users/${deletingUser.id}`, {
+      const updated = await apiFetch(`/api/admin/users/${deletingUser.id}`, {
         method: "DELETE",
       });
-      setUsers((prev) => prev.filter((u) => u.id !== deletingUser.id));
+      setUsers((prev) =>
+        prev.map((u) => (u.id === deletingUser.id ? { ...u, deletedAt: updated.deletedAt } : u))
+      );
       setDeletingUser(null);
     } catch {
       // handle
     } finally {
       setDeleteLoading(false);
+    }
+  };
+
+  const handleRestoreUser = async (userId: string) => {
+    setRestoringUser(userId);
+    try {
+      const updated = await apiFetch(`/api/admin/users/${userId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ deletedAt: null }),
+      });
+      setUsers((prev) =>
+        prev.map((u) => (u.id === userId ? { ...u, deletedAt: updated.deletedAt } : u))
+      );
+    } catch {
+      // handle
+    } finally {
+      setRestoringUser(null);
     }
   };
 
@@ -85,13 +106,14 @@ export default function AdminPage() {
   if (!appUser?.isAdmin) return null;
 
   const paidCount = users.filter((u) => u.isPaid).length;
+  const deletedCount = users.filter((u) => u.deletedAt).length;
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Admin - Users</h1>
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          {users.length} total | {paidCount} paid
+          {users.length} total | {paidCount} paid{deletedCount > 0 && ` | ${deletedCount} deleted`}
         </div>
       </div>
 
@@ -111,12 +133,17 @@ export default function AdminPage() {
               {users.map((u) => (
                 <tr
                   key={u.id}
-                  className="border-b border-gray-100 dark:border-gray-800"
+                  className={`border-b border-gray-100 dark:border-gray-800 ${
+                    u.deletedAt ? "opacity-50" : ""
+                  }`}
                 >
                   <td className="py-2 pr-4 font-medium">
                     {u.displayName || "-"}
                     {u.isAdmin && (
                       <span className="ml-1 text-xs text-blue-500">(admin)</span>
+                    )}
+                    {u.deletedAt && (
+                      <span className="ml-1 text-xs text-red-500">(deleted)</span>
                     )}
                   </td>
                   <td className="py-2 pr-4 text-gray-600 dark:text-gray-400">
@@ -132,21 +159,31 @@ export default function AdminPage() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => togglePaid(u.id, u.isPaid)}
-                        disabled={toggling === u.id}
+                        disabled={toggling === u.id || !!u.deletedAt}
                         className={`w-20 rounded py-1 text-center text-xs font-medium transition-colors ${
                           u.isPaid
                             ? "bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
-                        }`}
+                        } ${u.deletedAt ? "cursor-not-allowed" : ""}`}
                       >
                         {toggling === u.id ? "..." : u.isPaid ? "Mark Paid" : "Not Paid"}
                       </button>
-                      <button
-                        onClick={() => setDeletingUser(u)}
-                        className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
-                      >
-                        Delete
-                      </button>
+                      {u.deletedAt ? (
+                        <button
+                          onClick={() => handleRestoreUser(u.id)}
+                          disabled={restoringUser === u.id}
+                          className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
+                        >
+                          {restoringUser === u.id ? "..." : "Restore"}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setDeletingUser(u)}
+                          className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -163,9 +200,11 @@ export default function AdminPage() {
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            This will permanently delete <strong>{deletingUser?.displayName || deletingUser?.email}</strong> and all their data (organizations, teams, games, and stats).
+            This will suspend <strong>{deletingUser?.displayName || deletingUser?.email}</strong> and prevent them from signing in. Their data will be preserved.
           </p>
-          <p className="text-sm font-medium text-red-600">This cannot be undone.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            You can restore this user later from the admin panel.
+          </p>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setDeletingUser(null)}>
               Cancel
