@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { trackServerEvent } from "@/lib/analytics";
 import { z } from "zod/v4";
 
 const patchUserSchema = z.object({
@@ -41,6 +42,13 @@ export async function PATCH(
       createdAt: true,
     },
   });
+
+  if (body.isPaid !== undefined) {
+    trackServerEvent("PAYMENT_TOGGLED", user.id, {
+      targetUserId: userId,
+      newPaidStatus: updated.isPaid,
+    });
+  }
 
   return NextResponse.json(updated);
 }

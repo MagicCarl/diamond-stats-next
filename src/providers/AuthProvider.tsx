@@ -62,6 +62,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               isPaid: data.user.isPaid ?? false,
               isAdmin: data.user.isAdmin ?? false,
             });
+            // Track login event (fire and forget)
+            fetch("/api/analytics/events", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${idToken}`,
+              },
+              body: JSON.stringify({ eventType: "LOGIN" }),
+            }).catch(() => {});
           } else {
             const body = await verifyRes.json().catch(() => ({}));
             console.error("Auth verify failed:", verifyRes.status, body);
