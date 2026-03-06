@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/dashboard", "/admin", "/settings", "/teams/", "/games/"],
+        allow: ["/", "/features", "/pricing", "/login", "/signup"],
+        disallow: ["/api/", "/dashboard", "/admin", "/settings", "/teams/", "/games/", "/instructions"],
       },
     ],
     sitemap: "https://mybaseballstats.com/sitemap.xml",

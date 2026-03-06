@@ -1,0 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign Up - Free Baseball & Softball Stats Tracker",
+  description:
+    "Create a free account on My Baseball Stats. Score baseball and softball games live, track batting stats (AVG, OBP, SLG, OPS), pitching stats, and spray charts for your youth team.",
+  alternates: {
+    canonical: "https://mybaseballstats.com/signup",
+  },
+};
+
+export default function SignupLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
+}
