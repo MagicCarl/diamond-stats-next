@@ -39,9 +39,32 @@ export default function LandingPage() {
   const activeFeature = features.find((f) => f.title === previewFeature);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-gray-950">
       <header className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-xl font-bold">My Baseball Stats</h1>
+        <div className="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8">
+            <circle cx="32" cy="32" r="30" fill="#f5f5f5" stroke="#cc0000" strokeWidth="2"/>
+            <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="20" y1="10" x2="17" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="15" x2="16" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="20" x2="16" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="26" x2="16" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="19" y1="32" x2="15" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="38" x2="16" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="44" x2="16" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="20" y1="50" x2="17" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="10" x2="47" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="15" x2="48" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="20" x2="48" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="26" x2="48" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="45" y1="32" x2="49" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="38" x2="48" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="44" x2="48" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="44" y1="50" x2="47" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+          <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Mona Sans', sans-serif" }}>MyBaseballStats</span>
+        </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />
           {user ? (
@@ -63,14 +86,18 @@ export default function LandingPage() {
       </header>
 
       <main className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h2 className="text-5xl font-bold tracking-tight">
-          Every At-Bat. Every Game.
-          <span className="text-blue-600"> Every Season.</span>
+        <h2 className="text-6xl tracking-normal leading-tight sm:text-7xl" style={{ fontFamily: "'Mona Sans', sans-serif", fontWeight: 800 }}>
+          <span className="block text-[#1A1A1A] dark:text-white">Every At-Bat.</span>
+          <span className="block"><span className="text-[#E31837]">Every </span><span className="text-[#2563EB]">Game.</span></span>
+          <span className="block"><span className="text-[#16A34A]">Every </span><span className="text-[#1A1A1A] dark:text-white">Season.</span></span>
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
           The easiest way to score games live, track batting and pitching stats,
-          and give your youth baseball team the pro treatment &mdash; all from
-          your phone. One-time purchase. No subscriptions.
+          and give your baseball/softball team the pro treatment &mdash; all from
+          your phone/tablet.
+        </p>
+        <p className="mt-3 text-lg font-bold text-gray-900 dark:text-gray-100">
+          One-time purchase. No subscriptions.
         </p>
 
         <div className="mt-20 grid gap-8 text-left sm:grid-cols-3">
