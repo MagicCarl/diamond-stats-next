@@ -13,9 +13,11 @@ export default function LandingPage() {
             The Best Baseball &amp; Softball Stats App for Youth Teams
           </h2>
           <p className="mt-4 text-gray-600 dark:text-gray-400">
-            My Baseball Stats is the easiest way to track baseball and softball statistics for youth teams.
+            My Baseball Stats is the easiest baseball stats software for youth teams.
             Whether you coach Little League, travel ball, rec league, high school, or college — score every
-            game live from your phone and get professional-quality stats automatically.
+            game live from your phone and get professional-quality statistics automatically. Unlike complicated
+            baseball statistics software built for pros, My Baseball Stats is designed for coaches and parents
+            who want simple, powerful stat tracking without the learning curve.
           </p>
           <p className="mt-3 text-gray-600 dark:text-gray-400">
             No more spreadsheets or paper scorebooks. Record at-bats in real time and the app calculates
