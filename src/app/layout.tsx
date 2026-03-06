@@ -26,6 +26,9 @@ const monaSans = localFont({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "NbsUL_UJgedy-867VBhCthEwc74Hu5ZsIeuWOKfz5pA",
+  },
   title: {
     default:
       "My Baseball Stats - Youth Baseball & Softball Stats Tracker App",
