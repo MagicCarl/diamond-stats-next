@@ -71,8 +71,10 @@ export default function LoginPage() {
         setError("Network error. Please check your connection and try again.");
       } else if (code === "auth/popup-blocked") {
         setError("Popup was blocked by your browser. Please allow popups for this site and try again.");
+      } else if (code === "auth/unauthorized-domain") {
+        setError("This domain is not authorized for Google sign-in. Please contact support.");
       } else {
-        setError("Google sign-in failed. Please try again.");
+        setError(`Google sign-in failed (${code ?? "unknown"}). Please try again.`);
       }
     } finally {
       setGoogleLoading(false);
