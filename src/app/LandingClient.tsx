@@ -63,7 +63,7 @@ export default function LandingClient() {
             <line x1="44" y1="44" x2="48" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
             <line x1="44" y1="50" x2="47" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
-          <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Mona Sans', sans-serif" }}>MyBaseballStats</span>
+          <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Mona Sans', sans-serif" }}>Baseball Stats Tracker</span>
         </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />
@@ -123,7 +123,7 @@ export default function LandingClient() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/mybaseballstats_bannerAd.png"
-            alt="My Baseball Stats app showing live game scoring, batting stats, and spray charts for youth baseball and softball teams"
+            alt="Baseball Stats Tracker app showing live game scoring, batting stats, and spray charts for youth baseball and softball teams"
             className="mb-6 w-full rounded-lg shadow-2xl"
           />
           <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">

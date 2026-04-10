@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "My Baseball Stats",
+    name: "Baseball Stats Tracker",
     short_name: "Baseball Stats",
     description:
       "Score youth baseball games live. Automatic batting stats, pitching stats, spray charts, and box scores.",

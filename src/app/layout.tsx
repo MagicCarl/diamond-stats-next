@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   title: {
     default:
-      "My Baseball Stats - Youth Baseball & Softball Stats Tracker App",
-    template: "%s | My Baseball Stats",
+      "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker App",
+    template: "%s | Baseball Stats Tracker",
   },
   description:
     "Score youth baseball and softball games live from your phone. Automatic batting stats (AVG, OBP, SLG, OPS), pitching stats, spray charts, and box scores for Little League, travel ball, rec league, and high school teams. One-time $39 purchase — no subscriptions ever.",
@@ -73,17 +73,17 @@ export const metadata: Metadata = {
     "best baseball stats app",
     "best softball stats app",
   ],
-  authors: [{ name: "My Baseball Stats" }],
-  creator: "My Baseball Stats",
-  publisher: "My Baseball Stats",
-  metadataBase: new URL("https://mybaseballstats.com"),
+  authors: [{ name: "Baseball Stats Tracker" }],
+  creator: "Baseball Stats Tracker",
+  publisher: "Baseball Stats Tracker",
+  metadataBase: new URL("https://baseballstatstracker.com"),
   category: "Sports",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mybaseballstats.com",
-    siteName: "My Baseball Stats",
-    title: "My Baseball Stats - Youth Baseball & Softball Stats Tracker",
+    url: "https://baseballstatstracker.com",
+    siteName: "Baseball Stats Tracker",
+    title: "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker",
     description:
       "Score baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for youth teams. $39 one-time — no subscription.",
     images: [
@@ -91,13 +91,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "My Baseball Stats - Live scoring, spray charts, and box scores for youth baseball and softball",
+        alt: "Baseball Stats Tracker - Live scoring, spray charts, and box scores for youth baseball and softball",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Baseball Stats - Youth Baseball & Softball Stats Tracker",
+    title: "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker",
     description:
       "Score baseball and softball games live from your phone. Batting stats, spray charts, and box scores for youth teams. $39 one-time.",
     images: ["/og-image.png"],
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://mybaseballstats.com",
+    canonical: "https://baseballstatstracker.com",
   },
 };
 
@@ -140,10 +140,10 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
-                name: "My Baseball Stats",
+                name: "Baseball Stats Tracker",
                 applicationCategory: "SportsApplication",
                 operatingSystem: "Web, iOS, Android",
-                url: "https://mybaseballstats.com",
+                url: "https://baseballstatstracker.com",
                 description:
                   "Score youth baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for Little League, travel ball, and high school teams.",
                 offers: {
@@ -168,20 +168,20 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                name: "My Baseball Stats",
-                url: "https://mybaseballstats.com",
+                name: "Baseball Stats Tracker",
+                url: "https://baseballstatstracker.com",
                 potentialAction: {
                   "@type": "SearchAction",
-                  target: "https://mybaseballstats.com/?q={search_term_string}",
+                  target: "https://baseballstatstracker.com/?q={search_term_string}",
                   "query-input": "required name=search_term_string",
                 },
               },
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                name: "My Baseball Stats",
-                url: "https://mybaseballstats.com",
-                logo: "https://mybaseballstats.com/icon.svg",
+                name: "Baseball Stats Tracker",
+                url: "https://baseballstatstracker.com",
+                logo: "https://baseballstatstracker.com/icon.svg",
                 sameAs: [],
               },
               {
@@ -190,10 +190,10 @@ export default function RootLayout({
                 mainEntity: [
                   {
                     "@type": "Question",
-                    name: "What stats does My Baseball Stats track?",
+                    name: "What stats does Baseball Stats Tracker track?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "My Baseball Stats automatically calculates batting average (AVG), on-base percentage (OBP), slugging percentage (SLG), OPS, RBI, stolen bases, strikeouts, walks, doubles, triples, home runs, and more. It also tracks pitching stats including innings pitched, earned runs, strikeouts, walks, and pitch counts.",
+                      text: "Baseball Stats Tracker automatically calculates batting average (AVG), on-base percentage (OBP), slugging percentage (SLG), OPS, RBI, stolen bases, strikeouts, walks, doubles, triples, home runs, and more. It also tracks pitching stats including innings pitched, earned runs, strikeouts, walks, and pitch counts.",
                     },
                   },
                   {
@@ -201,15 +201,15 @@ export default function RootLayout({
                     name: "Does it work for softball too?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Yes! My Baseball Stats works perfectly for both baseball and softball. The scoring system, stat calculations, and spray charts work identically for both sports at any level — Little League, travel ball, rec league, high school, or college.",
+                      text: "Yes! Baseball Stats Tracker works perfectly for both baseball and softball. The scoring system, stat calculations, and spray charts work identically for both sports at any level — Little League, travel ball, rec league, high school, or college.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "How much does My Baseball Stats cost?",
+                    name: "How much does Baseball Stats Tracker cost?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "My Baseball Stats is a one-time purchase of $39. There are no monthly fees, no subscriptions, and no hidden charges. You pay once and get unlimited access to all features forever.",
+                      text: "Baseball Stats Tracker is a one-time purchase of $39. There are no monthly fees, no subscriptions, and no hidden charges. You pay once and get unlimited access to all features forever.",
                     },
                   },
                   {
@@ -217,7 +217,7 @@ export default function RootLayout({
                     name: "Can I score games live from my phone?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Yes! My Baseball Stats is designed for live scoring at the field. Score every at-bat in real-time from your phone or tablet. The app syncs across devices every 3 seconds, so coaches and parents can follow along live from their own devices.",
+                      text: "Yes! Baseball Stats Tracker is designed for live scoring at the field. Score every at-bat in real-time from your phone or tablet. The app syncs across devices every 3 seconds, so coaches and parents can follow along live from their own devices.",
                     },
                   },
                   {
@@ -233,7 +233,7 @@ export default function RootLayout({
                     name: "What levels of baseball and softball does it support?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "My Baseball Stats supports all levels: Little League, travel ball, recreational leagues, high school, and college. You can create unlimited teams and seasons to track stats across multiple levels and age groups.",
+                      text: "Baseball Stats Tracker supports all levels: Little League, travel ball, recreational leagues, high school, and college. You can create unlimited teams and seasons to track stats across multiple levels and age groups.",
                     },
                   },
                 ],

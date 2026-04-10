@@ -27,7 +27,7 @@ export default function NavBar() {
               href="/dashboard"
               className="text-lg font-bold text-gray-900 dark:text-white"
             >
-              My Baseball Stats
+              Baseball Stats Tracker
             </Link>
             <div className="hidden gap-1 md:flex">
               {navLinks.map((link) => (

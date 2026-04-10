@@ -7,16 +7,16 @@ export default function LandingPage() {
 
       {/* SEO-rich content section — server-rendered, crawlable by search engines */}
       <section className="mx-auto max-w-4xl px-6 pb-20">
-        {/* Why My Baseball Stats */}
+        {/* Why Baseball Stats Tracker */}
         <div className="mt-16 rounded-xl border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             The Best Baseball &amp; Softball Stats App for Youth Teams
           </h2>
           <p className="mt-4 text-gray-600 dark:text-gray-400">
-            My Baseball Stats is the easiest baseball stats software for youth teams.
+            Baseball Stats Tracker is the easiest baseball stats software for youth teams.
             Whether you coach Little League, travel ball, rec league, high school, or college — score every
             game live from your phone and get professional-quality statistics automatically. Unlike complicated
-            baseball statistics software built for pros, My Baseball Stats is designed for coaches and parents
+            baseball statistics software built for pros, Baseball Stats Tracker is designed for coaches and parents
             who want simple, powerful stat tracking without the learning curve.
           </p>
           <p className="mt-3 text-gray-600 dark:text-gray-400">
@@ -120,7 +120,7 @@ export default function LandingPage() {
           <div className="mt-6 space-y-6">
             <div>
               <h3 className="font-semibold text-gray-900 dark:text-white">
-                What stats does My Baseball Stats track?
+                What stats does Baseball Stats Tracker track?
               </h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 Batting stats include AVG, OBP, SLG, OPS, at-bats, hits, doubles, triples, home runs,
@@ -134,7 +134,7 @@ export default function LandingPage() {
                 Does it work for softball?
               </h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Yes! My Baseball Stats works perfectly for both baseball and softball at any level.
+                Yes! Baseball Stats Tracker works perfectly for both baseball and softball at any level.
                 The scoring, stat formulas, and spray charts are the same for both sports.
               </p>
             </div>
@@ -161,9 +161,9 @@ export default function LandingPage() {
                 What devices does it work on?
               </h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                My Baseball Stats is a web app that works on any device with a browser — iPhone, Android,
+                Baseball Stats Tracker is a web app that works on any device with a browser — iPhone, Android,
                 iPad, tablet, laptop, or desktop. No app store download required. Just open
-                mybaseballstats.com and start scoring.
+                baseballstatstracker.com and start scoring.
               </p>
             </div>
             <div>
@@ -186,7 +186,7 @@ export default function LandingPage() {
             Start Tracking Your Team&apos;s Stats Today
           </h2>
           <p className="mt-3 text-gray-600 dark:text-gray-400">
-            Join coaches and parents who trust My Baseball Stats to score their games and track their
+            Join coaches and parents who trust Baseball Stats Tracker to score their games and track their
             players&apos; development. Works for baseball and softball at every level.
           </p>
           <a

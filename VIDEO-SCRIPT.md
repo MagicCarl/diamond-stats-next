@@ -1,4 +1,4 @@
-# My Baseball Stats — 30-Second Promo Video Script
+# Baseball Stats Tracker — 30-Second Promo Video Script
 
 **Format:** 1080x1080 (square) for Instagram/Facebook, or 1080x1920 (vertical) for Reels/TikTok
 **Music:** None
@@ -98,7 +98,7 @@ All for a flat $39. Once.
 
 *0:23 — App name fades in (large, bold, white):*
 ```
-My Baseball Stats
+Baseball Stats Tracker
 ```
 
 *0:25 — Tagline fades in below (medium, lighter weight):*
@@ -113,7 +113,7 @@ $39 one-time
 
 *0:29 — URL fades in at bottom (small, white):*
 ```
-mybaseballstats.com
+baseballstatstracker.com
 ```
 
 *Hold for 1.5 seconds through end.*

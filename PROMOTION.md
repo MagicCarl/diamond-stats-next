@@ -1,4 +1,4 @@
-# My Baseball Stats - Promotion Guide
+# Baseball Stats Tracker - Promotion Guide
 
 One-time $39 youth baseball stats app. No subscriptions. The target audience is **parents, coaches, and team managers** of youth and amateur baseball teams.
 
@@ -10,7 +10,7 @@ One-time $39 youth baseball stats app. No subscriptions. The target audience is 
 - **Youth baseball parent groups** - Search "youth baseball [your city/state]" and join local groups. Answer questions about stat tracking and mention the app when relevant. Don't just spam links — be helpful first.
 - **Travel ball / tournament groups** - Parents in competitive travel ball are the most likely buyers. Groups like "Travel Baseball Parents" and regional tournament groups are goldmines.
 - **Little League groups** - Many local Little League organizations have Facebook groups for parents.
-- **Create a Facebook Page** for My Baseball Stats. Post short demo videos, stat tips, and testimonials.
+- **Create a Facebook Page** for Baseball Stats Tracker. Post short demo videos, stat tips, and testimonials.
 
 ### Instagram / TikTok
 - Short screen recordings showing live scoring in action at a real game (15-30 seconds).
@@ -33,7 +33,7 @@ One-time $39 youth baseball stats app. No subscriptions. The target audience is 
 ## 2. Baseball Forums & Communities (Free)
 
 - **Pair of discussions on youth baseball forums**: Sites like YouthBaseballParents.com, HSBBWEB.com (high school baseball web), and BaseballFever.com have active communities.
-- **GameChanger / iScore alternative threads** - People regularly search for alternatives to subscription-based apps. Position My Baseball Stats as the "buy it once" alternative.
+- **GameChanger / iScore alternative threads** - People regularly search for alternatives to subscription-based apps. Position Baseball Stats Tracker as the "buy it once" alternative.
 - **Coach-focused communities** - Coaches who are tired of paying monthly fees for stat apps are your best leads.
 
 ---
@@ -113,7 +113,7 @@ When promoting, always hit these points:
 
 ## 8. Competitor Positioning
 
-| Feature | My Baseball Stats | GameChanger | iScore |
+| Feature | Baseball Stats Tracker | GameChanger | iScore |
 |---|---|---|---|
 | Price | $39 one-time | $0 (ads) / subscription | $10/year per team |
 | Live scoring | Yes | Yes | Yes |

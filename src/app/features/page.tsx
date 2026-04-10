@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "travel ball stats app",
   ],
   alternates: {
-    canonical: "https://mybaseballstats.com/features",
+    canonical: "https://baseballstatstracker.com/features",
   },
 };
 
@@ -32,7 +32,7 @@ export default function FeaturesPage() {
             <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
             <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span className="text-xl font-bold tracking-tight">MyBaseballStats</span>
+          <span className="text-xl font-bold tracking-tight">Baseball Stats Tracker</span>
         </Link>
         <Link
           href="/signup"
@@ -47,7 +47,7 @@ export default function FeaturesPage() {
           Everything You Need to Track Baseball &amp; Softball Stats
         </h1>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-          My Baseball Stats gives coaches and parents professional stat tracking tools at a fraction of
+          Baseball Stats Tracker gives coaches and parents professional stat tracking tools at a fraction of
           the cost. One app handles live scoring, batting stats, pitching stats, spray charts, box scores,
           and opponent scouting — for both baseball and softball.
         </p>
@@ -223,14 +223,14 @@ export default function FeaturesPage() {
         {/* Comparison */}
         <section className="mt-16">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Why Coaches Choose My Baseball Stats
+            Why Coaches Choose Baseball Stats Tracker
           </h2>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-700">
                   <th className="pb-3 font-semibold text-gray-900 dark:text-white">Feature</th>
-                  <th className="pb-3 font-semibold text-blue-600 dark:text-blue-400">My Baseball Stats</th>
+                  <th className="pb-3 font-semibold text-blue-600 dark:text-blue-400">Baseball Stats Tracker</th>
                   <th className="pb-3 font-semibold text-gray-500">Other Apps</th>
                 </tr>
               </thead>
@@ -278,7 +278,7 @@ export default function FeaturesPage() {
 
       <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
         <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} My Baseball Stats. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Baseball Stats Tracker. All rights reserved.</p>
           <div className="mt-2 flex justify-center gap-4">
             <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
             <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>

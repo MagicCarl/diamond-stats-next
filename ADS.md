@@ -1,4 +1,4 @@
-# My Baseball Stats - Ad Copy
+# Baseball Stats Tracker - Ad Copy
 
 ---
 
@@ -11,7 +11,7 @@ You keep score on a napkin. You text the coach for your kid's batting average. Y
 
 There's a better way.
 
-My Baseball Stats lets you score games live from your phone, and it calculates every stat automatically — batting average, OBP, SLG, OPS, spray charts, the works.
+Baseball Stats Tracker lets you score games live from your phone, and it calculates every stat automatically — batting average, OBP, SLG, OPS, spray charts, the works.
 
 No monthly fees. No subscriptions. Just one payment of $39 and it's yours forever.
 
@@ -30,7 +30,7 @@ GameChanger is free — until you want spray charts. Or ad-free scoring. Or the 
 
 Then it's $5/month. Every month. Forever.
 
-My Baseball Stats gives you everything for a flat $39. Once.
+Baseball Stats Tracker gives you everything for a flat $39. Once.
 
 Live scoring from your phone. Automatic stat calculations. Spray charts. Real-time sync so the grandparents can follow along from home. Advanced splits by opponent and pitcher handedness.
 
@@ -63,7 +63,7 @@ One-time purchase. $39. No subscriptions, no ads, no catches.
 [Tap tap tap — scoring the at-bat in the app]
 "...and I didn't have to calculate a single stat."
 [Cut to stats page showing AVG, OBP, SLG, spray chart]
-"My Baseball Stats. $39 once. No subscriptions."
+"Baseball Stats Tracker. $39 once. No subscriptions."
 [End card with URL]
 
 ---
@@ -79,7 +79,7 @@ One-time purchase. $39. No subscriptions, no ads, no catches.
 **Headline 3:** Live Scoring, Spray Charts, Full Stats
 
 **Description 1:** Score games live from your phone. AVG, OBP, SLG, OPS calculated automatically. Spray charts, box scores & real-time sync. One-time purchase — no subscriptions.
-**Description 2:** Tired of paying monthly for baseball stats? My Baseball Stats is a flat $39. Live scoring, automatic stats, spray charts. Buy once, use forever.
+**Description 2:** Tired of paying monthly for baseball stats? Baseball Stats Tracker is a flat $39. Live scoring, automatic stats, spray charts. Buy once, use forever.
 
 ---
 
@@ -92,7 +92,7 @@ One-time purchase. $39. No subscriptions, no ads, no catches.
 **Headline 3:** Live Scoring + Spray Charts + Full Stats
 
 **Description 1:** All the features you need without monthly fees. Live scoring, spray charts, OBP, SLG, OPS & more. One-time $39 purchase. No ads. No subscriptions.
-**Description 2:** Switch from subscription-based scoring apps. My Baseball Stats gives you live scoring, automatic stats & spray charts for a flat $39. Buy it once, own it forever.
+**Description 2:** Switch from subscription-based scoring apps. Baseball Stats Tracker gives you live scoring, automatic stats & spray charts for a flat $39. Buy it once, own it forever.
 
 ---
 
@@ -105,7 +105,7 @@ One-time purchase. $39. No subscriptions, no ads, no catches.
 **Headline 3:** No Subscriptions. No Spreadsheets.
 
 **Description 1:** Score games in real-time from the bleachers. Every stat calculated automatically — AVG, OBP, SLG, spray charts, box scores. $39 one-time purchase.
-**Description 2:** Ditch the paper scorebook. My Baseball Stats tracks every at-bat and calculates full batting & pitching stats instantly. One-time $39. No monthly fees.
+**Description 2:** Ditch the paper scorebook. Baseball Stats Tracker tracks every at-bat and calculates full batting & pitching stats instantly. One-time $39. No monthly fees.
 
 ---
 

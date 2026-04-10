@@ -1,4 +1,4 @@
-# My Baseball Stats
+# Baseball Stats Tracker
 
 Youth and amateur baseball statistics tracking app. One-time $39 purchase via PayPal.
 

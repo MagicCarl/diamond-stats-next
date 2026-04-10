@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Pricing - $39 One-Time Baseball & Softball Stats App",
   description:
-    "My Baseball Stats costs $39 one-time with no monthly fees or subscriptions. Unlimited teams, seasons, and games. Live scoring, spray charts, batting stats, pitching stats, and box scores for youth baseball and softball.",
+    "Baseball Stats Tracker costs $39 one-time with no monthly fees or subscriptions. Unlimited teams, seasons, and games. Live scoring, spray charts, batting stats, pitching stats, and box scores for youth baseball and softball.",
   keywords: [
     "baseball stats app price",
     "cheap baseball stats app",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "softball stats app pricing",
   ],
   alternates: {
-    canonical: "https://mybaseballstats.com/pricing",
+    canonical: "https://baseballstatstracker.com/pricing",
   },
 };
 
@@ -29,7 +29,7 @@ export default function PricingPage() {
             <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
             <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
           </svg>
-          <span className="text-xl font-bold tracking-tight">MyBaseballStats</span>
+          <span className="text-xl font-bold tracking-tight">Baseball Stats Tracker</span>
         </Link>
         <Link
           href="/signup"
@@ -121,11 +121,11 @@ export default function PricingPage() {
         {/* Value comparison */}
         <div className="mt-16">
           <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">
-            How My Baseball Stats Compares
+            How Baseball Stats Tracker Compares
           </h2>
           <p className="mt-3 text-center text-gray-600 dark:text-gray-400">
             Most baseball stats apps charge $10-$30 per month. Over a single season, that&apos;s $60-$180.
-            Over three years, you&apos;d spend $360-$1,080. My Baseball Stats is just $39 total — forever.
+            Over three years, you&apos;d spend $360-$1,080. Baseball Stats Tracker is just $39 total — forever.
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
@@ -198,7 +198,7 @@ export default function PricingPage() {
 
       <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
         <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} My Baseball Stats. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Baseball Stats Tracker. All rights reserved.</p>
           <div className="mt-2 flex justify-center gap-4">
             <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
             <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>
