@@ -122,7 +122,7 @@ export default function LandingClient() {
         <div className="mx-auto mt-20 max-w-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/baseballstatstracker_bannerAd.png"
+            src="/baseballstatstracker_bannerAd.png?v=2"
             alt="Baseball Stats Tracker app showing live game scoring, batting stats, and spray charts for youth baseball and softball teams"
             className="mb-6 w-full rounded-lg shadow-2xl"
           />
