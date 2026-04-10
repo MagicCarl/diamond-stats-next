@@ -62,6 +62,7 @@ export default function LoginPage() {
       }
     } catch (err: unknown) {
       const code = (err as { code?: string })?.code;
+      console.error("Google sign-in error:", err);
       if (
         code === "auth/popup-closed-by-user" ||
         code === "auth/cancelled-popup-request"
