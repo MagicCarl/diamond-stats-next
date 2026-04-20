@@ -6,6 +6,7 @@ const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function sendPaymentThankYouEmail(to: string, displayName: string | null) {
+  console.log("[email-debug] sendPaymentThankYouEmail called", { to, from: fromEmail, hasKey: !!resendApiKey });
   if (!resend) {
     console.warn("RESEND_API_KEY not set; skipping thank-you email");
     return;
@@ -34,14 +35,15 @@ Play ball!
 — Baseball Stats Tracker`;
 
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: `Baseball Stats Tracker <${fromEmail}>`,
       to,
       subject: "Thank you for your purchase of Baseball Stats Tracker",
       html,
       text,
     });
+    console.log("[email-debug] resend send result", result);
   } catch (err) {
-    console.error("Failed to send thank-you email:", err);
+    console.error("[email-debug] Failed to send thank-you email:", err);
   }
 }
