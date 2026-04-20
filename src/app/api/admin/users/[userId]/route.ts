@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { trackServerEvent } from "@/lib/analytics";
+import { sendPaymentThankYouEmail } from "@/lib/email";
 import { z } from "zod/v4";
 
 const patchUserSchema = z.object({
@@ -26,6 +27,11 @@ export async function PATCH(
   }
   const body = parsed.data;
 
+  const previous = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { isPaid: true },
+  });
+
   const updated = await prisma.user.update({
     where: { id: userId },
     data: {
@@ -48,6 +54,10 @@ export async function PATCH(
       targetUserId: userId,
       newPaidStatus: updated.isPaid,
     });
+
+    if (updated.isPaid && !previous?.isPaid && updated.email) {
+      await sendPaymentThankYouEmail(updated.email, updated.displayName);
+    }
   }
 
   return NextResponse.json(updated);
