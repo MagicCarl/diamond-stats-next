@@ -55,13 +55,6 @@ export async function PATCH(
       newPaidStatus: updated.isPaid,
     });
 
-    console.log("[email-debug] isPaid toggle", {
-      previousPaid: previous?.isPaid,
-      updatedPaid: updated.isPaid,
-      email: updated.email,
-      willSend: updated.isPaid && !previous?.isPaid && !!updated.email,
-    });
-
     if (updated.isPaid && !previous?.isPaid && updated.email) {
       await sendPaymentThankYouEmail(updated.email, updated.displayName);
     }
