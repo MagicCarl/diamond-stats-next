@@ -30,6 +30,7 @@ export default function UsersTab() {
   const [deletingUser, setDeletingUser] = useState<AdminUser | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [restoringUser, setRestoringUser] = useState<string | null>(null);
+  const [showDeleted, setShowDeleted] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -103,13 +104,29 @@ export default function UsersTab() {
     );
   }
 
-  const paidCount = users.filter((u) => u.isPaid).length;
-  const deletedCount = users.filter((u) => u.deletedAt).length;
+  const activeUsers = users.filter((u) => !u.deletedAt);
+  const deletedCount = users.length - activeUsers.length;
+  const visibleUsers = showDeleted ? users : activeUsers;
+  const paidCount = activeUsers.filter((u) => u.isPaid).length;
 
   return (
     <>
-      <div className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-        {users.length} total | {paidCount} paid{deletedCount > 0 && ` | ${deletedCount} deleted`}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {activeUsers.length} total | {paidCount} paid
+          {deletedCount > 0 && ` | ${deletedCount} deleted`}
+        </div>
+        {deletedCount > 0 && (
+          <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <input
+              type="checkbox"
+              checked={showDeleted}
+              onChange={(e) => setShowDeleted(e.target.checked)}
+              className="rounded"
+            />
+            Show deleted
+          </label>
+        )}
       </div>
 
       <Card>
@@ -125,7 +142,7 @@ export default function UsersTab() {
               </tr>
             </thead>
             <tbody>
-              {users.map((u) => (
+              {visibleUsers.map((u) => (
                 <tr
                   key={u.id}
                   className={`border-b border-gray-100 dark:border-gray-800 ${

@@ -30,7 +30,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:support.claude.com)",
       "Bash(git -C /Users/carlandrews/Desktop/diamond-stats-next worktree list)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm audit:*)"
     ]
   }
 }
