@@ -91,12 +91,30 @@ export default function LandingClient() {
           <span className="block"><span className="text-[#E31837]">Every </span><span className="text-[#2563EB]">Game.</span></span>
           <span className="block"><span className="text-[#16A34A]">Every </span><span className="text-[#1A1A1A] dark:text-white">Season.</span></span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          The easiest way to score games live, track batting and pitching stats,
-          and give your baseball/softball team the pro treatment &mdash; all from
-          your phone/tablet.
+        <p className="mx-auto mt-8 max-w-2xl text-xl font-semibold text-gray-900 dark:text-gray-100">
+          Your kid had the game of his life on Saturday.
+          <br />
+          Can you remember what he did at the plate in the 4th?
         </p>
-        <p className="mt-3 text-lg font-bold text-gray-900 dark:text-gray-100">
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
+          Neither can he. Every season, thousands of at-bats and breakout moments disappear into a paper
+          scorebook nobody opens again. Baseball Stats Tracker keeps every at-bat &mdash; forever &mdash; from
+          your phone in the bleachers.
+        </p>
+        <div className="mt-8 flex flex-col items-center gap-2">
+          <a
+            href="https://www.paypal.com/paypalme/carlrandrews"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700"
+          >
+            Get Instant Access &mdash; $39
+          </a>
+          <p className="text-sm text-gray-500 dark:text-gray-500">
+            One-time payment. Score your first game in 60 seconds.
+          </p>
+        </div>
+        <p className="mt-6 text-lg font-bold text-gray-900 dark:text-gray-100">
           One-time purchase. No subscriptions.
         </p>
 
