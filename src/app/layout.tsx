@@ -76,12 +76,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Baseball Stats Tracker" }],
   creator: "Baseball Stats Tracker",
   publisher: "Baseball Stats Tracker",
-  metadataBase: new URL("https://baseballstatstracker.com"),
+  metadataBase: new URL("https://www.baseballstatstracker.com"),
   category: "Sports",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://baseballstatstracker.com",
+    url: "https://www.baseballstatstracker.com",
     siteName: "Baseball Stats Tracker",
     title: "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker",
     description:
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://baseballstatstracker.com",
+    canonical: "https://www.baseballstatstracker.com",
   },
 };
 
@@ -143,7 +143,7 @@ export default function RootLayout({
                 name: "Baseball Stats Tracker",
                 applicationCategory: "SportsApplication",
                 operatingSystem: "Web, iOS, Android",
-                url: "https://baseballstatstracker.com",
+                url: "https://www.baseballstatstracker.com",
                 description:
                   "Score youth baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for Little League, travel ball, and high school teams.",
                 offers: {
@@ -169,10 +169,10 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 name: "Baseball Stats Tracker",
-                url: "https://baseballstatstracker.com",
+                url: "https://www.baseballstatstracker.com",
                 potentialAction: {
                   "@type": "SearchAction",
-                  target: "https://baseballstatstracker.com/?q={search_term_string}",
+                  target: "https://www.baseballstatstracker.com/?q={search_term_string}",
                   "query-input": "required name=search_term_string",
                 },
               },
@@ -180,8 +180,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 name: "Baseball Stats Tracker",
-                url: "https://baseballstatstracker.com",
-                logo: "https://baseballstatstracker.com/icon.svg",
+                url: "https://www.baseballstatstracker.com",
+                logo: "https://www.baseballstatstracker.com/icon.svg",
                 sameAs: [],
               },
               {

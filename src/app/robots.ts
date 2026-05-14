@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/dashboard", "/admin", "/settings", "/teams/", "/games/", "/instructions"],
       },
     ],
-    sitemap: "https://baseballstatstracker.com/sitemap.xml",
+    sitemap: "https://www.baseballstatstracker.com/sitemap.xml",
   };
 }

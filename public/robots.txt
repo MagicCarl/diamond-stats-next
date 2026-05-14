@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://baseballstatstracker.com/sitemap.xml
+Sitemap: https://www.baseballstatstracker.com/sitemap.xml

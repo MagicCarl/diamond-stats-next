@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Sign in to Baseball Stats Tracker to score games live, track batting and pitching stats, spray charts, and box scores for your youth baseball or softball team.",
   alternates: {
-    canonical: "https://baseballstatstracker.com/login",
+    canonical: "https://www.baseballstatstracker.com/login",
   },
 };
 

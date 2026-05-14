@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "softball stats app pricing",
   ],
   alternates: {
-    canonical: "https://baseballstatstracker.com/pricing",
+    canonical: "https://www.baseballstatstracker.com/pricing",
   },
 };
 

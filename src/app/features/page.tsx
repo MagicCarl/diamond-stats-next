@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "travel ball stats app",
   ],
   alternates: {
-    canonical: "https://baseballstatstracker.com/features",
+    canonical: "https://www.baseballstatstracker.com/features",
   },
 };
 

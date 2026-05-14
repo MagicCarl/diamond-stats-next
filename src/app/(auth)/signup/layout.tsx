@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Create a free account on Baseball Stats Tracker. Score baseball and softball games live, track batting stats (AVG, OBP, SLG, OPS), pitching stats, and spray charts for your youth team.",
   alternates: {
-    canonical: "https://baseballstatstracker.com/signup",
+    canonical: "https://www.baseballstatstracker.com/signup",
   },
 };
 
