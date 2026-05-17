@@ -35,43 +35,18 @@ export const metadata: Metadata = {
     template: "%s | Baseball Stats Tracker",
   },
   description:
-    "Score youth baseball and softball games live from your phone. Automatic batting stats (AVG, OBP, SLG, OPS), pitching stats, spray charts, and box scores for Little League, travel ball, rec league, and high school teams. One-time $39 purchase — no subscriptions ever.",
+    "Score youth baseball & softball games live from your phone. Auto batting stats, pitching stats, spray charts & box scores. $39 one-time — no subscriptions.",
   keywords: [
     "baseball stats app",
     "softball stats app",
     "youth baseball stats tracker",
-    "youth softball stats tracker",
     "Little League stats app",
     "travel ball stats tracker",
     "baseball scorekeeping app",
-    "softball scorekeeping app",
     "live game scoring baseball",
     "baseball spray chart app",
-    "youth baseball box score",
     "pitching stats tracker",
-    "baseball stats app for coaches",
-    "softball stats app for coaches",
-    "baseball stats app for parents",
-    "baseball stats software",
-    "softball stats software",
-    "youth baseball software",
-    "baseball statistics software",
-    "high school baseball stats",
-    "rec league baseball stats",
-    "batting average calculator",
-    "OBP calculator baseball",
-    "baseball score keeper app",
-    "softball score keeper app",
-    "baseball stat tracker iPhone",
-    "baseball stat tracker Android",
-    "little league scorekeeping",
-    "travel baseball stats app",
-    "youth sports stats tracker",
-    "baseball lineup app",
-    "baseball game tracker",
-    "softball game tracker",
     "best baseball stats app",
-    "best softball stats app",
   ],
   authors: [{ name: "Baseball Stats Tracker" }],
   creator: "Baseball Stats Tracker",
@@ -85,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "Baseball Stats Tracker",
     title: "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker",
     description:
-      "Score baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for youth teams. $39 one-time — no subscription.",
+      "Score youth baseball & softball games live from your phone. Auto stats, spray charts & box scores. $39 one-time — no subscriptions.",
     images: [
       {
         url: "/og-image.png",
@@ -99,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Baseball Stats Tracker - Youth Baseball & Softball Stats Tracker",
     description:
-      "Score baseball and softball games live from your phone. Batting stats, spray charts, and box scores for youth teams. $39 one-time.",
+      "Score youth baseball & softball live from your phone. Batting stats, spray charts & box scores. $39 one-time.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -128,9 +103,9 @@ export default function RootLayout({
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-R20F8VGXY5"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-        <Script id="ga-config" strategy="beforeInteractive">
+        <Script id="ga-config" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R20F8VGXY5');`}
         </Script>
         <script
@@ -170,11 +145,6 @@ export default function RootLayout({
                 "@type": "WebSite",
                 name: "Baseball Stats Tracker",
                 url: "https://www.baseballstatstracker.com",
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: "https://www.baseballstatstracker.com/?q={search_term_string}",
-                  "query-input": "required name=search_term_string",
-                },
               },
               {
                 "@context": "https://schema.org",

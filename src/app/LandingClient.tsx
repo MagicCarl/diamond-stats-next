@@ -91,6 +91,9 @@ export default function LandingClient() {
           <span className="block"><span className="text-[#E31837]">Every </span><span className="text-[#2563EB]">Game.</span></span>
           <span className="block"><span className="text-[#16A34A]">Every </span><span className="text-[#1A1A1A] dark:text-white">Season.</span></span>
         </h1>
+        <h2 className="mx-auto mt-6 max-w-3xl text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+          The Baseball &amp; Softball Stats Tracker App for Youth, Little League, and Travel Ball Teams
+        </h2>
         <p className="mx-auto mt-8 max-w-2xl text-xl font-semibold text-gray-900 dark:text-gray-100">
           Your kid had the game of his life on Saturday.
           <br />
@@ -193,13 +196,13 @@ export default function LandingClient() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={activeFeature.imageLight}
-              alt={activeFeature.title}
+              alt={`Baseball Stats Tracker ${activeFeature.title.toLowerCase()} screen — ${activeFeature.description}`}
               className="w-full rounded-lg dark:hidden"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={activeFeature.imageDark}
-              alt={activeFeature.title}
+              alt={`Baseball Stats Tracker ${activeFeature.title.toLowerCase()} screen — ${activeFeature.description}`}
               className="hidden w-full rounded-lg dark:block"
             />
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">

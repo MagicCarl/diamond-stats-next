@@ -1,3 +1,4 @@
+import Link from "next/link";
 import LandingClient from "./LandingClient";
 
 export default function LandingPage() {
@@ -117,7 +118,15 @@ export default function LandingPage() {
             every game live from your phone and get professional-quality statistics automatically.
             No spreadsheets. No paper scorebooks. Record at-bats in real time and the app calculates
             batting average (AVG), on-base percentage (OBP), slugging percentage (SLG), OPS, RBIs,
-            stolen bases, and every stat that matters &mdash; instantly.
+            stolen bases, and every stat that matters &mdash; instantly. See the full{" "}
+            <Link href="/features" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              feature list
+            </Link>{" "}
+            or jump straight to{" "}
+            <Link href="/pricing" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              pricing
+            </Link>
+            .
           </p>
         </div>
 

@@ -25,6 +25,29 @@ export const metadata: Metadata = {
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-gray-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://www.baseballstatstracker.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Features",
+                item: "https://www.baseballstatstracker.com/features",
+              },
+            ],
+          }),
+        }}
+      />
       <header className="flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8">
