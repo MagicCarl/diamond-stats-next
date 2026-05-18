@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const CANONICAL_HOST = "www.baseballstatstracker.com";
+
 export function proxy(request: NextRequest) {
   const response = NextResponse.next();
+
+  // Block indexing of any host that isn't the canonical one (apex, vercel preview URLs)
+  const host = request.headers.get("host") ?? "";
+  if (host && host !== CANONICAL_HOST) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
 
   // Prevent clickjacking
   response.headers.set("X-Frame-Options", "DENY");
