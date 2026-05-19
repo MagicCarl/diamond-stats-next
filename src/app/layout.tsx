@@ -102,11 +102,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-R20F8VGXY5"
+          src="https://www.googletagmanager.com/gtag/js?id=G-V9XWGQS6QV"
           strategy="afterInteractive"
         />
         <Script id="ga-config" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R20F8VGXY5');`}
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V9XWGQS6QV');`}
         </Script>
         <script
           type="application/ld+json"
