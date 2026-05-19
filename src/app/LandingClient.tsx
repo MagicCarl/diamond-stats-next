@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -141,11 +142,13 @@ export default function LandingClient() {
         </div>
 
         <div className="mx-auto mt-20 max-w-md">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/baseballstatstracker_bannerAd.png?v=2"
+          <Image
+            src="/baseballstatstracker_bannerAd.png"
             alt="Baseball Stats Tracker app showing live game scoring, batting stats, and spray charts for youth baseball and softball teams"
-            className="mb-6 w-full rounded-lg shadow-2xl"
+            width={1536}
+            height={1024}
+            sizes="(max-width: 768px) 100vw, 448px"
+            className="mb-6 h-auto w-full rounded-lg shadow-2xl"
           />
           <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
             <h3 className="text-2xl font-bold">Get All Features</h3>

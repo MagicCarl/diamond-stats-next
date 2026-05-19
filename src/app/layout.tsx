@@ -22,6 +22,7 @@ const monaSans = localFont({
   src: "../../public/fonts/MonaSans.woff2",
   variable: "--font-mona-sans",
   weight: "200 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -102,9 +103,9 @@ export default function RootLayout({
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-V9XWGQS6QV"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga-config" strategy="afterInteractive">
+        <Script id="ga-config" strategy="lazyOnload">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-V9XWGQS6QV');`}
         </Script>
         <script
