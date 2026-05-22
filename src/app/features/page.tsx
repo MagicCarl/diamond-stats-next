@@ -306,6 +306,7 @@ export default function FeaturesPage() {
             <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
             <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>
             <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">Pricing</Link>
+            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">Compare</Link>
             <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">Sign In</Link>
             <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">Sign Up</Link>
           </div>

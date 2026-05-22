@@ -237,7 +237,11 @@ export default function LandingPage() {
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 Most charge $10&ndash;$30/month. Baseball Stats Tracker is a flat $39 one-time purchase. You get
                 live scoring, spray charts, advanced splits, opponent tracking, and real-time multi-device
-                sync &mdash; features that typically cost $200+/year elsewhere.
+                sync &mdash; features that typically cost $200+/year elsewhere. Read our{" "}
+                <Link href="/learn/gamechanger-alternatives" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                  honest comparison of GameChanger alternatives
+                </Link>{" "}
+                for the full breakdown.
               </p>
             </div>
           </div>
