@@ -307,44 +307,18 @@ export default function LandingPage() {
       </section>
 
       {/* ============================================================
-          PRIVACY POLICY
+          FOOTER LINKS
           ============================================================ */}
-      <section className="border-t border-gray-200 px-6 py-12 dark:border-gray-800">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Privacy Policy</h2>
-          <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-            BaseballStatsTracker.com &mdash; The Baseball &amp; Softball Stats Tracker App for Youth,
-            Little League, and Travel Ball Teams
-          </p>
-          <div className="mt-4 space-y-4 text-sm text-gray-600 dark:text-gray-400">
-            <p>
-              Score baseball and softball games in real time from any phone or tablet. Multiple devices
-              sync every 3 seconds &mdash; so coaches, parents, and fans can all follow along live.
-            </p>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">Batting &amp; Pitching Stats</h3>
-              <p className="mt-1">
-                AVG, OBP, SLG, OPS, RBIs, stolen bases, plus full pitching: IP, ERA, K, BB, HR, pitch
-                count, wild pitches. Calculated automatically as you score.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Built for Every Level of Baseball &amp; Softball and Little League
-              </h3>
-              <p className="mt-1">
-                Track your player&rsquo;s development without complicated scorekeeping software.
-                Reliable stats for tournaments and showcases. Multiple seasons and teams in one place.
-                Pro-level stat tracking at a fraction of the cost of other scorekeeping apps.
-              </p>
-            </div>
-            <p>
-              The App stores your baseball game data privately. It is saved by you using your login
-              name on your device.
-            </p>
-          </div>
+      <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
+        <div className="mx-auto max-w-3xl text-center text-sm text-gray-600 dark:text-gray-400">
+          <Link
+            href="/privacy"
+            className="font-medium text-blue-600 hover:underline dark:text-blue-400"
+          >
+            Privacy Policy
+          </Link>
         </div>
-      </section>
+      </footer>
     </div>
   );
 }
