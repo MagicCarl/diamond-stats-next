@@ -5,12 +5,17 @@
 
 ## Where we are
 
-Brainstorming (superpowers) is **complete**. Design is approved and the spec is
-committed: [2026-05-28-i18n-language-settings-design.md](./2026-05-28-i18n-language-settings-design.md).
+Brainstorming + planning (superpowers) **complete**. Both committed:
 
-Currently at the **user-review gate** — waiting for the user to review the
-committed spec before invoking the `superpowers:writing-plans` skill to produce
-the implementation plan. (No implementation code written yet.)
+- Spec: [2026-05-28-i18n-language-settings-design.md](./2026-05-28-i18n-language-settings-design.md)
+- Plan: [../plans/2026-05-28-i18n-language-settings.md](../plans/2026-05-28-i18n-language-settings.md)
+
+The plan has **28 tasks** in 4 phases (engine T1–14, screen extraction T15–25,
+translations T26, verification T27–28). Tasks 1–13 have full code; screen tasks
+follow the "Translation Recipe" in Task 14.
+
+**Next:** begin executing the plan, Task 1. Commit after every task (the plan
+bakes in per-task commits). No implementation code written yet.
 
 ## Decisions locked in (from brainstorming Q&A)
 
