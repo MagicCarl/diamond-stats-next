@@ -215,6 +215,15 @@
       "batting": "Batting",
       "noStats": "No stats yet",
       "player": "Player"
+    },
+    "sprayChart": {
+      "backToStats": "Back to Stats",
+      "title": "Season Spray Chart",
+      "player": "Player",
+      "allPlayers": "All Players",
+      "out": "Out",
+      "unknown": "Unknown",
+      "hits": "{count, plural, one {# hit recorded} other {# hits recorded}}"
     }
   }
 }

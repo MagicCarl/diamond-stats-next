@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
@@ -20,6 +21,7 @@ interface HitData {
 export default function TeamSprayChartPage() {
   const { teamId } = useParams<{ teamId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("teams.sprayChart");
   const [hits, setHits] = useState<HitData[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string>("all");
@@ -47,7 +49,7 @@ export default function TeamSprayChartPage() {
                 result: ab.result,
                 playerName: ab.player
                   ? `${ab.player.firstName} ${ab.player.lastName}`
-                  : ab.opponentBatter?.name || "Unknown",
+                  : ab.opponentBatter?.name || t("unknown"),
               });
             }
           }
@@ -79,7 +81,7 @@ export default function TeamSprayChartPage() {
     { result: "double", label: "2B" },
     { result: "triple", label: "3B" },
     { result: "home_run", label: "HR" },
-    { result: "groundout", label: "Out" },
+    { result: "groundout", label: t("out") },
   ];
 
   return (
@@ -88,21 +90,21 @@ export default function TeamSprayChartPage() {
         href={`/teams/${teamId}/stats`}
         className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
       >
-        &larr; Back to Stats
+        &larr; {t("backToStats")}
       </Link>
-      <h1 className="text-2xl font-bold">Season Spray Chart</h1>
+      <h1 className="text-2xl font-bold">{t("title")}</h1>
 
       <Card>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            Player
+            {t("player")}
           </label>
           <select
             value={selectedPlayerId}
             onChange={(e) => setSelectedPlayerId(e.target.value)}
             className="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800"
           >
-            <option value="all">All Players</option>
+            <option value="all">{t("allPlayers")}</option>
             {players.map((p) => (
               <option key={p.id} value={p.id}>
                 #{p.jerseyNumber ?? "-"} {p.firstName} {p.lastName}
@@ -126,7 +128,7 @@ export default function TeamSprayChartPage() {
         </div>
 
         <p className="mt-3 text-center text-sm text-gray-400">
-          {filteredHits.length} hit{filteredHits.length !== 1 ? "s" : ""} recorded
+          {t("hits", { count: filteredHits.length })}
         </p>
       </Card>
     </div>
