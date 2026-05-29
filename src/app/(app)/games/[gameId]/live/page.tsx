@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import { AtBatRecord, LineupEntryRecord, OpponentPitcherRecord, OpponentBatterRecord, PitchRecord, Player, Team } from "@/types";
 import Button from "@/components/ui/Button";
@@ -43,6 +44,8 @@ type ScoringMode = "our_batting" | "opponent_batting";
 export default function LiveScoringPage() {
   const { gameId } = useParams<{ gameId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("games.live");
+  const tc = useTranslations("common");
   const [game, setGame] = useState<GameDetail | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -252,7 +255,7 @@ export default function LiveScoringPage() {
 
       await fetchGame();
     } catch {
-      setErrorMsg("Failed to record at-bat. Please try again.");
+      setErrorMsg(t("errAtBat"));
     } finally {
       setSubmitting(false);
     }
@@ -301,7 +304,7 @@ export default function LiveScoringPage() {
 
       await fetchGame();
     } catch {
-      setErrorMsg("Failed to record opponent at-bat. Please try again.");
+      setErrorMsg(t("errOppAtBat"));
     } finally {
       setSubmitting(false);
     }
@@ -470,7 +473,7 @@ export default function LiveScoringPage() {
   }
 
   if (!game) {
-    return <p className="py-10 text-center text-gray-500">Game not found</p>;
+    return <p className="py-10 text-center text-gray-500">{t("gameNotFound")}</p>;
   }
 
   const isFinal = game.status === "final";
@@ -496,15 +499,15 @@ export default function LiveScoringPage() {
           href={`/teams/${game.teamId}`}
           className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
         >
-          &larr; Back
+          &larr; {tc("back")}
         </Link>
         <div className="flex gap-2">
           <Link href={`/games/${gameId}/box`}>
-            <Button variant="ghost" size="sm">Box Score</Button>
+            <Button variant="ghost" size="sm">{t("boxScore")}</Button>
           </Link>
           {!isFinal && (
             <Button variant="danger" size="sm" onClick={() => setShowEndGameConfirm(true)}>
-              End Game
+              {t("endGame")}
             </Button>
           )}
         </div>
@@ -515,17 +518,17 @@ export default function LiveScoringPage() {
         <div className="flex items-center justify-between">
           <div className="text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {game.isHome ? "Home" : "Away"}
+              {game.isHome ? t("home") : t("away")}
             </p>
             <p className="text-3xl font-bold">{game.ourScore}</p>
           </div>
           <div className="text-center">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
               {isFinal
-                ? "Final"
-                : `${game.isTopOfInning ? "Top" : "Bot"} ${game.currentInning}`}
+                ? t("final")
+                : `${game.isTopOfInning ? t("top") : t("bot")} ${game.currentInning}`}
             </p>
-            <p className="text-sm text-gray-400">vs {game.opponentName}</p>
+            <p className="text-sm text-gray-400">{t("vsOpponent", { name: game.opponentName })}</p>
             {!isFinal && (
               <div className="mt-1 flex justify-center gap-1">
                 {[0, 1, 2].map((i) => (
@@ -538,13 +541,13 @@ export default function LiveScoringPage() {
                     }`}
                   />
                 ))}
-                <span className="ml-1 text-xs text-gray-500">outs</span>
+                <span className="ml-1 text-xs text-gray-500">{t("outs")}</span>
               </div>
             )}
           </div>
           <div className="text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {game.isHome ? "Away" : "Home"}
+              {game.isHome ? t("away") : t("home")}
             </p>
             <p className="text-3xl font-bold">{game.opponentScore}</p>
           </div>
@@ -559,9 +562,9 @@ export default function LiveScoringPage() {
 
       {isFinal ? (
         <Card className="text-center">
-          <p className="text-lg font-semibold">Game Over</p>
+          <p className="text-lg font-semibold">{t("gameOver")}</p>
           <p className="text-sm text-gray-500">
-            Final Score: {game.ourScore} - {game.opponentScore}
+            {t("finalScore", { our: game.ourScore, opp: game.opponentScore })}
           </p>
         </Card>
       ) : (
@@ -576,7 +579,7 @@ export default function LiveScoringPage() {
                   : "bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
               }`}
             >
-              Our Team Batting
+              {t("ourTeamBatting")}
             </button>
             <button
               onClick={() => setScoringMode("opponent_batting")}
@@ -586,7 +589,7 @@ export default function LiveScoringPage() {
                   : "bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
               }`}
             >
-              {game.opponentName} Batting
+              {t("opponentBatting", { name: game.opponentName })}
             </button>
           </div>
 
@@ -595,8 +598,8 @@ export default function LiveScoringPage() {
             <>
               {game.lineupEntries.length === 0 ? (
                 <Card className="text-center">
-                  <p className="mb-2 text-gray-500">No lineup set yet.</p>
-                  <Button onClick={openLineupSetup}>Set Lineup</Button>
+                  <p className="mb-2 text-gray-500">{t("noLineup")}</p>
+                  <Button onClick={openLineupSetup}>{t("setLineup")}</Button>
                 </Card>
               ) : (
                 <>
@@ -604,7 +607,7 @@ export default function LiveScoringPage() {
                     <div className="mb-3 flex items-center justify-between">
                       <div>
                         <p className="text-xs text-gray-500 uppercase">
-                          {manualBatterIndex !== null ? "Selected Player" : "Now Batting"}
+                          {manualBatterIndex !== null ? t("selectedPlayer") : t("nowBatting")}
                         </p>
                         <p className="text-lg font-bold">
                           #{currentBatter?.player?.jerseyNumber ?? "-"}{" "}
@@ -612,13 +615,13 @@ export default function LiveScoringPage() {
                         </p>
                       </div>
                       <div className="text-right text-sm text-gray-500">
-                        {currentBatter?.position} | Spot #{(activeBatterIndex + 1)}
+                        {currentBatter?.position} | {t("spot")} #{(activeBatterIndex + 1)}
                         {manualBatterIndex !== null && (
                           <button
                             onClick={() => setManualBatterIndex(null)}
                             className="ml-2 text-xs text-blue-600 hover:underline"
                           >
-                            Back to next up
+                            {t("backToNextUp")}
                           </button>
                         )}
                       </div>
@@ -626,13 +629,13 @@ export default function LiveScoringPage() {
 
                     {/* Opponent Pitcher */}
                     <div className="mb-4 flex items-center gap-2">
-                      <span className="text-xs text-gray-500">Pitcher:</span>
+                      <span className="text-xs text-gray-500">{t("pitcher")}</span>
                       <select
                         value={selectedPitcherId}
                         onChange={(e) => setSelectedPitcherId(e.target.value)}
                         className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-800"
                       >
-                        <option value="">Unknown</option>
+                        <option value="">{t("unknown")}</option>
                         {game.opponentPitchers.map((p) => (
                           <option key={p.id} value={p.id}>
                             {p.name} ({p.throwsHand === "left" ? "L" : "R"})
@@ -643,7 +646,7 @@ export default function LiveScoringPage() {
                         onClick={() => setShowPitcherModal(true)}
                         className="text-xs text-blue-600 hover:underline"
                       >
-                        + New
+                        {t("addNew")}
                       </button>
                     </div>
 
@@ -669,7 +672,7 @@ export default function LiveScoringPage() {
                     {selectedResult && !["walk", "hbp", "ibb", "catchers_interference", "strikeout_swinging", "strikeout_looking"].includes(selectedResult) && (
                       <div className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
                         <p className="mb-2 text-xs font-medium text-gray-500 uppercase">
-                          Ball Location (tap the field)
+                          {t("ballLocation")}
                         </p>
                         <SprayChartDiamond
                           interactive
@@ -689,22 +692,22 @@ export default function LiveScoringPage() {
                         onClick={handleUndo}
                         disabled={game.atBats.length === 0}
                       >
-                        Undo Last
+                        {t("undoLast")}
                       </Button>
                       <Button
                         className="flex-1"
                         onClick={handleRecordAtBat}
                         disabled={!selectedResult || submitting}
                       >
-                        {submitting ? "Recording..." : "Record At-Bat"}
+                        {submitting ? t("recording") : t("recordAtBat")}
                       </Button>
                     </div>
                   </Card>
 
                   {/* Lineup */}
                   <Card>
-                    <h3 className="mb-2 text-sm font-semibold">Batting Order</h3>
-                    <p className="mb-2 text-xs text-gray-400">Tap a player to record SB, CS, or other actions</p>
+                    <h3 className="mb-2 text-sm font-semibold">{t("battingOrder")}</h3>
+                    <p className="mb-2 text-xs text-gray-400">{t("tapPlayerHint")}</p>
                     <div className="space-y-1">
                       {game.lineupEntries.map((entry, idx) => (
                         <button
@@ -725,7 +728,7 @@ export default function LiveScoringPage() {
                           <div className="flex items-center gap-2">
                             <span className="text-xs text-gray-500">{entry.position}</span>
                             {idx === currentBatterIndex && manualBatterIndex !== null && (
-                              <span className="text-xs text-blue-500">next up</span>
+                              <span className="text-xs text-blue-500">{t("nextUp")}</span>
                             )}
                           </div>
                         </button>
@@ -755,7 +758,7 @@ export default function LiveScoringPage() {
                     <div className="mb-3 flex items-center justify-between">
                       <div>
                         <p className="text-xs text-red-500 uppercase">
-                          {manualOppBatterIndex !== null ? "Selected Batter" : "Now Batting"} ({game.opponentName})
+                          {manualOppBatterIndex !== null ? t("selectedBatter") : t("nowBatting")} ({game.opponentName})
                         </p>
                         <p className="text-lg font-bold">
                           #{currentOppBatter?.jerseyNumber ?? "-"}{" "}
@@ -763,13 +766,13 @@ export default function LiveScoringPage() {
                         </p>
                       </div>
                       <div className="text-right text-sm text-gray-500">
-                        {currentOppBatter?.bats === "left" ? "L" : currentOppBatter?.bats === "switch" ? "S" : "R"} | Spot #{(activeOppBatterIndex + 1)}
+                        {currentOppBatter?.bats === "left" ? "L" : currentOppBatter?.bats === "switch" ? "S" : "R"} | {t("spot")} #{(activeOppBatterIndex + 1)}
                         {manualOppBatterIndex !== null && (
                           <button
                             onClick={() => setManualOppBatterIndex(null)}
                             className="ml-2 text-xs text-red-600 hover:underline"
                           >
-                            Back to next up
+                            {t("backToNextUp")}
                           </button>
                         )}
                       </div>
@@ -778,7 +781,7 @@ export default function LiveScoringPage() {
                     {/* Our Pitcher */}
                     {game.pitchingAppearances && game.pitchingAppearances.length > 0 && (
                       <div className="mb-4 flex items-center gap-2">
-                        <span className="text-xs text-gray-500">Our Pitcher:</span>
+                        <span className="text-xs text-gray-500">{t("ourPitcher")}</span>
                         <select
                           value={selectedOurPitcherId}
                           onChange={(e) => setSelectedOurPitcherId(e.target.value)}
@@ -786,7 +789,7 @@ export default function LiveScoringPage() {
                         >
                           {game.pitchingAppearances.map((pa) => (
                             <option key={pa.id} value={pa.id}>
-                              {pa.player ? `${pa.player.firstName} ${pa.player.lastName}` : "Unknown"}
+                              {pa.player ? `${pa.player.firstName} ${pa.player.lastName}` : t("unknown")}
                             </option>
                           ))}
                         </select>
@@ -797,7 +800,7 @@ export default function LiveScoringPage() {
                     <div className="mb-4 rounded-lg border border-gray-200 p-3 dark:border-gray-700">
                       <div className="mb-2 flex items-center justify-between">
                         <h4 className="text-xs font-semibold text-gray-500 uppercase">
-                          Pitch Tracking
+                          {t("pitchTracking")}
                         </h4>
                         <span className="text-sm font-mono font-bold">
                           {countBalls}-{countStrikes}
@@ -821,7 +824,7 @@ export default function LiveScoringPage() {
                             onClick={handleRemoveLastPitch}
                             className="inline-flex h-6 items-center rounded px-1.5 text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20"
                           >
-                            Undo
+                            {t("undo")}
                           </button>
                         </div>
                       )}
@@ -866,7 +869,7 @@ export default function LiveScoringPage() {
                             onClick={handleAddPitch}
                             disabled={!selectedPitchResult}
                           >
-                            + Add Pitch
+                            {t("addPitch")}
                           </Button>
                         </div>
                       </div>
@@ -899,7 +902,7 @@ export default function LiveScoringPage() {
                         </div>
                       </div>
                       <div>
-                        <label className="text-xs text-gray-500">Scored</label>
+                        <label className="text-xs text-gray-500">{t("scored")}</label>
                         <button
                           onClick={() => setOppRunnerScored(!oppRunnerScored)}
                           className={`mt-1 block rounded-lg border px-3 py-1 text-sm ${
@@ -908,7 +911,7 @@ export default function LiveScoringPage() {
                               : "border-gray-200 dark:border-gray-700"
                           }`}
                         >
-                          {oppRunnerScored ? "Yes" : "No"}
+                          {oppRunnerScored ? t("yes") : t("no")}
                         </button>
                       </div>
                     </div>
@@ -917,7 +920,7 @@ export default function LiveScoringPage() {
                     {oppSelectedResult && !["walk", "hbp", "ibb", "catchers_interference", "strikeout_swinging", "strikeout_looking"].includes(oppSelectedResult) && (
                       <div className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
                         <p className="mb-2 text-xs font-medium text-gray-500 uppercase">
-                          Ball Location (tap the field)
+                          {t("ballLocation")}
                         </p>
                         <SprayChartDiamond
                           interactive
@@ -937,14 +940,14 @@ export default function LiveScoringPage() {
                         onClick={handleUndo}
                         disabled={game.atBats.length === 0}
                       >
-                        Undo Last
+                        {t("undoLast")}
                       </Button>
                       <Button
                         className="flex-1"
                         onClick={handleRecordOppAtBat}
                         disabled={!oppSelectedResult || submitting}
                       >
-                        {submitting ? "Recording..." : `Record ${game.opponentName} At-Bat`}
+                        {submitting ? t("recording") : t("recordOppAtBat", { name: game.opponentName })}
                       </Button>
                     </div>
                   </Card>
@@ -952,12 +955,12 @@ export default function LiveScoringPage() {
                   {/* Opponent Batting Order */}
                   <Card>
                     <div className="mb-2 flex items-center justify-between">
-                      <h3 className="text-sm font-semibold">{game.opponentName} Batting Order</h3>
+                      <h3 className="text-sm font-semibold">{t("oppBattingOrder", { name: game.opponentName })}</h3>
                       <button
                         onClick={() => setShowBatterModal(true)}
                         className="text-xs text-blue-600 hover:underline"
                       >
-                        + Add Batter
+                        {t("addBatterLink")}
                       </button>
                     </div>
                     <div className="space-y-1">
@@ -982,7 +985,7 @@ export default function LiveScoringPage() {
                               {batter.bats === "left" ? "L" : batter.bats === "switch" ? "S" : "R"}
                             </span>
                             {idx === currentOppBatterIndex && manualOppBatterIndex !== null && (
-                              <span className="text-xs text-red-500">next up</span>
+                              <span className="text-xs text-red-500">{t("nextUp")}</span>
                             )}
                           </div>
                         </button>
@@ -996,16 +999,16 @@ export default function LiveScoringPage() {
 
           {/* Game Log */}
           <Card>
-            <h3 className="mb-2 text-sm font-semibold">Game Log <span className="font-normal text-gray-400">(tap to edit SB/CS)</span></h3>
+            <h3 className="mb-2 text-sm font-semibold">{t("gameLog")} <span className="font-normal text-gray-400">{t("gameLogHint")}</span></h3>
             {game.atBats.length === 0 ? (
-              <p className="text-sm text-gray-400">No at-bats recorded yet</p>
+              <p className="text-sm text-gray-400">{t("noAtBats")}</p>
             ) : (
               <div className="max-h-72 space-y-1 overflow-y-auto">
                 {[...game.atBats].reverse().map((ab) => {
                   const isOurs = !!ab.playerId;
                   const batterName = isOurs
-                    ? (ab.player ? `${ab.player.firstName} ${ab.player.lastName}` : "Unknown")
-                    : ab.opponentBatter?.name || "Unknown";
+                    ? (ab.player ? `${ab.player.firstName} ${ab.player.lastName}` : t("unknown"))
+                    : ab.opponentBatter?.name || t("unknown");
                   const isEditing = editingAtBatId === ab.id;
                   return (
                     <div key={ab.id}>
@@ -1058,7 +1061,7 @@ export default function LiveScoringPage() {
                           )}
                         </span>
                         <span className="text-xs text-gray-400">
-                          {ab.isTop ? "Top" : "Bot"} {ab.inning}
+                          {ab.isTop ? t("top") : t("bot")} {ab.inning}
                         </span>
                       </div>
                       {isEditing && (
@@ -1079,7 +1082,7 @@ export default function LiveScoringPage() {
                             onClick={handleEditAtBat}
                             className="ml-auto rounded bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700"
                           >
-                            Save
+                            {tc("save")}
                           </button>
                         </div>
                       )}
@@ -1096,23 +1099,23 @@ export default function LiveScoringPage() {
       <Modal
         isOpen={showPitcherModal}
         onClose={() => setShowPitcherModal(false)}
-        title="Add Opponent Pitcher"
+        title={t("addOpponentPitcher")}
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Name
+              {t("name")}
             </label>
             <input
               value={newPitcherName}
               onChange={(e) => setNewPitcherName(e.target.value)}
               className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800"
-              placeholder="Pitcher name"
+              placeholder={t("pitcherNamePlaceholder")}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Throws
+              {t("throws")}
             </label>
             <div className="mt-1 flex gap-3">
               <button
@@ -1123,7 +1126,7 @@ export default function LiveScoringPage() {
                     : "border-gray-300 dark:border-gray-600"
                 }`}
               >
-                Right
+                {t("right")}
               </button>
               <button
                 onClick={() => setNewPitcherHand("left")}
@@ -1133,15 +1136,15 @@ export default function LiveScoringPage() {
                     : "border-gray-300 dark:border-gray-600"
                 }`}
               >
-                Left
+                {t("left")}
               </button>
             </div>
           </div>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setShowPitcherModal(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
-            <Button onClick={handleAddPitcher}>Add Pitcher</Button>
+            <Button onClick={handleAddPitcher}>{t("addPitcher")}</Button>
           </div>
         </div>
       </Modal>
@@ -1150,23 +1153,23 @@ export default function LiveScoringPage() {
       <Modal
         isOpen={showBatterModal}
         onClose={() => setShowBatterModal(false)}
-        title={`Add ${game.opponentName} Batter`}
+        title={t("addBatterTitle", { name: game.opponentName })}
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Name
+              {t("name")}
             </label>
             <input
               value={newBatterName}
               onChange={(e) => setNewBatterName(e.target.value)}
               className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800"
-              placeholder="Batter name"
+              placeholder={t("batterNamePlaceholder")}
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Jersey # (optional)
+              {t("jerseyOptional")}
             </label>
             <input
               value={newBatterNumber}
@@ -1178,7 +1181,7 @@ export default function LiveScoringPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Bats
+              {t("bats")}
             </label>
             <div className="mt-1 flex gap-3">
               {["right", "left", "switch"].map((hand) => (
@@ -1191,16 +1194,16 @@ export default function LiveScoringPage() {
                       : "border-gray-300 dark:border-gray-600"
                   }`}
                 >
-                  {hand === "switch" ? "Switch" : hand === "left" ? "Left" : "Right"}
+                  {hand === "switch" ? t("switch") : hand === "left" ? t("left") : t("right")}
                 </button>
               ))}
             </div>
           </div>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setShowBatterModal(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
-            <Button onClick={handleAddBatter}>Add Batter</Button>
+            <Button onClick={handleAddBatter}>{t("addBatter")}</Button>
           </div>
         </div>
       </Modal>
@@ -1209,7 +1212,7 @@ export default function LiveScoringPage() {
       <Modal
         isOpen={showLineupSetup}
         onClose={() => setShowLineupSetup(false)}
-        title="Set Batting Order"
+        title={t("setBattingOrder")}
       >
         <div className="space-y-3">
           <div className="space-y-1">
@@ -1274,7 +1277,7 @@ export default function LiveScoringPage() {
           ).length > 0 && (
             <div>
               <p className="mb-1 text-xs font-medium text-gray-500">
-                Add to lineup:
+                {t("addToLineup")}
               </p>
               <div className="flex flex-wrap gap-1">
                 {availablePlayers
@@ -1297,13 +1300,13 @@ export default function LiveScoringPage() {
               variant="secondary"
               onClick={() => setShowLineupSetup(false)}
             >
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button
               onClick={handleSaveLineup}
               disabled={lineupDraft.length === 0}
             >
-              Save Lineup ({lineupDraft.length} players)
+              {t("saveLineup", { count: lineupDraft.length })}
             </Button>
           </div>
         </div>
@@ -1313,17 +1316,18 @@ export default function LiveScoringPage() {
       <Modal
         isOpen={showEndGameConfirm}
         onClose={() => setShowEndGameConfirm(false)}
-        title="End Game?"
+        title={t("endGameTitle")}
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            This will mark the game as final with a score of{" "}
-            <strong>{game.ourScore} - {game.opponentScore}</strong>.
-            This action cannot be undone.
+            {t.rich("endGameConfirm", {
+              score: `${game.ourScore} - ${game.opponentScore}`,
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setShowEndGameConfirm(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button
               variant="danger"
@@ -1332,7 +1336,7 @@ export default function LiveScoringPage() {
                 await handleEndGame();
               }}
             >
-              End Game
+              {t("endGame")}
             </Button>
           </div>
         </div>
@@ -1350,10 +1354,11 @@ function ResultButtons({
   selectedResult: string | null;
   onSelectResult: (result: string) => void;
 }) {
+  const t = useTranslations("games.live");
   return (
     <div className="space-y-3">
       <div>
-        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">Hits</p>
+        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">{t("hits")}</p>
         <div className="grid grid-cols-4 gap-2">
           {AT_BAT_RESULTS.hits.map((result) => (
             <button
@@ -1373,7 +1378,7 @@ function ResultButtons({
         </div>
       </div>
       <div>
-        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">Walks</p>
+        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">{t("walks")}</p>
         <div className="grid grid-cols-4 gap-2">
           {AT_BAT_RESULTS.walks.map((result) => (
             <button
@@ -1393,7 +1398,7 @@ function ResultButtons({
         </div>
       </div>
       <div>
-        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">Outs</p>
+        <p className="mb-1 text-xs font-medium text-gray-500 uppercase">{t("outsSection")}</p>
         <div className="grid grid-cols-5 gap-2">
           {AT_BAT_RESULTS.outs.map((result) => (
             <button
@@ -1435,6 +1440,7 @@ function ExtrasPanel({
   caughtStealing: number;
   setCaughtStealing: (v: number) => void;
 }) {
+  const t = useTranslations("games.live");
   return (
     <div className="mt-4 grid grid-cols-2 gap-4 border-t border-gray-200 pt-4 dark:border-gray-700 sm:grid-cols-4">
       <div>
@@ -1456,7 +1462,7 @@ function ExtrasPanel({
         </div>
       </div>
       <div>
-        <label className="text-xs text-gray-500">Scored</label>
+        <label className="text-xs text-gray-500">{t("scored")}</label>
         <button
           onClick={() => setRunnerScored(!runnerScored)}
           className={`mt-1 block rounded-lg border px-3 py-1 text-sm ${
@@ -1465,7 +1471,7 @@ function ExtrasPanel({
               : "border-gray-200 dark:border-gray-700"
           }`}
         >
-          {runnerScored ? "Yes" : "No"}
+          {runnerScored ? t("yes") : t("no")}
         </button>
       </div>
       <div>
