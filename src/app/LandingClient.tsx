@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 const features = [
   {
@@ -67,6 +68,10 @@ export default function LandingClient() {
           <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Mona Sans', sans-serif" }}>Baseball Stats Tracker</span>
         </div>
         <div className="flex items-center gap-3">
+          <LanguageSwitcher
+            placeholder="Select Language"
+            className="rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+          />
           <ThemeToggle />
           {user ? (
             <Link
