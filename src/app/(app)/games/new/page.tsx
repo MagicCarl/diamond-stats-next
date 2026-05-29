@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import { Team, Season } from "@/types";
@@ -17,6 +18,8 @@ export default function NewGamePage() {
   const teamId = searchParams.get("teamId");
   const { appUser } = useAuth();
   const { apiFetch } = useApi();
+  const t = useTranslations("games.new");
+  const tc = useTranslations("common");
 
   const [teams, setTeams] = useState<Team[]>([]);
   const [seasons, setSeasons] = useState<Season[]>([]);
@@ -57,7 +60,7 @@ export default function NewGamePage() {
       });
       router.push(`/games/${game.id}/live`);
     } catch {
-      setError("Failed to create game. Please try again.");
+      setError(t("createError"));
     } finally {
       setSaving(false);
     }
@@ -66,10 +69,10 @@ export default function NewGamePage() {
   if (appUser && !appUser.isPaid) {
     return (
       <div className="mx-auto max-w-lg">
-        <h1 className="mb-6 text-2xl font-bold">New Game</h1>
+        <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
         <Card className="text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            Purchase the app to create games and start scoring.
+            {t("purchasePrompt")}
           </p>
           <a
             href="https://www.paypal.com/paypalme/carlrandrews"
@@ -77,13 +80,13 @@ export default function NewGamePage() {
             rel="noopener noreferrer"
             className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
           >
-            Purchase Now - $39
+            {t("purchaseCta")}
           </a>
           <Link
             href="/dashboard"
             className="mt-2 block text-sm text-gray-500 hover:underline"
           >
-            Back to Dashboard
+            {t("backToDashboard")}
           </Link>
         </Card>
       </div>
@@ -92,7 +95,7 @@ export default function NewGamePage() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 text-2xl font-bold">New Game</h1>
+      <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
 
       {error && (
         <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
@@ -105,11 +108,11 @@ export default function NewGamePage() {
           {!teamId && (
             <Select
               id="teamId"
-              label="Team"
+              label={t("teamLabel")}
               value={form.teamId}
               onChange={(e) => setForm({ ...form, teamId: e.target.value })}
               options={[
-                { value: "", label: "Select team..." },
+                { value: "", label: t("selectTeam") },
                 ...teams.map((t) => ({ value: t.id, label: t.name })),
               ]}
             />
@@ -118,11 +121,11 @@ export default function NewGamePage() {
           {seasons.length > 0 && (
             <Select
               id="seasonId"
-              label="Season"
+              label={t("seasonLabel")}
               value={form.seasonId}
               onChange={(e) => setForm({ ...form, seasonId: e.target.value })}
               options={[
-                { value: "", label: "No season" },
+                { value: "", label: t("noSeason") },
                 ...seasons.map((s) => ({ value: s.id, label: s.name })),
               ]}
             />
@@ -130,17 +133,17 @@ export default function NewGamePage() {
 
           <Input
             id="opponentName"
-            label="Opponent"
+            label={t("opponentLabel")}
             value={form.opponentName}
             onChange={(e) => setForm({ ...form, opponentName: e.target.value })}
-            placeholder="e.g., Eastside Eagles"
+            placeholder={t("opponentPlaceholder")}
             required
           />
 
           <div className="grid grid-cols-2 gap-4">
             <Input
               id="gameDate"
-              label="Date"
+              label={t("dateLabel")}
               type="date"
               value={form.gameDate}
               onChange={(e) => setForm({ ...form, gameDate: e.target.value })}
@@ -148,7 +151,7 @@ export default function NewGamePage() {
             />
             <Input
               id="gameTime"
-              label="Time"
+              label={t("timeLabel")}
               type="time"
               value={form.gameTime}
               onChange={(e) => setForm({ ...form, gameTime: e.target.value })}
@@ -157,28 +160,28 @@ export default function NewGamePage() {
 
           <Input
             id="location"
-            label="Location"
+            label={t("locationLabel")}
             value={form.location}
             onChange={(e) => setForm({ ...form, location: e.target.value })}
-            placeholder="e.g., Wilson Park Field 3"
+            placeholder={t("locationPlaceholder")}
           />
 
           <div className="grid grid-cols-2 gap-4">
             <Select
               id="isHome"
-              label="Home/Away"
+              label={t("homeAwayLabel")}
               value={form.isHome ? "home" : "away"}
               onChange={(e) =>
                 setForm({ ...form, isHome: e.target.value === "home" })
               }
               options={[
-                { value: "home", label: "Home" },
-                { value: "away", label: "Away" },
+                { value: "home", label: t("home") },
+                { value: "away", label: t("away") },
               ]}
             />
             <Input
               id="innings"
-              label="Innings"
+              label={t("inningsLabel")}
               type="number"
               min={1}
               max={12}
@@ -195,10 +198,10 @@ export default function NewGamePage() {
               type="button"
               onClick={() => router.back()}
             >
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button type="submit" disabled={saving || !form.teamId}>
-              {saving ? "Creating..." : "Start Game"}
+              {saving ? t("creating") : t("startGame")}
             </Button>
           </div>
         </form>

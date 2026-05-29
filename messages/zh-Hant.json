@@ -39,5 +39,30 @@
     "levelLabel": "Level",
     "creating": "Creating...",
     "createError": "Failed to create team"
+  },
+  "games": {
+    "new": {
+      "title": "New Game",
+      "purchasePrompt": "Purchase the app to create games and start scoring.",
+      "purchaseCta": "Purchase Now - $39",
+      "backToDashboard": "Back to Dashboard",
+      "createError": "Failed to create game. Please try again.",
+      "teamLabel": "Team",
+      "selectTeam": "Select team...",
+      "seasonLabel": "Season",
+      "noSeason": "No season",
+      "opponentLabel": "Opponent",
+      "opponentPlaceholder": "e.g., Eastside Eagles",
+      "dateLabel": "Date",
+      "timeLabel": "Time",
+      "locationLabel": "Location",
+      "locationPlaceholder": "e.g., Wilson Park Field 3",
+      "homeAwayLabel": "Home/Away",
+      "home": "Home",
+      "away": "Away",
+      "inningsLabel": "Innings",
+      "creating": "Creating...",
+      "startGame": "Start Game"
+    }
   }
 }
