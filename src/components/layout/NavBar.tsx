@@ -6,6 +6,7 @@ import { useState } from "react";
 import { clsx } from "clsx";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard" },
@@ -61,6 +62,7 @@ export default function NavBar() {
           </div>
 
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             {user && (
               <button
@@ -113,6 +115,9 @@ export default function NavBar() {
               Admin
             </Link>
           )}
+          <div className="px-3 py-2">
+            <LanguageSwitcher className="w-full rounded-lg border border-gray-300 bg-white px-2 py-2 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300" />
+          </div>
           {user && (
             <button
               onClick={() => { logout(); setMobileOpen(false); }}
