@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import { Team } from "@/types";
@@ -18,6 +19,8 @@ export default function DashboardPage() {
   const { appUser } = useAuth();
   const { apiFetch } = useApi();
   const router = useRouter();
+  const t = useTranslations("dashboard");
+  const tc = useTranslations("common");
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [showTeamModal, setShowTeamModal] = useState(false);
@@ -61,7 +64,7 @@ export default function DashboardPage() {
       setShowTeamModal(false);
       await fetchTeams();
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to create team";
+      const message = err instanceof Error ? err.message : t("createError");
       setError(message);
       console.error("Create team error:", err);
     } finally {
@@ -82,7 +85,7 @@ export default function DashboardPage() {
       {appUser && !appUser.isPaid && (
         <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800 dark:bg-amber-900/20">
           <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
-            You&apos;re in view-only mode. Purchase the app to create games and start scoring.
+            {t("viewOnlyBanner")}
           </p>
           <a
             href="https://www.paypal.com/paypalme/carlrandrews"
@@ -90,22 +93,22 @@ export default function DashboardPage() {
             rel="noopener noreferrer"
             className="mt-1 inline-block text-sm font-medium text-amber-700 underline hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-300"
           >
-            Purchase Now - $39 one-time
+            {t("purchaseCta")}
           </a>
         </div>
       )}
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">My Teams</h1>
-        <Button onClick={() => { setShowTeamModal(true); setModalView(teams.length > 0 ? "pick" : "create"); setError(null); }}>+ New Team</Button>
+        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <Button onClick={() => { setShowTeamModal(true); setModalView(teams.length > 0 ? "pick" : "create"); setError(null); }}>{t("newTeam")}</Button>
       </div>
 
       {teams.length === 0 ? (
         <Card className="text-center">
           <p className="text-gray-500 dark:text-gray-400">
-            No teams yet. Create your first team to get started.
+            {t("emptyState")}
           </p>
           <Button className="mt-4" onClick={() => { setShowTeamModal(true); setModalView("create"); setError(null); }}>
-            Create Team
+            {t("createTeam")}
           </Button>
         </Card>
       ) : (
@@ -118,8 +121,8 @@ export default function DashboardPage() {
                   {LEVELS.find((l) => l.value === team.level)?.label || team.level}
                 </p>
                 <div className="mt-3 flex gap-4 text-sm text-gray-500 dark:text-gray-400">
-                  <span>{team._count?.players || 0} players</span>
-                  <span>{team._count?.games || 0} games</span>
+                  <span>{t("playersCount", { count: team._count?.players || 0 })}</span>
+                  <span>{t("gamesCount", { count: team._count?.games || 0 })}</span>
                 </div>
               </Card>
             </Link>
@@ -130,12 +133,12 @@ export default function DashboardPage() {
       <Modal
         isOpen={showTeamModal}
         onClose={() => setShowTeamModal(false)}
-        title={modalView === "pick" ? "Select a Team" : "Create New Team"}
+        title={modalView === "pick" ? t("selectTeamTitle") : t("createTeamTitle")}
       >
         {modalView === "pick" ? (
           <div className="space-y-3">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Choose an existing team or create a new one.
+              {t("chooseOrCreate")}
             </p>
             <div className="max-h-64 space-y-2 overflow-y-auto">
               {teams.map((team) => (
@@ -152,7 +155,7 @@ export default function DashboardPage() {
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {LEVELS.find((l) => l.value === team.level)?.label || team.level}
                       {" · "}
-                      {team._count?.players || 0} players
+                      {t("playersCount", { count: team._count?.players || 0 })}
                     </p>
                   </div>
                   <span className="text-gray-400">&rarr;</span>
@@ -164,7 +167,7 @@ export default function DashboardPage() {
                 className="w-full"
                 onClick={() => setModalView("create")}
               >
-                + Create New Team
+                {t("createNewTeam")}
               </Button>
             </div>
           </div>
@@ -177,15 +180,15 @@ export default function DashboardPage() {
             )}
             <Input
               id="teamName"
-              label="Team Name"
+              label={t("teamNameLabel")}
               value={newTeamName}
               onChange={(e) => setNewTeamName(e.target.value)}
-              placeholder="e.g., Westside Tigers"
+              placeholder={t("teamNamePlaceholder")}
               required
             />
             <Select
               id="teamLevel"
-              label="Level"
+              label={t("levelLabel")}
               value={newTeamLevel}
               onChange={(e) => setNewTeamLevel(e.target.value)}
               options={LEVELS.map((l) => ({ value: l.value, label: l.label }))}
@@ -197,7 +200,7 @@ export default function DashboardPage() {
                   type="button"
                   onClick={() => setModalView("pick")}
                 >
-                  Back
+                  {tc("back")}
                 </Button>
               )}
               <Button
@@ -205,10 +208,10 @@ export default function DashboardPage() {
                 type="button"
                 onClick={() => setShowTeamModal(false)}
               >
-                Cancel
+                {tc("cancel")}
               </Button>
               <Button type="submit" disabled={creating}>
-                {creating ? "Creating..." : "Create Team"}
+                {creating ? t("creating") : t("createTeam")}
               </Button>
             </div>
           </form>
