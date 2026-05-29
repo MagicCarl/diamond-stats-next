@@ -225,5 +225,29 @@
       "unknown": "Unknown",
       "hits": "{count, plural, one {# hit recorded} other {# hits recorded}}"
     }
+  },
+  "stats": {
+    "search": {
+      "title": "Stats Search",
+      "team": "Team",
+      "selectTeam": "Select team...",
+      "vsOpponent": "vs. Opponent",
+      "vsOpponentPlaceholder": "e.g., Eagles",
+      "vsPitcher": "vs. Pitcher",
+      "vsPitcherPlaceholder": "e.g., Smith",
+      "pitcherThrows": "Pitcher Throws",
+      "any": "Any",
+      "right": "Right",
+      "left": "Left",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "searching": "Searching...",
+      "searchStats": "Search Stats",
+      "results": "Results",
+      "resultsVs": " (vs {team})",
+      "resultsPitcher": " (pitcher: {name})",
+      "noResults": "No stats found for these filters",
+      "player": "Player"
+    }
   }
 }

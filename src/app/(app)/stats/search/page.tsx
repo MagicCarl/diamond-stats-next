@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import { Team } from "@/types";
 import { BattingStats } from "@/lib/stats";
@@ -21,6 +22,7 @@ interface PlayerStat {
 
 export default function StatsSearchPage() {
   const { apiFetch } = useApi();
+  const t = useTranslations("stats.search");
   const [teams, setTeams] = useState<Team[]>([]);
   const [selectedTeamId, setSelectedTeamId] = useState("");
   const [vsTeam, setVsTeam] = useState("");
@@ -62,55 +64,55 @@ export default function StatsSearchPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Stats Search</h1>
+      <h1 className="text-2xl font-bold">{t("title")}</h1>
 
       <Card>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Select
             id="team"
-            label="Team"
+            label={t("team")}
             value={selectedTeamId}
             onChange={(e) => setSelectedTeamId(e.target.value)}
             options={[
-              { value: "", label: "Select team..." },
-              ...teams.map((t) => ({ value: t.id, label: t.name })),
+              { value: "", label: t("selectTeam") },
+              ...teams.map((tm) => ({ value: tm.id, label: tm.name })),
             ]}
           />
           <Input
             id="vsTeam"
-            label="vs. Opponent"
+            label={t("vsOpponent")}
             value={vsTeam}
             onChange={(e) => setVsTeam(e.target.value)}
-            placeholder="e.g., Eagles"
+            placeholder={t("vsOpponentPlaceholder")}
           />
           <Input
             id="vsPitcher"
-            label="vs. Pitcher"
+            label={t("vsPitcher")}
             value={vsPitcher}
             onChange={(e) => setVsPitcher(e.target.value)}
-            placeholder="e.g., Smith"
+            placeholder={t("vsPitcherPlaceholder")}
           />
           <Select
             id="vsHand"
-            label="Pitcher Throws"
+            label={t("pitcherThrows")}
             value={vsHand}
             onChange={(e) => setVsHand(e.target.value)}
             options={[
-              { value: "", label: "Any" },
-              { value: "right", label: "Right" },
-              { value: "left", label: "Left" },
+              { value: "", label: t("any") },
+              { value: "right", label: t("right") },
+              { value: "left", label: t("left") },
             ]}
           />
           <Input
             id="fromDate"
-            label="From Date"
+            label={t("fromDate")}
             type="date"
             value={fromDate}
             onChange={(e) => setFromDate(e.target.value)}
           />
           <Input
             id="toDate"
-            label="To Date"
+            label={t("toDate")}
             type="date"
             value={toDate}
             onChange={(e) => setToDate(e.target.value)}
@@ -118,7 +120,7 @@ export default function StatsSearchPage() {
         </div>
         <div className="mt-4">
           <Button onClick={handleSearch} disabled={!selectedTeamId || loading}>
-            {loading ? "Searching..." : "Search Stats"}
+            {loading ? t("searching") : t("searchStats")}
           </Button>
         </div>
       </Card>
@@ -126,21 +128,21 @@ export default function StatsSearchPage() {
       {searched && (
         <Card>
           <h3 className="mb-3 text-sm font-semibold uppercase text-gray-500">
-            Results
-            {vsTeam && ` (vs ${vsTeam})`}
-            {vsPitcher && ` (pitcher: ${vsPitcher})`}
+            {t("results")}
+            {vsTeam && t("resultsVs", { team: vsTeam })}
+            {vsPitcher && t("resultsPitcher", { name: vsPitcher })}
             {vsHand && ` (${vsHand === "left" ? "LHP" : "RHP"})`}
           </h3>
           {results.length === 0 ? (
             <p className="text-sm text-gray-400">
-              No stats found for these filters
+              {t("noResults")}
             </p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 text-left dark:border-gray-700">
-                    <th className="px-2 py-1 font-medium">Player</th>
+                    <th className="px-2 py-1 font-medium">{t("player")}</th>
                     <th className="px-2 py-1 text-center font-medium">G</th>
                     <th className="px-2 py-1 text-center font-medium">AB</th>
                     <th className="px-2 py-1 text-center font-medium">H</th>
