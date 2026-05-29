@@ -3,42 +3,44 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
 const features = [
   {
-    icon: "\u26BE",
-    title: "Live Game Scoring",
-    description:
-      "Score games in real-time from your phone at the field. Track every at-bat, stolen base, and pitching change.",
+    id: "live",
+    icon: "⚾",
     imageLight: "/screenshots/live-scoring-light.svg",
     imageDark: "/screenshots/live-scoring.svg",
   },
   {
-    icon: "\uD83D\uDCCA",
-    title: "Season Stats",
-    description:
-      "Automatic calculation of AVG, OBP, SLG, OPS, and more. Filter stats by opponent, pitcher, and handedness.",
+    id: "stats",
+    icon: "📊",
     imageLight: "/screenshots/season-stats-light.svg",
     imageDark: "/screenshots/season-stats.svg",
   },
   {
-    icon: "\uD83C\uDFAF",
-    title: "Spray Charts",
-    description:
-      "See where your players hit the ball. Per-game and season-long spray charts with color-coded hit types.",
+    id: "spray",
+    icon: "🎯",
     imageLight: "/screenshots/spray-chart-light.svg",
     imageDark: "/screenshots/spray-chart.svg",
   },
-];
+] as const;
+
+const featureKeys: Record<string, { title: string; desc: string }> = {
+  live: { title: "featureLiveTitle", desc: "featureLiveDesc" },
+  stats: { title: "featureStatsTitle", desc: "featureStatsDesc" },
+  spray: { title: "featureSprayTitle", desc: "featureSprayDesc" },
+};
 
 export default function LandingClient() {
   const { user } = useAuth();
+  const t = useTranslations("marketing.landing");
   const [previewFeature, setPreviewFeature] = useState<string | null>(null);
 
-  const activeFeature = features.find((f) => f.title === previewFeature);
+  const activeFeature = features.find((f) => f.id === previewFeature);
 
   return (
     <>
@@ -69,7 +71,7 @@ export default function LandingClient() {
         </div>
         <div className="flex items-center gap-3">
           <LanguageSwitcher
-            placeholder="Select Language"
+            placeholder={t("selectLanguage")}
             className="rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
           />
           <ThemeToggle />
@@ -78,14 +80,14 @@ export default function LandingClient() {
               href="/dashboard"
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
-              Dashboard
+              {t("dashboard")}
             </Link>
           ) : (
             <Link
               href="/login"
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
-              Sign In
+              {t("signIn")}
             </Link>
           )}
         </div>
@@ -93,22 +95,20 @@ export default function LandingClient() {
 
       <main className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h1 className="text-6xl tracking-normal leading-tight sm:text-7xl" style={{ fontFamily: "'Mona Sans', sans-serif", fontWeight: 800 }}>
-          <span className="block text-[#1A1A1A] dark:text-white">Every At-Bat.</span>
-          <span className="block"><span className="text-[#E31837]">Every </span><span className="text-[#2563EB]">Game.</span></span>
-          <span className="block"><span className="text-[#16A34A]">Every </span><span className="text-[#1A1A1A] dark:text-white">Season.</span></span>
+          <span className="block text-[#1A1A1A] dark:text-white">{t("heroLine1")}</span>
+          <span className="block text-[#2563EB]">{t("heroLine2")}</span>
+          <span className="block text-[#16A34A]">{t("heroLine3")}</span>
         </h1>
         <h2 className="mx-auto mt-6 max-w-3xl text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
-          The Baseball &amp; Softball Stats Tracker App for Youth, Little League, and Travel Ball Teams
+          {t("subtitle")}
         </h2>
         <p className="mx-auto mt-8 max-w-2xl text-xl font-semibold text-gray-900 dark:text-gray-100">
-          Your kid had the game of his life on Saturday.
+          {t("hook1")}
           <br />
-          Can you remember what he did at the plate in the 4th?
+          {t("hook2")}
         </p>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          Neither can he. Every season, thousands of at-bats and breakout moments disappear into a paper
-          scorebook nobody opens again. Baseball Stats Tracker keeps every at-bat &mdash; forever &mdash; from
-          your phone in the bleachers.
+          {t("hookBody")}
         </p>
         <div className="mt-8 flex flex-col items-center gap-2">
           <a
@@ -117,30 +117,30 @@ export default function LandingClient() {
             rel="noopener noreferrer"
             className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700"
           >
-            Get Instant Access &mdash; $39
+            {t("ctaPrimary")}
           </a>
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            One-time payment. Score your first game in 60 seconds.
+            {t("ctaSub")}
           </p>
         </div>
         <p className="mt-6 text-lg font-bold text-gray-900 dark:text-gray-100">
-          One-time purchase. No subscriptions.
+          {t("noSubs")}
         </p>
 
         <div className="mt-20 grid gap-8 text-left sm:grid-cols-3">
           {features.map((feature) => (
             <button
-              key={feature.title}
-              onClick={() => setPreviewFeature(feature.title)}
+              key={feature.id}
+              onClick={() => setPreviewFeature(feature.id)}
               className="rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:shadow-lg hover:border-blue-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
             >
               <div className="mb-3 text-3xl">{feature.icon}</div>
-              <h3 className="text-lg font-semibold">{feature.title}</h3>
+              <h3 className="text-lg font-semibold">{t(featureKeys[feature.id].title)}</h3>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                {feature.description}
+                {t(featureKeys[feature.id].desc)}
               </p>
               <span className="mt-3 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">
-                See example &rarr;
+                {t("seeExample")}
               </span>
             </button>
           ))}
@@ -156,19 +156,19 @@ export default function LandingClient() {
             className="mb-6 h-auto w-full rounded-lg shadow-2xl"
           />
           <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="text-2xl font-bold">Get All Features</h3>
+            <h3 className="text-2xl font-bold">{t("getAllFeatures")}</h3>
             <div className="mt-4">
               <span className="text-4xl font-bold">$39</span>
-              <span className="ml-1 text-gray-500 dark:text-gray-400">one-time</span>
+              <span className="ml-1 text-gray-500 dark:text-gray-400">{t("oneTime")}</span>
             </div>
             <ul className="mt-6 space-y-2 text-left text-sm text-gray-600 dark:text-gray-400">
-              <li>Unlimited teams &amp; seasons</li>
-              <li>Live scoring with pitch tracking</li>
-              <li>Real-time sync across devices</li>
-              <li>Spray charts &amp; advanced stats</li>
-              <li>Inning-by-inning box score</li>
-              <li>Opponent roster auto-load</li>
-              <li>Opponent batter tracking &amp; splits</li>
+              <li>{t("planUnlimited")}</li>
+              <li>{t("planLiveScoring")}</li>
+              <li>{t("planSync")}</li>
+              <li>{t("planSpray")}</li>
+              <li>{t("planBox")}</li>
+              <li>{t("planRoster")}</li>
+              <li>{t("planSplits")}</li>
             </ul>
             <a
               href="https://www.paypal.com/paypalme/carlrandrews"
@@ -176,7 +176,7 @@ export default function LandingClient() {
               rel="noopener noreferrer"
               className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
             >
-              Purchase Now
+              {t("purchaseNow")}
             </a>
           </div>
         </div>
@@ -200,21 +200,21 @@ export default function LandingClient() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="mb-4 text-xl font-bold">{activeFeature.title}</h3>
+            <h3 className="mb-4 text-xl font-bold">{t(featureKeys[activeFeature.id].title)}</h3>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={activeFeature.imageLight}
-              alt={`Baseball Stats Tracker ${activeFeature.title.toLowerCase()} screen — ${activeFeature.description}`}
+              alt={t(featureKeys[activeFeature.id].title)}
               className="w-full rounded-lg dark:hidden"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={activeFeature.imageDark}
-              alt={`Baseball Stats Tracker ${activeFeature.title.toLowerCase()} screen — ${activeFeature.description}`}
+              alt={t(featureKeys[activeFeature.id].title)}
               className="hidden w-full rounded-lg dark:block"
             />
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-              {activeFeature.description}
+              {t(featureKeys[activeFeature.id].desc)}
             </p>
           </div>
         </div>
