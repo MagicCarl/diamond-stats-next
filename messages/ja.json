@@ -134,6 +134,18 @@
       "outsSection": "Outs",
       "errAtBat": "Failed to record at-bat. Please try again.",
       "errOppAtBat": "Failed to record opponent at-bat. Please try again."
+    },
+    "box": {
+      "gameNotFound": "Game not found",
+      "backToGame": "Back to Game",
+      "final": "Final",
+      "inProgress": "In Progress — {half} {inning}",
+      "top": "Top",
+      "bot": "Bot",
+      "batting": "Batting",
+      "player": "Player",
+      "playByPlay": "Play-by-Play",
+      "unknown": "Unknown"
     }
   }
 }

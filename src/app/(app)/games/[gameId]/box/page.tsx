@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
@@ -23,6 +24,7 @@ interface PlayerBoxLine {
 export default function BoxScorePage() {
   const { gameId } = useParams<{ gameId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("games.box");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [game, setGame] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -43,7 +45,7 @@ export default function BoxScorePage() {
   }
 
   if (!game) {
-    return <p className="py-10 text-center text-gray-500">Game not found</p>;
+    return <p className="py-10 text-center text-gray-500">{t("gameNotFound")}</p>;
   }
 
   // Calculate box score lines per player
@@ -129,7 +131,7 @@ export default function BoxScorePage() {
         href={`/games/${gameId}/live`}
         className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
       >
-        &larr; Back to Game
+        &larr; {t("backToGame")}
       </Link>
 
       {/* Inning-by-inning scoreboard */}
@@ -202,20 +204,20 @@ export default function BoxScorePage() {
         </div>
         <p className="mt-2 text-center text-xs text-gray-500">
           {game.status === "final"
-            ? "Final"
-            : `In Progress \u2014 ${game.isTopOfInning ? "Top" : "Bot"} ${game.currentInning}`}
+            ? t("final")
+            : t("inProgress", { half: game.isTopOfInning ? t("top") : t("bot"), inning: game.currentInning })}
         </p>
       </Card>
 
       <Card>
         <h3 className="mb-3 text-sm font-semibold uppercase text-gray-500">
-          Batting
+          {t("batting")}
         </h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left dark:border-gray-700">
-                <th className="px-2 py-1 font-medium">Player</th>
+                <th className="px-2 py-1 font-medium">{t("player")}</th>
                 <th className="px-2 py-1 text-center font-medium">AB</th>
                 <th className="px-2 py-1 text-center font-medium">H</th>
                 <th className="px-2 py-1 text-center font-medium">R</th>
@@ -251,13 +253,13 @@ export default function BoxScorePage() {
       {/* Play-by-play */}
       <Card>
         <h3 className="mb-3 text-sm font-semibold uppercase text-gray-500">
-          Play-by-Play
+          {t("playByPlay")}
         </h3>
         <div className="space-y-1">
           {game.atBats.map((ab: { id: string; player?: { firstName: string; lastName: string }; opponentBatter?: { name: string }; result: string; rbi: number; stolenBases: number; isTop: boolean; inning: number }) => {
             const batterName = ab.player
               ? `${ab.player.firstName} ${ab.player.lastName}`
-              : ab.opponentBatter?.name || "Unknown";
+              : ab.opponentBatter?.name || t("unknown");
             return (
               <div
                 key={ab.id}
