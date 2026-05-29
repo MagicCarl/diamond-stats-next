@@ -14,11 +14,25 @@ The plan has **28 tasks** in 4 phases (engine T1–14, screen extraction T15–2
 translations T26, verification T27–28). Tasks 1–13 have full code; screen tasks
 follow the "Translation Recipe" in Task 14.
 
-**Progress:** Tasks 1–8 complete and committed. Engine is live (next-intl
-booting, `<html lang>` renders, dev server verified HTTP 200).
+**Progress:** Tasks 1–14 complete and committed — the **entire engine is
+done**. next-intl boots, `<html lang>` renders, `User.language` persists to DB
++ `NEXT_LOCALE` cookie, `PATCH /api/user/language` works, AuthProvider exposes
+`language`/`setLanguage`, LanguageSwitcher is in the NavBar (desktop + mobile),
+and the Settings page is real. Dev server verified: `/` and `/settings` both
+HTTP 200. 12 unit tests passing.
 
-**Next:** Task 9 (verify route returns + mirrors language). Commit after every
-task.
+**Next:** Tasks 15–25 — extract hardcoded strings from each app screen into
+`messages/en.json` using the Translation Recipe (plan Task 14), then Task 26
+(translate to es/ja/ko/zh-Hant), Task 27 (parity check), Task 28 (verify).
+
+Note: `messages/{es,ja,ko,zh-Hant}.json` are currently English copies of
+`en.json` (placeholders) — real translation happens in Task 26.
+
+### Test/verify commands
+
+- `npx vitest run` — unit tests
+- `npm run i18n:check` — (added in T27) key parity
+- `npm run build` — production build
 
 ### ⚠️ Database migration drift (important)
 
