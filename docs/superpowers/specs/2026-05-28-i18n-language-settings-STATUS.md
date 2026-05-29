@@ -26,13 +26,22 @@ across the whole authenticated app + auth pages is now in `messages/en.json`
 (493 keys, 10 top-level namespaces: common, nav, settings, dashboard, games,
 teams, stats, instructions, auth, admin).
 
-REMAINING — pick up at **T26**:
-- T26 translate `messages/{es,ja,ko,zh-Hant}.json` from `en.json` (currently
-  English copies). Must preserve keys, ICU placeholders ({count}, {name}, etc.),
-  rich tags (<b>, <em>, <badge>, <blue>, <code>), and keep stat abbreviations
-  (AVG/OBP/ERA/K/BB/HR/RBI/SB/CS/1B/2B/3B etc.) LITERAL. Native review later.
-- T27 add parity check (`src/i18n/parity.test.ts` + `scripts/check-i18n-parity.mjs` + `i18n:check` npm script).
-- T28 full verify: `npm test`, `npm run i18n:check`, `npm run lint`, `npm run build`, manual pass per locale.
+**T26 COMPLETE** — all 4 non-English catalogs translated (es/ja/ko/zh-Hant),
+493 keys each, exact parity. Machine-translated; native review recommended.
+**T27 COMPLETE** — parity test (`src/i18n/parity.test.ts`) + script
+(`scripts/check-i18n-parity.mjs`, `npm run i18n:check`). 16 unit tests pass,
+parity OK.
+
+REMAINING — **T28 only** (final verification). Run, in order:
+- `npx vitest run` (expect 16 pass) — DONE, passing
+- `npm run i18n:check` (expect "i18n parity OK") — DONE, passing
+- `npm run lint` — NOT yet run this session
+- `npm run build` — NOT yet run; this is the key remaining gate (full prod build)
+- Manual pass: `npm run dev`, switch each locale via NavBar switcher, walk the
+  screens, confirm no raw keys / no console "missing message" warnings.
+
+If `npm run build` surfaces errors, fix them. Then the feature is complete —
+consider `superpowers:finishing-a-development-branch` for merge/PR options.
 
 **Per-screen recipe (what I do each time):** read the page → add an `en.json`
 namespace (stat abbrevs stay literal; `RESULT_*`/`LEVELS`/`POSITIONS` from
