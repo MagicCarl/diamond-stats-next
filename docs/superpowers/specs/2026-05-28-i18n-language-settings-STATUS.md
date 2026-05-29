@@ -32,6 +32,21 @@ teams, stats, instructions, auth, admin).
 (`scripts/check-i18n-parity.mjs`, `npm run i18n:check`). 16 unit tests pass,
 parity OK.
 
+### DEPLOYED TO PRODUCTION (2026-05-29)
+
+- Deployed via `vercel deploy --prod` (fresh prod build, prod env vars) — live at
+  **www.baseballstatstracker.com**. GitHub `main` pushed/in sync.
+- Added a **"Select Language" picker to the landing page** header (LandingClient,
+  next to ThemeToggle) via a new `placeholder` mode on `LanguageSwitcher`.
+- Preview-domain note: Google sign-in + saved-password autofill don't work on
+  `*.vercel.app` preview URLs (Firebase authorized-domains + per-domain password
+  managers). They work on the production domain. Auth code was verified
+  unchanged by the i18n work (diff vs origin/main).
+- ⚠️ STILL ENGLISH: the landing/marketing page **content** (`/`, `/features`,
+  `/pricing`, `/learn/*`, `/privacy`) is NOT translated — only the picker was
+  added. Full marketing-page translation is the deferred Phase 2 (large: SEO copy
+  + JSON-LD metadata). Awaiting user decision.
+
 **T28 COMPLETE — all gates passed. The i18n feature is DONE.**
 - `npx vitest run` → 16 tests pass.
 - `npm run i18n:check` → "i18n parity OK" (493 keys × 5 locales).
