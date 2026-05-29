@@ -12,11 +12,13 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase-client";
 
 interface AppUser {
   isPaid: boolean;
   isAdmin: boolean;
+  language: string;
 }
 
 interface AuthContextType {
@@ -25,6 +27,8 @@ interface AuthContextType {
   loading: boolean;
   token: string | null;
   logout: () => Promise<void>;
+  language: string;
+  setLanguage: (locale: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -33,13 +37,17 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   token: null,
   logout: async () => {},
+  language: "en",
+  setLanguage: async () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [language, setLanguageState] = useState("en");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -61,7 +69,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setAppUser({
               isPaid: data.user.isPaid ?? false,
               isAdmin: data.user.isAdmin ?? false,
+              language: data.user.language ?? "en",
             });
+            setLanguageState(data.user.language ?? "en");
             // Track login event (fire and forget)
             fetch("/api/analytics/events", {
               method: "POST",
@@ -95,8 +105,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAppUser(null);
   };
 
+  const setLanguage = async (locale: string) => {
+    setLanguageState(locale);
+    const current = auth.currentUser;
+    if (current) {
+      const idToken = await current.getIdToken();
+      await fetch("/api/user/language", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ language: locale }),
+      }).catch(() => {});
+    } else {
+      // Pre-auth (login/signup): persist via cookie so SSR picks it up.
+      document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    }
+    router.refresh();
+  };
+
   return (
-    <AuthContext.Provider value={{ user, appUser, loading, token, logout }}>
+    <AuthContext.Provider
+      value={{ user, appUser, loading, token, logout, language, setLanguage }}
+    >
       {children}
     </AuthContext.Provider>
   );
