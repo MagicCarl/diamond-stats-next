@@ -16,6 +16,7 @@ model User {
   email       String   @unique
   displayName String?  @map("display_name")
   theme       String   @default("dark")
+  language    String   @default("en") @map("language")
   isPaid      Boolean  @default(false) @map("is_paid")
   isAdmin     Boolean  @default(false) @map("is_admin")
   deletedAt   DateTime? @map("deleted_at")

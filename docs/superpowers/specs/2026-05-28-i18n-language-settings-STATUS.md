@@ -14,8 +14,27 @@ The plan has **28 tasks** in 4 phases (engine T1–14, screen extraction T15–2
 translations T26, verification T27–28). Tasks 1–13 have full code; screen tasks
 follow the "Translation Recipe" in Task 14.
 
-**Next:** begin executing the plan, Task 1. Commit after every task (the plan
-bakes in per-task commits). No implementation code written yet.
+**Progress:** Tasks 1–8 complete and committed. Engine is live (next-intl
+booting, `<html lang>` renders, dev server verified HTTP 200).
+
+**Next:** Task 9 (verify route returns + mirrors language). Commit after every
+task.
+
+### ⚠️ Database migration drift (important)
+
+Running `prisma migrate dev` for Task 8 revealed **schema drift**: the live
+Supabase DB is *ahead* of the migration history on disk
+(`prisma/migrations/` is missing `analytics_events`, `users.deleted_at`,
+`users.is_admin`, `users.is_paid` — these exist in prod but have no migration
+file). `migrate dev` wanted to **reset/drop all data**, which we did NOT do.
+
+Instead, the `language` column was added **surgically and non-destructively**:
+`ALTER TABLE users ADD COLUMN IF NOT EXISTS language TEXT NOT NULL DEFAULT 'en'`
+(verified present, default `'en'`, NOT NULL). No migration file was created.
+
+Pre-existing follow-up for the user (out of scope for i18n): the migration
+history should be reconciled with production (e.g. baseline the existing schema
+with `prisma migrate resolve`) so future `migrate deploy` works cleanly.
 
 ## Decisions locked in (from brainstorming Q&A)
 
