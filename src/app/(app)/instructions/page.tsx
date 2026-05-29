@@ -1,485 +1,421 @@
 "use client";
 
+import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import Card from "@/components/ui/Card";
 
 export default function InstructionsPage() {
+  const t = useTranslations("instructions");
+
+  const rich = {
+    b: (c: ReactNode) => <strong>{c}</strong>,
+    em: (c: ReactNode) => <em>{c}</em>,
+    badge: (c: ReactNode) => (
+      <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+        {c}
+      </span>
+    ),
+    blue: (c: ReactNode) => (
+      <span className="text-blue-500 font-medium">{c}</span>
+    ),
+  };
+
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      <h1 className="text-2xl font-bold">How to Use Baseball Stats Tracker</h1>
+      <h1 className="text-2xl font-bold">{t("title")}</h1>
 
       {/* Getting Started */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Getting Started</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("gettingStarted")}</h2>
         <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>
-            <strong>Create or Select a Team</strong> &mdash; From the Dashboard, tap{" "}
-            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ New Team</span>.
-            If you already have teams, you&apos;ll see a list of your existing teams to quickly switch between them. Tap any team to go to its page, or tap{" "}
-            <strong>+ Create New Team</strong> to add a new one with a team name and level (Little League, Travel, Recreational, High School, or College).
-          </li>
-          <li>
-            <strong>Add Players</strong> &mdash; Open your team page and tap{" "}
-            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ Add Player</span>.
-            Enter each player&apos;s first name, last name, jersey number, batting hand (Right, Left, or Switch), throwing hand, and primary position.
-          </li>
-          <li>
-            <strong>Edit Players</strong> &mdash; Need to make a change? Tap the{" "}
-            <span className="text-blue-500 font-medium">Edit</span> button next to any player
-            in the roster to update their name, jersey number, position, or handedness.
-          </li>
-          <li>
-            <strong>Create a Season</strong> &mdash; Tap{" "}
-            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ Season</span>{" "}
-            on your team page to add a season (e.g., &ldquo;Spring 2026&rdquo;). Seasons let you group games and filter stats over time.
-            To remove a season entered incorrectly, tap the red <strong>Delete</strong> link next to it in the Seasons list on your team page. Games in that season are preserved.
-          </li>
-          <li>
-            <strong>Schedule a Game</strong> &mdash; Tap{" "}
-            <span className="rounded bg-blue-100 px-1.5 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">+ New Game</span>,
-            enter the opponent name, game date, time, location, whether you&apos;re home or away, and the number of innings. Optionally assign the game to a season.
-            The home/away selection affects the default batting order &mdash; as the home team, your team bats in the bottom of the inning; as the away team, you bat in the top.
-          </li>
+          <li>{t.rich("gs1", rich)}</li>
+          <li>{t.rich("gs2", rich)}</li>
+          <li>{t.rich("gs3", rich)}</li>
+          <li>{t.rich("gs4", rich)}</li>
+          <li>{t.rich("gs5", rich)}</li>
         </ol>
       </Card>
 
       {/* Pre-Game Setup */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Pre-Game Setup</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("preGame")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Before first pitch, open your game and get everything ready:
+          {t("preGameIntro")}
         </p>
         <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>
-            <strong>Set Your Lineup</strong> &mdash; Tap <strong>Set Lineup</strong> on the live scoring page. Add players from your roster to the batting order, assign each a defensive position for this game, and use the up/down arrows to reorder. Save when you&apos;re ready.
-          </li>
-          <li>
-            <strong>Add Opponent Pitchers</strong> &mdash; When your team is batting, use the pitcher dropdown and tap <strong>+ New</strong> to add the starting pitcher&apos;s name and throwing hand (Left or Right). You can add relief pitchers as the game progresses.
-          </li>
-          <li>
-            <strong>Add Opponent Batters</strong> &mdash; Switch to <strong>Opponent Batting</strong> mode and tap{" "}
-            <strong>+ Add Batter</strong> to add opposing batters with their name, jersey number, and batting hand. You can add these as each batter comes up.
-            <em> If you&apos;ve played this opponent before, their roster is automatically loaded from the previous game</em>, so you won&apos;t need to re-enter them.
-          </li>
+          <li>{t.rich("pg1", rich)}</li>
+          <li>{t.rich("pg2", rich)}</li>
+          <li>{t.rich("pg3", rich)}</li>
         </ol>
       </Card>
 
       {/* Live Scoring */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Live Scoring</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("liveScoring")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          The Live Scoring page is the primary screen you use at the field. Open any game and you&apos;re ready to go.
+          {t("liveIntro")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">The Scoreboard</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("scoreboard")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          The scoreboard at the top shows the current score, inning (Top or Bottom), and outs count. Everything updates automatically as you record at-bats.
+          {t("scoreboardText")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Scoring Mode Toggle</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("modeToggle")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Use the toggle at the top to switch between <strong>Our Team Batting</strong> (blue) and <strong>Opponent Batting</strong> (red). This determines whose at-bats you are recording and ensures the score updates for the correct team.
+          {t.rich("modeToggleText", rich)}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Recording Your Team&apos;s At-Bats</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("recordingOurs")}</h3>
         <ol className="mb-3 list-inside list-decimal space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>The current batter is shown automatically based on your lineup order.</li>
-          <li>Select the opposing pitcher from the dropdown (or add a new one if a pitching change occurs).</li>
-          <li>Choose the at-bat result from the buttons below (see At-Bat Results section).</li>
-          <li>Adjust RBI count and mark if the runner scored using the +/- buttons.</li>
-          <li>Record stolen bases or caught stealing if applicable.</li>
-          <li>For batted balls, tap the spray chart diamond to record where the ball was hit.</li>
-          <li>Tap <strong>Record At-Bat</strong> to save.</li>
+          <li>{t("ro1")}</li>
+          <li>{t("ro2")}</li>
+          <li>{t("ro3")}</li>
+          <li>{t("ro4")}</li>
+          <li>{t("ro5")}</li>
+          <li>{t("ro6")}</li>
+          <li>{t.rich("ro7", rich)}</li>
         </ol>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          The app automatically tracks outs, advances innings (3 outs ends the half-inning), and updates the score.
+          {t("recordingOursNote")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Recording Opponent At-Bats</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("recordingOpp")}</h3>
         <ol className="mb-3 list-inside list-decimal space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>Switch to <strong>Opponent Batting</strong> mode using the toggle.</li>
-          <li>The current opponent batter is shown automatically (or add a new batter).</li>
-          <li>Optionally track individual pitches using the pitch tracking panel (see Pitch Tracking section below).</li>
-          <li>Select the at-bat result, set RBI/runs scored, and tap the spray chart for batted balls.</li>
-          <li>Tap <strong>Record Opponent At-Bat</strong> to save.</li>
+          <li>{t.rich("rop1", rich)}</li>
+          <li>{t("rop2")}</li>
+          <li>{t("rop3")}</li>
+          <li>{t("rop4")}</li>
+          <li>{t.rich("rop5", rich)}</li>
         </ol>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Selecting a Different Batter</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("selectBatter")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Need to record an at-bat for someone out of order? Tap any player in the batting order list to select them. Tap again or use &ldquo;Back to next up&rdquo; to return to the automatic rotation.
+          {t("selectBatterText")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Automatic Inning Tracking</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("autoInning")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Three outs automatically end the half-inning. The app switches from Top to Bottom (or Bottom to Top with an inning increment). Outs reset to zero for the new half-inning. Double plays count as 2 outs.
+          {t("autoInningText")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Real-Time Sync</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("realTimeSync")}</h3>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          The live scoring page automatically refreshes every 3 seconds. This means multiple people can follow the same game from different devices &mdash; one person scores at the field while coaches or parents see updates in real time on their own phone or computer.
+          {t("realTimeSyncText")}
         </p>
       </Card>
 
       {/* Pitch Tracking */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Pitch Tracking</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("pitchTracking")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          When in <strong>Opponent Batting</strong> mode, use the pitch tracking panel to record each pitch <em>before</em> logging the at-bat result. This tracks your pitcher&apos;s performance and builds a pitch-by-pitch record.
+          {t.rich("pitchTrackingIntro", rich)}
         </p>
         <ol className="mb-3 list-inside list-decimal space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li>Tap the <strong>strike zone diagram</strong> to mark where the pitch was located.</li>
-          <li>Select the pitch result button:</li>
+          <li>{t.rich("pt1", rich)}</li>
+          <li>{t("pt2")}</li>
         </ol>
         <div className="mb-3 ml-6 grid grid-cols-2 gap-1 text-sm text-gray-700 dark:text-gray-300">
-          <div><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1.5 align-middle" /><strong>CS</strong> &mdash; Called Strike</div>
-          <div><span className="inline-block w-3 h-3 rounded-full bg-red-700 mr-1.5 align-middle" /><strong>SS</strong> &mdash; Swinging Strike</div>
-          <div><span className="inline-block w-3 h-3 rounded-full bg-orange-500 mr-1.5 align-middle" /><strong>F</strong> &mdash; Foul Ball</div>
-          <div><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1.5 align-middle" /><strong>B</strong> &mdash; Ball</div>
-          <div><span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-1.5 align-middle" /><strong>IP</strong> &mdash; In Play</div>
-          <div><span className="inline-block w-3 h-3 rounded-full bg-purple-500 mr-1.5 align-middle" /><strong>HBP</strong> &mdash; Hit By Pitch</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1.5 align-middle" />{t.rich("pitchCS", rich)}</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-red-700 mr-1.5 align-middle" />{t.rich("pitchSS", rich)}</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-orange-500 mr-1.5 align-middle" />{t.rich("pitchF", rich)}</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1.5 align-middle" />{t.rich("pitchB", rich)}</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-1.5 align-middle" />{t.rich("pitchIP", rich)}</div>
+          <div><span className="inline-block w-3 h-3 rounded-full bg-purple-500 mr-1.5 align-middle" />{t.rich("pitchHBP", rich)}</div>
         </div>
         <ol className="mb-3 list-inside list-decimal space-y-1 text-sm text-gray-700 dark:text-gray-300" start={3}>
-          <li>Tap <strong>+ Add Pitch</strong> to log the pitch. It appears as a numbered circle on the strike zone.</li>
-          <li>The ball-strike count updates automatically. Foul balls do <em>not</em> add a strike when already at 2 strikes.</li>
-          <li>Use <strong>Undo</strong> to remove the last pitch if you make a mistake.</li>
-          <li>Once the pitch sequence is complete, record the at-bat result as usual.</li>
+          <li>{t.rich("pt3", rich)}</li>
+          <li>{t.rich("pt4", rich)}</li>
+          <li>{t.rich("pt5", rich)}</li>
+          <li>{t("pt6")}</li>
         </ol>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          All pitches are saved with the at-bat and visible in the game log, including the total pitch count for each at-bat.
+          {t("pitchTrackingNote")}
         </p>
       </Card>
 
       {/* At-Bat Result Buttons */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">At-Bat Results</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("atBatResults")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Select one of these outcomes for each at-bat. Each button shows the abbreviation with the full name displayed below it for quick reference:
+          {t("atBatResultsIntro")}
         </p>
 
         <div className="space-y-4 text-sm">
           <div>
-            <h3 className="mb-1 font-semibold text-green-600 dark:text-green-400">Hits</h3>
+            <h3 className="mb-1 font-semibold text-green-600 dark:text-green-400">{t("hits")}</h3>
             <div className="grid grid-cols-2 gap-1 text-gray-700 dark:text-gray-300">
-              <div><strong>1B</strong> &mdash; Single</div>
-              <div><strong>2B</strong> &mdash; Double</div>
-              <div><strong>3B</strong> &mdash; Triple</div>
-              <div><strong>HR</strong> &mdash; Home Run</div>
+              <div>{t.rich("resultSingle", rich)}</div>
+              <div>{t.rich("resultDouble", rich)}</div>
+              <div>{t.rich("resultTriple", rich)}</div>
+              <div>{t.rich("resultHR", rich)}</div>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-1 font-semibold text-purple-600 dark:text-purple-400">Walks / Reached Base</h3>
+            <h3 className="mb-1 font-semibold text-purple-600 dark:text-purple-400">{t("walksReached")}</h3>
             <div className="grid grid-cols-2 gap-1 text-gray-700 dark:text-gray-300">
-              <div><strong>BB</strong> &mdash; Base on Balls (Walk)</div>
-              <div><strong>HBP</strong> &mdash; Hit By Pitch</div>
-              <div><strong>IBB</strong> &mdash; Intentional Walk</div>
-              <div><strong>CI</strong> &mdash; Catcher&apos;s Interference</div>
+              <div>{t.rich("resultBB", rich)}</div>
+              <div>{t.rich("resultHBP", rich)}</div>
+              <div>{t.rich("resultIBB", rich)}</div>
+              <div>{t.rich("resultCI", rich)}</div>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-1 font-semibold text-gray-500">Outs</h3>
+            <h3 className="mb-1 font-semibold text-gray-500">{t("outs")}</h3>
             <div className="grid grid-cols-2 gap-1 text-gray-700 dark:text-gray-300">
-              <div><strong>KS</strong> &mdash; Strikeout Swinging</div>
-              <div><strong>KL</strong> &mdash; Strikeout Looking</div>
-              <div><strong>GO</strong> &mdash; Groundout</div>
-              <div><strong>FO</strong> &mdash; Flyout</div>
-              <div><strong>LO</strong> &mdash; Lineout</div>
-              <div><strong>PO</strong> &mdash; Popout</div>
-              <div><strong>FC</strong> &mdash; Fielder&apos;s Choice</div>
-              <div><strong>DP</strong> &mdash; Double Play (2 outs)</div>
-              <div><strong>SF</strong> &mdash; Sacrifice Fly (not an official AB)</div>
-              <div><strong>SAC</strong> &mdash; Sacrifice Bunt (not an official AB)</div>
+              <div>{t.rich("resultKS", rich)}</div>
+              <div>{t.rich("resultKL", rich)}</div>
+              <div>{t.rich("resultGO", rich)}</div>
+              <div>{t.rich("resultFO", rich)}</div>
+              <div>{t.rich("resultLO", rich)}</div>
+              <div>{t.rich("resultPO", rich)}</div>
+              <div>{t.rich("resultFC", rich)}</div>
+              <div>{t.rich("resultDP", rich)}</div>
+              <div>{t.rich("resultSF", rich)}</div>
+              <div>{t.rich("resultSAC", rich)}</div>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-1 font-semibold text-yellow-600 dark:text-yellow-400">Other</h3>
+            <h3 className="mb-1 font-semibold text-yellow-600 dark:text-yellow-400">{t("other")}</h3>
             <div className="text-gray-700 dark:text-gray-300">
-              <div><strong>E</strong> &mdash; Error (batter reaches on a fielding error)</div>
+              <div>{t.rich("resultE", rich)}</div>
             </div>
           </div>
         </div>
 
         <div className="mt-4 rounded-lg bg-gray-50 p-3 dark:bg-gray-800/50">
           <p className="text-xs text-gray-600 dark:text-gray-400">
-            <strong>Note:</strong> Walks (BB, IBB), Hit By Pitch (HBP), Sacrifice Fly (SF), Sacrifice Bunt (SAC), and Catcher&apos;s Interference (CI) are <em>not</em> counted as official at-bats but <em>are</em> counted as plate appearances.
+            {t.rich("atBatNote", rich)}
           </p>
         </div>
       </Card>
 
       {/* At-Bat Extras */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">At-Bat Extras</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("atBatExtras")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          In addition to the at-bat result, you can record the following for each plate appearance:
+          {t("atBatExtrasIntro")}
         </p>
         <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <p>
-            <strong>RBI</strong> &mdash; Use the +/- buttons to set how many runs batted in on this at-bat (0 or more).
-          </p>
-          <p>
-            <strong>Runner Scored</strong> &mdash; Toggle Yes/No to indicate if the batter scored a run (e.g., on a home run or subsequent play).
-          </p>
-          <p>
-            <strong>Stolen Bases</strong> &mdash; Use the +/- buttons if the batter stole any bases during this at-bat.
-          </p>
-          <p>
-            <strong>Caught Stealing</strong> &mdash; Use the +/- buttons if the batter was caught stealing.
-          </p>
-          <p>
-            <strong>Hit Location</strong> &mdash; For any batted ball (hit or out in play), tap the spray chart diamond to mark where the ball was hit or fielded.
-          </p>
+          <p>{t.rich("extraRBI", rich)}</p>
+          <p>{t.rich("extraScored", rich)}</p>
+          <p>{t.rich("extraSB", rich)}</p>
+          <p>{t.rich("extraCS", rich)}</p>
+          <p>{t.rich("extraHitLoc", rich)}</p>
         </div>
 
-        <h3 className="mt-4 mb-2 text-sm font-semibold text-gray-500 uppercase">Editing a Previous At-Bat</h3>
+        <h3 className="mt-4 mb-2 text-sm font-semibold text-gray-500 uppercase">{t("editingPrev")}</h3>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          Need to add a stolen base or caught stealing after you&apos;ve already moved to the next batter?
-          Tap any entry in the <strong>Game Log</strong> to expand it. Use the SB and CS +/- buttons to update
-          the values, then tap <strong>Save</strong>. This is useful when a runner steals a base or gets picked off
-          while the next batter is at the plate.
+          {t.rich("editingPrevText", rich)}
         </p>
       </Card>
 
       {/* Opponent Tracking */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Opponent Tracking</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("opponentTracking")}</h2>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Opponent Pitchers</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("oppPitchers")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          When your team is batting, select the opposing pitcher from the dropdown or tap <strong>+ New</strong> to add one.
-          Enter their name and throwing hand (Left or Right). Each of your team&apos;s at-bats is linked to the opposing pitcher,
-          which enables pitcher-specific stat splits later in Stats Search. Add new pitchers as relief pitchers enter the game.
+          {t.rich("oppPitchersText", rich)}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Opponent Batters</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("oppBatters")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Switch to <strong>Opponent Batting</strong> mode and tap <strong>+ Add Batter</strong> to create opponent batter entries
-          with name, jersey number (optional), and batting hand (Right, Left, or Switch). The app auto-rotates through opponent batters
-          just like your lineup, or you can tap to manually select a batter.
+          {t.rich("oppBattersText", rich)}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Your Pitching Staff</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("yourPitching")}</h3>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          When in Opponent Batting mode, the app tracks which of your team&apos;s pitchers is on the mound. This records pitching appearances
-          including outs recorded, hits allowed, runs, earned runs, walks, strikeouts, home runs allowed, pitch count, hit batters, and wild pitches.
+          {t("yourPitchingText")}
         </p>
       </Card>
 
       {/* Spray Charts */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Spray Charts</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("sprayCharts")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          When recording any batted-ball result (hit or out in play), a baseball diamond diagram appears.
-          Tap where the ball landed or was fielded to record the location. The location is saved with the at-bat.
+          {t("sprayChartsText")}
         </p>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Viewing Spray Charts</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("viewingSpray")}</h3>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          You can view spray charts in three ways:
+          {t("viewingSprayIntro")}
         </p>
         <ul className="mb-3 list-inside list-disc space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li><strong>During Live Scoring</strong> &mdash; Mark hit locations as you record at-bats.</li>
-          <li><strong>Game Spray Chart</strong> &mdash; From any game, view all batted-ball locations from that single game.</li>
-          <li><strong>Team Spray Chart</strong> &mdash; From your team page, view cumulative spray chart data across all games. Filter by individual player or view the whole team at once.</li>
+          <li>{t.rich("viewSpray1", rich)}</li>
+          <li>{t.rich("viewSpray2", rich)}</li>
+          <li>{t.rich("viewSpray3", rich)}</li>
         </ul>
 
-        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">Color Coding</h3>
+        <h3 className="mb-2 text-sm font-semibold text-gray-500 uppercase">{t("colorCoding")}</h3>
         <div className="flex flex-wrap gap-3 text-sm">
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-green-500" /> Singles
+            <span className="inline-block h-3 w-3 rounded-full bg-green-500" /> {t("colorSingles")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-blue-500" /> Doubles
+            <span className="inline-block h-3 w-3 rounded-full bg-blue-500" /> {t("colorDoubles")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-orange-500" /> Triples
+            <span className="inline-block h-3 w-3 rounded-full bg-orange-500" /> {t("colorTriples")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-red-500" /> Home Runs
+            <span className="inline-block h-3 w-3 rounded-full bg-red-500" /> {t("colorHomeRuns")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-3 w-3 rounded-full bg-gray-500" /> Outs
+            <span className="inline-block h-3 w-3 rounded-full bg-gray-500" /> {t("colorOuts")}
           </span>
         </div>
       </Card>
 
       {/* Box Score */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Box Score</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("boxScore")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          Every game has a box score that you can view during or after the game. The box score includes:
+          {t("boxScoreIntro")}
         </p>
         <ul className="mb-3 list-inside list-disc space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li><strong>Inning-by-Inning Scoreboard</strong> &mdash; A traditional baseball scoreboard showing runs scored in each inning, with columns for total Runs (R), Hits (H), and Errors (E). The away team is on top, home team on bottom, and the current inning is highlighted in blue.</li>
-          <li><strong>Batting Stats Table</strong> &mdash; Each player in your lineup with AB, H, R (runs scored), RBI, BB, K (strikeouts), SB, and AVG for that game.</li>
-          <li><strong>Play-by-Play Log</strong> &mdash; Chronological list of every at-bat showing the batter, result, RBI, stolen bases, and inning marker (e.g., T1, B3).</li>
+          <li>{t.rich("boxScore1", rich)}</li>
+          <li>{t.rich("boxScore2", rich)}</li>
+          <li>{t.rich("boxScore3", rich)}</li>
         </ul>
       </Card>
 
       {/* Season Stats */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Season Stats</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("seasonStats")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          From your team page, tap <strong>Season Stats</strong> to see cumulative batting statistics for every player across all games.
+          {t.rich("seasonStatsIntro", rich)}
         </p>
         <div className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          <p className="mb-2">The stats table includes these columns (tap a column header to sort):</p>
+          <p className="mb-2">{t("seasonStatsColIntro")}</p>
           <div className="grid grid-cols-2 gap-1">
-            <div><strong>G</strong> &mdash; Games played</div>
-            <div><strong>AB</strong> &mdash; Official at-bats</div>
-            <div><strong>H</strong> &mdash; Hits</div>
-            <div><strong>2B</strong> &mdash; Doubles</div>
-            <div><strong>3B</strong> &mdash; Triples</div>
-            <div><strong>HR</strong> &mdash; Home Runs</div>
-            <div><strong>RBI</strong> &mdash; Runs Batted In</div>
-            <div><strong>BB</strong> &mdash; Walks</div>
-            <div><strong>K</strong> &mdash; Strikeouts</div>
-            <div><strong>SB</strong> &mdash; Stolen Bases</div>
-            <div><strong>AVG</strong> &mdash; Batting Average</div>
-            <div><strong>OBP</strong> &mdash; On-Base Percentage</div>
-            <div><strong>SLG</strong> &mdash; Slugging Percentage</div>
-            <div><strong>OPS</strong> &mdash; On-Base Plus Slugging</div>
+            <div>{t.rich("colG", rich)}</div>
+            <div>{t.rich("colAB", rich)}</div>
+            <div>{t.rich("colH", rich)}</div>
+            <div>{t.rich("col2B", rich)}</div>
+            <div>{t.rich("col3B", rich)}</div>
+            <div>{t.rich("colHR", rich)}</div>
+            <div>{t.rich("colRBI", rich)}</div>
+            <div>{t.rich("colBB", rich)}</div>
+            <div>{t.rich("colK", rich)}</div>
+            <div>{t.rich("colSB", rich)}</div>
+            <div>{t.rich("colAVG", rich)}</div>
+            <div>{t.rich("colOBP", rich)}</div>
+            <div>{t.rich("colSLG", rich)}</div>
+            <div>{t.rich("colOPS", rich)}</div>
           </div>
         </div>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          The page also shows your team&apos;s overall record (Wins - Losses - Ties) at the top.
+          {t("seasonStatsRecord")}
         </p>
       </Card>
 
       {/* Advanced Stats Search */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Advanced Stats Search</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("advSearch")}</h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
-          The <strong>Stats Search</strong> page lets you filter and analyze your players&apos; performance with powerful filters:
+          {t.rich("advSearchIntro", rich)}
         </p>
         <ul className="mb-3 list-inside list-disc space-y-1 text-sm text-gray-700 dark:text-gray-300">
-          <li><strong>Team</strong> &mdash; Select which of your teams to analyze.</li>
-          <li><strong>Opponent</strong> &mdash; Filter by opponent team name (partial match).</li>
-          <li><strong>Pitcher</strong> &mdash; Filter by opposing pitcher name (partial match).</li>
-          <li><strong>Pitcher Hand</strong> &mdash; See how your players hit against lefties vs. righties.</li>
-          <li><strong>Date Range</strong> &mdash; Filter by start and end dates.</li>
+          <li>{t.rich("advSearch1", rich)}</li>
+          <li>{t.rich("advSearch2", rich)}</li>
+          <li>{t.rich("advSearch3", rich)}</li>
+          <li>{t.rich("advSearch4", rich)}</li>
+          <li>{t.rich("advSearch5", rich)}</li>
         </ul>
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          Results show each player&apos;s stats (G, AB, H, HR, RBI, BB, K, SB, AVG, OBP, OPS) for only the at-bats matching your filters.
-          For example, you can see how your team hits against a specific pitcher or how they perform against left-handed pitching.
+          {t("advSearchNote")}
         </p>
       </Card>
 
       {/* Stats Explained */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">How Stats Are Calculated</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("statsCalc")}</h2>
         <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
           <div>
-            <h3 className="font-semibold">Plate Appearances (PA)</h3>
-            <p>Total times a batter comes to the plate, including walks, HBP, sacrifices, and all other outcomes.</p>
+            <h3 className="font-semibold">{t("paHead")}</h3>
+            <p>{t("paText")}</p>
           </div>
           <div>
-            <h3 className="font-semibold">At-Bats (AB)</h3>
-            <p>Plate appearances minus walks, HBP, sacrifice flies, sacrifice bunts, and catcher&apos;s interference. This is the denominator for batting average.</p>
+            <h3 className="font-semibold">{t("abHead")}</h3>
+            <p>{t("abText")}</p>
           </div>
           <div>
-            <h3 className="font-semibold">Batting Average (AVG)</h3>
-            <p>Hits &divide; Official At-Bats. Walks, HBP, sacrifices, and catcher&apos;s interference are <em>not</em> counted as official at-bats.</p>
+            <h3 className="font-semibold">{t("avgHead")}</h3>
+            <p>{t.rich("avgText", rich)}</p>
           </div>
           <div>
-            <h3 className="font-semibold">On-Base Percentage (OBP)</h3>
-            <p>(Hits + Walks + HBP + CI) &divide; (At-Bats + Walks + HBP + Sacrifice Flies + CI). Measures how often a batter reaches base safely.</p>
+            <h3 className="font-semibold">{t("obpHead")}</h3>
+            <p>{t("obpText")}</p>
           </div>
           <div>
-            <h3 className="font-semibold">Slugging Percentage (SLG)</h3>
-            <p>Total Bases &divide; Official At-Bats. Singles = 1, Doubles = 2, Triples = 3, Home Runs = 4.</p>
+            <h3 className="font-semibold">{t("slgHead")}</h3>
+            <p>{t("slgText")}</p>
           </div>
           <div>
-            <h3 className="font-semibold">OPS (On-Base Plus Slugging)</h3>
-            <p>OBP + SLG. A combined measure of a hitter&apos;s ability to get on base and hit for power.</p>
+            <h3 className="font-semibold">{t("opsHead")}</h3>
+            <p>{t("opsText")}</p>
           </div>
           <div>
-            <h3 className="font-semibold">Stolen Base Percentage (SB%)</h3>
-            <p>Stolen Bases &divide; (Stolen Bases + Caught Stealing). Shows baserunning efficiency.</p>
+            <h3 className="font-semibold">{t("sbPctHead")}</h3>
+            <p>{t("sbPctText")}</p>
           </div>
         </div>
       </Card>
 
       {/* Game Management */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Game Management</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("gameMgmt")}</h2>
         <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <p>
-            <strong>Undo Last</strong> &mdash; Removes the most recent at-bat and reverts the score, outs, and inning as needed. Use this to fix mistakes.
-          </p>
-          <p>
-            <strong>End Game</strong> &mdash; Marks the game as final. The final score is locked and the game appears with a green &ldquo;Final&rdquo; badge in your games list.
-          </p>
-          <p>
-            <strong>Box Score</strong> &mdash; View a traditional box score with batting stats and play-by-play log at any time during or after the game.
-          </p>
-          <p>
-            <strong>Game Spray Chart</strong> &mdash; View all batted-ball locations from the game on a color-coded diamond diagram.
-          </p>
-          <p>
-            <strong>Game Status</strong> &mdash; Games show as &ldquo;Scheduled&rdquo; before any at-bats, &ldquo;In Progress&rdquo; with the current inning during the game, and &ldquo;Final&rdquo; after you end the game.
-          </p>
-          <p>
-            <strong>Delete All Games</strong> &mdash; From your team&apos;s page, scroll below the games list to find the red <strong>Delete All Games</strong> button. This permanently removes all games and their stats for the team. A confirmation dialog will appear before anything is deleted. This is useful when starting a fresh season or cleaning up test data.
-          </p>
+          <p>{t.rich("mgmtUndo", rich)}</p>
+          <p>{t.rich("mgmtEndGame", rich)}</p>
+          <p>{t.rich("mgmtBoxScore", rich)}</p>
+          <p>{t.rich("mgmtSprayChart", rich)}</p>
+          <p>{t.rich("mgmtStatus", rich)}</p>
+          <p>{t.rich("mgmtDeleteAll", rich)}</p>
         </div>
       </Card>
 
       {/* Step-by-Step Scoring Guide */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Step-by-Step: Scoring a Full Game</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("stepByStep")}</h2>
         <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>
-            <strong>Create the game</strong> from your team page with opponent name, date, and home/away.
-          </li>
-          <li>
-            <strong>Set your lineup</strong> &mdash; add players and assign positions.
-          </li>
-          <li>
-            <strong>Top of 1st (Opponent Batting)</strong> &mdash; Switch to Opponent Batting mode. Add opponent batters as they come up. Optionally track pitches for each at-bat. Record each result. After 3 outs, the inning flips automatically.
-          </li>
-          <li>
-            <strong>Bottom of 1st (Your Team Batting)</strong> &mdash; Switch to Our Team Batting. Add the opposing pitcher. Record each at-bat result with RBIs, runs scored, and hit location. After 3 outs, inning advances to Top of 2nd.
-          </li>
-          <li>
-            <strong>Continue alternating</strong> between Opponent Batting and Our Team Batting each half-inning. Add new opponent pitchers or batters as they enter the game.
-          </li>
-          <li>
-            <strong>End the game</strong> when the final out is recorded. Tap <strong>End Game</strong> to mark it as final.
-          </li>
-          <li>
-            <strong>Review</strong> the box score and spray chart after the game!
-          </li>
+          <li>{t.rich("step1", rich)}</li>
+          <li>{t.rich("step2", rich)}</li>
+          <li>{t.rich("step3", rich)}</li>
+          <li>{t.rich("step4", rich)}</li>
+          <li>{t.rich("step5", rich)}</li>
+          <li>{t.rich("step6", rich)}</li>
+          <li>{t.rich("step7", rich)}</li>
         </ol>
       </Card>
 
       {/* Quick Reference */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Quick Reference</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("quickRef")}</h2>
         <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <p>
-            <strong>Dark Mode</strong> &mdash; Toggle between light and dark themes using the sun/moon icon in the toolbar. Dark mode is great for outdoor games with bright sunlight.
-          </p>
-          <p>
-            <strong>Sign Out</strong> &mdash; Click &quot;Sign Out&quot; in the navigation bar to log out from your account.
-          </p>
+          <p>{t.rich("quickDarkMode", rich)}</p>
+          <p>{t.rich("quickSignOut", rich)}</p>
         </div>
       </Card>
 
       {/* Tips */}
       <Card>
-        <h2 className="mb-3 text-lg font-semibold">Tips for Best Results</h2>
+        <h2 className="mb-3 text-lg font-semibold">{t("tips")}</h2>
         <ul className="list-inside list-disc space-y-2 text-sm text-gray-700 dark:text-gray-300">
-          <li>Set up your roster and lineup <em>before</em> the game starts so you can focus on scoring during play.</li>
-          <li>Add opponent pitchers as they enter the game so each at-bat is linked to the correct pitcher for splits analysis.</li>
-          <li>Use the spray chart tap on every batted ball &mdash; even outs. Over a season, this reveals valuable hitting tendencies.</li>
-          <li>Record pitch locations during opponent at-bats to analyze your pitcher&apos;s tendencies and strike zone command.</li>
-          <li>Check the Stats Search page regularly to see how your team performs against different opponents and pitcher types.</li>
-          <li>Use the <strong>Undo Last</strong> button right away if you record something incorrectly &mdash; it&apos;s easier to fix in the moment.</li>
-          <li>Have a second person help &mdash; one person watches the game, the other records on the app. With real-time sync, both devices stay up to date automatically.</li>
-          <li>When facing a repeat opponent, their batter roster loads automatically &mdash; saving you time on game day setup.</li>
-          <li>Use dark mode at outdoor games for better screen visibility in bright sunlight.</li>
-          <li>Check the box score during the game to see the traditional inning-by-inning scoreboard with R/H/E columns, just like a real ballpark.</li>
+          <li>{t.rich("tip1", rich)}</li>
+          <li>{t.rich("tip2", rich)}</li>
+          <li>{t("tip3")}</li>
+          <li>{t.rich("tip4", rich)}</li>
+          <li>{t("tip5")}</li>
+          <li>{t.rich("tip6", rich)}</li>
+          <li>{t("tip7")}</li>
+          <li>{t("tip8")}</li>
+          <li>{t("tip9")}</li>
+          <li>{t("tip10")}</li>
         </ul>
       </Card>
     </div>
