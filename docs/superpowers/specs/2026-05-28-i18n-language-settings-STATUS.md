@@ -21,9 +21,18 @@ done**. next-intl boots, `<html lang>` renders, `User.language` persists to DB
 and the Settings page is real. Dev server verified: `/` and `/settings` both
 HTTP 200. 12 unit tests passing.
 
-**Next:** Tasks 15–25 — extract hardcoded strings from each app screen into
-`messages/en.json` using the Translation Recipe (plan Task 14), then Task 26
-(translate to es/ja/ko/zh-Hant), Task 27 (parity check), Task 28 (verify).
+**Screen extraction progress:** Done = nav, settings, dashboard (T15), new game
+(T16), live scoring (T17 — the big 1500-line one). In progress = box score
+(T18). Remaining screens = game spray chart (T19), team detail (T20), team
+stats (T21), team spray chart (T22), stats search (T23), instructions (T24),
+admin + shared UI + auth pages (T25). Then T26 (translate to es/ja/ko/zh-Hant),
+T27 (parity), T28 (verify).
+
+Convention reminders: stat abbreviations (AVG/OBP/ERA/K/BB/HR/RBI/SB/CS/IP)
+stay literal; only full-word labels/tooltips get keys. `RESULT_LABELS` /
+`RESULT_FULL_NAMES` / `LEVELS` live in `src/lib/constants.ts` and are left
+untranslated this pass (data-layer concern). Plural/param strings use ICU via
+`t("key", { count })`; rich text uses `t.rich`.
 
 Note: `messages/{es,ja,ko,zh-Hant}.json` are currently English copies of
 `en.json` (placeholders) — real translation happens in Task 26.
