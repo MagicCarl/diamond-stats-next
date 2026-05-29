@@ -8,7 +8,7 @@ import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
 import SprayChartDiamond from "@/components/spray-chart/SprayChartDiamond";
-import { RESULT_COLORS, RESULT_LABELS } from "@/lib/constants";
+import { RESULT_COLORS } from "@/lib/constants";
 import { Player } from "@/types";
 
 interface HitData {

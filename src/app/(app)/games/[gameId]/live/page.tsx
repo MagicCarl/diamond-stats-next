@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
-import { AtBatRecord, LineupEntryRecord, OpponentPitcherRecord, OpponentBatterRecord, PitchRecord, Player, Team } from "@/types";
+import { AtBatRecord, LineupEntryRecord, OpponentPitcherRecord, OpponentBatterRecord, Player, Team } from "@/types";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
