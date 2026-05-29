@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import { Player, Game } from "@/types";
 import Button from "@/components/ui/Button";
@@ -32,6 +33,8 @@ interface TeamDetail {
 export default function TeamDetailPage() {
   const { teamId } = useParams<{ teamId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("teams.detail");
+  const tc = useTranslations("common");
   const [team, setTeam] = useState<TeamDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [showAddPlayer, setShowAddPlayer] = useState(false);
@@ -159,7 +162,7 @@ export default function TeamDetailPage() {
   };
 
   const handleDeletePlayer = async (playerId: string) => {
-    if (!confirm("Remove this player from the roster? Their game stats will also be deleted.")) return;
+    if (!confirm(t("removePlayerConfirm"))) return;
     try {
       await apiFetch(`/api/teams/${teamId}/players/${playerId}`, {
         method: "DELETE",
@@ -203,7 +206,7 @@ export default function TeamDetailPage() {
   }
 
   if (!team) {
-    return <p className="py-10 text-center text-gray-500">Team not found</p>;
+    return <p className="py-10 text-center text-gray-500">{t("teamNotFound")}</p>;
   }
 
   return (
@@ -214,21 +217,21 @@ export default function TeamDetailPage() {
             href="/dashboard"
             className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
           >
-            &larr; Back to Dashboard
+            &larr; {t("backToDashboard")}
           </Link>
           <h1 className="mt-1 text-2xl font-bold">{team.name}</h1>
         </div>
         <div className="flex gap-3">
           <Button variant="secondary" size="sm" onClick={() => setShowCreateSeason(true)}>
-            + Season
+            {t("addSeason")}
           </Button>
           <Link href={`/teams/${teamId}/stats`}>
             <Button variant="secondary" size="sm">
-              Season Stats
+              {t("seasonStats")}
             </Button>
           </Link>
           <Link href={`/games/new?teamId=${teamId}`}>
-            <Button size="sm">+ New Game</Button>
+            <Button size="sm">{t("newGame")}</Button>
           </Link>
         </div>
       </div>
@@ -237,17 +240,17 @@ export default function TeamDetailPage() {
       <section className="mb-8">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-lg font-semibold">
-            Roster ({team.players.length})
+            {t("roster", { count: team.players.length })}
           </h2>
           <Button size="sm" variant="secondary" onClick={() => setShowAddPlayer(true)}>
-            + Add Player
+            {t("addPlayer")}
           </Button>
         </div>
 
         {team.players.length === 0 ? (
           <Card>
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-              No players yet. Add players to your roster to get started.
+              {t("noPlayers")}
             </p>
           </Card>
         ) : (
@@ -256,10 +259,10 @@ export default function TeamDetailPage() {
               <thead>
                 <tr className="border-b border-gray-200 text-left dark:border-gray-700">
                   <th className="px-3 py-2 font-medium">#</th>
-                  <th className="px-3 py-2 font-medium">Name</th>
+                  <th className="px-3 py-2 font-medium">{t("name")}</th>
                   <th className="px-3 py-2 font-medium">Pos</th>
-                  <th className="px-3 py-2 font-medium">Bats</th>
-                  <th className="px-3 py-2 font-medium">Throws</th>
+                  <th className="px-3 py-2 font-medium">{t("bats")}</th>
+                  <th className="px-3 py-2 font-medium">{t("throws")}</th>
                   <th className="px-3 py-2"></th>
                 </tr>
               </thead>
@@ -286,13 +289,13 @@ export default function TeamDetailPage() {
                           onClick={() => openEditModal(player)}
                           className="text-xs text-blue-500 hover:underline"
                         >
-                          Edit
+                          {tc("edit")}
                         </button>
                         <button
                           onClick={() => handleDeletePlayer(player.id)}
                           className="text-xs text-red-500 hover:underline"
                         >
-                          Remove
+                          {t("remove")}
                         </button>
                       </div>
                     </td>
@@ -307,20 +310,20 @@ export default function TeamDetailPage() {
       {/* Seasons */}
       {team.seasons.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3 text-lg font-semibold">Seasons</h2>
+          <h2 className="mb-3 text-lg font-semibold">{t("seasons")}</h2>
           <div className="space-y-2">
             {team.seasons.map((season) => (
               <Card key={season.id} className="flex items-center justify-between">
                 <span className="font-medium">{season.name}</span>
                 <button
                   onClick={() => {
-                    if (confirm(`Delete season "${season.name}"? Games in this season will be preserved but no longer assigned to it.`)) {
+                    if (confirm(t("deleteSeasonConfirm", { name: season.name }))) {
                       handleDeleteSeason(season.id);
                     }
                   }}
                   className="text-xs text-red-500 hover:text-red-700"
                 >
-                  Delete
+                  {tc("delete")}
                 </button>
               </Card>
             ))}
@@ -331,13 +334,13 @@ export default function TeamDetailPage() {
       {/* Games */}
       <section>
         <h2 className="mb-3 text-lg font-semibold">
-          Recent Games ({team._count?.games ?? team.games.length})
+          {t("recentGames", { count: team._count?.games ?? team.games.length })}
         </h2>
 
         {team.games.length === 0 ? (
           <Card>
             <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-              No games yet. Start a new game to begin tracking stats.
+              {t("noGames")}
             </p>
           </Card>
         ) : (
@@ -367,10 +370,10 @@ export default function TeamDetailPage() {
                       }`}
                     >
                       {game.status === "final"
-                        ? "Final"
+                        ? t("final")
                         : game.status === "in_progress"
-                        ? `In Progress - ${game.isTopOfInning ? "Top" : "Bot"} ${game.currentInning}`
-                        : "Scheduled"}
+                        ? t("inProgress", { half: game.isTopOfInning ? t("top") : t("bot"), inning: game.currentInning })
+                        : t("scheduled")}
                     </span>
                   </div>
                 </Card>
@@ -385,7 +388,7 @@ export default function TeamDetailPage() {
               onClick={() => setShowDeleteGames(true)}
               className="w-full rounded-lg bg-red-600 px-4 py-3 text-center font-medium text-white hover:bg-red-700"
             >
-              Delete All Games ({team._count?.games ?? team.games.length})
+              {t("deleteAllGames", { count: team._count?.games ?? team.games.length })}
             </button>
           </div>
         )}
@@ -395,13 +398,13 @@ export default function TeamDetailPage() {
       <Modal
         isOpen={showAddPlayer}
         onClose={() => setShowAddPlayer(false)}
-        title="Add Player"
+        title={t("addPlayerTitle")}
       >
         <form onSubmit={handleAddPlayer} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Input
               id="firstName"
-              label="First Name"
+              label={t("firstName")}
               value={playerForm.firstName}
               onChange={(e) =>
                 setPlayerForm({ ...playerForm, firstName: e.target.value })
@@ -410,7 +413,7 @@ export default function TeamDetailPage() {
             />
             <Input
               id="lastName"
-              label="Last Name"
+              label={t("lastName")}
               value={playerForm.lastName}
               onChange={(e) =>
                 setPlayerForm({ ...playerForm, lastName: e.target.value })
@@ -421,7 +424,7 @@ export default function TeamDetailPage() {
           <div className="grid grid-cols-3 gap-4">
             <Input
               id="jerseyNumber"
-              label="Jersey #"
+              label={t("jersey")}
               type="number"
               value={playerForm.jerseyNumber}
               onChange={(e) =>
@@ -430,39 +433,39 @@ export default function TeamDetailPage() {
             />
             <Select
               id="bats"
-              label="Bats"
+              label={t("bats")}
               value={playerForm.bats}
               onChange={(e) =>
                 setPlayerForm({ ...playerForm, bats: e.target.value })
               }
               options={[
-                { value: "right", label: "Right" },
-                { value: "left", label: "Left" },
-                { value: "switch", label: "Switch" },
+                { value: "right", label: t("right") },
+                { value: "left", label: t("left") },
+                { value: "switch", label: t("switch") },
               ]}
             />
             <Select
               id="throws"
-              label="Throws"
+              label={t("throws")}
               value={playerForm.throwsHand}
               onChange={(e) =>
                 setPlayerForm({ ...playerForm, throwsHand: e.target.value })
               }
               options={[
-                { value: "right", label: "Right" },
-                { value: "left", label: "Left" },
+                { value: "right", label: t("right") },
+                { value: "left", label: t("left") },
               ]}
             />
           </div>
           <Select
             id="position"
-            label="Primary Position"
+            label={t("primaryPosition")}
             value={playerForm.primaryPosition}
             onChange={(e) =>
               setPlayerForm({ ...playerForm, primaryPosition: e.target.value })
             }
             options={[
-              { value: "", label: "Select..." },
+              { value: "", label: t("select") },
               ...POSITIONS.map((p) => ({ value: p, label: p })),
             ]}
           />
@@ -472,10 +475,10 @@ export default function TeamDetailPage() {
               type="button"
               onClick={() => setShowAddPlayer(false)}
             >
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button type="submit" disabled={saving}>
-              {saving ? "Adding..." : "Add Player"}
+              {saving ? t("adding") : t("addPlayerTitle")}
             </Button>
           </div>
         </form>
@@ -485,13 +488,13 @@ export default function TeamDetailPage() {
       <Modal
         isOpen={showCreateSeason}
         onClose={() => setShowCreateSeason(false)}
-        title="Create Season"
+        title={t("createSeasonTitle")}
       >
         <form onSubmit={handleCreateSeason} className="space-y-4">
           <Input
             id="seasonName"
-            label="Season Name"
-            placeholder="e.g. Spring 2026"
+            label={t("seasonNameLabel")}
+            placeholder={t("seasonNamePlaceholder")}
             value={seasonName}
             onChange={(e) => setSeasonName(e.target.value)}
             required
@@ -502,10 +505,10 @@ export default function TeamDetailPage() {
               type="button"
               onClick={() => setShowCreateSeason(false)}
             >
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button type="submit" disabled={saving}>
-              {saving ? "Creating..." : "Create Season"}
+              {saving ? t("creating") : t("createSeason")}
             </Button>
           </div>
         </form>
@@ -515,19 +518,23 @@ export default function TeamDetailPage() {
       <Modal
         isOpen={showDeleteGames}
         onClose={() => setShowDeleteGames(false)}
-        title="Delete All Games"
+        title={t("deleteAllGamesTitle")}
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            This will permanently delete all {team._count?.games ?? team.games.length} game(s) and their stats for <strong>{team.name}</strong>. Your team roster will be preserved.
+            {t.rich("deleteAllConfirm", {
+              count: team._count?.games ?? team.games.length,
+              name: team.name,
+              strong: (chunks) => <strong>{chunks}</strong>,
+            })}
           </p>
-          <p className="text-sm font-medium text-red-600">This cannot be undone.</p>
+          <p className="text-sm font-medium text-red-600">{t("cannotBeUndone")}</p>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setShowDeleteGames(false)}>
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button variant="danger" onClick={handleDeleteAllGames} disabled={deleting}>
-              {deleting ? "Deleting..." : "Delete All Games"}
+              {deleting ? t("deleting") : t("deleteAllGamesTitle")}
             </Button>
           </div>
         </div>
@@ -537,13 +544,13 @@ export default function TeamDetailPage() {
       <Modal
         isOpen={!!editingPlayer}
         onClose={() => setEditingPlayer(null)}
-        title="Edit Player"
+        title={t("editPlayerTitle")}
       >
         <form onSubmit={handleEditPlayer} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <Input
               id="editFirstName"
-              label="First Name"
+              label={t("firstName")}
               value={editForm.firstName}
               onChange={(e) =>
                 setEditForm({ ...editForm, firstName: e.target.value })
@@ -552,7 +559,7 @@ export default function TeamDetailPage() {
             />
             <Input
               id="editLastName"
-              label="Last Name"
+              label={t("lastName")}
               value={editForm.lastName}
               onChange={(e) =>
                 setEditForm({ ...editForm, lastName: e.target.value })
@@ -563,7 +570,7 @@ export default function TeamDetailPage() {
           <div className="grid grid-cols-3 gap-4">
             <Input
               id="editJerseyNumber"
-              label="Jersey #"
+              label={t("jersey")}
               type="number"
               value={editForm.jerseyNumber}
               onChange={(e) =>
@@ -572,39 +579,39 @@ export default function TeamDetailPage() {
             />
             <Select
               id="editBats"
-              label="Bats"
+              label={t("bats")}
               value={editForm.bats}
               onChange={(e) =>
                 setEditForm({ ...editForm, bats: e.target.value })
               }
               options={[
-                { value: "right", label: "Right" },
-                { value: "left", label: "Left" },
-                { value: "switch", label: "Switch" },
+                { value: "right", label: t("right") },
+                { value: "left", label: t("left") },
+                { value: "switch", label: t("switch") },
               ]}
             />
             <Select
               id="editThrows"
-              label="Throws"
+              label={t("throws")}
               value={editForm.throwsHand}
               onChange={(e) =>
                 setEditForm({ ...editForm, throwsHand: e.target.value })
               }
               options={[
-                { value: "right", label: "Right" },
-                { value: "left", label: "Left" },
+                { value: "right", label: t("right") },
+                { value: "left", label: t("left") },
               ]}
             />
           </div>
           <Select
             id="editPosition"
-            label="Primary Position"
+            label={t("primaryPosition")}
             value={editForm.primaryPosition}
             onChange={(e) =>
               setEditForm({ ...editForm, primaryPosition: e.target.value })
             }
             options={[
-              { value: "", label: "Select..." },
+              { value: "", label: t("select") },
               ...POSITIONS.map((p) => ({ value: p, label: p })),
             ]}
           />
@@ -614,10 +621,10 @@ export default function TeamDetailPage() {
               type="button"
               onClick={() => setEditingPlayer(null)}
             >
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button type="submit" disabled={saving}>
-              {saving ? "Saving..." : "Save Changes"}
+              {saving ? t("saving") : t("saveChanges")}
             </Button>
           </div>
         </form>
