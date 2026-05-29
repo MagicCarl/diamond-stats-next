@@ -32,6 +32,30 @@ teams, stats, instructions, auth, admin).
 (`scripts/check-i18n-parity.mjs`, `npm run i18n:check`). 16 unit tests pass,
 parity OK.
 
+### PHASE 2 — MARKETING PAGE TRANSLATION (in progress, 2026-05-29)
+
+User asked to translate ALL marketing pages into the 5 languages. Approach:
+translate visible copy page-by-page, commit + deploy each; leave SEO
+metadata/JSON-LD in English (search-engine layer, needs URL routing for real
+SEO value which we don't have).
+
+- ✅ **Landing page DONE + DEPLOYED** — `src/app/page.tsx` (server, getTranslations)
+  + `src/app/LandingClient.tsx` (client, useTranslations), namespace
+  `marketing.landing` (~95 keys) translated into all 5 locales. Parity OK, build
+  OK, rendered in all 5 langs. Live at www.baseballstatstracker.com.
+- ⏳ REMAINING marketing pages (each: extract → `marketing.<page>` namespace →
+  refactor to getTranslations (server) → translate 4 langs → parity/build →
+  deploy):
+  - `src/app/features/page.tsx` (server, 317 lines, has metadata block — leave meta English)
+  - `src/app/pricing/page.tsx` (server, 237 lines, metadata block)
+  - `src/app/learn/gamechanger-alternatives/page.tsx` (server, 469 lines, metadata block)
+  - `src/app/privacy/page.tsx` (server, 59 lines, metadata block)
+- Recipe for these server pages: `const t = await getTranslations("marketing.<page>")`;
+  rich text via `t.rich(key, tags)` with tag handlers defined in the component;
+  insert translated namespace into each locale file BEFORE the `"admin": {` key
+  (anchor used so far) to keep parity. Run `npm run i18n:check` + `npm run build`
+  before deploy.
+
 ### DEPLOYED TO PRODUCTION (2026-05-29)
 
 - Deployed via `vercel deploy --prod` (fresh prod build, prod env vars) — live at
