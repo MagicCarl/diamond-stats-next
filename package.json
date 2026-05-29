@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "i18n:check": "node scripts/check-i18n-parity.mjs"
   },
   "dependencies": {
     "@prisma/client": "^6.19.2",
