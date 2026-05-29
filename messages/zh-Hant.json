@@ -8,5 +8,17 @@
     "loading": "Loading…",
     "confirm": "Confirm",
     "back": "Back"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "statsSearch": "Stats Search",
+    "instructions": "Instructions",
+    "admin": "Admin",
+    "signOut": "Sign Out"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageHelp": "Choose the language for the app interface."
   }
 }

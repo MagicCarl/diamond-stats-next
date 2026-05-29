@@ -4,20 +4,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { clsx } from "clsx";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 
-const navLinks = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/stats/search", label: "Stats Search" },
-  { href: "/instructions", label: "Instructions" },
-];
-
 export default function NavBar() {
   const pathname = usePathname();
   const { user, appUser, logout } = useAuth();
+  const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { href: "/dashboard", label: t("dashboard") },
+    { href: "/stats/search", label: t("statsSearch") },
+    { href: "/instructions", label: t("instructions") },
+  ];
 
   return (
     <nav className="border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
@@ -55,7 +57,7 @@ export default function NavBar() {
                       : "text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
                   )}
                 >
-                  Admin
+                  {t("admin")}
                 </Link>
               )}
             </div>
@@ -69,7 +71,7 @@ export default function NavBar() {
                 onClick={logout}
                 className="hidden rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 md:block"
               >
-                Sign Out
+                {t("signOut")}
               </button>
             )}
             <button
@@ -112,7 +114,7 @@ export default function NavBar() {
                   : "text-gray-600 dark:text-gray-400"
               )}
             >
-              Admin
+              {t("admin")}
             </Link>
           )}
           <div className="px-3 py-2">
@@ -123,7 +125,7 @@ export default function NavBar() {
               onClick={() => { logout(); setMobileOpen(false); }}
               className="block w-full rounded-lg px-3 py-2 text-left text-sm text-gray-600 dark:text-gray-400"
             >
-              Sign Out
+              {t("signOut")}
             </button>
           )}
         </div>
