@@ -203,6 +203,18 @@
       "editPlayerTitle": "Edit Player",
       "saving": "Saving...",
       "saveChanges": "Save Changes"
+    },
+    "stats": {
+      "backToTeam": "Back to Team",
+      "seasonStats": "Season Stats",
+      "sprayChart": "Spray Chart",
+      "wins": "Wins",
+      "losses": "Losses",
+      "ties": "Ties",
+      "winPct": "Win %",
+      "batting": "Batting",
+      "noStats": "No stats yet",
+      "player": "Player"
     }
   }
 }

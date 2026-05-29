@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import { BattingStats } from "@/lib/stats";
 import Card from "@/components/ui/Card";
@@ -28,6 +29,7 @@ interface TeamRecord {
 export default function TeamStatsPage() {
   const { teamId } = useParams<{ teamId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("teams.stats");
   const [playerStats, setPlayerStats] = useState<PlayerStat[]>([]);
   const [record, setRecord] = useState<TeamRecord | null>(null);
   const [loading, setLoading] = useState(true);
@@ -87,13 +89,13 @@ export default function TeamStatsPage() {
             href={`/teams/${teamId}`}
             className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
           >
-            &larr; Back to Team
+            &larr; {t("backToTeam")}
           </Link>
-          <h1 className="mt-1 text-2xl font-bold">Season Stats</h1>
+          <h1 className="mt-1 text-2xl font-bold">{t("seasonStats")}</h1>
         </div>
         <Link href={`/teams/${teamId}/spray-chart`}>
           <button className="rounded-lg bg-gray-200 px-3 py-2 text-sm font-medium dark:bg-gray-700">
-            Spray Chart
+            {t("sprayChart")}
           </button>
         </Link>
       </div>
@@ -102,11 +104,11 @@ export default function TeamStatsPage() {
       {record && (
         <div className="grid grid-cols-4 gap-4">
           {[
-            { label: "Wins", value: record.wins, color: "text-green-600" },
-            { label: "Losses", value: record.losses, color: "text-red-600" },
-            { label: "Ties", value: record.ties, color: "text-yellow-600" },
+            { label: t("wins"), value: record.wins, color: "text-green-600" },
+            { label: t("losses"), value: record.losses, color: "text-red-600" },
+            { label: t("ties"), value: record.ties, color: "text-yellow-600" },
             {
-              label: "Win %",
+              label: t("winPct"),
               value:
                 record.wins + record.losses > 0
                   ? ((record.wins / (record.wins + record.losses)) * 100).toFixed(0) + "%"
@@ -125,16 +127,16 @@ export default function TeamStatsPage() {
       {/* Batting Stats Table */}
       <Card>
         <h3 className="mb-3 text-sm font-semibold uppercase text-gray-500">
-          Batting
+          {t("batting")}
         </h3>
         {sorted.length === 0 ? (
-          <p className="text-sm text-gray-400">No stats yet</p>
+          <p className="text-sm text-gray-400">{t("noStats")}</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 text-left dark:border-gray-700">
-                  <th className="px-2 py-1 font-medium">Player</th>
+                  <th className="px-2 py-1 font-medium">{t("player")}</th>
                   <SortHeader col="games" label="G" />
                   <SortHeader col="atBats" label="AB" />
                   <SortHeader col="hits" label="H" />
