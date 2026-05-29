@@ -21,12 +21,30 @@ done**. next-intl boots, `<html lang>` renders, `User.language` persists to DB
 and the Settings page is real. Dev server verified: `/` and `/settings` both
 HTTP 200. 12 unit tests passing.
 
-**Screen extraction progress:** Done = nav, settings, dashboard (T15), new game
-(T16), live scoring (T17 — the big 1500-line one). In progress = box score
-(T18). Remaining screens = game spray chart (T19), team detail (T20), team
-stats (T21), team spray chart (T22), stats search (T23), instructions (T24),
-admin + shared UI + auth pages (T25). Then T26 (translate to es/ja/ko/zh-Hant),
-T27 (parity), T28 (verify).
+**Screen extraction progress (as of 2026-05-28 EOD):**
+
+DONE & committed: nav, settings, dashboard (T15), new game (T16), live scoring
+(T17 — the big 1500-line one), box score (T18), game spray chart (T19), team
+detail (T20). Each is its own commit (`feat(i18n): translate <screen>`).
+
+REMAINING screens — pick up at **T21**:
+- T21 team stats — `src/app/(app)/teams/[teamId]/stats/page.tsx` — ns `teams.stats`
+- T22 team spray chart — `src/app/(app)/teams/[teamId]/spray-chart/page.tsx` — ns `teams.sprayChart`
+- T23 stats search — `src/app/(app)/stats/search/page.tsx` — ns `stats.search`
+- T24 instructions — `src/app/(app)/instructions/page.tsx` — ns `instructions`
+- T25 admin + shared UI + auth — admin page (ns `admin`), AnalyticsTab, UsersTab,
+  Modal (close aria-label), Spinner (aria), login (ns `auth.login`), signup
+  (ns `auth.signup`); add LanguageSwitcher to login + signup pages.
+- T26 translate `messages/{es,ja,ko,zh-Hant}.json` from `en.json` (still English copies).
+- T27 add parity check (`src/i18n/parity.test.ts` + `scripts/check-i18n-parity.mjs` + `i18n:check` npm script).
+- T28 full verify: `npm test`, `npm run i18n:check`, `npm run lint`, `npm run build`, manual pass per locale.
+
+**Per-screen recipe (what I do each time):** read the page → add an `en.json`
+namespace (stat abbrevs stay literal; `RESULT_*`/`LEVELS`/`POSITIONS` from
+constants stay literal) → refactor to `useTranslations("ns")` (+ `tc` for
+`common`) → `for l in es ja ko zh-Hant; do cp messages/en.json messages/$l.json; done`
+→ `npx tsc --noEmit` → commit. ICU plural/param via `t("k",{count})`; rich text
+via `t.rich`.
 
 Convention reminders: stat abbreviations (AVG/OBP/ERA/K/BB/HR/RBI/SB/CS/IP)
 stay literal; only full-word labels/tooltips get keys. `RESULT_LABELS` /
