@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
@@ -12,6 +13,7 @@ import { RESULT_COLORS } from "@/lib/constants";
 export default function GameSprayChartPage() {
   const { gameId } = useParams<{ gameId: string }>();
   const { apiFetch } = useApi();
+  const t = useTranslations("games.sprayChart");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [game, setGame] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -32,7 +34,7 @@ export default function GameSprayChartPage() {
   }
 
   if (!game) {
-    return <p className="py-10 text-center text-gray-500">Game not found</p>;
+    return <p className="py-10 text-center text-gray-500">{t("gameNotFound")}</p>;
   }
 
   const hits = game.atBats
@@ -45,7 +47,7 @@ export default function GameSprayChartPage() {
       result: ab.result,
       playerName: ab.player
         ? `${ab.player.firstName} ${ab.player.lastName}`
-        : ab.opponentBatter?.name || "Unknown",
+        : ab.opponentBatter?.name || t("unknown"),
     }));
 
   const legendItems = [
@@ -53,7 +55,7 @@ export default function GameSprayChartPage() {
     { result: "double", label: "2B" },
     { result: "triple", label: "3B" },
     { result: "home_run", label: "HR" },
-    { result: "groundout", label: "Out" },
+    { result: "groundout", label: t("out") },
   ];
 
   return (
@@ -62,10 +64,10 @@ export default function GameSprayChartPage() {
         href={`/games/${gameId}/live`}
         className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400"
       >
-        &larr; Back to Game
+        &larr; {t("backToGame")}
       </Link>
       <h1 className="text-2xl font-bold">
-        Game Spray Chart - vs {game.opponentName}
+        {t("title", { name: game.opponentName })}
       </h1>
 
       <Card>
@@ -84,7 +86,7 @@ export default function GameSprayChartPage() {
         </div>
 
         <p className="mt-3 text-center text-sm text-gray-400">
-          {hits.length} hit location{hits.length !== 1 ? "s" : ""} recorded
+          {t("hitLocations", { count: hits.length })}
         </p>
       </Card>
     </div>

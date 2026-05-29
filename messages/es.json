@@ -146,6 +146,14 @@
       "player": "Player",
       "playByPlay": "Play-by-Play",
       "unknown": "Unknown"
+    },
+    "sprayChart": {
+      "gameNotFound": "Game not found",
+      "backToGame": "Back to Game",
+      "title": "Game Spray Chart - vs {name}",
+      "out": "Out",
+      "unknown": "Unknown",
+      "hitLocations": "{count, plural, one {# hit location recorded} other {# hit locations recorded}}"
     }
   }
 }
