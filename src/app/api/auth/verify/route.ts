@@ -34,15 +34,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       user: {
         id: user.id,
         email: user.email,
         displayName: user.displayName,
         isPaid: user.isPaid,
         isAdmin: user.isAdmin,
+        language: user.language,
       },
     });
+
+    response.cookies.set("NEXT_LOCALE", user.language, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "lax",
+    });
+
+    return response;
   } catch {
     return NextResponse.json(
       { error: "Invalid token" },

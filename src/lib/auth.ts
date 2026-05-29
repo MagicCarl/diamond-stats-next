@@ -8,6 +8,7 @@ export interface AuthUser {
   email: string;
   displayName: string | null;
   theme: string;
+  language: string;
   isPaid: boolean;
   isAdmin: boolean;
 }
