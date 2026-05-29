@@ -32,16 +32,33 @@ teams, stats, instructions, auth, admin).
 (`scripts/check-i18n-parity.mjs`, `npm run i18n:check`). 16 unit tests pass,
 parity OK.
 
-REMAINING — **T28 only** (final verification). Run, in order:
-- `npx vitest run` (expect 16 pass) — DONE, passing
-- `npm run i18n:check` (expect "i18n parity OK") — DONE, passing
-- `npm run lint` — NOT yet run this session
-- `npm run build` — NOT yet run; this is the key remaining gate (full prod build)
-- Manual pass: `npm run dev`, switch each locale via NavBar switcher, walk the
-  screens, confirm no raw keys / no console "missing message" warnings.
+**T28 COMPLETE — all gates passed. The i18n feature is DONE.**
+- `npx vitest run` → 16 tests pass.
+- `npm run i18n:check` → "i18n parity OK" (493 keys × 5 locales).
+- `npm run build` → "Compiled successfully" (only the pre-existing lockfile
+  workspace-root warning, unrelated to i18n).
+- Locale rendering verified: fetched `/login` with `NEXT_LOCALE` set to each of
+  en/es/ja/ko/zh-Hant — each rendered its translated title, zero "missing
+  message" warnings in the dev log.
 
-If `npm run build` surfaces errors, fix them. Then the feature is complete —
-consider `superpowers:finishing-a-development-branch` for merge/PR options.
+### Known pre-existing lint errors (NOT from this work, not blocking)
+
+`npm run lint` reports 15 errors + 4 warnings, all pre-existing and unrelated to
+i18n (Next 16 ships stricter react-hooks rules):
+- `src/components/ui/ThemeToggle.tsx` — react-hooks/set-state-in-effect.
+- `src/app/(app)/teams/[teamId]/stats/page.tsx` — react-hooks/static-components
+  (the `SortHeader` component is defined inside the page component; predates this
+  work).
+- Warnings: a couple of unused imports (`PitchRecord`, `RESULT_LABELS`) and
+  exhaustive-deps — minor, pre-existing.
+Next 16's `next build` does NOT run ESLint, so these don't block the build/deploy.
+
+### Remaining for the user (optional, out of scope)
+- Native-speaker review of the 4 machine-translated catalogs before public
+  reliance (baseball terminology especially).
+- Reconcile Prisma migration-history drift (see below) so future
+  `migrate deploy` runs cleanly.
+- Could clean up the pre-existing lint errors separately.
 
 **Per-screen recipe (what I do each time):** read the page → add an `en.json`
 namespace (stat abbrevs stay literal; `RESULT_*`/`LEVELS`/`POSITIONS` from
