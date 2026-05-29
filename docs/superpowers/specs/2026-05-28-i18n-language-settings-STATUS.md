@@ -21,21 +21,16 @@ done**. next-intl boots, `<html lang>` renders, `User.language` persists to DB
 and the Settings page is real. Dev server verified: `/` and `/settings` both
 HTTP 200. 12 unit tests passing.
 
-**Screen extraction progress (as of 2026-05-28 EOD):**
+**Screen extraction COMPLETE (T15–T25, all committed).** Every English string
+across the whole authenticated app + auth pages is now in `messages/en.json`
+(493 keys, 10 top-level namespaces: common, nav, settings, dashboard, games,
+teams, stats, instructions, auth, admin).
 
-DONE & committed: nav, settings, dashboard (T15), new game (T16), live scoring
-(T17 — the big 1500-line one), box score (T18), game spray chart (T19), team
-detail (T20). Each is its own commit (`feat(i18n): translate <screen>`).
-
-REMAINING screens — pick up at **T21**:
-- T21 team stats — `src/app/(app)/teams/[teamId]/stats/page.tsx` — ns `teams.stats`
-- T22 team spray chart — `src/app/(app)/teams/[teamId]/spray-chart/page.tsx` — ns `teams.sprayChart`
-- T23 stats search — `src/app/(app)/stats/search/page.tsx` — ns `stats.search`
-- T24 instructions — `src/app/(app)/instructions/page.tsx` — ns `instructions`
-- T25 admin + shared UI + auth — admin page (ns `admin`), AnalyticsTab, UsersTab,
-  Modal (close aria-label), Spinner (aria), login (ns `auth.login`), signup
-  (ns `auth.signup`); add LanguageSwitcher to login + signup pages.
-- T26 translate `messages/{es,ja,ko,zh-Hant}.json` from `en.json` (still English copies).
+REMAINING — pick up at **T26**:
+- T26 translate `messages/{es,ja,ko,zh-Hant}.json` from `en.json` (currently
+  English copies). Must preserve keys, ICU placeholders ({count}, {name}, etc.),
+  rich tags (<b>, <em>, <badge>, <blue>, <code>), and keep stat abbreviations
+  (AVG/OBP/ERA/K/BB/HR/RBI/SB/CS/1B/2B/3B etc.) LITERAL. Native review later.
 - T27 add parity check (`src/i18n/parity.test.ts` + `scripts/check-i18n-parity.mjs` + `i18n:check` npm script).
 - T28 full verify: `npm test`, `npm run i18n:check`, `npm run lint`, `npm run build`, manual pass per locale.
 
