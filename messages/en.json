@@ -705,6 +705,17 @@
       "faqA4": "Payment is processed securely through PayPal. After payment, your account is activated within 24 hours (usually much faster). No credit card information is stored on our servers.",
       "bottomCta": "Create Free Account",
       "bottomSub": "Explore the app free. Purchase when you're ready."
+    },
+    "privacy": {
+      "backHome": "Back to home",
+      "title": "Privacy Policy",
+      "subtitle": "BaseballStatsTracker.com — The Baseball & Softball Stats Tracker App for Youth, Little League, and Travel Ball Teams",
+      "intro": "Score baseball and softball games in real time from any phone or tablet. Multiple devices sync every 3 seconds — so coaches, parents, and fans can all follow along live.",
+      "battingH2": "Batting & Pitching Stats",
+      "battingP": "AVG, OBP, SLG, OPS, RBIs, stolen bases, plus full pitching: IP, ERA, K, BB, HR, pitch count, wild pitches. Calculated automatically as you score.",
+      "levelsH2": "Built for Every Level of Baseball & Softball and Little League",
+      "levelsP": "Track your player's development without complicated scorekeeping software. Reliable stats for tournaments and showcases. Multiple seasons and teams in one place. Pro-level stat tracking at a fraction of the cost of other scorekeeping apps.",
+      "storage": "The App stores your baseball game data privately. It is saved by you using your login name on your device."
     }
   },
   "admin": {
