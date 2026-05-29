@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Pricing - $39 One-Time Baseball & Softball Stats App",
@@ -19,7 +20,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const t = await getTranslations("marketing.pricing");
+  const tc = await getTranslations("marketing.common");
+  const feats = ["feat1", "feat2", "feat3", "feat4", "feat5", "feat6", "feat7", "feat8", "feat9", "feat10", "feat11"] as const;
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-gray-950">
       <script
@@ -58,74 +63,36 @@ export default function PricingPage() {
           href="/signup"
           className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
         >
-          Get Started
+          {tc("getStarted")}
         </Link>
       </header>
 
       <main className="mx-auto max-w-3xl px-6 py-16">
         <h1 className="text-center text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-          One Price. Everything Included.
+          {t("h1")}
         </h1>
         <p className="mt-4 text-center text-lg text-gray-600 dark:text-gray-400">
-          No monthly fees. No per-team charges. No feature gates. Pay once, use forever.
+          {t("intro")}
         </p>
 
         {/* Pricing Card */}
         <div className="mx-auto mt-12 max-w-md rounded-2xl border-2 border-blue-600 bg-white p-8 text-center shadow-lg dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-blue-600 dark:text-blue-400">All Features</h2>
+          <h2 className="text-lg font-semibold text-blue-600 dark:text-blue-400">{t("allFeatures")}</h2>
           <div className="mt-4">
             <span className="text-6xl font-bold text-gray-900 dark:text-white">$39</span>
-            <span className="ml-2 text-xl text-gray-500 dark:text-gray-400">one-time</span>
+            <span className="ml-2 text-xl text-gray-500 dark:text-gray-400">{t("oneTime")}</span>
           </div>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            Lifetime access — no recurring charges
+            {t("lifetime")}
           </p>
 
           <ul className="mt-8 space-y-3 text-left text-sm text-gray-700 dark:text-gray-300">
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Unlimited teams &amp; seasons</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Unlimited games</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Live game scoring from any device</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Automatic batting stats (AVG, OBP, SLG, OPS, and more)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Pitching stats &amp; pitch-by-pitch tracking</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Interactive spray charts (per-game &amp; season)</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Professional inning-by-inning box scores</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Advanced stats search &amp; splits</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Opponent pitcher &amp; batter tracking</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Real-time multi-device sync</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="mt-0.5 text-green-500">&#10003;</span>
-              <span>Works for baseball &amp; softball</span>
-            </li>
+            {feats.map((k) => (
+              <li key={k} className="flex items-start gap-2">
+                <span className="mt-0.5 text-green-500">&#10003;</span>
+                <span>{t(k)}</span>
+              </li>
+            ))}
           </ul>
 
           <a
@@ -134,73 +101,60 @@ export default function PricingPage() {
             rel="noopener noreferrer"
             className="mt-8 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
           >
-            Purchase Now — $39
+            {t("purchaseCta")}
           </a>
           <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-            Secure payment via PayPal. Your account is activated within 24 hours of purchase.
+            {t("securePayment")}
           </p>
         </div>
 
         {/* Value comparison */}
         <div className="mt-16">
           <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">
-            How Baseball Stats Tracker Compares
+            {t("compareH2")}
           </h2>
           <p className="mt-3 text-center text-gray-600 dark:text-gray-400">
-            Most baseball stats apps charge $10-$30 per month. Over a single season, that&apos;s $60-$180.
-            Over three years, you&apos;d spend $360-$1,080. Baseball Stats Tracker is just $39 total — forever.
+            {t("compareIntro")}
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             <div className="rounded-xl border border-gray-200 bg-white p-6 text-center dark:border-gray-700 dark:bg-gray-800">
-              <h3 className="font-semibold text-gray-900 dark:text-white">1 Season</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("season1")}</h3>
               <div className="mt-2 text-3xl font-bold text-blue-600 dark:text-blue-400">$39</div>
-              <p className="mt-1 text-sm text-gray-500">vs. $60-$180 elsewhere</p>
+              <p className="mt-1 text-sm text-gray-500">{t("season1Vs")}</p>
             </div>
             <div className="rounded-xl border border-gray-200 bg-white p-6 text-center dark:border-gray-700 dark:bg-gray-800">
-              <h3 className="font-semibold text-gray-900 dark:text-white">2 Seasons</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("season2")}</h3>
               <div className="mt-2 text-3xl font-bold text-blue-600 dark:text-blue-400">$39</div>
-              <p className="mt-1 text-sm text-gray-500">vs. $120-$360 elsewhere</p>
+              <p className="mt-1 text-sm text-gray-500">{t("season2Vs")}</p>
             </div>
             <div className="rounded-xl border border-gray-200 bg-white p-6 text-center dark:border-gray-700 dark:bg-gray-800">
-              <h3 className="font-semibold text-gray-900 dark:text-white">5+ Seasons</h3>
-              <div className="mt-2 text-3xl font-bold text-blue-600 dark:text-blue-400">Still $39</div>
-              <p className="mt-1 text-sm text-gray-500">vs. $600-$1,800 elsewhere</p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("season5")}</h3>
+              <div className="mt-2 text-3xl font-bold text-blue-600 dark:text-blue-400">{t("season5Price")}</div>
+              <p className="mt-1 text-sm text-gray-500">{t("season5Vs")}</p>
             </div>
           </div>
         </div>
 
         {/* FAQ */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Pricing FAQ</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t("faqH2")}</h2>
           <div className="mt-6 space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">Is there a free trial?</h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                You can create a free account and explore the app. You&apos;ll be able to set up teams,
-                add players, and view the interface. Creating and scoring games requires the $39 purchase.
-              </p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ1")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA1")}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">Are there any hidden fees?</h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                No. $39 is the complete price. No monthly fees, no per-team charges, no feature
-                upgrades, no in-app purchases. Every feature is included.
-              </p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ2")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA2")}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">Can I track multiple teams?</h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Yes. Your purchase includes unlimited teams, seasons, and games. Coach three teams across
-                two age groups? No problem — one account covers everything.
-              </p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ3")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA3")}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">How do I pay?</h3>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Payment is processed securely through PayPal. After payment, your account is activated
-                within 24 hours (usually much faster). No credit card information is stored on our servers.
-              </p>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ4")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA4")}</p>
             </div>
           </div>
         </div>
@@ -211,24 +165,24 @@ export default function PricingPage() {
             href="/signup"
             className="inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700"
           >
-            Create Free Account
+            {t("bottomCta")}
           </Link>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-500">
-            Explore the app free. Purchase when you&apos;re ready.
+            {t("bottomSub")}
           </p>
         </div>
       </main>
 
       <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
         <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Baseball Stats Tracker. All rights reserved.</p>
+          <p>{tc("footerRights", { year: new Date().getFullYear() })}</p>
           <div className="mt-2 flex justify-center gap-4">
-            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
-            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>
-            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">Pricing</Link>
-            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">Compare</Link>
-            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">Sign In</Link>
-            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">Sign Up</Link>
+            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navHome")}</Link>
+            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navFeatures")}</Link>
+            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navPricing")}</Link>
+            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navCompare")}</Link>
+            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignIn")}</Link>
+            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignUp")}</Link>
           </div>
         </div>
       </footer>
