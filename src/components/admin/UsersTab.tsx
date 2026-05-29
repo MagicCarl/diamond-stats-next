@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
@@ -24,6 +25,8 @@ export default function UsersTab() {
   const { appUser, loading: authLoading } = useAuth();
   const { apiFetch } = useApi();
   const router = useRouter();
+  const t = useTranslations("admin.users");
+  const tc = useTranslations("common");
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [toggling, setToggling] = useState<string | null>(null);
@@ -113,8 +116,8 @@ export default function UsersTab() {
     <>
       <div className="mb-4 flex items-center justify-between">
         <div className="text-sm text-gray-500 dark:text-gray-400">
-          {activeUsers.length} total | {paidCount} paid
-          {deletedCount > 0 && ` | ${deletedCount} deleted`}
+          {t("summary", { total: activeUsers.length, paid: paidCount })}
+          {deletedCount > 0 && t("deletedSuffix", { deleted: deletedCount })}
         </div>
         {deletedCount > 0 && (
           <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -124,7 +127,7 @@ export default function UsersTab() {
               onChange={(e) => setShowDeleted(e.target.checked)}
               className="rounded"
             />
-            Show deleted
+            {t("showDeleted")}
           </label>
         )}
       </div>
@@ -134,11 +137,11 @@ export default function UsersTab() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left text-xs text-gray-500 uppercase dark:border-gray-700">
-                <th className="pb-2 pr-4">Name</th>
-                <th className="pb-2 pr-4">Email</th>
-                <th className="pb-2 pr-4">Signed Up</th>
-                <th className="pb-2 pr-4">Teams</th>
-                <th className="pb-2">Action</th>
+                <th className="pb-2 pr-4">{t("name")}</th>
+                <th className="pb-2 pr-4">{t("email")}</th>
+                <th className="pb-2 pr-4">{t("signedUp")}</th>
+                <th className="pb-2 pr-4">{t("teams")}</th>
+                <th className="pb-2">{t("action")}</th>
               </tr>
             </thead>
             <tbody>
@@ -152,10 +155,10 @@ export default function UsersTab() {
                   <td className="py-2 pr-4 font-medium">
                     {u.displayName || "-"}
                     {u.isAdmin && (
-                      <span className="ml-1 text-xs text-blue-500">(admin)</span>
+                      <span className="ml-1 text-xs text-blue-500">{t("adminTag")}</span>
                     )}
                     {u.deletedAt && (
-                      <span className="ml-1 text-xs text-red-500">(deleted)</span>
+                      <span className="ml-1 text-xs text-red-500">{t("deletedTag")}</span>
                     )}
                   </td>
                   <td className="py-2 pr-4 text-gray-600 dark:text-gray-400">
@@ -178,7 +181,7 @@ export default function UsersTab() {
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                         } ${u.deletedAt ? "cursor-not-allowed" : ""}`}
                       >
-                        {toggling === u.id ? "..." : u.isPaid ? "Mark Paid" : "Not Paid"}
+                        {toggling === u.id ? "..." : u.isPaid ? t("markPaid") : t("notPaid")}
                       </button>
                       {u.deletedAt ? (
                         <button
@@ -186,14 +189,14 @@ export default function UsersTab() {
                           disabled={restoringUser === u.id}
                           className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50"
                         >
-                          {restoringUser === u.id ? "..." : "Restore"}
+                          {restoringUser === u.id ? "..." : t("restore")}
                         </button>
                       ) : (
                         <button
                           onClick={() => setDeletingUser(u)}
                           className="w-16 rounded py-1 text-center text-xs font-medium transition-colors bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50"
                         >
-                          Delete
+                          {t("delete")}
                         </button>
                       )}
                     </div>
@@ -208,21 +211,24 @@ export default function UsersTab() {
       <Modal
         isOpen={!!deletingUser}
         onClose={() => setDeletingUser(null)}
-        title="Delete User"
+        title={t("deleteTitle")}
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            This will suspend <strong>{deletingUser?.displayName || deletingUser?.email}</strong> and prevent them from signing in. Their data will be preserved.
+            {t.rich("deleteConfirm", {
+              name: deletingUser?.displayName || deletingUser?.email || "",
+              b: (c) => <strong>{c}</strong>,
+            })}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            You can restore this user later from the admin panel.
+            {t("deleteNote")}
           </p>
           <div className="flex justify-end gap-3">
             <Button variant="secondary" onClick={() => setDeletingUser(null)}>
-              Cancel
+              {tc("cancel")}
             </Button>
             <Button variant="danger" onClick={handleDeleteUser} disabled={deleteLoading}>
-              {deleteLoading ? "Deleting..." : "Delete User"}
+              {deleteLoading ? t("deleting") : t("deleteUser")}
             </Button>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import { clsx } from "clsx";
 import Spinner from "@/components/ui/Spinner";
@@ -9,8 +10,8 @@ import UsersTab from "@/components/admin/UsersTab";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
 
 const TABS = [
-  { id: "users", label: "Users" },
-  { id: "analytics", label: "Analytics" },
+  { id: "users", labelKey: "tabUsers" },
+  { id: "analytics", labelKey: "tabAnalytics" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -18,6 +19,7 @@ type TabId = (typeof TABS)[number]["id"];
 export default function AdminPage() {
   const { appUser, loading: authLoading } = useAuth();
   const router = useRouter();
+  const t = useTranslations("admin");
   const [activeTab, setActiveTab] = useState<TabId>("users");
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function AdminPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">Admin</h1>
+        <h1 className="text-2xl font-bold">{t("title")}</h1>
         <div className="mt-4 flex gap-1 border-b border-gray-200 dark:border-gray-700">
           {TABS.map((tab) => (
             <button
@@ -53,7 +55,7 @@ export default function AdminPage() {
                   : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
               )}
             >
-              {tab.label}
+              {t(tab.labelKey)}
             </button>
           ))}
         </div>

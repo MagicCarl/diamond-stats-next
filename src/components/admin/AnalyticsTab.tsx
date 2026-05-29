@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useApi } from "@/hooks/useApi";
 import Card from "@/components/ui/Card";
 import Spinner from "@/components/ui/Spinner";
+
+type AnalyticsT = (key: string, values?: Record<string, string | number>) => string;
 
 interface AnalyticsData {
   overview: {
@@ -36,15 +39,15 @@ interface GAData {
   trafficSources: GARow[];
 }
 
-function formatTimeAgo(dateStr: string): string {
+function formatTimeAgo(dateStr: string, t: AnalyticsT): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return "just now";
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 1) return t("justNow");
+  if (minutes < 60) return t("minutesAgo", { count: minutes });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t("hoursAgo", { count: hours });
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return t("daysAgo", { count: days });
 }
 
 function formatDate(dateStr: string): string {
@@ -68,6 +71,7 @@ const EVENT_COLORS: Record<string, string> = {
 
 export default function AnalyticsTab() {
   const { apiFetch } = useApi();
+  const t = useTranslations("admin.analytics");
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [gaData, setGaData] = useState<GAData | null>(null);
   const [gaError, setGaError] = useState(false);
@@ -117,28 +121,28 @@ export default function AnalyticsTab() {
       {/* Overview Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Card>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Total Users</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t("totalUsers")}</p>
           <p className="mt-1 text-3xl font-bold">{data.overview.totalUsers}</p>
         </Card>
         <Card>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Paid Users</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t("paidUsers")}</p>
           <p className="mt-1 text-3xl font-bold">{data.overview.paidUsers}</p>
           <p className="text-xs text-gray-400">
             {data.overview.totalUsers > 0
               ? `${Math.round((data.overview.paidUsers / data.overview.totalUsers) * 100)}%`
               : "0%"}{" "}
-            conversion
+            {t("conversionLabel")}
           </p>
         </Card>
         <Card>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Active Users (7d)</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t("activeUsers7d")}</p>
           <p className="mt-1 text-3xl font-bold">{data.overview.activeUsers}</p>
           <p className="text-xs text-gray-400">
-            {data.overview.recentLogins} logins this week
+            {t("loginsThisWeek", { count: data.overview.recentLogins })}
           </p>
         </Card>
         <Card>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Total Games</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t("totalGames")}</p>
           <p className="mt-1 text-3xl font-bold">{data.overview.totalGames}</p>
         </Card>
       </div>
@@ -147,7 +151,7 @@ export default function AnalyticsTab() {
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-            Daily Logins (30 days)
+            {t("dailyLogins")}
           </h3>
           {data.dailyLogins.length > 0 ? (
             <div className="flex items-end gap-0.5" style={{ height: "120px" }}>
@@ -159,17 +163,17 @@ export default function AnalyticsTab() {
                     height: `${(day.count / maxLoginCount) * 100}%`,
                     minHeight: day.count > 0 ? "4px" : "0",
                   }}
-                  title={`${formatDate(day.date)}: ${day.count} logins`}
+                  title={t("tooltipLogins", { date: formatDate(day.date), count: day.count })}
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-gray-400">No login data yet</p>
+            <p className="text-sm text-gray-400">{t("noLoginData")}</p>
           )}
         </Card>
         <Card>
           <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-            Games Created (30 days)
+            {t("gamesCreated")}
           </h3>
           {data.dailyGames.length > 0 ? (
             <div className="flex items-end gap-0.5" style={{ height: "120px" }}>
@@ -181,12 +185,12 @@ export default function AnalyticsTab() {
                     height: `${(day.count / maxGameCount) * 100}%`,
                     minHeight: day.count > 0 ? "4px" : "0",
                   }}
-                  title={`${formatDate(day.date)}: ${day.count} games`}
+                  title={t("tooltipGames", { date: formatDate(day.date), count: day.count })}
                 />
               ))}
             </div>
           ) : (
-            <p className="text-sm text-gray-400">No game data yet</p>
+            <p className="text-sm text-gray-400">{t("noGameData")}</p>
           )}
         </Card>
       </div>
@@ -194,7 +198,7 @@ export default function AnalyticsTab() {
       {/* User Growth Chart */}
       <Card>
         <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-          User Signups (Last 12 Weeks)
+          {t("userSignups")}
         </h3>
         {data.userGrowth.length > 0 ? (
           <div className="space-y-2">
@@ -219,7 +223,7 @@ export default function AnalyticsTab() {
             ))}
           </div>
         ) : (
-          <p className="text-sm text-gray-400">No signup data yet</p>
+          <p className="text-sm text-gray-400">{t("noSignupData")}</p>
         )}
       </Card>
 
@@ -229,7 +233,7 @@ export default function AnalyticsTab() {
           <div className="grid grid-cols-3 gap-4">
             <Card>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Page Views (30d)
+                {t("pageViews30d")}
               </p>
               <p className="mt-1 text-3xl font-bold">
                 {gaTotals.pageViews.toLocaleString()}
@@ -237,7 +241,7 @@ export default function AnalyticsTab() {
             </Card>
             <Card>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Sessions (30d)
+                {t("sessions30d")}
               </p>
               <p className="mt-1 text-3xl font-bold">
                 {gaTotals.sessions.toLocaleString()}
@@ -245,7 +249,7 @@ export default function AnalyticsTab() {
             </Card>
             <Card>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                GA Active Users (30d)
+                {t("gaActiveUsers30d")}
               </p>
               <p className="mt-1 text-3xl font-bold">
                 {gaTotals.activeUsers.toLocaleString()}
@@ -257,7 +261,7 @@ export default function AnalyticsTab() {
             {/* Top Pages */}
             <Card>
               <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-                Top Pages
+                {t("topPages")}
               </h3>
               <div className="space-y-2">
                 {gaData.topPages.map((row, i) => (
@@ -279,7 +283,7 @@ export default function AnalyticsTab() {
             {/* Traffic Sources */}
             <Card>
               <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-                Traffic Sources
+                {t("trafficSources")}
               </h3>
               <div className="space-y-2">
                 {gaData.trafficSources.map((row, i) => (
@@ -304,7 +308,9 @@ export default function AnalyticsTab() {
       {gaError && (
         <Card>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Google Analytics data not available. Set <code className="rounded bg-gray-100 px-1 dark:bg-gray-800">GA4_PROPERTY_ID</code> and grant your Firebase service account Viewer access in GA4 to enable.
+            {t.rich("gaUnavailable", {
+              code: (c) => <code className="rounded bg-gray-100 px-1 dark:bg-gray-800">{c}</code>,
+            })}
           </p>
         </Card>
       )}
@@ -312,7 +318,7 @@ export default function AnalyticsTab() {
       {/* Recent Activity Log */}
       <Card>
         <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-          Recent Activity
+          {t("recentActivity")}
         </h3>
         {data.recentEvents.length > 0 ? (
           <div className="space-y-1">
@@ -331,17 +337,17 @@ export default function AnalyticsTab() {
                     {event.eventType}
                   </span>
                   <span className="text-gray-600 dark:text-gray-400">
-                    {event.user?.displayName || event.user?.email || "Anonymous"}
+                    {event.user?.displayName || event.user?.email || t("anonymous")}
                   </span>
                 </div>
                 <span className="shrink-0 text-xs text-gray-400">
-                  {formatTimeAgo(event.createdAt)}
+                  {formatTimeAgo(event.createdAt, t)}
                 </span>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-sm text-gray-400">No events tracked yet</p>
+          <p className="text-sm text-gray-400">{t("noEvents")}</p>
         )}
       </Card>
     </div>

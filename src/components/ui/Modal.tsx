@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
+  const tc = useTranslations("common");
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -43,7 +45,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           </h2>
           <button
             onClick={onClose}
-            aria-label="Close"
+            aria-label={tc("close")}
             className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
