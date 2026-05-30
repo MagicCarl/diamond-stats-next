@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/providers/AuthProvider";
-import { SUPPORTED_LOCALES, LOCALE_NAMES } from "@/i18n/config";
+import { SUPPORTED_LOCALES, LOCALE_NAMES, LOCALE_FLAGS } from "@/i18n/config";
 
 export default function LanguageSwitcher({
   className,
@@ -31,7 +31,7 @@ export default function LanguageSwitcher({
       )}
       {SUPPORTED_LOCALES.map((loc) => (
         <option key={loc} value={loc}>
-          {LOCALE_NAMES[loc]}
+          {LOCALE_FLAGS[loc]} {LOCALE_NAMES[loc]}
         </option>
       ))}
     </select>

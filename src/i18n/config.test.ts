@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isLocale, SUPPORTED_LOCALES, DEFAULT_LOCALE, LOCALE_NAMES } from "./config";
+import { isLocale, SUPPORTED_LOCALES, DEFAULT_LOCALE, LOCALE_NAMES, LOCALE_FLAGS } from "./config";
 
 describe("locale config", () => {
   it("includes the five supported locales", () => {
@@ -11,6 +11,11 @@ describe("locale config", () => {
   it("has a native display name for every locale", () => {
     for (const l of SUPPORTED_LOCALES) {
       expect(LOCALE_NAMES[l]).toBeTruthy();
+    }
+  });
+  it("has a flag for every locale", () => {
+    for (const l of SUPPORTED_LOCALES) {
+      expect(LOCALE_FLAGS[l]).toBeTruthy();
     }
   });
   it("isLocale accepts supported, rejects others", () => {
