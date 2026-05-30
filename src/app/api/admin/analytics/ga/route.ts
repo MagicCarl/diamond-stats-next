@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     const analyticsData = google.analyticsdata({ version: "v1beta", auth });
     const property = `properties/${propertyId}`;
 
-    const [pageViewsReport, topPagesReport, trafficReport] = await Promise.all(
+    const [pageViewsReport, topPagesReport, trafficReport, countriesReport] = await Promise.all(
       [
         analyticsData.properties.runReport({
           property,
@@ -66,6 +66,16 @@ export async function GET(req: NextRequest) {
             limit: "10",
           },
         }),
+        analyticsData.properties.runReport({
+          property,
+          requestBody: {
+            dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+            metrics: [{ name: "sessions" }, { name: "activeUsers" }],
+            dimensions: [{ name: "country" }],
+            orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+            limit: "15",
+          },
+        }),
       ]
     );
 
@@ -73,6 +83,7 @@ export async function GET(req: NextRequest) {
       pageViews: pageViewsReport.data.rows ?? [],
       topPages: topPagesReport.data.rows ?? [],
       trafficSources: trafficReport.data.rows ?? [],
+      countries: countriesReport.data.rows ?? [],
     });
   } catch (err) {
     console.error("GA4 API error:", err);

@@ -37,6 +37,7 @@ interface GAData {
   pageViews: GARow[];
   topPages: GARow[];
   trafficSources: GARow[];
+  countries: GARow[];
 }
 
 function formatTimeAgo(dateStr: string, t: AnalyticsT): string {
@@ -257,7 +258,7 @@ export default function AnalyticsTab() {
             </Card>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-3">
             {/* Top Pages */}
             <Card>
               <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -299,6 +300,32 @@ export default function AnalyticsTab() {
                     </span>
                   </div>
                 ))}
+              </div>
+            </Card>
+
+            {/* Top Countries */}
+            <Card>
+              <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
+                {t("topCountries")}
+              </h3>
+              <div className="space-y-2">
+                {gaData.countries.length === 0 ? (
+                  <p className="text-sm text-gray-400">{t("noCountryData")}</p>
+                ) : (
+                  gaData.countries.map((row, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between border-b border-gray-100 py-1.5 text-sm dark:border-gray-800 last:border-0"
+                    >
+                      <span className="truncate text-gray-700 dark:text-gray-300">
+                        {row.dimensionValues[0]?.value || t("countryUnknown")}
+                      </span>
+                      <span className="ml-2 shrink-0 text-gray-500">
+                        {parseInt(row.metricValues[0]?.value || "0").toLocaleString()}
+                      </span>
+                    </div>
+                  ))
+                )}
               </div>
             </Card>
           </div>
