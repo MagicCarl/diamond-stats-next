@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 const URL = "https://www.baseballstatstracker.com/learn/gamechanger-alternatives";
 const PUBLISHED = "2026-05-21";
@@ -31,7 +32,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GameChangerAlternativesPage() {
+export default async function GameChangerAlternativesPage() {
+  const t = await getTranslations("marketing.learn");
+  const tc = await getTranslations("marketing.common");
+  const rich = {
+    b: (c: React.ReactNode) => <strong>{c}</strong>,
+    em: (c: React.ReactNode) => <em>{c}</em>,
+    featuresLink: (c: React.ReactNode) => (
+      <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+    ),
+    pricingLink: (c: React.ReactNode) => (
+      <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+    ),
+  };
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-gray-950">
       <script
@@ -155,296 +169,259 @@ export default function GameChangerAlternativesPage() {
           href="/signup"
           className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
         >
-          Get Started
+          {tc("getStarted")}
         </Link>
       </header>
 
       <main className="mx-auto max-w-3xl px-6 py-12">
         <article className="prose-baseball">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-            GameChanger Alternatives in 2026: 5 Honest Options for Youth Baseball Parents (And the $39 One We Built)
+            {t("title")}
           </h1>
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            By Carl Andrews · Updated May 21, 2026
+            {t("byline")}
           </p>
 
           <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">
-            The honest version of why you&apos;re here
+            {t("whyH2")}
           </h2>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">
-            You opened GameChanger this season and saw the bill. Or your league switched to a paid tier. Or you just spent fifteen minutes trying to figure out where the spray chart lives, and your kid is up in two minutes.
-          </p>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">
-            You&apos;re not alone. &ldquo;GameChanger alternatives&rdquo; is one of the most-searched youth-baseball queries every spring, and the reasons are always some combination of three things:
-          </p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("whyP1")}</p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("whyP2")}</p>
           <ol className="mt-3 list-decimal space-y-2 pl-6 text-gray-700 dark:text-gray-300">
-            <li><strong>Price.</strong> GameChanger&apos;s pricing has crept up over the years, especially for travel ball families with multiple kids on multiple teams.</li>
-            <li><strong>Complexity.</strong> It&apos;s built for a 13-year-old with two thumbs and a press-box coach with three monitors. It&apos;s not built for a dad in the bleachers trying to score one-handed while holding a juice box.</li>
-            <li><strong>Subscription fatigue.</strong> Another monthly bill. Forever.</li>
+            <li>{t.rich("whyLi1", rich)}</li>
+            <li>{t.rich("whyLi2", rich)}</li>
+            <li>{t.rich("whyLi3", rich)}</li>
           </ol>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">
-            If any of those is why you&apos;re reading this — keep reading. I&apos;m going to compare five real options I&apos;ve actually used, including the $39 one I built (and I&apos;ll tell you when it&apos;s not the right fit).
-          </p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("whyP3")}</p>
 
           <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">
-            What you actually want in an alternative
+            {t("wantH2")}
           </h2>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">
-            Before we get to the table, here&apos;s what matters when you&apos;re picking a stats app as a parent or volunteer coach:
-          </p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("wantP")}</p>
           <ul className="mt-3 list-disc space-y-2 pl-6 text-gray-700 dark:text-gray-300">
-            <li><strong>One-handed scoring from your phone.</strong> You&apos;re standing. Your kid is up. Big buttons. Sun-readable.</li>
-            <li><strong>Stats that don&apos;t need a manual.</strong> AVG, OBP, OPS, RBIs — auto-calculated. You shouldn&apos;t need a Sabermetrics degree.</li>
-            <li><strong>Live sync to grandma&apos;s phone.</strong> So she can follow from Florida.</li>
-            <li><strong>Spray charts</strong> — actually useful for coaching positioning and seeing where your kid&apos;s hits are landing.</li>
-            <li><strong>Works on whatever phone you already have.</strong> No app store install if possible. iPhone, Android, iPad — just a browser.</li>
-            <li><strong>A price that doesn&apos;t make you flinch in April.</strong></li>
+            <li>{t.rich("wantLi1", rich)}</li>
+            <li>{t.rich("wantLi2", rich)}</li>
+            <li>{t.rich("wantLi3", rich)}</li>
+            <li>{t.rich("wantLi4", rich)}</li>
+            <li>{t.rich("wantLi5", rich)}</li>
+            <li>{t.rich("wantLi6", rich)}</li>
           </ul>
 
           <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">
-            The 5 alternatives, compared
+            {t("tableH2")}
           </h2>
           <div className="mt-6 overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">App</th>
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">Pricing</th>
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">Live scoring</th>
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">Spray charts</th>
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">Multi-device sync</th>
-                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">Best for</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colApp")}</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colPricing")}</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colLive")}</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colSpray")}</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colSync")}</th>
+                  <th className="pb-3 font-semibold text-gray-900 dark:text-white">{t("colBest")}</th>
                 </tr>
               </thead>
               <tbody className="text-gray-700 dark:text-gray-300">
                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                  <td className="py-3 font-medium text-blue-600 dark:text-blue-400">Baseball Stats Tracker (mine)</td>
-                  <td className="py-3"><strong>$39 one-time</strong></td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes (3s)</td>
-                  <td className="py-3">Parents who want simple, forever</td>
+                  <td className="py-3 font-medium text-blue-600 dark:text-blue-400">{t("appUs")}</td>
+                  <td className="py-3"><strong>{t("priceUs")}</strong></td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("syncUs")}</td>
+                  <td className="py-3">{t("bestUs")}</td>
                 </tr>
                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                  <td className="py-3">iScore Baseball</td>
-                  <td className="py-3">~$10/mo or $40/yr per team</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Coaches who want deep config</td>
+                  <td className="py-3">{t("appIScore")}</td>
+                  <td className="py-3">{t("priceIScore")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("bestIScore")}</td>
                 </tr>
                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                  <td className="py-3">GameChanger</td>
-                  <td className="py-3">~$10/mo per team</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Yes</td>
-                  <td className="py-3">Big organizations / leagues</td>
+                  <td className="py-3">{t("appGC")}</td>
+                  <td className="py-3">{t("priceGC")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("yes")}</td>
+                  <td className="py-3">{t("bestGC")}</td>
                 </tr>
                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                  <td className="py-3">Paper scorebook + Excel</td>
-                  <td className="py-3">$8 + your time</td>
-                  <td className="py-3">No (manual)</td>
-                  <td className="py-3">No</td>
-                  <td className="py-3">No</td>
-                  <td className="py-3">Old-school purists</td>
+                  <td className="py-3">{t("appPaper")}</td>
+                  <td className="py-3">{t("pricePaper")}</td>
+                  <td className="py-3">{t("livePaper")}</td>
+                  <td className="py-3">{t("no")}</td>
+                  <td className="py-3">{t("no")}</td>
+                  <td className="py-3">{t("bestPaper")}</td>
                 </tr>
                 <tr>
-                  <td className="py-3">Pocket Radar + scorebook</td>
-                  <td className="py-3">$400 + scorebook</td>
-                  <td className="py-3">Hardware only</td>
-                  <td className="py-3">No</td>
-                  <td className="py-3">No</td>
-                  <td className="py-3">Velocity-focused families</td>
+                  <td className="py-3">{t("appRadar")}</td>
+                  <td className="py-3">{t("priceRadar")}</td>
+                  <td className="py-3">{t("liveRadar")}</td>
+                  <td className="py-3">{t("no")}</td>
+                  <td className="py-3">{t("no")}</td>
+                  <td className="py-3">{t("bestRadar")}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            <em>Pricing as of writing; check current vendor sites before deciding.</em>
+            <em>{t("tableNote")}</em>
           </p>
 
-          <p className="mt-6 text-gray-700 dark:text-gray-300">Let&apos;s go deeper on each.</p>
+          <p className="mt-6 text-gray-700 dark:text-gray-300">{t("goDeeper")}</p>
 
           <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">
-            1. Baseball Stats Tracker — the one I built ($39, one-time)
+            {t("s1H3")}
           </h3>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>The honest pitch:</strong> I was the dad in the bleachers with a Sharpie and a clipboard. I tried the &ldquo;pro&rdquo; apps. My wife took one look and said, <em>&ldquo;You&apos;re not going to use that.&rdquo;</em> She was right. So I built the thing I actually wanted.
+            <strong>{t("lblPitch")}</strong> {t.rich("s1Pitch", rich)}
           </p>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">What it does well:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("lblWell")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>Tap-to-score from the bleachers. Big buttons, designed for one thumb.</li>
-            <li>Auto stats: AVG, OBP, SLG, OPS, RBI, SB, K, BB — calculated as you score.</li>
-            <li>Pitching stats: IP, ERA, K, BB, pitch count.</li>
-            <li>Spray charts per game and per season.</li>
-            <li>Live link grandparents can open from any browser.</li>
-            <li>Splits vs. lefties, righties, specific opponents.</li>
-            <li><strong>$39 once. No subscription. Pay once, use it forever.</strong></li>
-            <li>Works for baseball <em>and</em> softball, every level — Little League through high school.</li>
-            <li>30-day money-back guarantee. Email me. I&apos;ll refund you personally.</li>
+            <li>{t("s1Well1")}</li>
+            <li>{t("s1Well2")}</li>
+            <li>{t("s1Well3")}</li>
+            <li>{t("s1Well4")}</li>
+            <li>{t("s1Well5")}</li>
+            <li>{t("s1Well6")}</li>
+            <li>{t.rich("s1Well7", rich)}</li>
+            <li>{t.rich("s1Well8", rich)}</li>
+            <li>{t("s1Well9")}</li>
           </ul>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">Where it&apos;s not the right fit:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("s1ShortLabel")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>If you&apos;re a college-level coach who needs custom advanced metrics beyond what I track, you may want something heavier.</li>
-            <li>If you need <em>deep</em> video integration (clipping at-bats to film), look elsewhere — I don&apos;t do that yet.</li>
-            <li>If your league mandates GameChanger for game data submission, you&apos;re stuck.</li>
+            <li>{t("s1Short1")}</li>
+            <li>{t.rich("s1Short2", rich)}</li>
+            <li>{t("s1Short3")}</li>
           </ul>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
-              See the full feature list
-            </Link>{" "}
-            or{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
-              jump to pricing
-            </Link>
-            .
+            {t.rich("s1Links", rich)}
           </p>
 
-          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">2. iScore Baseball</h3>
+          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">{t("s2H3")}</h3>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>The honest pitch:</strong> iScore has been around forever and is favored by some high school and travel coaches who want a lot of knobs. It can do almost everything.
+            <strong>{t("lblPitch")}</strong> {t("s2Pitch")}
           </p>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">What it does well:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("lblWell")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>Genuinely deep stat tracking with lots of config.</li>
-            <li>Long history, well-supported on iOS.</li>
-            <li>Coaches who want to nerd out can.</li>
+            <li>{t("s2Well1")}</li>
+            <li>{t("s2Well2")}</li>
+            <li>{t("s2Well3")}</li>
           </ul>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">Where it falls short for parents:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("s2ShortLabel")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>The UI shows its age — lots of menus, lots of taps to do one thing.</li>
-            <li>Subscription pricing per team adds up if you have multiple kids.</li>
-            <li>Steeper learning curve than most parents have time for.</li>
+            <li>{t("s2Short1")}</li>
+            <li>{t("s2Short2")}</li>
+            <li>{t("s2Short3")}</li>
           </ul>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>Verdict:</strong> Great if you&apos;re a coach who lives in the app. Overkill for most parents.
+            <strong>{t("lblVerdict")}</strong> {t("s2Verdict")}
           </p>
 
-          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">3. GameChanger (the incumbent)</h3>
+          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">{t("s3H3")}</h3>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>The honest pitch:</strong> GameChanger is the 800-pound gorilla. Most travel organizations use it. The interface is polished. The streaming feature is the best in the category.
+            <strong>{t("lblPitch")}</strong> {t("s3Pitch")}
           </p>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">What it does well:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("lblWell")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>Polished, modern UI.</li>
-            <li>Best-in-class live streaming and broadcasting features.</li>
-            <li>Wide adoption — if your team uses it, you know everyone else can follow along.</li>
-            <li>Integration with the SportsEngine ecosystem.</li>
+            <li>{t("s3Well1")}</li>
+            <li>{t("s3Well2")}</li>
+            <li>{t("s3Well3")}</li>
+            <li>{t("s3Well4")}</li>
           </ul>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">Where it falls short:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("s3ShortLabel")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>Pricing has climbed over the years — what used to feel like a no-brainer now stings.</li>
-            <li>Some features that were free are now behind paywalls.</li>
-            <li>Built for <em>organizations</em> first; parents are along for the ride.</li>
+            <li>{t("s3Short1")}</li>
+            <li>{t("s3Short2")}</li>
+            <li>{t.rich("s3Short3", rich)}</li>
           </ul>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>Verdict:</strong> If your league mandates it, you don&apos;t have a choice. If they don&apos;t, the price is the issue.
+            <strong>{t("lblVerdict")}</strong> {t("s3Verdict")}
           </p>
 
           <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">
-            4. Paper scorebook + Excel/Google Sheets
+            {t("s4H3")}
           </h3>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>The honest pitch:</strong> This is how it was done for 100 years. It still works.
+            <strong>{t("lblPitch")}</strong> {t("s4Pitch")}
           </p>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">What it does well:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("lblWell")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>$8 for a scorebook lasts a season.</li>
-            <li>No batteries, no logins, no sync issues.</li>
+            <li>{t("s4Well1")}</li>
+            <li>{t("s4Well2")}</li>
           </ul>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">Where it falls short:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("s4ShortLabel")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>You&apos;re scoring one-handed and trying to remember if that was a 6-4-3 or a 6-3.</li>
-            <li>Stats? You&apos;re typing every at-bat into a spreadsheet on Sunday night. Or you&apos;re not.</li>
-            <li>Spray charts? Hand-drawn on a half-sheet of paper.</li>
-            <li>No live updates for the family.</li>
+            <li>{t("s4Short1")}</li>
+            <li>{t("s4Short2")}</li>
+            <li>{t("s4Short3")}</li>
+            <li>{t("s4Short4")}</li>
           </ul>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>Verdict:</strong> Honest, romantic, and unsustainable past about three games into the season.
+            <strong>{t("lblVerdict")}</strong> {t("s4Verdict")}
           </p>
 
-          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">5. Pocket Radar + scorebook</h3>
+          <h3 className="mt-10 text-xl font-bold text-gray-900 dark:text-white">{t("s5H3")}</h3>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>The honest pitch:</strong> Not a stats app, but worth mentioning because some families combine a Pocket Radar with a scorebook or another app.
+            <strong>{t("lblPitch")}</strong> {t("s5Pitch")}
           </p>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">What it does well:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("lblWell")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>Genuinely accurate pitch velocity tracking.</li>
-            <li>Useful for older pitchers who care about velo.</li>
+            <li>{t("s5Well1")}</li>
+            <li>{t("s5Well2")}</li>
           </ul>
-          <p className="mt-3 font-semibold text-gray-900 dark:text-white">Where it falls short:</p>
+          <p className="mt-3 font-semibold text-gray-900 dark:text-white">{t("s5ShortLabel")}</p>
           <ul className="mt-2 list-disc space-y-1 pl-6 text-gray-700 dark:text-gray-300">
-            <li>$400. Doesn&apos;t track anything else.</li>
-            <li>You still need a separate stats app on top of it.</li>
+            <li>{t("s5Short1")}</li>
+            <li>{t("s5Short2")}</li>
           </ul>
           <p className="mt-3 text-gray-700 dark:text-gray-300">
-            <strong>Verdict:</strong> Velocity is a small slice of the picture. Get a stats app first; add velo hardware if it&apos;s important to your kid&apos;s recruiting.
+            <strong>{t("lblVerdict")}</strong> {t("s5Verdict")}
           </p>
 
-          <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">The honest verdict</h2>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">
-            If you&apos;re a parent or volunteer coach reading this, you basically have three real choices:
-          </p>
+          <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">{t("verdictH2")}</h2>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("verdictP")}</p>
           <ul className="mt-3 list-disc space-y-2 pl-6 text-gray-700 dark:text-gray-300">
-            <li>
-              <strong>You want the simplest thing that works, you don&apos;t want a subscription, and you&apos;re scoring your own kid&apos;s games:</strong>{" "}
-              Try Baseball Stats Tracker. It&apos;s $39 once, and I built it for exactly this. If it doesn&apos;t work for you, email me — I&apos;ll refund you personally.
-            </li>
-            <li>
-              <strong>You&apos;re a hardcore coach who lives in the app and needs deep configuration:</strong>{" "}
-              iScore is for you.
-            </li>
-            <li>
-              <strong>Your league mandates GameChanger:</strong> Keep paying it, sadly.
-            </li>
+            <li>{t.rich("verdictLi1", rich)}</li>
+            <li>{t.rich("verdictLi2", rich)}</li>
+            <li>{t.rich("verdictLi3", rich)}</li>
           </ul>
-          <p className="mt-3 text-gray-700 dark:text-gray-300">Everything else is a distant tier.</p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300">{t("verdictAfter")}</p>
 
-          <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">FAQs</h2>
+          <h2 className="mt-12 text-2xl font-bold text-gray-900 dark:text-white">{t("faqH2")}</h2>
 
-          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">
-            Is Baseball Stats Tracker really $39 one-time, no catches?
-          </h3>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            Yes. One payment, lifetime access. No upsells, no &ldquo;Pro&rdquo; tier, no in-app purchases. 30-day money-back guarantee.
-          </p>
+          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">{t("faqQ1")}</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">{t("faqA1")}</p>
 
-          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">Will it work for softball?</h3>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            Yes — baseball and softball both, every level (Little League, travel ball, rec, high school).
-          </p>
+          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">{t("faqQ2")}</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">{t("faqA2")}</p>
 
-          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">Can I import my GameChanger data?</h3>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            Not currently. You&apos;d start fresh. If this is a dealbreaker, let me know and I&apos;ll prioritize it.
-          </p>
+          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">{t("faqQ3")}</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">{t("faqA3")}</p>
 
-          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">What if I&apos;m not happy?</h3>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            Email me. I&apos;ll refund you personally within 30 days, no questions asked.
-          </p>
+          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">{t("faqQ4")}</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">{t("faqA4")}</p>
 
-          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">Will the price ever go up?</h3>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">
-            For new buyers, possibly. For people who&apos;ve already bought, never — that&apos;s the whole point of &ldquo;one-time.&rdquo;
-          </p>
+          <h3 className="mt-6 text-lg font-bold text-gray-900 dark:text-white">{t("faqQ5")}</h3>
+          <p className="mt-2 text-gray-700 dark:text-gray-300">{t("faqA5")}</p>
 
           <section className="mt-16 rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Ready to try it?</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t("ctaH2")}</h2>
             <p className="mt-3 text-gray-600 dark:text-gray-400">
-              $39 once. Score your first game tonight. No app store, no subscription. You just own it.
+              {t("ctaP")}
             </p>
             <div className="mt-6">
               <span className="text-5xl font-bold text-gray-900 dark:text-white">$39</span>
-              <span className="ml-2 text-gray-500 dark:text-gray-400">one-time</span>
+              <span className="ml-2 text-gray-500 dark:text-gray-400">{t("ctaOneTime")}</span>
             </div>
             <div className="mt-6">
               <Link
                 href="/pricing"
                 className="inline-block rounded-lg bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700"
               >
-                Get instant access
+                {t("ctaBtn")}
               </Link>
             </div>
           </section>
@@ -453,14 +430,14 @@ export default function GameChangerAlternativesPage() {
 
       <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
         <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Baseball Stats Tracker. All rights reserved.</p>
+          <p>{tc("footerRights", { year: new Date().getFullYear() })}</p>
           <div className="mt-2 flex justify-center gap-4">
-            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">Home</Link>
-            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">Features</Link>
-            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">Pricing</Link>
-            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">Compare</Link>
-            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">Sign In</Link>
-            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">Sign Up</Link>
+            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navHome")}</Link>
+            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navFeatures")}</Link>
+            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navPricing")}</Link>
+            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navCompare")}</Link>
+            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignIn")}</Link>
+            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignUp")}</Link>
           </div>
         </div>
       </footer>
