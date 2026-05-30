@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useTransition,
   ReactNode,
 } from "react";
 import {
@@ -29,6 +30,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   language: string;
   setLanguage: (locale: string) => Promise<void>;
+  languagePending: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -39,6 +41,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
   language: "en",
   setLanguage: async () => {},
+  languagePending: false,
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -48,6 +51,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [language, setLanguageState] = useState("en");
+  // True from the start of setLanguage until the server-rendered content
+  // for the new locale is in. Combined manual flag (for the PATCH window)
+  // + useTransition's isPending (for the router.refresh transition).
+  const [langSaving, setLangSaving] = useState(false);
+  const [isRefreshPending, startTransition] = useTransition();
+  const languagePending = langSaving || isRefreshPending;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -106,28 +115,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const setLanguage = async (locale: string) => {
+    setLangSaving(true);
     setLanguageState(locale);
-    const current = auth.currentUser;
-    if (current) {
-      const idToken = await current.getIdToken();
-      await fetch("/api/user/language", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({ language: locale }),
-      }).catch(() => {});
-    } else {
-      // Pre-auth (login/signup): persist via cookie so SSR picks it up.
-      document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+    try {
+      const current = auth.currentUser;
+      if (current) {
+        const idToken = await current.getIdToken();
+        await fetch("/api/user/language", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({ language: locale }),
+        }).catch(() => {});
+      } else {
+        // Pre-auth (login/signup): persist via cookie so SSR picks it up.
+        document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+      }
+    } finally {
+      // Hand off to React's transition: isRefreshPending stays true until
+      // the new server-rendered content for this locale is in.
+      startTransition(() => router.refresh());
+      setLangSaving(false);
     }
-    router.refresh();
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, appUser, loading, token, logout, language, setLanguage }}
+      value={{ user, appUser, loading, token, logout, language, setLanguage, languagePending }}
     >
       {children}
     </AuthContext.Provider>
