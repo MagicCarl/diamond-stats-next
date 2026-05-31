@@ -35,8 +35,8 @@ export async function GET(req: NextRequest) {
     userGrowth,
     activeUsersResult,
   ] = await Promise.all([
-    prisma.user.count(),
-    prisma.user.count({ where: { isPaid: true } }),
+    prisma.user.count({ where: { deletedAt: null } }),
+    prisma.user.count({ where: { isPaid: true, deletedAt: null } }),
     prisma.game.count(),
     prisma.analyticsEvent.count({
       where: { eventType: "LOGIN", createdAt: { gte: sevenDaysAgo } },
