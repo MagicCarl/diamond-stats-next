@@ -122,7 +122,7 @@ export default async function RootLayout({
                 name: "Baseball Stats Tracker",
                 applicationCategory: "SportsApplication",
                 operatingSystem: "Web",
-                url: "https://www.baseballstatstracker.com",
+                mainEntityOfPage: "https://www.baseballstatstracker.com",
                 description:
                   "Score youth baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for Little League, travel ball, and high school teams.",
                 offers: {
@@ -155,8 +155,12 @@ export default async function RootLayout({
                 "@type": "Organization",
                 name: "Baseball Stats Tracker",
                 url: "https://www.baseballstatstracker.com",
-                logo: "https://www.baseballstatstracker.com/icon.svg",
-                sameAs: [],
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.baseballstatstracker.com/logo.png",
+                  width: 512,
+                  height: 512,
+                },
               },
               {
                 "@context": "https://schema.org",

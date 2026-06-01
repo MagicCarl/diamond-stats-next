@@ -64,7 +64,9 @@ export default async function GameChangerAlternativesPage() {
               name: "Baseball Stats Tracker",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.baseballstatstracker.com/icon.svg",
+                url: "https://www.baseballstatstracker.com/logo.png",
+                width: 512,
+                height: 512,
               },
             },
             mainEntityOfPage: {
