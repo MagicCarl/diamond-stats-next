@@ -156,6 +156,14 @@ export default async function PricingPage() {
               <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ4")}</h3>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA4")}</p>
             </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ5")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA5")}</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white">{t("faqQ6")}</h3>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA6")}</p>
+            </div>
           </div>
         </div>
 

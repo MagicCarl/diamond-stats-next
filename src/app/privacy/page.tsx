@@ -26,21 +26,15 @@ export default async function PrivacyPolicyPage() {
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
           {t("subtitle")}
         </p>
-        <div className="mt-8 space-y-6 text-gray-700 dark:text-gray-300">
-          <p>{t("intro")}</p>
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t("battingH2")}
-            </h2>
-            <p className="mt-2">{t("battingP")}</p>
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t("levelsH2")}
-            </h2>
-            <p className="mt-2">{t("levelsP")}</p>
-          </div>
-          <p>{t("storage")}</p>
+        <div className="mt-8 space-y-8 text-gray-700 dark:text-gray-300">
+          {(["collect","use","share","retain","security","kids","contact"] as const).map((key) => (
+            <div key={key}>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                {t(`${key}H2`)}
+              </h2>
+              <p className="mt-2">{t(`${key}P`)}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

@@ -7,7 +7,7 @@ const PUBLISHED = "2026-05-21";
 const MODIFIED = "2026-05-21";
 
 export const metadata: Metadata = {
-  title: "GameChanger Alternatives in 2026: 5 Honest Options for Youth Baseball Parents",
+  title: "GameChanger Alternatives 2026: Top 5 for Youth Baseball",
   description:
     "Looking for a cheaper, simpler alternative to GameChanger? We compare 5 real options for youth baseball and softball families, including a $39 one-time-purchase app built by a baseball dad.",
   alternates: {
