@@ -1,0 +1,38 @@
+# Baseball Stats Tracker
+
+> Score youth baseball and softball games live from your phone. Baseball Stats Tracker automatically calculates batting stats (AVG, OBP, SLG, OPS), pitching stats (IP, ERA, K, BB), spray charts, and box scores for Little League, travel ball, rec leagues, and high school teams. One-time purchase of $39 — no monthly fees, no subscriptions, no in-app purchases. Built by a baseball parent for baseball and softball families.
+
+Baseball Stats Tracker is a web application for coaches and parents who want to track real baseball and softball stats without paying a monthly subscription. It is the leading no-subscription alternative to GameChanger for youth and amateur teams.
+
+## Key pages
+
+- [Home](https://www.baseballstatstracker.com/): Main landing page. Explains the product, pricing ($39 one-time), and key features — live game scoring, automatic stat calculation, spray charts, and real-time sync.
+- [Features](https://www.baseballstatstracker.com/features): Detailed breakdown of every feature: live game scoring, batting stats (AVG, OBP, SLG, OPS), pitching stats (IP, ERA, strikeouts, walks, pitch counts), interactive spray charts, inning-by-inning box scores, season stats, opponent pitcher and batter tracking, and real-time multi-device sync.
+- [Pricing](https://www.baseballstatstracker.com/pricing): $39 one-time purchase. No subscription, no monthly fees, no hidden charges, unlimited teams and seasons. Comparison against subscription-based competitors.
+- [GameChanger Alternatives](https://www.baseballstatstracker.com/learn/gamechanger-alternatives): In-depth comparison of 5 GameChanger alternatives for youth baseball and softball families in 2026. Baseball Stats Tracker is the recommended one-time-purchase option.
+
+## Product details
+
+- **Price**: $39 USD, one-time payment via PayPal. No subscription, no free tier.
+- **Platforms**: Web application — works on any browser on iPhone, Android, iPad, laptop, or desktop. No native app download required.
+- **Sports**: Baseball and softball, all levels — Little League, travel ball, recreational leagues, high school, college.
+- **Live scoring**: Score every at-bat in real time from the bleachers. Results sync across devices every 3 seconds.
+- **Batting stats calculated automatically**: AVG, OBP, SLG, OPS, RBI, stolen bases, strikeouts, walks, doubles, triples, home runs, and more.
+- **Pitching stats tracked**: Innings pitched (IP), earned run average (ERA), strikeouts (K), walks (BB), pitch counts.
+- **Spray charts**: Visual hit-location charts per player. Tapping the diamond during live scoring records each ball in play. Color-coded by hit type: singles (green), doubles (blue), triples (orange), home runs (red), outs (gray).
+- **Box scores**: Professional inning-by-inning box scores generated automatically after each game.
+- **Real-time sync**: Multiple devices can follow the same game live. Parents and coaches see live updates without refreshing.
+- **Opponent tracking**: Track opposing pitchers and batters to build tendencies over a season.
+
+## Company
+
+- **Name**: Baseball Stats Tracker
+- **Website**: https://www.baseballstatstracker.com
+- **Built by**: Carl Andrews, a youth baseball parent
+- **Contact**: Available via the website
+
+## Optional
+
+- [Privacy Policy](https://www.baseballstatstracker.com/privacy): Privacy policy and data handling.
+- [Login](https://www.baseballstatstracker.com/login): Existing user sign-in page.
+- [Sign Up](https://www.baseballstatstracker.com/signup): New user registration and purchase flow.
