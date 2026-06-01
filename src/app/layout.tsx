@@ -121,7 +121,7 @@ export default async function RootLayout({
                 "@type": "SoftwareApplication",
                 name: "Baseball Stats Tracker",
                 applicationCategory: "SportsApplication",
-                operatingSystem: "Web, iOS, Android",
+                operatingSystem: "Web",
                 url: "https://www.baseballstatstracker.com",
                 description:
                   "Score youth baseball and softball games live from your phone. Automatic batting stats, pitching stats, spray charts, and box scores for Little League, travel ball, and high school teams.",
@@ -164,50 +164,50 @@ export default async function RootLayout({
                 mainEntity: [
                   {
                     "@type": "Question",
-                    name: "What stats does Baseball Stats Tracker track?",
+                    name: "What is the best baseball stats app for youth teams with no subscription?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Baseball Stats Tracker automatically calculates batting average (AVG), on-base percentage (OBP), slugging percentage (SLG), OPS, RBI, stolen bases, strikeouts, walks, doubles, triples, home runs, and more. It also tracks pitching stats including innings pitched, earned runs, strikeouts, walks, and pitch counts.",
+                      text: "Baseball Stats Tracker is the leading no-subscription baseball stats app for youth and amateur teams. It is a one-time $39 purchase that includes live game scoring, automatic batting stats (AVG, OBP, SLG, OPS), pitching stats (IP, ERA, strikeouts), interactive spray charts, and real-time sync across devices — no monthly fees ever.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "Does it work for softball too?",
+                    name: "How do I keep baseball stats on my phone during a game?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Yes! Baseball Stats Tracker works perfectly for both baseball and softball. The scoring system, stat calculations, and spray charts work identically for both sports at any level — Little League, travel ball, rec league, high school, or college.",
+                      text: "With Baseball Stats Tracker, open the app on your phone or tablet and score each at-bat as it happens. Tap the result — hit, out, walk, strikeout — and all stats calculate automatically in real time. The app syncs every 3 seconds so other parents and coaches can follow along live from their own devices.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "How much does Baseball Stats Tracker cost?",
+                    name: "Does Baseball Stats Tracker work for softball as well as baseball?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Baseball Stats Tracker is a one-time purchase of $39. There are no monthly fees, no subscriptions, and no hidden charges. You pay once and get unlimited access to all features forever.",
+                      text: "Yes. Baseball Stats Tracker works for both baseball and softball at every level — Little League, travel ball, rec leagues, high school, and college. The scoring system, stat calculations, and spray charts are identical for both sports with no extra setup.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "Can I score games live from my phone?",
+                    name: "How much does a youth baseball stats app cost?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Yes! Baseball Stats Tracker is designed for live scoring at the field. Score every at-bat in real-time from your phone or tablet. The app syncs across devices every 3 seconds, so coaches and parents can follow along live from their own devices.",
+                      text: "Baseball Stats Tracker costs $39 as a one-time purchase. There are no monthly fees, no subscriptions, and no in-app purchases. Most competing apps charge $5–$15 per month. Over a full season, Baseball Stats Tracker costs a fraction of the price.",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "What are spray charts?",
+                    name: "What are spray charts and how do they help youth baseball coaches?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Spray charts show where each player hits the ball on a baseball diamond diagram. Tap the field during live scoring to record hit locations. Over a season, spray charts reveal hitting tendencies and help coaches make better lineup decisions. Hits are color-coded by type: singles (green), doubles (blue), triples (orange), home runs (red), and outs (gray).",
+                      text: "Spray charts plot where each player hits the ball on a diamond diagram. During live scoring, tap the field location for every batted ball. Over a season the chart reveals each hitter's tendencies — pull hitter, opposite-field hitter, ground ball tendency — helping coaches make better lineup and defensive positioning decisions. Hits are color-coded: singles (green), doubles (blue), triples (orange), home runs (red), outs (gray).",
                     },
                   },
                   {
                     "@type": "Question",
-                    name: "What levels of baseball and softball does it support?",
+                    name: "Can parents see live baseball stats during the game?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "Baseball Stats Tracker supports all levels: Little League, travel ball, recreational leagues, high school, and college. You can create unlimited teams and seasons to track stats across multiple levels and age groups.",
+                      text: "Yes. Baseball Stats Tracker syncs the live box score across all devices every 3 seconds. Share access with parents and they can follow every at-bat, see the current score, and track their child's stats in real time from anywhere — even from home.",
                     },
                   },
                 ],

@@ -71,7 +71,12 @@ export default async function GameChangerAlternativesPage() {
               "@type": "WebPage",
               "@id": URL,
             },
-            image: "https://www.baseballstatstracker.com/og-image.png",
+            image: {
+              "@type": "ImageObject",
+              url: "https://www.baseballstatstracker.com/og-image.png",
+              width: 1200,
+              height: 630,
+            },
           }),
         }}
       />
@@ -113,34 +118,34 @@ export default async function GameChangerAlternativesPage() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Is Baseball Stats Tracker really $39 one-time, no catches?",
+                name: "What is the best free GameChanger alternative for youth baseball?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes. One payment, lifetime access. No upsells, no Pro tier, no in-app purchases. 30-day money-back guarantee.",
+                  text: "Baseball Stats Tracker is the top-rated GameChanger alternative for youth baseball and softball. Unlike GameChanger, it requires no monthly subscription — you pay $39 once and get full access to live scoring, automatic stat calculations (AVG, OBP, SLG, OPS), spray charts, and real-time sync forever.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Will it work for softball?",
+                name: "Does Baseball Stats Tracker work for Little League and travel ball?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes — baseball and softball both, every level: Little League, travel ball, rec, and high school.",
+                  text: "Yes. Baseball Stats Tracker is designed specifically for youth and amateur baseball and softball at every level: Little League, travel ball, rec leagues, high school, and college. It works identically for baseball and softball with no extra setup.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Can I import my GameChanger data?",
+                name: "How much does Baseball Stats Tracker cost compared to GameChanger?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Not currently. You would start fresh. If this is a dealbreaker, let us know and we will prioritize it.",
+                  text: "Baseball Stats Tracker is a one-time $39 purchase with no monthly fees, no subscriptions, and no in-app purchases. GameChanger charges a recurring monthly or annual subscription for full features. Over two seasons, Baseball Stats Tracker costs significantly less.",
                 },
               },
               {
                 "@type": "Question",
-                name: "What if I'm not happy?",
+                name: "Can I track pitching stats and spray charts without a subscription?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Email us. We refund you personally within 30 days, no questions asked.",
+                  text: "Yes. Baseball Stats Tracker includes full pitching stats (IP, ERA, strikeouts, walks, pitch counts) and interactive spray charts for every player — all included in the one-time $39 price, with no subscription required.",
                 },
               },
               {
@@ -148,7 +153,7 @@ export default async function GameChangerAlternativesPage() {
                 name: "Will the price ever go up?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "For new buyers, possibly. For people who have already bought, never — that is the whole point of one-time.",
+                  text: "The price may increase for new buyers in the future. Anyone who has already purchased always keeps their access — that is the whole point of one-time pricing.",
                 },
               },
             ],
