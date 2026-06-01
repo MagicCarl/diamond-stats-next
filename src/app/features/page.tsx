@@ -282,6 +282,13 @@ export default async function FeaturesPage() {
               </tbody>
             </table>
           </div>
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Weighing your options?{" "}
+            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
+              See our honest breakdown of GameChanger alternatives
+            </Link>{" "}
+            — including who each app is actually right for.
+          </p>
         </section>
       </main>
 

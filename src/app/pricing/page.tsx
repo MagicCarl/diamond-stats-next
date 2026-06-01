@@ -178,6 +178,13 @@ export default async function PricingPage() {
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-500">
             {t("bottomSub")}
           </p>
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            Not sure yet?{" "}
+            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
+              Read our honest comparison of GameChanger alternatives
+            </Link>{" "}
+            to see how we stack up.
+          </p>
         </div>
       </main>
 
