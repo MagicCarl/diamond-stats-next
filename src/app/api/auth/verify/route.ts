@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdminAuth } from "@/lib/firebase-admin";
 import { prisma } from "@/lib/prisma";
+import { accessBlockReason } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -17,7 +18,9 @@ export async function POST(req: NextRequest) {
       where: { firebaseUid: decoded.uid },
       update: {
         email: decoded.email || "",
-        displayName: decoded.name || null,
+        // Only set the name when the token carries one — never clobber an
+        // existing display name back to null on a routine login.
+        ...(decoded.name ? { displayName: decoded.name } : {}),
       },
       create: {
         firebaseUid: decoded.uid,
@@ -26,12 +29,18 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Block soft-deleted users from signing in
-    if (user.deletedAt) {
-      return NextResponse.json(
-        { error: "Account suspended" },
-        { status: 403 }
-      );
+    // Enforce access rules: soft-deleted, nameless, or (for new accounts)
+    // unverified-email users are blocked. The frontend reads `code` to show
+    // the right message and trigger email re-verification when appropriate.
+    const block = accessBlockReason(user, decoded);
+    if (block) {
+      const error =
+        block === "DELETED"
+          ? "Account suspended"
+          : block === "NAME_REQUIRED"
+            ? "A name is required on your account"
+            : "Please verify your email address before signing in";
+      return NextResponse.json({ error, code: block }, { status: 403 });
     }
 
     const response = NextResponse.json({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -9,6 +9,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
+  sendEmailVerification,
+  signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
@@ -20,9 +22,13 @@ export default function SignupPage() {
   const router = useRouter();
   const t = useTranslations("auth.signup");
 
+  // Signup briefly signs the user in before we send verification and sign them
+  // back out. Suppress the "already logged in → dashboard" redirect during that
+  // window so the verification flow isn't interrupted.
+  const justSignedUp = useRef(false);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) router.replace("/dashboard");
+      if (user && !justSignedUp.current) router.replace("/dashboard");
     });
     return () => unsubscribe();
   }, [router]);
@@ -32,24 +38,36 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState("");
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      setError(t("nameRequired"));
+      return;
+    }
+
+    setLoading(true);
+    justSignedUp.current = true;
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
-      if (name) {
-        await updateProfile(cred.user, { displayName: name });
-      }
-      router.push("/dashboard");
+      await updateProfile(cred.user, { displayName: trimmedName });
+      await sendEmailVerification(cred.user);
+      // Hold them out of the app until they click the verification link.
+      await signOut(auth);
+      setVerifyEmail(email);
     } catch (err: unknown) {
+      justSignedUp.current = false;
       const code = (err as { code?: string })?.code;
       if (code === "auth/email-already-in-use") {
         setError(t("emailInUse"));
       } else if (code === "auth/weak-password") {
         setError(t("weakPassword"));
+      } else if (code === "auth/invalid-email") {
+        setError(t("invalidEmail"));
       } else {
         setError(t("createFailed"));
       }
@@ -88,6 +106,26 @@ export default function SignupPage() {
     }
   };
 
+  // After signup we hold the user out until they verify their email.
+  if (verifyEmail) {
+    return (
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-sm text-center">
+          <h1 className="mb-4 text-2xl font-bold">{t("verifyTitle")}</h1>
+          <div className="mb-6 rounded-lg bg-blue-50 p-4 text-sm text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+            {t("verifySent", { email: verifyEmail })}
+          </div>
+          <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+            {t("verifyHint")}
+          </p>
+          <Link href="/login" className="text-blue-600 hover:underline">
+            {t("backToSignIn")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="w-full max-w-sm">
@@ -110,6 +148,7 @@ export default function SignupPage() {
             label={t("name")}
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
           <Input
             id="email"

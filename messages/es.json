@@ -459,7 +459,10 @@
       "resetTitle": "Restablecer Contraseña",
       "resetIntro": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
       "sending": "Enviando...",
-      "sendResetLink": "Enviar Enlace de Restablecimiento"
+      "sendResetLink": "Enviar Enlace de Restablecimiento",
+      "verifyRequired": "Please verify your email first. We just sent a new verification link — check your inbox (and spam), then sign in.",
+      "accountSuspended": "This account has been suspended. Contact support if you think this is a mistake.",
+      "nameMissing": "Your account is missing a name. Please contact support."
     },
     "signup": {
       "title": "Crea tu cuenta",
@@ -478,7 +481,13 @@
       "signingUp": "Registrando...",
       "continueGoogle": "Continuar con Google",
       "haveAccount": "¿Ya tienes una cuenta?",
-      "signIn": "Inicia sesión"
+      "signIn": "Inicia sesión",
+      "nameRequired": "Please enter your name.",
+      "invalidEmail": "Please enter a valid email address.",
+      "verifyTitle": "Check your email",
+      "verifySent": "We sent a verification link to {email}. Click it to activate your account, then sign in.",
+      "verifyHint": "Didn't get it? Check your spam folder.",
+      "backToSignIn": "Back to sign in"
     }
   },
   "marketing": {

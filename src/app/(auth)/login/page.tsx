@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -9,6 +9,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  sendEmailVerification,
+  signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase-client";
@@ -22,9 +24,12 @@ export default function LoginPage() {
   const t = useTranslations("auth.login");
   const tc = useTranslations("common");
 
+  // Suppress the auto-redirect while we run the post-login verification check,
+  // so a blocked user isn't bounced to the dashboard before we can react.
+  const checking = useRef(false);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) router.replace("/dashboard");
+      if (user && !checking.current) router.replace("/dashboard");
     });
     return () => unsubscribe();
   }, [router]);
@@ -43,13 +48,45 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
+    checking.current = true;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push("/dashboard");
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+      const idToken = await cred.user.getIdToken();
+      const res = await fetch("/api/auth/verify", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      if (res.ok) {
+        router.push("/dashboard");
+        return;
+      }
+      const { code } = await res
+        .json()
+        .catch(() => ({ code: undefined as string | undefined }));
+      if (code === "EMAIL_NOT_VERIFIED") {
+        // Re-send the verification link, then hold them out until verified.
+        try {
+          await sendEmailVerification(cred.user);
+        } catch {
+          // best-effort resend; a link was already sent at signup
+        }
+        await signOut(auth);
+        setError(t("verifyRequired"));
+      } else if (code === "DELETED") {
+        await signOut(auth);
+        setError(t("accountSuspended"));
+      } else if (code === "NAME_REQUIRED") {
+        await signOut(auth);
+        setError(t("nameMissing"));
+      } else {
+        await signOut(auth);
+        setError(t("invalidCredentials"));
+      }
     } catch {
       setError(t("invalidCredentials"));
     } finally {
+      checking.current = false;
       setLoading(false);
     }
   };

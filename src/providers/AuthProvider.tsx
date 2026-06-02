@@ -93,6 +93,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           } else {
             const body = await verifyRes.json().catch(() => ({}));
             console.error("Auth verify failed:", verifyRes.status, body);
+            // Blocked (deleted / no name / unverified email): sign out so the
+            // authenticated-route guard bounces them to /login. The login and
+            // signup pages surface the specific reason to the user.
+            if (verifyRes.status === 403) {
+              await signOut(auth);
+              setUser(null);
+              setToken(null);
+              setAppUser(null);
+            }
           }
         } catch (err) {
           console.error("Auth verify error:", err);
