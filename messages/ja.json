@@ -486,7 +486,7 @@
       "invalidEmail": "Please enter a valid email address.",
       "verifyTitle": "Check your email",
       "verifySent": "We sent a verification link to {email}. Click it to activate your account, then sign in.",
-      "verifyHint": "Didn't get it? Check your spam folder.",
+      "verifyHint": "Don't see it? Check your spam or junk mail folder — verification emails sometimes land there.",
       "backToSignIn": "Back to sign in"
     }
   },
