@@ -14,33 +14,50 @@ export async function POST(req: NextRequest) {
   try {
     const decoded = await getAdminAuth().verifyIdToken(token);
 
-    const user = await prisma.user.upsert({
+    const errorFor = (code: string) =>
+      code === "DELETED"
+        ? "Account suspended"
+        : code === "NAME_REQUIRED"
+          ? "A name is required on your account"
+          : "Please verify your email address before signing in";
+
+    let user = await prisma.user.findUnique({
       where: { firebaseUid: decoded.uid },
-      update: {
-        email: decoded.email || "",
-        // Only set the name when the token carries one — never clobber an
-        // existing display name back to null on a routine login.
-        ...(decoded.name ? { displayName: decoded.name } : {}),
-      },
-      create: {
-        firebaseUid: decoded.uid,
-        email: decoded.email || "",
-        displayName: decoded.name || null,
-      },
     });
 
-    // Enforce access rules: soft-deleted, nameless, or (for new accounts)
-    // unverified-email users are blocked. The frontend reads `code` to show
-    // the right message and trigger email re-verification when appropriate.
+    if (!user) {
+      // New account: do NOT persist a user row until the email is verified
+      // and a name is present. Unverified/nameless signups never become users.
+      if (!decoded.email_verified || !decoded.name) {
+        const code = !decoded.name ? "NAME_REQUIRED" : "EMAIL_NOT_VERIFIED";
+        return NextResponse.json({ error: errorFor(code), code }, { status: 403 });
+      }
+      user = await prisma.user.create({
+        data: {
+          firebaseUid: decoded.uid,
+          email: decoded.email || "",
+          displayName: decoded.name,
+        },
+      });
+    } else {
+      // Existing account: keep email/name fresh without clobbering a name.
+      user = await prisma.user.update({
+        where: { firebaseUid: decoded.uid },
+        data: {
+          email: decoded.email || "",
+          ...(decoded.name ? { displayName: decoded.name } : {}),
+        },
+      });
+    }
+
+    // Enforce access rules: soft-deleted, nameless, or (for non-grandfathered
+    // accounts) unverified-email users are blocked. The frontend reads `code`.
     const block = accessBlockReason(user, decoded);
     if (block) {
-      const error =
-        block === "DELETED"
-          ? "Account suspended"
-          : block === "NAME_REQUIRED"
-            ? "A name is required on your account"
-            : "Please verify your email address before signing in";
-      return NextResponse.json({ error, code: block }, { status: 403 });
+      return NextResponse.json(
+        { error: errorFor(block), code: block },
+        { status: 403 },
+      );
     }
 
     const response = NextResponse.json({

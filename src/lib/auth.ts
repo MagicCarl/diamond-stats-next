@@ -54,25 +54,25 @@ export async function getAuthUser(req: NextRequest): Promise<AuthUser | null> {
     if (!decoded.email) {
       return null;
     }
-    // Look up existing user first (fast read), fall back to upsert if not found
+    // Look up existing user first (fast read).
     let user = await prisma.user.findUnique({
       where: { firebaseUid: decoded.uid },
     });
     if (!user) {
-      user = await prisma.user.upsert({
-        where: { firebaseUid: decoded.uid },
-        update: {
-          email: decoded.email,
-          displayName: decoded.name || null,
-        },
-        create: {
+      // New account: only persist a user row once the email is verified and a
+      // name is present. Unverified/nameless signups never become users.
+      if (!decoded.email_verified || !decoded.name) {
+        return null;
+      }
+      user = await prisma.user.create({
+        data: {
           firebaseUid: decoded.uid,
           email: decoded.email,
-          displayName: decoded.name || null,
+          displayName: decoded.name,
         },
       });
     }
-    // Block soft-deleted, nameless, or (for new accounts) unverified users.
+    // Block soft-deleted, nameless, or (for non-grandfathered) unverified users.
     if (accessBlockReason(user, decoded)) {
       return null;
     }
