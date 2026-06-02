@@ -10,6 +10,15 @@ export async function GET(req: NextRequest) {
   }
 
   const users = await prisma.user.findMany({
+    // Rule: nobody appears on the Users page without BOTH a name and an email.
+    // This hides nameless/soft-deleted junk (e.g. bot signups) from the list.
+    where: {
+      AND: [
+        { displayName: { not: null } },
+        { displayName: { not: "" } },
+        { email: { not: "" } },
+      ],
+    },
     orderBy: { createdAt: "desc" },
     select: {
       id: true,
