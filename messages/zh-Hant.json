@@ -24,7 +24,7 @@
   "dashboard": {
     "title": "我的球隊",
     "newTeam": "+ 新球隊",
-    "viewOnlyBanner": "您目前處於唯讀模式。購買應用程式以建立比賽並開始記錄。",
+    "viewOnlyBanner": "Free trial: your first game is on us — fully scoreable. Unlock unlimited games for a one-time $39.",
     "purchaseCta": "立即購買 - $39 一次性付款",
     "emptyState": "尚無球隊。建立你的第一支球隊開始使用。",
     "createTeam": "建立球隊",
@@ -62,7 +62,9 @@
       "away": "客場",
       "inningsLabel": "局數",
       "creating": "建立中...",
-      "startGame": "開始比賽"
+      "startGame": "開始比賽",
+      "freeTrialNote": "🎉 Your first game is free — fully scoreable with live scoring, stats, and spray charts. After that, unlock unlimited games for a one-time $39.",
+      "limitReached": "You've used your free game. Unlock unlimited games — live scoring, stats, and spray charts — for a one-time $39, no subscription."
     },
     "live": {
       "gameNotFound": "找不到比賽",
@@ -596,7 +598,10 @@
       "closeBullet2": "沒有東西要取消——它就是你的",
       "closeBullet3": "30 天退款保證。寄信給我，我會親自退款給你。",
       "ctaSub2": "沒有訂閱。沒有額外推銷。沒有「Pro 方案」。",
-      "privacyPolicy": "隱私權政策"
+      "privacyPolicy": "隱私權政策",
+      "tryFreeOr": "or",
+      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39."
     },
     "common": {
       "getStarted": "開始使用",
@@ -705,7 +710,7 @@
       "season5Vs": "別處要 $600-$1,800",
       "faqH2": "價格常見問題",
       "faqQ1": "有免費試用嗎？",
-      "faqA1": "你可以建立免費帳戶並探索應用程式。你能設定球隊、新增球員並查看介面。建立與記錄比賽需要 $39 購買。",
+      "faqA1": "Yes! Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included, no credit card. After that, a one-time $39 unlocks unlimited games, teams, and seasons forever.",
       "faqQ2": "有任何隱藏費用嗎？",
       "faqA2": "沒有。$39 就是完整價格。沒有月費、沒有按球隊收費、沒有功能升級、沒有應用程式內購買。所有功能都包含在內。",
       "faqQ3": "我可以追蹤多支球隊嗎？",

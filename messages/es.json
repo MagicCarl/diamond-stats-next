@@ -24,7 +24,7 @@
   "dashboard": {
     "title": "Mis Equipos",
     "newTeam": "+ Nuevo Equipo",
-    "viewOnlyBanner": "Estás en modo de solo lectura. Compra la aplicación para crear juegos y empezar a anotar.",
+    "viewOnlyBanner": "Free trial: your first game is on us — fully scoreable. Unlock unlimited games for a one-time $39.",
     "purchaseCta": "Compra Ahora - $39 pago único",
     "emptyState": "Aún no hay equipos. Crea tu primer equipo para comenzar.",
     "createTeam": "Crear Equipo",
@@ -62,7 +62,9 @@
       "away": "Visitante",
       "inningsLabel": "Entradas",
       "creating": "Creando...",
-      "startGame": "Iniciar Juego"
+      "startGame": "Iniciar Juego",
+      "freeTrialNote": "🎉 Your first game is free — fully scoreable with live scoring, stats, and spray charts. After that, unlock unlimited games for a one-time $39.",
+      "limitReached": "You've used your free game. Unlock unlimited games — live scoring, stats, and spray charts — for a one-time $39, no subscription."
     },
     "live": {
       "gameNotFound": "Juego no encontrado",
@@ -596,7 +598,10 @@
       "closeBullet2": "Nada que cancelar: simplemente es tuyo",
       "closeBullet3": "Garantía de devolución de 30 días. Escríbeme. Te reembolso personalmente.",
       "ctaSub2": "Sin suscripción. Sin ventas adicionales. Sin “nivel Pro”.",
-      "privacyPolicy": "Política de Privacidad"
+      "privacyPolicy": "Política de Privacidad",
+      "tryFreeOr": "or",
+      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39."
     },
     "common": {
       "getStarted": "Comenzar",
@@ -705,7 +710,7 @@
       "season5Vs": "vs. $600-$1,800 en otros lugares",
       "faqH2": "Preguntas Frecuentes sobre Precios",
       "faqQ1": "¿Hay una prueba gratuita?",
-      "faqA1": "Puedes crear una cuenta gratis y explorar la app. Podrás configurar equipos, agregar jugadores y ver la interfaz. Crear y anotar juegos requiere la compra de $39.",
+      "faqA1": "Yes! Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included, no credit card. After that, a one-time $39 unlocks unlimited games, teams, and seasons forever.",
       "faqQ2": "¿Hay cargos ocultos?",
       "faqA2": "No. $39 es el precio completo. Sin cuotas mensuales, sin cargos por equipo, sin mejoras de funciones, sin compras dentro de la app. Todas las funciones están incluidas.",
       "faqQ3": "¿Puedo registrar varios equipos?",

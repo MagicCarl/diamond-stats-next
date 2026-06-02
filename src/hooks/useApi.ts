@@ -21,8 +21,14 @@ export function useApi() {
       const res = await fetch(url, { ...options, headers, cache: "no-store" });
 
       if (!res.ok) {
-        const error = await res.json().catch(() => ({ error: "Request failed" }));
-        throw new Error(error.error || `HTTP ${res.status}`);
+        const body = await res.json().catch(() => ({ error: "Request failed" }));
+        const err = new Error(body.error || `HTTP ${res.status}`) as Error & {
+          status?: number;
+          code?: string;
+        };
+        err.status = res.status;
+        err.code = body.code;
+        throw err;
       }
 
       return res.json();

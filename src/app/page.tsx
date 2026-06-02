@@ -259,6 +259,21 @@ export default async function LandingPage() {
               <p className="text-sm text-gray-500 dark:text-gray-500">
                 {t("ctaSub2")}
               </p>
+
+              <div className="mt-4 flex items-center gap-3 text-sm text-gray-400">
+                <div className="h-px w-8 bg-gray-300 dark:bg-gray-700" />
+                <span>{t("tryFreeOr")}</span>
+                <div className="h-px w-8 bg-gray-300 dark:bg-gray-700" />
+              </div>
+              <Link
+                href="/signup"
+                className="w-full rounded-lg border-2 border-blue-600 px-8 py-3 text-center text-base font-semibold text-blue-600 transition hover:bg-blue-50 sm:w-auto dark:hover:bg-blue-900/20"
+              >
+                {t("tryFreeCta")}
+              </Link>
+              <p className="max-w-md text-center text-sm text-gray-500 dark:text-gray-400">
+                {t("tryFreeNote")}
+              </p>
             </div>
           </div>
         </div>

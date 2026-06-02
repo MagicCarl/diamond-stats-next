@@ -24,7 +24,7 @@
   "dashboard": {
     "title": "My Teams",
     "newTeam": "+ New Team",
-    "viewOnlyBanner": "You're in view-only mode. Purchase the app to create games and start scoring.",
+    "viewOnlyBanner": "Free trial: your first game is on us — fully scoreable. Unlock unlimited games for a one-time $39.",
     "purchaseCta": "Purchase Now - $39 one-time",
     "emptyState": "No teams yet. Create your first team to get started.",
     "createTeam": "Create Team",
@@ -62,7 +62,9 @@
       "away": "Away",
       "inningsLabel": "Innings",
       "creating": "Creating...",
-      "startGame": "Start Game"
+      "startGame": "Start Game",
+      "freeTrialNote": "🎉 Your first game is free — fully scoreable with live scoring, stats, and spray charts. After that, unlock unlimited games for a one-time $39.",
+      "limitReached": "You've used your free game. Unlock unlimited games — live scoring, stats, and spray charts — for a one-time $39, no subscription."
     },
     "live": {
       "gameNotFound": "Game not found",
@@ -596,7 +598,10 @@
       "closeBullet2": "Nothing to cancel — you just own it",
       "closeBullet3": "Try free first — pay only when you're ready to score games.",
       "ctaSub2": "No subscription. No upsells. No “Pro tier.”",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "tryFreeOr": "or",
+      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39."
     },
     "common": {
       "getStarted": "Get Started",
@@ -705,7 +710,7 @@
       "season5Vs": "vs. $600-$1,800 elsewhere",
       "faqH2": "Pricing FAQ",
       "faqQ1": "Is there a free trial?",
-      "faqA1": "You can create a free account and explore the app. You'll be able to set up teams, add players, and view the interface. Creating and scoring games requires the $39 purchase.",
+      "faqA1": "Yes! Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included, no credit card. After that, a one-time $39 unlocks unlimited games, teams, and seasons forever.",
       "faqQ2": "Are there any hidden fees?",
       "faqA2": "No. $39 is the complete price. No monthly fees, no per-team charges, no feature upgrades, no in-app purchases. Every feature is included.",
       "faqQ3": "Can I track multiple teams?",

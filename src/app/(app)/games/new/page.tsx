@@ -35,6 +35,8 @@ export default function NewGamePage() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  // Set when the backend reports the free 1-game trial is used up.
+  const [limitReached, setLimitReached] = useState(false);
 
   useEffect(() => {
     apiFetch("/api/teams").then(setTeams).catch(() => {});
@@ -59,20 +61,26 @@ export default function NewGamePage() {
         body: JSON.stringify(form),
       });
       router.push(`/games/${game.id}/live`);
-    } catch {
-      setError(t("createError"));
+    } catch (err) {
+      // Free trial used up — show the upgrade prompt instead of a generic error.
+      if ((err as { code?: string })?.code === "FREE_LIMIT_REACHED") {
+        setLimitReached(true);
+      } else {
+        setError(t("createError"));
+      }
     } finally {
       setSaving(false);
     }
   };
 
-  if (appUser && !appUser.isPaid) {
+  // Free user who has already used their one free game: show the paywall.
+  if (limitReached) {
     return (
       <div className="mx-auto max-w-lg">
         <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
         <Card className="text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            {t("purchasePrompt")}
+            {t("limitReached")}
           </p>
           <a
             href="https://www.paypal.com/paypalme/carlrandrews"
@@ -96,6 +104,12 @@ export default function NewGamePage() {
   return (
     <div className="mx-auto max-w-lg">
       <h1 className="mb-6 text-2xl font-bold">{t("title")}</h1>
+
+      {appUser && !appUser.isPaid && (
+        <div className="mb-4 rounded-lg bg-green-50 p-3 text-sm text-green-700 dark:bg-green-900/20 dark:text-green-300">
+          {t("freeTrialNote")}
+        </div>
+      )}
 
       {error && (
         <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">

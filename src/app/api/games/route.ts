@@ -29,15 +29,27 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(games);
 }
 
+// Free accounts may fully create and score this many games before a purchase
+// is required. The first game is a real, complete trial of the product.
+const FREE_GAME_LIMIT = 1;
+
 export async function POST(req: NextRequest) {
   const user = await getAuthUser(req);
   if (!user) return unauthorized();
 
   if (!user.isPaid) {
-    return NextResponse.json(
-      { error: "Purchase required to create games" },
-      { status: 403 }
-    );
+    const gamesCreated = await prisma.game.count({
+      where: { team: { organization: { ownerId: user.id } } },
+    });
+    if (gamesCreated >= FREE_GAME_LIMIT) {
+      return NextResponse.json(
+        {
+          error: "You've used your free game. Purchase to create more.",
+          code: "FREE_LIMIT_REACHED",
+        },
+        { status: 403 }
+      );
+    }
   }
 
   const body = await req.json();

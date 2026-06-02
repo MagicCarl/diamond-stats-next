@@ -24,7 +24,7 @@
   "dashboard": {
     "title": "マイチーム",
     "newTeam": "+ 新規チーム",
-    "viewOnlyBanner": "閲覧専用モードです。試合の作成と記録を始めるにはアプリを購入してください。",
+    "viewOnlyBanner": "Free trial: your first game is on us — fully scoreable. Unlock unlimited games for a one-time $39.",
     "purchaseCta": "今すぐ購入 - $39 買い切り",
     "emptyState": "まだチームがありません。最初のチームを作成して始めましょう。",
     "createTeam": "チームを作成",
@@ -62,7 +62,9 @@
       "away": "アウェイ",
       "inningsLabel": "イニング数",
       "creating": "作成中...",
-      "startGame": "試合開始"
+      "startGame": "試合開始",
+      "freeTrialNote": "🎉 Your first game is free — fully scoreable with live scoring, stats, and spray charts. After that, unlock unlimited games for a one-time $39.",
+      "limitReached": "You've used your free game. Unlock unlimited games — live scoring, stats, and spray charts — for a one-time $39, no subscription."
     },
     "live": {
       "gameNotFound": "試合が見つかりません",
@@ -596,7 +598,10 @@
       "closeBullet2": "解約するものは何もない — ただ自分のものになる",
       "closeBullet3": "30日間返金保証。メールしてください。私が個人的に返金します。",
       "ctaSub2": "サブスクなし。アップセルなし。「Proプラン」なし。",
-      "privacyPolicy": "プライバシーポリシー"
+      "privacyPolicy": "プライバシーポリシー",
+      "tryFreeOr": "or",
+      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39."
     },
     "common": {
       "getStarted": "始める",
@@ -705,7 +710,7 @@
       "season5Vs": "他では $600〜$1,800",
       "faqH2": "料金に関するよくある質問",
       "faqQ1": "無料トライアルはありますか？",
-      "faqA1": "無料でアカウントを作成し、アプリを試せます。チームの設定、選手の追加、インターフェースの閲覧ができます。試合の作成と記録には$39の購入が必要です。",
+      "faqA1": "Yes! Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included, no credit card. After that, a one-time $39 unlocks unlimited games, teams, and seasons forever.",
       "faqQ2": "隠れた費用はありますか？",
       "faqA2": "ありません。$39が全額です。月額料金、チームごとの課金、機能アップグレード、アプリ内課金はありません。すべての機能が含まれます。",
       "faqQ3": "複数のチームを記録できますか？",
