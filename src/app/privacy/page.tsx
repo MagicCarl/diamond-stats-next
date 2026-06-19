@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Baseball Stats Tracker",
   description:
     "Privacy policy for BaseballStatsTracker.com — the baseball and softball stats tracker app for youth, Little League, and travel ball teams.",
+  alternates: {
+    canonical: "https://www.baseballstatstracker.com/privacy",
+  },
 };
 
 export default async function PrivacyPolicyPage() {
