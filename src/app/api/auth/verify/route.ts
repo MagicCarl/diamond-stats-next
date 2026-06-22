@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAdminAuth } from "@/lib/firebase-admin";
 import { prisma } from "@/lib/prisma";
 import { accessBlockReason } from "@/lib/auth";
+import { trackServerEvent } from "@/lib/analytics";
 
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -39,6 +40,7 @@ export async function POST(req: NextRequest) {
           displayName: decoded.name,
         },
       });
+      trackServerEvent("SIGNUP", user.id);
     } else {
       // Existing account: keep email/name fresh without clobbering a name.
       user = await prisma.user.update({

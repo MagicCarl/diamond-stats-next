@@ -6,7 +6,6 @@ import { z } from "zod/v4";
 
 const EVENT_TYPES = [
   "LOGIN",
-  "PAGE_VIEW",
   "GAME_CREATED",
   "PAYMENT_TOGGLED",
   "TEAM_CREATED",

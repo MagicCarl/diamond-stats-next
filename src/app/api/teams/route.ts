@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { trackServerEvent } from "@/lib/analytics";
 
 export async function GET(req: NextRequest) {
   const user = await getAuthUser(req);
@@ -79,6 +80,8 @@ export async function POST(req: NextRequest) {
       _count: { select: { players: { where: { isActive: true } }, games: true } },
     },
   });
+
+  trackServerEvent("TEAM_CREATED", user.id, { teamId: team.id });
 
   return NextResponse.json(team, { status: 201 });
 }
