@@ -718,18 +718,30 @@
       "faqQ4": "¿Cómo pago?",
       "faqA4": "El pago se procesa de forma segura a través de PayPal. Tras el pago, tu cuenta se activa dentro de las 24 horas (normalmente mucho más rápido). No se almacena información de tarjetas de crédito en nuestros servidores.",
       "bottomCta": "Crear Cuenta Gratis",
-      "bottomSub": "Explora la app gratis. Compra cuando estés listo."
+      "bottomSub": "Explora la app gratis. Compra cuando estés listo.",
+      "faqQ5": "¿En qué dispositivos funciona?",
+      "faqA5": "En cualquier dispositivo con navegador: iPhone, Android, iPad, portátil o computadora de escritorio. No es necesario descargar nada de ninguna tienda de apps. Solo abre baseballstatstracker.com desde cualquier navegador y ya puedes empezar a registrar.",
+      "faqQ6": "¿Puedo probarlo antes de comprar?",
+      "faqA6": "Sí. Crea una cuenta gratuita y explora toda la app: configura equipos, añade jugadores y recorre cada pantalla. Registrar y guardar partidos requiere la compra única de $39."
     },
     "privacy": {
       "backHome": "Volver al inicio",
       "title": "Política de Privacidad",
       "subtitle": "BaseballStatsTracker.com — La aplicación de estadísticas de béisbol y softbol para equipos juveniles, Little League y travel ball",
-      "intro": "Anota juegos de béisbol y softbol en tiempo real desde cualquier teléfono o tableta. Varios dispositivos se sincronizan cada 3 segundos, para que entrenadores, padres y aficionados puedan seguirlo todo en vivo.",
-      "battingH2": "Estadísticas de Bateo y Pitcheo",
-      "battingP": "AVG, OBP, SLG, OPS, carreras impulsadas, bases robadas, además de pitcheo completo: IP, ERA, K, BB, HR, conteo de lanzamientos, lanzamientos descontrolados. Calculado automáticamente mientras anotas.",
-      "levelsH2": "Hecho para Todos los Niveles de Béisbol, Softbol y Little League",
-      "levelsP": "Sigue el desarrollo de tu jugador sin software de anotación complicado. Estadísticas confiables para torneos y showcases. Varias temporadas y equipos en un solo lugar. Seguimiento de estadísticas de nivel profesional a una fracción del costo de otras apps de anotación.",
-      "storage": "La aplicación almacena los datos de tus juegos de forma privada. Los guardas tú con tu nombre de inicio de sesión en tu dispositivo."
+      "collectH2": "Qué recopilamos",
+      "collectP": "Cuando creas una cuenta recopilamos tu dirección de correo electrónico y tu nombre. Cuando registras partidos, almacenamos los datos que introduces —jugadores, turnos al bate, estadísticas y resultados— en tu cuenta. También recopilamos datos básicos de uso (páginas visitadas, errores) a través de Google Analytics para ayudarnos a mejorar la app.",
+      "useH2": "Cómo usamos tus datos",
+      "useP": "Usamos tu correo electrónico para identificar tu cuenta y enviarte mensajes relacionados con ella, como la confirmación de pago. Usamos los datos de tus partidos para mostrar tus estadísticas y sincronizarlas entre tus dispositivos. No usamos tus datos con fines publicitarios y no los vendemos a nadie.",
+      "shareH2": "Con quién los compartimos",
+      "shareP": "Utilizamos los siguientes servicios para que la app funcione: Firebase (autenticación), Supabase (base de datos), Vercel (alojamiento), PayPal (pagos) y Google Analytics (análisis de uso). Cada servicio procesa únicamente los datos necesarios para funcionar. No compartimos tus datos personales con ningún otro tercero.",
+      "retainH2": "Cuánto tiempo los conservamos",
+      "retainP": "Los datos de tu cuenta se conservan mientras tu cuenta esté activa. Si quieres que eliminemos tus datos, escríbenos y eliminaremos tu cuenta y todos los datos de partidos asociados en un plazo de 7 días.",
+      "securityH2": "Seguridad",
+      "securityP": "Todos los datos se transmiten mediante HTTPS. Las contraseñas nunca se almacenan: la autenticación la gestiona Firebase. Los datos de los partidos se guardan en una base de datos privada limitada únicamente a tu cuenta. Ningún otro usuario puede acceder a tus datos.",
+      "kidsH2": "Menores",
+      "kidsP": "Baseball Stats Tracker está diseñado para entrenadores y padres, no para que lo usen los niños directamente. No recopilamos conscientemente datos personales de menores de 13 años. Los nombres de los jugadores y las estadísticas introducidas quedan a discreción del padre, madre o entrenador titular de la cuenta.",
+      "contactH2": "Contacto",
+      "contactP": "Preguntas o solicitudes de eliminación: mauicarlandrews@gmail.com"
     },
     "learn": {
       "title": "Alternativas a GameChanger en 2026: 5 Opciones Honestas para Padres de Béisbol Juvenil (Y la de $39 que Construimos)",
@@ -914,7 +926,15 @@
       "gaUnavailable": "Datos de Google Analytics no disponibles. Configura <code>GA4_PROPERTY_ID</code> y otorga a tu cuenta de servicio de Firebase acceso de Lector en GA4 para habilitarlo.",
       "recentActivity": "Actividad Reciente",
       "anonymous": "Anónimo",
-      "noEvents": "Aún no se han registrado eventos"
+      "noEvents": "Aún no se han registrado eventos",
+      "visitorsSection": "Visitantes del sitio (Google Analytics)",
+      "visitors30d": "Visitantes (30 d)",
+      "avgTimeOnSite": "Tiempo medio en el sitio",
+      "dailyVisitors": "Visitantes diarios (30 días)",
+      "weeklyVisitors": "Visitantes semanales",
+      "weeklyVisitorsCaption": "Suma de visitantes diarios por semana: las visitas repetidas en varios días se cuentan cada día.",
+      "noVisitorData": "Aún no hay datos de visitantes",
+      "tooltipVisitors": "{date}: {count} visitantes"
     }
   }
 }

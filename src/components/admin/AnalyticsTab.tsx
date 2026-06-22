@@ -61,6 +61,31 @@ function formatWeek(dateStr: string): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
+// GA4 "date" dimension comes back as YYYYMMDD
+function parseGADate(raw: string): Date {
+  return new Date(+raw.slice(0, 4), +raw.slice(4, 6) - 1, +raw.slice(6, 8));
+}
+
+function shortDate(d: Date): string {
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+function formatDuration(totalSeconds: number): string {
+  const s = Math.round(totalSeconds);
+  const mins = Math.floor(s / 60);
+  const secs = s % 60;
+  return mins === 0 ? `${secs}s` : `${mins}m ${secs}s`;
+}
+
+// Monday of the week containing `date`
+function isoWeekStart(date: Date): Date {
+  const d = new Date(date);
+  const offset = (d.getDay() + 6) % 7; // 0 = Monday
+  d.setDate(d.getDate() - offset);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
 const EVENT_COLORS: Record<string, string> = {
   LOGIN: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
   GAME_CREATED: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
@@ -116,6 +141,44 @@ export default function AnalyticsTab() {
         ),
       }
     : null;
+
+  // Per-day visitor breakdown derived from the GA "date" report.
+  // metricValues = [screenPageViews, sessions, activeUsers, averageSessionDuration]
+  const dailyVisitors = gaData
+    ? gaData.pageViews.map((r) => ({
+        date: parseGADate(r.dimensionValues[0]?.value || ""),
+        visitors: parseInt(r.metricValues[2]?.value || "0"),
+        sessions: parseInt(r.metricValues[1]?.value || "0"),
+        avgDuration: parseFloat(r.metricValues[3]?.value || "0"),
+      }))
+    : [];
+
+  // Session-weighted average so longer-traffic days count proportionally.
+  const totalSessions = dailyVisitors.reduce((s, d) => s + d.sessions, 0);
+  const avgSessionDuration =
+    totalSessions > 0
+      ? dailyVisitors.reduce((s, d) => s + d.avgDuration * d.sessions, 0) /
+        totalSessions
+      : 0;
+
+  // Roll daily visitors up into ISO weeks (Monday start).
+  const weeklyMap = new Map<number, { week: Date; visitors: number }>();
+  for (const d of dailyVisitors) {
+    const wk = isoWeekStart(d.date);
+    const key = wk.getTime();
+    const existing = weeklyMap.get(key);
+    if (existing) existing.visitors += d.visitors;
+    else weeklyMap.set(key, { week: wk, visitors: d.visitors });
+  }
+  const weeklyVisitors = [...weeklyMap.values()].sort(
+    (a, b) => a.week.getTime() - b.week.getTime()
+  );
+
+  const maxDailyVisitors = Math.max(...dailyVisitors.map((d) => d.visitors), 1);
+  const maxWeeklyVisitors = Math.max(
+    ...weeklyVisitors.map((w) => w.visitors),
+    1
+  );
 
   return (
     <div className="space-y-6">
@@ -231,13 +294,15 @@ export default function AnalyticsTab() {
       {/* Google Analytics Data */}
       {!gaError && gaData && gaTotals && (
         <>
-          <div className="grid grid-cols-3 gap-4">
+          <h2 className="pt-2 text-lg font-semibold">{t("visitorsSection")}</h2>
+
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <Card>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t("pageViews30d")}
+                {t("visitors30d")}
               </p>
               <p className="mt-1 text-3xl font-bold">
-                {gaTotals.pageViews.toLocaleString()}
+                {gaTotals.activeUsers.toLocaleString()}
               </p>
             </Card>
             <Card>
@@ -250,10 +315,82 @@ export default function AnalyticsTab() {
             </Card>
             <Card>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t("gaActiveUsers30d")}
+                {t("pageViews30d")}
               </p>
               <p className="mt-1 text-3xl font-bold">
-                {gaTotals.activeUsers.toLocaleString()}
+                {gaTotals.pageViews.toLocaleString()}
+              </p>
+            </Card>
+            <Card>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t("avgTimeOnSite")}
+              </p>
+              <p className="mt-1 text-3xl font-bold">
+                {formatDuration(avgSessionDuration)}
+              </p>
+            </Card>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {/* Daily Visitors */}
+            <Card>
+              <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
+                {t("dailyVisitors")}
+              </h3>
+              {dailyVisitors.length > 0 ? (
+                <div className="flex items-end gap-0.5" style={{ height: "120px" }}>
+                  {dailyVisitors.map((day) => (
+                    <div
+                      key={day.date.getTime()}
+                      className="group relative flex-1 rounded-t bg-indigo-400 dark:bg-indigo-500 hover:bg-indigo-500 dark:hover:bg-indigo-400 transition-colors"
+                      style={{
+                        height: `${(day.visitors / maxDailyVisitors) * 100}%`,
+                        minHeight: day.visitors > 0 ? "4px" : "0",
+                      }}
+                      title={t("tooltipVisitors", {
+                        date: shortDate(day.date),
+                        count: day.visitors,
+                      })}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-400">{t("noVisitorData")}</p>
+              )}
+            </Card>
+
+            {/* Weekly Visitors */}
+            <Card>
+              <h3 className="mb-4 text-sm font-medium text-gray-500 dark:text-gray-400">
+                {t("weeklyVisitors")}
+              </h3>
+              {weeklyVisitors.length > 0 ? (
+                <div className="space-y-2">
+                  {weeklyVisitors.map((w) => (
+                    <div key={w.week.getTime()} className="flex items-center gap-3">
+                      <span className="w-20 shrink-0 text-xs text-gray-500">
+                        {shortDate(w.week)}
+                      </span>
+                      <div className="flex-1">
+                        <div
+                          className="h-6 rounded bg-indigo-500 dark:bg-indigo-400 transition-all"
+                          style={{
+                            width: `${(w.visitors / maxWeeklyVisitors) * 100}%`,
+                            minWidth: w.visitors > 0 ? "8px" : "0",
+                          }}
+                        />
+                      </div>
+                      <span className="w-8 text-right text-xs text-gray-500">
+                        {w.visitors}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-400">{t("noVisitorData")}</p>
+              )}
+              <p className="mt-3 text-xs text-gray-400">
+                {t("weeklyVisitorsCaption")}
               </p>
             </Card>
           </div>

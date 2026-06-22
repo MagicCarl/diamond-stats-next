@@ -39,6 +39,7 @@ export async function GET(req: NextRequest) {
               { name: "screenPageViews" },
               { name: "sessions" },
               { name: "activeUsers" },
+              { name: "averageSessionDuration" },
             ],
             dimensions: [{ name: "date" }],
             orderBys: [{ dimension: { dimensionName: "date" } }],

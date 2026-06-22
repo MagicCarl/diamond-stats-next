@@ -926,7 +926,15 @@
       "gaUnavailable": "Google Analytics data not available. Set <code>GA4_PROPERTY_ID</code> and grant your Firebase service account Viewer access in GA4 to enable.",
       "recentActivity": "Recent Activity",
       "anonymous": "Anonymous",
-      "noEvents": "No events tracked yet"
+      "noEvents": "No events tracked yet",
+      "visitorsSection": "Site Visitors (Google Analytics)",
+      "visitors30d": "Visitors (30d)",
+      "avgTimeOnSite": "Avg. Time on Site",
+      "dailyVisitors": "Daily Visitors (30 days)",
+      "weeklyVisitors": "Weekly Visitors",
+      "weeklyVisitorsCaption": "Sum of daily visitors per week — repeat visits across days are counted each day.",
+      "noVisitorData": "No visitor data yet",
+      "tooltipVisitors": "{date}: {count} visitors"
     }
   }
 }
