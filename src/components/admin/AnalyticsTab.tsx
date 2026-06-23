@@ -502,6 +502,11 @@ export default function AnalyticsTab() {
                   <span className="text-gray-600 dark:text-gray-400">
                     {event.user?.displayName || event.user?.email || t("anonymous")}
                   </span>
+                  {typeof event.metadata?.ref === "string" && (
+                    <span className="rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                      ref: {event.metadata.ref}
+                    </span>
+                  )}
                 </div>
                 <span className="shrink-0 text-xs text-gray-400">
                   {formatTimeAgo(event.createdAt, t)}

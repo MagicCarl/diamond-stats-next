@@ -27,6 +27,21 @@ export function proxy(request: NextRequest) {
     "camera=(), microphone=(), geolocation=()"
   );
 
+  // Capture influencer referral codes (?ref=massey) into a cookie so we can
+  // attribute later signups to the influencer who sent the visitor. 30-day
+  // window. Sanitized to a safe slug to avoid storing arbitrary input.
+  const ref = request.nextUrl.searchParams.get("ref");
+  if (ref) {
+    const slug = ref.slice(0, 40).replace(/[^a-zA-Z0-9_-]/g, "");
+    if (slug) {
+      response.cookies.set("ref", slug, {
+        path: "/",
+        maxAge: 60 * 60 * 24 * 30,
+        sameSite: "lax",
+      });
+    }
+  }
+
   // Content Security Policy
   response.headers.set(
     "Content-Security-Policy",

@@ -40,7 +40,8 @@ export async function POST(req: NextRequest) {
           displayName: decoded.name,
         },
       });
-      trackServerEvent("SIGNUP", user.id);
+      const ref = req.cookies.get("ref")?.value;
+      trackServerEvent("SIGNUP", user.id, ref ? { ref } : undefined);
     } else {
       // Existing account: keep email/name fresh without clobbering a name.
       user = await prisma.user.update({
