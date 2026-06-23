@@ -136,3 +136,46 @@ Use one slug per creator, matched to their code: `?ref=massey` ↔ `MASSEY10`,
    specific detail roughly doubles reply rates vs. generic copy-paste.
 2. **Stagger codes + ref slugs** (`MASSEY10`/`?ref=massey`, etc.) so you know exactly
    which creator drives sales before spending more.
+
+---
+
+## Personalized pitches
+
+### Grant Massey — Massey Made Baseball
+
+- **Email:** info@masseymade.com (business inbox — use email, not DM)
+- **Code:** `MASSEY10` · **Link:** `baseballstatstracker.com/pricing?ref=massey`
+- **Hook:** ex-White Sox infielder, Charlotte NC, infield + hitting instruction
+- **Status:** drafted, not sent
+
+> **Subject: Paid collab — baseball stats app for your Massey Made athletes**
+>
+> Hi Grant,
+>
+> I'm Carl, founder of **BaseballStatsTracker.com**. I've been following Massey Made
+> Baseball — the infield and hitting breakdowns are exactly the kind of detail-oriented
+> coaching your audience clearly trusts, and coming off your run at shortstop in the White
+> Sox org, you teach the game at a level most of these parents and players don't get
+> anywhere else.
+>
+> That's why I'm reaching out. I built a stats-tracking app for youth and travel-ball
+> coaches and parents — batting and pitching stats, spray charts, live game scoring that
+> syncs across devices in the dugout, and optional pitch-by-pitch tracking. One-time
+> **$39, no subscription**. Your followers are squarely who I built it for.
+>
+> I'd love to do a paid collaboration:
+>
+> - **A flat fee** for one post or Reel + a story (open to your rate)
+> - **Your own discount code, `MASSEY10`** — $10 off for your audience ($29 instead of $39)
+> - **$10 to you for every sale** your code brings in
+> - **A free account** so you can show it on screen during a drill or game
+>
+> Your followers would use this link: **baseballstatstracker.com/pricing?ref=massey** and
+> enter **`MASSEY10`** in the PayPal note at checkout — that's how we'll track every signup
+> and sale back to you.
+>
+> If you're interested, just reply with your rate and I'll send a free login plus a few
+> talking points. Appreciate you taking a look.
+>
+> Carl
+> BaseballStatsTracker.com
