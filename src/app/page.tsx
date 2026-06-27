@@ -36,25 +36,48 @@ export default async function LandingPage() {
       <LandingClient />
 
       {/* ============================================================
-          SECTION 1 — EMOTION (The Story)
+          SECTION 1 — INTRO (skimmable hook + video)
           ============================================================ */}
       <section className="mx-auto max-w-3xl px-6 pb-16 pt-4">
         <div className="rounded-xl border border-gray-200 bg-white p-8 sm:p-10 dark:border-gray-700 dark:bg-gray-800">
-          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
-            {t("whyBuilt")}
-          </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            {t("storyH2")}
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+            {t("introHeadline")}
           </h2>
-          <div className="mt-6 space-y-5 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-            <p>{t("story1")}</p>
-            <p>{t.rich("story2", richTags)}</p>
-            <p>{t("story3")}</p>
-            <p>{t.rich("story4", richTags)}</p>
-            <p className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t("story5")}
-            </p>
-            <p>{t("story6")}</p>
+          <div className="mt-6 space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+            <p>{t("introP1")}</p>
+            <p>{t("introP2")}</p>
+          </div>
+
+          {/* Video — visual break (autoplay muted loop; tap to unmute via controls) */}
+          <div className="my-8 flex justify-center">
+            <video
+              src="/coach-ad.mp4"
+              poster="/coach-ad-poster.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              className="w-full max-w-[300px] rounded-2xl shadow-xl"
+            />
+          </div>
+
+          <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {t("introSub1")}
+          </h3>
+          <div className="mt-4 space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+            <p>{t("introP3")}</p>
+            <p>{t("introP4")}</p>
+            <p>{t("introP5")}</p>
+          </div>
+
+          <h3 className="mt-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {t("introSub2")}
+          </h3>
+          <div className="mt-4 space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+            <p className="text-xl font-semibold text-gray-900 dark:text-white">{t("introP6")}</p>
+            <p>{t("introP7")}</p>
+            <p>{t("introP8")}</p>
           </div>
         </div>
       </section>

@@ -601,7 +601,18 @@
       "privacyPolicy": "プライバシーポリシー",
       "tryFreeOr": "or",
       "tryFreeCta": "Try It Free — Score Your First Game",
-      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39."
+      "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39.",
+      "introHeadline": "If you've ever kept score on the back of a snack-bar receipt, this is for you.",
+      "introP1": "Every baseball parent knows the drill.",
+      "introP2": "Your kid goes 2-for-3 with a double, and you swear you'll remember it. By July, it's gone.",
+      "introSub1": "Finally — stats that keep themselves",
+      "introP3": "Baseball Stats Tracker lets you score the game live, right from the bleachers.",
+      "introP4": "Batting average, on-base percentage, spray charts — all calculated for you, the moment the at-bat ends.",
+      "introP5": "Grandma can follow along live from her couch. The coach gets real numbers, not guesses.",
+      "introSub2": "One price. Yours forever.",
+      "introP6": "No subscription. No monthly fee. Just $39, once.",
+      "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
     },
     "common": {
       "getStarted": "始める",
