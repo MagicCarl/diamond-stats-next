@@ -41,6 +41,9 @@ export async function POST(req: NextRequest) {
     customer_email: user.email,
     client_reference_id: user.id,
     metadata: { userId: user.id },
+    // Also stamp the PaymentIntent so refund webhooks (charge.refunded) can
+    // map back to this user and revoke access.
+    payment_intent_data: { metadata: { userId: user.id } },
     success_url: `${origin}/dashboard?purchase=success`,
     cancel_url: `${origin}/pricing?purchase=cancelled`,
   });

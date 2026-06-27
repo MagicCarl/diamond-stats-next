@@ -48,5 +48,39 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  // A refund revokes access: the user is soft-deleted and marked unpaid, so
+  // they can no longer use the app (enforced by getAuthUser's deletedAt check).
+  if (event.type === "charge.refunded") {
+    const charge = event.data.object as Stripe.Charge;
+    // userId lives on the PaymentIntent metadata (set at checkout). Fall back
+    // to the charge's own metadata just in case.
+    let userId = charge.metadata?.userId || null;
+    if (!userId && charge.payment_intent) {
+      try {
+        const piId =
+          typeof charge.payment_intent === "string"
+            ? charge.payment_intent
+            : charge.payment_intent.id;
+        const pi = await stripe.paymentIntents.retrieve(piId);
+        userId = pi.metadata?.userId || null;
+      } catch (err) {
+        console.error("[stripe webhook] could not retrieve PaymentIntent:", err);
+      }
+    }
+    if (userId) {
+      try {
+        await prisma.user.update({
+          where: { id: userId },
+          data: { isPaid: false, deletedAt: new Date() },
+        });
+        console.log(`[stripe webhook] refund → revoked access for user ${userId}`);
+      } catch (err) {
+        console.error(`[stripe webhook] could not revoke ${userId}:`, err);
+      }
+    } else {
+      console.error("[stripe webhook] no userId on refunded charge", charge.id);
+    }
+  }
+
   return NextResponse.json({ received: true });
 }
