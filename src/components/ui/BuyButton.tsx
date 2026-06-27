@@ -22,6 +22,7 @@ export default function BuyButton({
   const { apiFetch } = useApi();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleClick = async () => {
     if (!user) {
@@ -29,21 +30,36 @@ export default function BuyButton({
       return;
     }
     setLoading(true);
+    setError("");
     try {
       const { url } = await apiFetch("/api/checkout", { method: "POST" });
       if (url) {
         window.location.href = url;
-      } else {
-        setLoading(false);
+        return;
       }
-    } catch {
+      setError("Couldn't start checkout. Please try again.");
+    } catch (err) {
+      const code = (err as { code?: string })?.code;
+      if (code === "ALREADY_PAID") {
+        setError("You already have full access — create unlimited games anytime.");
+      } else {
+        setError("Couldn't start checkout. Please try again in a moment.");
+      }
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <button onClick={handleClick} disabled={loading} className={className}>
-      {loading ? "…" : children}
-    </button>
+    <>
+      <button onClick={handleClick} disabled={loading} className={className}>
+        {loading ? "…" : children}
+      </button>
+      {error && (
+        <span className="mt-2 block text-sm text-red-600 dark:text-red-400">
+          {error}
+        </span>
+      )}
+    </>
   );
 }
