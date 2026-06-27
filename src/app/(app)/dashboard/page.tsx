@@ -13,6 +13,7 @@ import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal";
 import Select from "@/components/ui/Select";
 import Spinner from "@/components/ui/Spinner";
+import BuyButton from "@/components/ui/BuyButton";
 import { LEVELS } from "@/lib/constants";
 
 export default function DashboardPage() {
@@ -29,6 +30,16 @@ export default function DashboardPage() {
   const [newTeamLevel, setNewTeamLevel] = useState("little_league");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Set when the user lands back from a successful Stripe checkout. The webhook
+  // flips isPaid server-side; this optimistically reflects it in the UI (the
+  // cached appUser.isPaid catches up on the next natural load).
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("purchase") === "success") {
+      setPurchaseSuccess(true);
+    }
+  }, []);
 
   const fetchTeams = async () => {
     try {
@@ -82,19 +93,21 @@ export default function DashboardPage() {
 
   return (
     <div>
-      {appUser && !appUser.isPaid && (
+      {purchaseSuccess && (
+        <div className="mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 dark:border-green-800 dark:bg-green-900/20">
+          <p className="text-sm font-medium text-green-800 dark:text-green-300">
+            {t("purchaseSuccess")}
+          </p>
+        </div>
+      )}
+      {appUser && !appUser.isPaid && !purchaseSuccess && (
         <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800 dark:bg-amber-900/20">
           <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
             {t("viewOnlyBanner")}
           </p>
-          <a
-            href="https://www.paypal.com/paypalme/carlrandrews"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-1 inline-block text-sm font-medium text-amber-700 underline hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-300"
-          >
+          <BuyButton className="mt-1 inline-block text-sm font-medium text-amber-700 underline hover:text-amber-900 dark:text-amber-400 dark:hover:text-amber-300">
             {t("purchaseCta")}
-          </a>
+          </BuyButton>
         </div>
       )}
       <div className="mb-6 flex items-center justify-between">

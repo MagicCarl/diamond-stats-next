@@ -38,7 +38,8 @@
     "teamNamePlaceholder": "例如：西區虎隊",
     "levelLabel": "級別",
     "creating": "建立中...",
-    "createError": "建立球隊失敗"
+    "createError": "建立球隊失敗",
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
   },
   "games": {
     "new": {

@@ -38,7 +38,8 @@
     "teamNamePlaceholder": "예: 웨스트사이드 타이거스",
     "levelLabel": "레벨",
     "creating": "만드는 중...",
-    "createError": "팀을 만들지 못했습니다"
+    "createError": "팀을 만들지 못했습니다",
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
   },
   "games": {
     "new": {

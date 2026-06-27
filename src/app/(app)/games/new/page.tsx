@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Card from "@/components/ui/Card";
+import BuyButton from "@/components/ui/BuyButton";
 
 export default function NewGamePage() {
   const router = useRouter();
@@ -82,14 +83,9 @@ export default function NewGamePage() {
           <p className="text-gray-600 dark:text-gray-400">
             {t("limitReached")}
           </p>
-          <a
-            href="https://www.paypal.com/paypalme/carlrandrews"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
-          >
+          <BuyButton className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700">
             {t("purchaseCta")}
-          </a>
+          </BuyButton>
           <Link
             href="/dashboard"
             className="mt-2 block text-sm text-gray-500 hover:underline"

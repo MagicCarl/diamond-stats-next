@@ -38,7 +38,8 @@
     "teamNamePlaceholder": "例：ウェストサイド・タイガース",
     "levelLabel": "レベル",
     "creating": "作成中...",
-    "createError": "チームの作成に失敗しました"
+    "createError": "チームの作成に失敗しました",
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
   },
   "games": {
     "new": {

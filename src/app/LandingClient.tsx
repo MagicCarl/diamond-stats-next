@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import BuyButton from "@/components/ui/BuyButton";
 
 const features = [
   {
@@ -111,14 +112,9 @@ export default function LandingClient() {
           {t("hookBody")}
         </p>
         <div className="mt-8 flex flex-col items-center gap-2">
-          <a
-            href="https://www.paypal.com/paypalme/carlrandrews"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700"
-          >
+          <BuyButton className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700">
             {t("ctaPrimary")}
-          </a>
+          </BuyButton>
           <p className="text-sm text-gray-500 dark:text-gray-500">
             {t("ctaSub")}
           </p>
@@ -170,14 +166,9 @@ export default function LandingClient() {
               <li>{t("planRoster")}</li>
               <li>{t("planSplits")}</li>
             </ul>
-            <a
-              href="https://www.paypal.com/paypalme/carlrandrews"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
-            >
+            <BuyButton className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
               {t("purchaseNow")}
-            </a>
+            </BuyButton>
           </div>
         </div>
       </main>
