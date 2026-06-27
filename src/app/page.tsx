@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import LandingClient from "./LandingClient";
+import BuyButton from "@/components/ui/BuyButton";
 
 export default async function LandingPage() {
   const t = await getTranslations("marketing.landing");
@@ -271,14 +272,9 @@ export default async function LandingPage() {
             </div>
 
             <div className="mt-8 flex flex-col items-center gap-3">
-              <a
-                href="https://www.paypal.com/paypalme/carlrandrews"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full rounded-lg bg-blue-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700 sm:w-auto"
-              >
+              <BuyButton className="w-full rounded-lg bg-blue-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700 sm:w-auto">
                 {t("ctaPrimary")}
-              </a>
+              </BuyButton>
               <p className="text-sm text-gray-500 dark:text-gray-500">
                 {t("ctaSub2")}
               </p>

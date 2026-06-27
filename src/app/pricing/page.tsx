@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import BuyButton from "@/components/ui/BuyButton";
 
 export const metadata: Metadata = {
   title: "Pricing - $39 One-Time Baseball & Softball Stats App",
@@ -95,14 +96,9 @@ export default async function PricingPage() {
             ))}
           </ul>
 
-          <a
-            href="https://www.paypal.com/paypalme/carlrandrews"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
-          >
+          <BuyButton className="mt-8 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
             {t("purchaseCta")}
-          </a>
+          </BuyButton>
           <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
             {t("securePayment")}
           </p>

@@ -38,7 +38,8 @@
     "teamNamePlaceholder": "e.g., Westside Tigers",
     "levelLabel": "Level",
     "creating": "Creating...",
-    "createError": "Failed to create team"
+    "createError": "Failed to create team",
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
   },
   "games": {
     "new": {

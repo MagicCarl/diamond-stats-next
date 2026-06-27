@@ -38,7 +38,8 @@
     "teamNamePlaceholder": "p. ej., Tigres del Oeste",
     "levelLabel": "Nivel",
     "creating": "Creando...",
-    "createError": "Error al crear el equipo"
+    "createError": "Error al crear el equipo",
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
   },
   "games": {
     "new": {
