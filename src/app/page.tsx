@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import { getTranslations } from "next-intl/server";
 import LandingClient from "./LandingClient";
 import BuyButton from "@/components/ui/BuyButton";
@@ -296,6 +297,17 @@ export default async function LandingPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ============================================================
+          SORO BLOG EMBED
+          ============================================================ */}
+      <section className="mx-auto max-w-3xl px-6 pb-16">
+        <div id="soro-blog" />
+        <Script
+          src="https://app.trysoro.com/api/embed/8d385f99-7f5f-4586-9a39-bbfdefac99ae"
+          strategy="afterInteractive"
+        />
       </section>
 
       {/* ============================================================
