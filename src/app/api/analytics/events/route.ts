@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser } from "@/lib/auth";
+import { enforceRateLimit } from "@/lib/rate-limit";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { z } from "zod/v4";
@@ -18,6 +19,14 @@ const createEventSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  // Public, unauthenticated write endpoint — throttle per IP to stop DB flooding.
+  const limited = await enforceRateLimit(req, {
+    name: "analytics-events",
+    limit: 30,
+    window: "1 m",
+  });
+  if (limited) return limited;
+
   const user = await getAuthUser(req);
 
   const parsed = createEventSchema.safeParse(await req.json());

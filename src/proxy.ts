@@ -12,6 +12,13 @@ export function proxy(request: NextRequest) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
   }
 
+  // Force HTTPS for two years, including subdomains, and allow preload-list
+  // submission. Prevents protocol-downgrade / SSL-stripping attacks.
+  response.headers.set(
+    "Strict-Transport-Security",
+    "max-age=63072000; includeSubDomains; preload"
+  );
+
   // Prevent clickjacking
   response.headers.set("X-Frame-Options", "DENY");
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
+import { enforceRateLimit } from "@/lib/rate-limit";
 import { stripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
@@ -10,6 +11,15 @@ const PRICE_CENTS = 3900;
 export async function POST(req: NextRequest) {
   const user = await getAuthUser(req);
   if (!user) return unauthorized();
+
+  // Limit Stripe session creation per account to prevent abuse.
+  const limited = await enforceRateLimit(req, {
+    name: "checkout",
+    limit: 5,
+    window: "1 m",
+    identifier: user.id,
+  });
+  if (limited) return limited;
 
   if (user.isPaid) {
     return NextResponse.json(

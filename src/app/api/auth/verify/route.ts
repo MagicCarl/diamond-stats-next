@@ -2,9 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAdminAuth } from "@/lib/firebase-admin";
 import { prisma } from "@/lib/prisma";
 import { accessBlockReason } from "@/lib/auth";
+import { enforceRateLimit } from "@/lib/rate-limit";
 import { trackServerEvent } from "@/lib/analytics";
 
 export async function POST(req: NextRequest) {
+  // Throttle per IP — this verifies tokens and can create user rows.
+  const limited = await enforceRateLimit(req, {
+    name: "auth-verify",
+    limit: 20,
+    window: "1 m",
+  });
+  if (limited) return limited;
+
   const authHeader = req.headers.get("authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     return NextResponse.json({ error: "No token provided" }, { status: 401 });
