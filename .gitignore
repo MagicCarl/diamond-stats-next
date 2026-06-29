@@ -42,3 +42,7 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Local personal notes (not part of the app)
+PROJECT_STATUS.md
+youtube-content-plan.md
