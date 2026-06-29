@@ -218,6 +218,6 @@ export const metadata: Metadata = {
 
 - **Verify the competitor pricing claims** before publishing. I wrote "GameChanger ~$10/mo per team" and "iScore ~$10/mo or $40/yr" as ballpark figures. Check current pricing on their sites and update the table.
 - **Decide on tone of competitor comparisons.** I kept it fair but honest. If you want to soften the GameChanger criticism (in case they ever notice), tweak the "incumbent" section.
-- **Update PayPal / checkout link.** Your home page has a PayPal.me link as the CTA — confirm that's still your checkout method or whether you want the article CTA to point somewhere else.
+- **Checkout link.** The site now uses Stripe Checkout (one-time $39) as the CTA — make sure the article CTA points to the current checkout flow.
 - **Date the article.** Use `datePublished` and `dateModified` in JSON-LD. Update `dateModified` whenever you tweak the content — Google rewards freshness on listicle-style content.
 - **Once approved, I will:** (a) convert this into a `src/app/learn/gamechanger-alternatives/page.tsx` Server Component with the metadata and JSON-LD above, (b) add a shared `/learn` layout if helpful, (c) add the URL to `src/app/sitemap.ts`, (d) push a preview deploy for you to click through before merging to main.

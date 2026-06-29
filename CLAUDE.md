@@ -1,13 +1,13 @@
 # Baseball Stats Tracker
 
-Youth and amateur baseball statistics tracking app. One-time $39 purchase via PayPal.
+Youth and amateur baseball statistics tracking app. One-time $39 purchase via Stripe.
 
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router) with TypeScript
 - **Database**: PostgreSQL (Supabase) via Prisma ORM with PgBouncer
 - **Auth**: Firebase Authentication (email/password + Google OAuth)
-- **Payments**: PayPal (manual verification) with Stripe SDK available
+- **Payments**: Stripe Checkout (one-time payment) with webhook-based access activation
 - **Styling**: Tailwind CSS v4, next-themes for dark mode
 - **Hosting**: Vercel (frontend), Supabase (database), Firebase (auth)
 
@@ -81,6 +81,7 @@ See `.env.example` for required variables:
 
 ## Payment Model
 
-- One-time $39 purchase via PayPal.me link
-- Admin manually toggles `isPaid` flag via admin panel
+- One-time $39 purchase via Stripe Checkout (`POST /api/checkout`)
+- Stripe webhook (`checkout.session.completed`) automatically sets `isPaid`; a refund (`charge.refunded`) revokes access by soft-deleting the user
+- Admin can also manually toggle `isPaid` via the admin panel
 - Free users can view data; creating games requires paid status
