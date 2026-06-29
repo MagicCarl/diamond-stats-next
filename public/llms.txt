@@ -13,7 +13,7 @@ Baseball Stats Tracker is a web application for coaches and parents who want to 
 
 ## Product details
 
-- **Price**: $39 USD, one-time payment via PayPal. No subscription, no free tier.
+- **Price**: $39 USD, one-time payment via Stripe. No subscription, no free tier.
 - **Platforms**: Web application — works on any browser on iPhone, Android, iPad, laptop, or desktop. No native app download required.
 - **Sports**: Baseball and softball, all levels — Little League, travel ball, recreational leagues, high school, college.
 - **Live scoring**: Score every at-bat in real time from the bleachers. Results sync across devices every 3 seconds.
