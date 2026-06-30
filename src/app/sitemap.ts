@@ -29,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/learn/best-baseball-stats-apps`,
+      lastModified: new Date("2026-06-29"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/signup`,
       lastModified: new Date(),
       changeFrequency: "monthly",
