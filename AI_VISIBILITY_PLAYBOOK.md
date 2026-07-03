@@ -81,7 +81,7 @@ or just paste the links into a Claude session and ask it to add them. Wanted the
 - [x] Facebook — https://www.facebook.com/profile.php?id=61588582352146
 - [x] Instagram — https://www.instagram.com/mauicarl/
 - [ ] Threads profile URL
-- [ ] LinkedIn company page URL (after Step 1; Crunchbase skipped — paid)
+- [x] LinkedIn — https://www.linkedin.com/company/baseball-stats-tracker (Crunchbase skipped — paid; page description still to save, see Step 1 note)
 - [x] Wikidata — https://www.wikidata.org/wiki/Q140411691 (created 2026-07-02 with statements)
 
 ## Step 4 — Directory + review listings (copy already written)

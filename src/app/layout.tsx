@@ -170,6 +170,7 @@ export default async function RootLayout({
                   "https://www.facebook.com/profile.php?id=61588582352146",
                   "https://www.instagram.com/mauicarl/",
                   "https://www.wikidata.org/wiki/Q140411691",
+                  "https://www.linkedin.com/company/baseball-stats-tracker",
                 ],
               },
               {
