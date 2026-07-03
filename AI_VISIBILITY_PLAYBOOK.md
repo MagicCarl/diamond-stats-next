@@ -59,11 +59,11 @@ This part of the BeFound report was correct.
    - **Label:** Baseball Stats Tracker
    - **Description:** web application for live scoring and statistics tracking in youth baseball and softball
 3. On the new item, use **+ add statement** to add, one at a time:
-   - **instance of (P31):** software application — this is BeFound's "P31" tip
+   - **instance of (P31):** web application
    - **official website (P856):** https://www.baseballstatstracker.com
-   - **country of origin (P17):** United States
+   - **country of origin (P495):** United States of America
    - **inception (P571):** your launch year
-   - **developer (P178):** Carl Andrews
+   - (skip "developer" — it only accepts existing Wikidata items as values)
 4. Keep it strictly factual — no marketing language. Wikidata editors delete
    puffery, and a deleted item is worse than none.
 5. Copy the item URL (looks like wikidata.org/wiki/Q…) for Step 3.
@@ -83,7 +83,7 @@ or just paste the links into a Claude session and ask it to add them. Wanted the
 - [x] Instagram — https://www.instagram.com/mauicarl/
 - [ ] Threads profile URL
 - [ ] Crunchbase profile URL (after Step 1)
-- [ ] Wikidata item URL (after Step 2)
+- [x] Wikidata — https://www.wikidata.org/wiki/Q140411691 (item created 2026-07-02; statements still to add)
 
 ## Step 4 — Directory + review listings (copy already written)
 

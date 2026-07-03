@@ -169,6 +169,7 @@ export default async function RootLayout({
                   "https://x.com/mauicarlandrews",
                   "https://www.facebook.com/profile.php?id=61588582352146",
                   "https://www.instagram.com/mauicarl/",
+                  "https://www.wikidata.org/wiki/Q140411691",
                 ],
               },
               {
