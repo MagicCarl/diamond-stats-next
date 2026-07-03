@@ -166,6 +166,9 @@ export default async function RootLayout({
                 // Instagram, Crunchbase, Wikidata — see AI_VISIBILITY_PLAYBOOK.md).
                 sameAs: [
                   "https://www.youtube.com/@mauicarlandrews",
+                  "https://x.com/mauicarlandrews",
+                  "https://www.facebook.com/profile.php?id=61588582352146",
+                  "https://www.instagram.com/mauicarl/",
                 ],
               },
               {

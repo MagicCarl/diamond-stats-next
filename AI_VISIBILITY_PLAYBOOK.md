@@ -78,9 +78,9 @@ Each time a profile from this playbook goes live, add its URL to that array —
 or just paste the links into a Claude session and ask it to add them. Wanted there:
 
 - [x] YouTube — https://www.youtube.com/@mauicarlandrews
-- [ ] X/Twitter profile URL
-- [ ] Facebook page URL
-- [ ] Instagram profile URL
+- [x] X/Twitter — https://x.com/mauicarlandrews
+- [x] Facebook — https://www.facebook.com/profile.php?id=61588582352146
+- [x] Instagram — https://www.instagram.com/mauicarl/
 - [ ] Threads profile URL
 - [ ] Crunchbase profile URL (after Step 1)
 - [ ] Wikidata item URL (after Step 2)
