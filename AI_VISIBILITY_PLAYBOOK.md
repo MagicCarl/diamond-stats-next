@@ -30,24 +30,23 @@ one-time purchase"** niche — every step below aims at it.
 
 ---
 
-## Step 1 — Crunchbase profile (~20 min, do first)
+## Step 1 — LinkedIn Company Page (~15 min, free)
 
-AI engines use Crunchbase to confirm a software company is real and pull its
-attributes (founding date, category, description).
+_(Originally Crunchbase, but Crunchbase now gates company submissions behind a
+paid plan — checked 2026-07-02. A LinkedIn page serves the same "this company
+is real" role for AI engines and is free.)_
 
-1. Go to **crunchbase.com** → Sign Up (free account, use mauicarlandrews@gmail.com).
-2. Search "Baseball Stats Tracker" to confirm no profile exists, then choose
-   **Add a Company** (under the profile menu, or crunchbase.com/add-new).
+1. Log in to **linkedin.com** with a personal account (free to create).
+2. Go to **linkedin.com/company/setup/new** (or the "For Business" grid icon →
+   **Create a Company Page**).
 3. Fill every field — blank fields are missed signals:
    - **Name:** Baseball Stats Tracker
    - **Website:** https://www.baseballstatstracker.com
-   - **Industry/categories:** Sports, Software, Apps, SaaS
-   - **Founded:** the real year you launched
+   - **Industry:** Software Development
    - **Description:** reuse the "About" copy from `marketing-ai-listings.md` § 2
-   - **Founder:** Carl Andrews
-   - **Social links:** YouTube (youtube.com/@mauicarlandrews) + X/Facebook/Instagram
-4. After it's approved, copy the Crunchbase profile URL — you'll add it to the
-   website's `sameAs` list in Step 3.
+   - **Logo:** use `public/logo.png` from this repo
+4. Copy the page URL (linkedin.com/company/…) — it goes into the website's
+   `sameAs` list in Step 3.
 
 ## Step 2 — Wikidata entry (~20 min)
 
@@ -82,8 +81,8 @@ or just paste the links into a Claude session and ask it to add them. Wanted the
 - [x] Facebook — https://www.facebook.com/profile.php?id=61588582352146
 - [x] Instagram — https://www.instagram.com/mauicarl/
 - [ ] Threads profile URL
-- [ ] Crunchbase profile URL (after Step 1)
-- [x] Wikidata — https://www.wikidata.org/wiki/Q140411691 (item created 2026-07-02; statements still to add)
+- [ ] LinkedIn company page URL (after Step 1; Crunchbase skipped — paid)
+- [x] Wikidata — https://www.wikidata.org/wiki/Q140411691 (created 2026-07-02 with statements)
 
 ## Step 4 — Directory + review listings (copy already written)
 

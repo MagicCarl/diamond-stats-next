@@ -162,8 +162,8 @@ export default async function RootLayout({
                   height: 512,
                 },
                 // sameAs tells AI engines these profiles are the same entity.
-                // Append new URLs here as listings go live (X, Facebook,
-                // Instagram, Crunchbase, Wikidata — see AI_VISIBILITY_PLAYBOOK.md).
+                // Append new URLs here as listings go live (LinkedIn, Threads
+                // still pending — see AI_VISIBILITY_PLAYBOOK.md Step 3).
                 sameAs: [
                   "https://www.youtube.com/@mauicarlandrews",
                   "https://x.com/mauicarlandrews",
