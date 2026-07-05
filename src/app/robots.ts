@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: ["/", "/features", "/pricing", "/login", "/signup"],
-        disallow: ["/api/", "/dashboard", "/admin", "/settings", "/teams/", "/games/", "/instructions"],
+        disallow: ["/api/", "/dashboard", "/admin", "/settings", "/stats/", "/teams/", "/games/", "/instructions"],
       },
     ],
     sitemap: "https://www.baseballstatstracker.com/sitemap.xml",

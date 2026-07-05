@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import LandingClient from "./LandingClient";
 import BuyButton from "@/components/ui/BuyButton";
 import SoroBlog from "@/components/SoroBlog";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.baseballstatstracker.com",
+  },
+};
 
 export default async function LandingPage() {
   const t = await getTranslations("marketing.landing");
