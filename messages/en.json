@@ -881,6 +881,10 @@
       "ctaP": "$39 once. Score your first game tonight. No app store, no subscription. You just own it.",
       "ctaOneTime": "one-time",
       "ctaBtn": "Get instant access"
+    },
+    "footer": {
+      "guides": "Guides",
+      "privacy": "Privacy Policy"
     }
   },
   "admin": {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/learn/baseball-stats-explained";
 const PUBLISHED = "2026-07-01";
@@ -243,6 +244,7 @@ export default function BaseballStatsExplainedPage() {
           <Link href="/compare" className="hover:underline">→ Compare apps</Link>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/learn/how-to-keep-score-in-baseball";
 const PUBLISHED = "2026-07-01";
@@ -172,6 +173,7 @@ export default function HowToKeepScorePage() {
         <CtaCard />
         <RelatedLinks />
       </main>
+      <Footer />
     </div>
   );
 }

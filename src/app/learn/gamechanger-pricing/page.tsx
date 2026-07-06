@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/learn/gamechanger-pricing";
 const PUBLISHED = "2026-07-01";
@@ -144,6 +145,7 @@ export default function GameChangerPricingPage() {
         <CtaCard />
         <RelatedLinks />
       </main>
+      <Footer />
     </div>
   );
 }

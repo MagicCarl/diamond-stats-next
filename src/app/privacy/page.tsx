@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
@@ -40,6 +41,7 @@ export default async function PrivacyPolicyPage() {
           ))}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

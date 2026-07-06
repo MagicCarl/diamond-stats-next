@@ -29,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/learn`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/learn/gamechanger-alternatives`,
       lastModified: new Date("2026-05-21"),
       changeFrequency: "monthly",

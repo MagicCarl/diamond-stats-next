@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/learn/baseball-spray-chart-guide";
 const PUBLISHED = "2026-07-01";
@@ -149,6 +150,7 @@ export default function SprayChartGuidePage() {
         <CtaCard />
         <RelatedLinks />
       </main>
+      <Footer />
     </div>
   );
 }

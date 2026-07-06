@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import LandingClient from "./LandingClient";
 import BuyButton from "@/components/ui/BuyButton";
 import SoroBlog from "@/components/SoroBlog";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   alternates: {
@@ -316,16 +317,7 @@ export default async function LandingPage() {
       {/* ============================================================
           FOOTER LINKS
           ============================================================ */}
-      <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
-        <div className="mx-auto max-w-3xl text-center text-sm text-gray-600 dark:text-gray-400">
-          <Link
-            href="/privacy"
-            className="font-medium text-blue-600 hover:underline dark:text-blue-400"
-          >
-            {t("privacyPolicy")}
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

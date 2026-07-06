@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 import { getTranslations } from "next-intl/server";
 
 const URL = "https://www.baseballstatstracker.com/learn/gamechanger-alternatives";
@@ -432,22 +433,22 @@ export default async function GameChangerAlternativesPage() {
               </Link>
             </div>
           </section>
+
+          <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">
+            <Link href="/learn/gamechanger-pricing" className="hover:underline">
+              → GameChanger pricing breakdown
+            </Link>
+            <Link href="/learn/best-baseball-stats-apps" className="hover:underline">
+              → Best baseball stats apps
+            </Link>
+            <Link href="/compare" className="hover:underline">
+              → Side-by-side app comparison
+            </Link>
+          </div>
         </article>
       </main>
 
-      <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
-        <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>{tc("footerRights", { year: new Date().getFullYear() })}</p>
-          <div className="mt-2 flex justify-center gap-4">
-            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navHome")}</Link>
-            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navFeatures")}</Link>
-            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navPricing")}</Link>
-            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navCompare")}</Link>
-            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignIn")}</Link>
-            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignUp")}</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

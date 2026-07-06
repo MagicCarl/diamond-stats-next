@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/compare";
 const MODIFIED = "2026-07-01";
@@ -265,11 +266,15 @@ export default function ComparePage() {
           <Link href="/learn/gamechanger-alternatives" className="hover:underline">
             → GameChanger alternatives
           </Link>
+          <Link href="/learn/gamechanger-pricing" className="hover:underline">
+            → GameChanger pricing breakdown
+          </Link>
           <Link href="/learn/best-baseball-stats-apps" className="hover:underline">
             → Best baseball stats apps
           </Link>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

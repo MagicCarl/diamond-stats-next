@@ -881,6 +881,10 @@
       "ctaP": "$39 una vez. Anota tu primer juego esta noche. Sin tienda de apps, sin suscripción. Simplemente es tuyo.",
       "ctaOneTime": "pago único",
       "ctaBtn": "Obtén acceso instantáneo"
+    },
+    "footer": {
+      "guides": "Guías",
+      "privacy": "Política de Privacidad"
     }
   },
   "admin": {

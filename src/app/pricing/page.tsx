@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Footer from "@/components/layout/Footer";
 import { getTranslations } from "next-intl/server";
 import BuyButton from "@/components/ui/BuyButton";
 
@@ -179,24 +180,16 @@ export default async function PricingPage() {
             <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
               Read our honest comparison of GameChanger alternatives
             </Link>{" "}
-            to see how we stack up.
+            to see how we stack up, or see{" "}
+            <Link href="/learn/gamechanger-pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+              what GameChanger actually costs
+            </Link>{" "}
+            per year.
           </p>
         </div>
       </main>
 
-      <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
-        <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>{tc("footerRights", { year: new Date().getFullYear() })}</p>
-          <div className="mt-2 flex justify-center gap-4">
-            <Link href="/" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navHome")}</Link>
-            <Link href="/features" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navFeatures")}</Link>
-            <Link href="/pricing" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navPricing")}</Link>
-            <Link href="/learn/gamechanger-alternatives" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navCompare")}</Link>
-            <Link href="/login" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignIn")}</Link>
-            <Link href="/signup" className="hover:text-gray-700 dark:hover:text-gray-300">{tc("navSignUp")}</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
