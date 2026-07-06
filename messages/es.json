@@ -138,7 +138,12 @@
       "errAtBat": "Error al registrar el turno. Inténtalo de nuevo.",
       "errOppAtBat": "Error al registrar el turno del rival. Inténtalo de nuevo.",
       "share": "Compartir",
-      "shareCopied": "¡Enlace copiado!"
+      "shareCopied": "¡Enlace copiado!",
+      "shareTitle": "Compartir este partido",
+      "shareExplain": "Cualquiera con este enlace puede ver el partido en vivo: marcador, box score y jugada a jugada. No necesitan cuenta, y la página se actualiza automáticamente mientras anotas.",
+      "shareCopy": "Copiar enlace",
+      "shareVia": "Compartir por…",
+      "shareNote": "Solo las personas a las que envíes este enlace pueden ver el partido. El enlace sigue siendo válido después del partido, así que la familia también puede ver el box score final."
     },
     "box": {
       "gameNotFound": "Juego no encontrado",
@@ -439,7 +444,14 @@
     "tip7": "Pide ayuda a una segunda persona: una observa el juego y la otra registra en la aplicación. Con la sincronización en tiempo real, ambos dispositivos se mantienen actualizados automáticamente.",
     "tip8": "Cuando enfrentes a un rival repetido, su plantilla de bateadores se carga automáticamente, ahorrándote tiempo en la preparación del día de juego.",
     "tip9": "Usa el modo oscuro en juegos al aire libre para una mejor visibilidad de la pantalla bajo sol brillante.",
-    "tip10": "Revisa el box score durante el juego para ver el marcador tradicional entrada por entrada con las columnas R/H/E, igual que en un estadio real."
+    "tip10": "Revisa el box score durante el juego para ver el marcador tradicional entrada por entrada con las columnas R/H/E, igual que en un estadio real.",
+    "shareFamily": "Compartir un partido con familia y amigos",
+    "shareFamilyIntro": "Cualquiera — abuelos, jugadores en casa, el chat del equipo — puede seguir tu partido en vivo desde cualquier teléfono o computadora. No necesitan cuenta ni la app.",
+    "sfs1": "Abre la página de <b>anotación en vivo</b> de tu partido (donde registras los turnos al bate).",
+    "sfs2": "Toca <b>Compartir</b> en la esquina superior derecha, junto a <badge>Box Score</badge>.",
+    "sfs3": "Se abre una ventana con el enlace público del partido. Toca <b>Copiar enlace</b> y pégalo en el chat del equipo, o toca <b>Compartir por…</b> para enviarlo por mensaje.",
+    "sfs4": "Eso es todo. Quien abra el enlace verá el marcador en vivo, el box score y la jugada a jugada — actualizándose automáticamente cada pocos segundos.",
+    "shareFamilyNote": "Cada partido tiene su propio enlace y solo las personas a las que se lo envíes pueden encontrarlo. El enlace sigue funcionando después del partido."
   },
   "auth": {
     "login": {

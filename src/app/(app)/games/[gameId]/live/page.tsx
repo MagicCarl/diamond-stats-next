@@ -98,6 +98,8 @@ export default function LiveScoringPage() {
   const [editSB, setEditSB] = useState(0);
   const [editCS, setEditCS] = useState(0);
 
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
 
   const rosterAutoLoadedRef = useRef(false);
@@ -495,28 +497,85 @@ export default function LiveScoringPage() {
   }
 
   const handleShare = async () => {
+    setShareCopied(false);
+    setShowShareModal(true);
+    if (shareUrl) return;
     try {
       const { shareToken } = await apiFetch(`/api/games/${gameId}/share`, {
         method: "POST",
       });
-      const url = `${window.location.origin}/watch/${shareToken}`;
-      if (navigator.share) {
-        await navigator.share({
-          title: `${game.team?.name || "Our team"} vs ${game.opponentName}`,
-          url,
-        });
-      } else {
-        await navigator.clipboard.writeText(url);
-        setShareCopied(true);
-        setTimeout(() => setShareCopied(false), 2500);
-      }
+      setShareUrl(`${window.location.origin}/watch/${shareToken}`);
     } catch {
-      // user cancelled the share sheet, or the request failed — no-op
+      setShowShareModal(false);
+    }
+  };
+
+  const handleCopyShareUrl = async () => {
+    if (!shareUrl) return;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2500);
+    } catch {
+      // clipboard unavailable — the link is still selectable in the input
+    }
+  };
+
+  const handleNativeShare = async () => {
+    if (!shareUrl) return;
+    try {
+      await navigator.share({
+        title: `${game.team?.name || "Our team"} vs ${game.opponentName}`,
+        url: shareUrl,
+      });
+    } catch {
+      // user closed the share sheet — no-op
     }
   };
 
   return (
     <div className="space-y-4">
+      {/* Share game modal */}
+      <Modal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        title={t("shareTitle")}
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            {t("shareExplain")}
+          </p>
+          {shareUrl ? (
+            <>
+              <input
+                type="text"
+                readOnly
+                value={shareUrl}
+                onFocus={(e) => e.target.select()}
+                className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
+              />
+              <div className="flex gap-2">
+                <Button className="flex-1" onClick={handleCopyShareUrl}>
+                  {shareCopied ? t("shareCopied") : t("shareCopy")}
+                </Button>
+                {typeof navigator !== "undefined" && "share" in navigator && (
+                  <Button variant="ghost" className="flex-1" onClick={handleNativeShare}>
+                    {t("shareVia")}
+                  </Button>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-center py-4">
+              <Spinner />
+            </div>
+          )}
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            {t("shareNote")}
+          </p>
+        </div>
+      </Modal>
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <Link
@@ -527,7 +586,7 @@ export default function LiveScoringPage() {
         </Link>
         <div className="flex gap-2">
           <Button variant="ghost" size="sm" onClick={handleShare}>
-            {shareCopied ? t("shareCopied") : t("share")}
+            {t("share")}
           </Button>
           <Link href={`/games/${gameId}/box`}>
             <Button variant="ghost" size="sm">{t("boxScore")}</Button>

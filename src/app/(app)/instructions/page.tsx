@@ -105,6 +105,25 @@ export default function InstructionsPage() {
         </p>
       </Card>
 
+      {/* Sharing with Family & Friends */}
+      <Card>
+        <h2 className="mb-3 text-lg font-semibold">{t("shareFamily")}</h2>
+        <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
+          {t("shareFamilyIntro")}
+        </p>
+        <ol className="mb-3 list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <li>{t.rich("sfs1", rich)}</li>
+          <li>{t.rich("sfs2", rich)}</li>
+          <li>{t.rich("sfs3", rich)}</li>
+          <li>{t.rich("sfs4", rich)}</li>
+        </ol>
+        <div className="rounded-lg bg-gray-50 p-3 dark:bg-gray-800/50">
+          <p className="text-xs text-gray-600 dark:text-gray-400">
+            {t("shareFamilyNote")}
+          </p>
+        </div>
+      </Card>
+
       {/* Pitch Tracking */}
       <Card>
         <h2 className="mb-3 text-lg font-semibold">{t("pitchTracking")}</h2>

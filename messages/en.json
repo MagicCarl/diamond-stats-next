@@ -138,7 +138,12 @@
       "errAtBat": "Failed to record at-bat. Please try again.",
       "errOppAtBat": "Failed to record opponent at-bat. Please try again.",
       "share": "Share",
-      "shareCopied": "Link copied!"
+      "shareCopied": "Link copied!",
+      "shareTitle": "Share this game",
+      "shareExplain": "Anyone with this link can watch the game live — scoreboard, box score, and play-by-play. They don't need an account, and the page updates automatically as you score.",
+      "shareCopy": "Copy link",
+      "shareVia": "Share via…",
+      "shareNote": "Only people you send this link to can see the game. The link stays valid after the game ends, so family can check the final box score too."
     },
     "box": {
       "gameNotFound": "Game not found",
@@ -439,7 +444,14 @@
     "tip7": "Have a second person help — one person watches the game, the other records on the app. With real-time sync, both devices stay up to date automatically.",
     "tip8": "When facing a repeat opponent, their batter roster loads automatically — saving you time on game day setup.",
     "tip9": "Use dark mode at outdoor games for better screen visibility in bright sunlight.",
-    "tip10": "Check the box score during the game to see the traditional inning-by-inning scoreboard with R/H/E columns, just like a real ballpark."
+    "tip10": "Check the box score during the game to see the traditional inning-by-inning scoreboard with R/H/E columns, just like a real ballpark.",
+    "shareFamily": "Sharing a Game with Family & Friends",
+    "shareFamilyIntro": "Anyone — grandparents, players at home, the whole team group chat — can follow your game live from any phone or computer. They do not need an account or the app.",
+    "sfs1": "Open your game's <b>live scoring</b> page (the page where you record at-bats).",
+    "sfs2": "Tap <b>Share</b> in the top-right corner, next to <badge>Box Score</badge>.",
+    "sfs3": "A window opens with this game's public link. Tap <b>Copy link</b> and paste it into your team's group chat, or tap <b>Share via…</b> to send it by text message.",
+    "sfs4": "That's it. Anyone who opens the link sees the live scoreboard, box score, and play-by-play — updating automatically every few seconds as you score.",
+    "shareFamilyNote": "Each game has its own link, and only people you send it to can find it. The link keeps working after the game ends, so family can check the final score later."
   },
   "auth": {
     "login": {
