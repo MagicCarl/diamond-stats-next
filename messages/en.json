@@ -136,7 +136,9 @@
       "walks": "Walks",
       "outsSection": "Outs",
       "errAtBat": "Failed to record at-bat. Please try again.",
-      "errOppAtBat": "Failed to record opponent at-bat. Please try again."
+      "errOppAtBat": "Failed to record opponent at-bat. Please try again.",
+      "share": "Share",
+      "shareCopied": "Link copied!"
     },
     "box": {
       "gameNotFound": "Game not found",

@@ -136,7 +136,9 @@
       "walks": "Bases por Bolas",
       "outsSection": "Outs",
       "errAtBat": "Error al registrar el turno. Inténtalo de nuevo.",
-      "errOppAtBat": "Error al registrar el turno del rival. Inténtalo de nuevo."
+      "errOppAtBat": "Error al registrar el turno del rival. Inténtalo de nuevo.",
+      "share": "Compartir",
+      "shareCopied": "¡Enlace copiado!"
     },
     "box": {
       "gameNotFound": "Juego no encontrado",

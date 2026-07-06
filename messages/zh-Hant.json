@@ -136,7 +136,9 @@
       "walks": "保送",
       "outsSection": "出局",
       "errAtBat": "記錄打席失敗。請再試一次。",
-      "errOppAtBat": "記錄對方打席失敗。請再試一次。"
+      "errOppAtBat": "記錄對方打席失敗。請再試一次。",
+      "share": "分享",
+      "shareCopied": "已複製連結！"
     },
     "box": {
       "gameNotFound": "找不到比賽",

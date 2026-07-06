@@ -136,7 +136,9 @@
       "walks": "볼넷",
       "outsSection": "아웃",
       "errAtBat": "타석을 기록하지 못했습니다. 다시 시도하세요.",
-      "errOppAtBat": "상대 타석을 기록하지 못했습니다. 다시 시도하세요."
+      "errOppAtBat": "상대 타석을 기록하지 못했습니다. 다시 시도하세요.",
+      "share": "공유",
+      "shareCopied": "링크가 복사되었습니다!"
     },
     "box": {
       "gameNotFound": "경기를 찾을 수 없습니다",

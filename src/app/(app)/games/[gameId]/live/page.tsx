@@ -22,6 +22,7 @@ interface PitchingAppearanceRecord {
 interface GameDetail {
   id: string;
   teamId: string;
+  team?: { name: string };
   opponentName: string;
   gameDate: string;
   isHome: boolean;
@@ -96,6 +97,8 @@ export default function LiveScoringPage() {
   const [editingAtBatId, setEditingAtBatId] = useState<string | null>(null);
   const [editSB, setEditSB] = useState(0);
   const [editCS, setEditCS] = useState(0);
+
+  const [shareCopied, setShareCopied] = useState(false);
 
   const rosterAutoLoadedRef = useRef(false);
   const initialModeSetRef = useRef(false);
@@ -491,6 +494,27 @@ export default function LiveScoringPage() {
     }
   }
 
+  const handleShare = async () => {
+    try {
+      const { shareToken } = await apiFetch(`/api/games/${gameId}/share`, {
+        method: "POST",
+      });
+      const url = `${window.location.origin}/watch/${shareToken}`;
+      if (navigator.share) {
+        await navigator.share({
+          title: `${game.team?.name || "Our team"} vs ${game.opponentName}`,
+          url,
+        });
+      } else {
+        await navigator.clipboard.writeText(url);
+        setShareCopied(true);
+        setTimeout(() => setShareCopied(false), 2500);
+      }
+    } catch {
+      // user cancelled the share sheet, or the request failed — no-op
+    }
+  };
+
   return (
     <div className="space-y-4">
       {/* Header */}
@@ -502,6 +526,9 @@ export default function LiveScoringPage() {
           &larr; {tc("back")}
         </Link>
         <div className="flex gap-2">
+          <Button variant="ghost" size="sm" onClick={handleShare}>
+            {shareCopied ? t("shareCopied") : t("share")}
+          </Button>
           <Link href={`/games/${gameId}/box`}>
             <Button variant="ghost" size="sm">{t("boxScore")}</Button>
           </Link>
