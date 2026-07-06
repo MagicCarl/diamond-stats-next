@@ -1,10 +1,29 @@
-// Real user quotes only — never invent these. Add entries as users provide
-// them; the section renders nothing while this list is empty.
+// Real quotes only — never invent these. The section renders nothing while
+// this list is empty.
 const testimonials: {
   quote: string;
   name: string;
-  role: string;
-}[] = [];
+  role?: string;
+}[] = [
+  {
+    quote: "A refreshing change from the usual subscription fatigue",
+    name: "Aidan Talon",
+  },
+  {
+    quote:
+      "Baseball Stats Tracker has a clear value proposition, excellent pricing transparency, and good competitive readiness, making it a strong offering for its target audience.",
+    name: "Independent online review",
+  },
+  {
+    quote: "Congrats — looks like a solid product",
+    name: "David",
+    role: "KrispiTech",
+  },
+  {
+    quote: "Very cool idea!",
+    name: "Will Colachis",
+  },
+];
 
 export default function Testimonials() {
   if (testimonials.length === 0) return null;
@@ -12,23 +31,22 @@ export default function Testimonials() {
   return (
     <section className="mx-auto max-w-4xl px-6 pb-16">
       <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-        What parents &amp; coaches say
+        What people are saying
       </h2>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {testimonials.map((item) => (
           <figure
             key={item.quote}
             className="rounded-xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
           >
-            <div className="text-yellow-500" aria-hidden>
-              ★★★★★
-            </div>
-            <blockquote className="mt-3 text-gray-700 dark:text-gray-300">
+            <blockquote className="text-gray-700 dark:text-gray-300">
               &ldquo;{item.quote}&rdquo;
             </blockquote>
             <figcaption className="mt-4 text-sm">
               <span className="font-semibold text-gray-900 dark:text-white">{item.name}</span>
-              <span className="text-gray-500 dark:text-gray-400"> — {item.role}</span>
+              {item.role && (
+                <span className="text-gray-500 dark:text-gray-400"> — {item.role}</span>
+              )}
             </figcaption>
           </figure>
         ))}
