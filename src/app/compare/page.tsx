@@ -260,6 +260,7 @@ export default function ComparePage() {
           >
             Get Instant Access — $39
           </Link>
+          <p className="mt-3 text-sm text-gray-400">30-day money-back guarantee — no questions asked.</p>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">

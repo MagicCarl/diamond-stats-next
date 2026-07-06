@@ -601,7 +601,7 @@
       "ctaSub2": "Sin suscripción. Sin ventas adicionales. Sin “nivel Pro”.",
       "privacyPolicy": "Política de Privacidad",
       "tryFreeOr": "or",
-      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeCta": "Pruébalo gratis — anota tu primer partido",
       "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39.",
       "introHeadline": "If you've ever kept score on the back of a snack-bar receipt, this is for you.",
       "introP1": "Every baseball parent knows the drill.",
@@ -613,7 +613,8 @@
       "introSub2": "One price. Yours forever.",
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
-      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
+      "trialSub": "Cuenta gratis — sin tarjeta de crédito. Anota un partido completo con estadísticas en vivo y gráficos de bateo."
     },
     "common": {
       "getStarted": "Comenzar",
@@ -623,7 +624,8 @@
       "navPricing": "Precios",
       "navCompare": "Comparar",
       "navSignIn": "Iniciar Sesión",
-      "navSignUp": "Registrarse"
+      "navSignUp": "Registrarse",
+      "guarantee": "Garantía de devolución de 30 días — sin preguntas."
     },
     "features": {
       "h1": "Todo lo que Necesitas para Registrar Estadísticas de Béisbol y Softbol",

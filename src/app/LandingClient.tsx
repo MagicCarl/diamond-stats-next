@@ -39,6 +39,7 @@ const featureKeys: Record<string, { title: string; desc: string }> = {
 export default function LandingClient() {
   const { user } = useAuth();
   const t = useTranslations("marketing.landing");
+  const tc = useTranslations("marketing.common");
   const [previewFeature, setPreviewFeature] = useState<string | null>(null);
 
   const activeFeature = features.find((f) => f.id === previewFeature);
@@ -112,7 +113,16 @@ export default function LandingClient() {
           {t("hookBody")}
         </p>
         <div className="mt-8 flex flex-col items-center gap-2">
-          <BuyButton className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white hover:bg-blue-700">
+          <Link
+            href="/signup"
+            className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-lg hover:bg-blue-700"
+          >
+            {t("tryFreeCta")}
+          </Link>
+          <p className="max-w-md text-sm text-gray-500 dark:text-gray-500">
+            {t("trialSub")}
+          </p>
+          <BuyButton className="mt-3 rounded-lg border-2 border-blue-600 px-8 py-2.5 text-base font-semibold text-blue-600 transition hover:bg-blue-50 dark:hover:bg-blue-900/20">
             {t("ctaPrimary")}
           </BuyButton>
           <p className="text-sm text-gray-500 dark:text-gray-500">
@@ -169,6 +179,9 @@ export default function LandingClient() {
             <BuyButton className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
               {t("purchaseNow")}
             </BuyButton>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+              {tc("guarantee")}
+            </p>
           </div>
         </div>
       </main>

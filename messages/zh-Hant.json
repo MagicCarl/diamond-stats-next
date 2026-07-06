@@ -601,7 +601,7 @@
       "ctaSub2": "沒有訂閱。沒有額外推銷。沒有「Pro 方案」。",
       "privacyPolicy": "隱私權政策",
       "tryFreeOr": "or",
-      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeCta": "免費試用 — 記錄你的第一場比賽",
       "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39.",
       "introHeadline": "If you've ever kept score on the back of a snack-bar receipt, this is for you.",
       "introP1": "Every baseball parent knows the drill.",
@@ -613,7 +613,8 @@
       "introSub2": "One price. Yours forever.",
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
-      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
+      "trialSub": "免費帳戶 — 無需信用卡。完整記錄一場比賽，包含即時數據與擊球落點圖。"
     },
     "common": {
       "getStarted": "開始使用",
@@ -623,7 +624,8 @@
       "navPricing": "價格",
       "navCompare": "比較",
       "navSignIn": "登入",
-      "navSignUp": "註冊"
+      "navSignUp": "註冊",
+      "guarantee": "30 天退款保證 — 不問原因。"
     },
     "features": {
       "h1": "追蹤棒球與壘球數據所需的一切",

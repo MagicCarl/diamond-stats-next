@@ -236,6 +236,7 @@ export default function BaseballStatsExplainedPage() {
           <Link href="/pricing" className="mt-5 inline-block rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">
             Get Instant Access — $39
           </Link>
+          <p className="mt-3 text-sm text-gray-400">30-day money-back guarantee — no questions asked.</p>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">

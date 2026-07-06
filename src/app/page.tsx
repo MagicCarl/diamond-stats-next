@@ -5,6 +5,7 @@ import LandingClient from "./LandingClient";
 import BuyButton from "@/components/ui/BuyButton";
 import SoroBlog from "@/components/SoroBlog";
 import Footer from "@/components/layout/Footer";
+import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
   alternates: {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 
 export default async function LandingPage() {
   const t = await getTranslations("marketing.landing");
+  const tc = await getTranslations("marketing.common");
 
   const cmp = [
     ["cmpGet1", "cmpRep1"],
@@ -242,6 +244,8 @@ export default async function LandingPage() {
         </div>
       </section>
 
+      <Testimonials />
+
       {/* ============================================================
           SECTION 3 — URGENCY (The Close)
           ============================================================ */}
@@ -286,6 +290,9 @@ export default async function LandingPage() {
               </BuyButton>
               <p className="text-sm text-gray-500 dark:text-gray-500">
                 {t("ctaSub2")}
+              </p>
+              <p className="text-sm font-medium text-green-700 dark:text-green-400">
+                {tc("guarantee")}
               </p>
 
               <div className="mt-4 flex items-center gap-3 text-sm text-gray-400">

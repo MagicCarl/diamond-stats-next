@@ -601,7 +601,7 @@
       "ctaSub2": "サブスクなし。アップセルなし。「Proプラン」なし。",
       "privacyPolicy": "プライバシーポリシー",
       "tryFreeOr": "or",
-      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeCta": "無料で試す — 最初の試合をスコア記録",
       "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39.",
       "introHeadline": "If you've ever kept score on the back of a snack-bar receipt, this is for you.",
       "introP1": "Every baseball parent knows the drill.",
@@ -613,7 +613,8 @@
       "introSub2": "One price. Yours forever.",
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
-      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
+      "trialSub": "無料アカウント — クレジットカード不要。ライブ統計とスプレーチャート付きで1試合まるごと記録できます。"
     },
     "common": {
       "getStarted": "始める",
@@ -623,7 +624,8 @@
       "navPricing": "料金",
       "navCompare": "比較",
       "navSignIn": "サインイン",
-      "navSignUp": "登録"
+      "navSignUp": "登録",
+      "guarantee": "30日間返金保証 — 理由は問いません。"
     },
     "features": {
       "h1": "野球・ソフトボールの成績記録に必要なすべて",

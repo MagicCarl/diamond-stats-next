@@ -601,7 +601,7 @@
       "ctaSub2": "구독 없음. 추가 판매 없음. “Pro 등급” 없음.",
       "privacyPolicy": "개인정보 처리방침",
       "tryFreeOr": "or",
-      "tryFreeCta": "Try It Free — Score Your First Game",
+      "tryFreeCta": "무료 체험 — 첫 경기를 기록해 보세요",
       "tryFreeNote": "Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included. No credit card needed. Love it? Unlock unlimited games for a one-time $39.",
       "introHeadline": "If you've ever kept score on the back of a snack-bar receipt, this is for you.",
       "introP1": "Every baseball parent knows the drill.",
@@ -613,7 +613,8 @@
       "introSub2": "One price. Yours forever.",
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
-      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
+      "trialSub": "무료 계정 — 신용카드 불필요. 실시간 통계와 스프레이 차트로 한 경기를 완전히 기록해 보세요."
     },
     "common": {
       "getStarted": "시작하기",
@@ -623,7 +624,8 @@
       "navPricing": "요금",
       "navCompare": "비교",
       "navSignIn": "로그인",
-      "navSignUp": "회원가입"
+      "navSignUp": "회원가입",
+      "guarantee": "30일 환불 보장 — 조건 없이."
     },
     "features": {
       "h1": "야구 & 소프트볼 기록 추적에 필요한 모든 것",

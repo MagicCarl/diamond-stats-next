@@ -613,7 +613,8 @@
       "introSub2": "One price. Yours forever.",
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
-      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39."
+      "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
+      "trialSub": "Free account — no credit card. Score a full game with live stats & spray charts."
     },
     "common": {
       "getStarted": "Get Started",
@@ -623,7 +624,8 @@
       "navPricing": "Pricing",
       "navCompare": "Compare",
       "navSignIn": "Sign In",
-      "navSignUp": "Sign Up"
+      "navSignUp": "Sign Up",
+      "guarantee": "30-day money-back guarantee — no questions asked."
     },
     "features": {
       "h1": "Everything You Need to Track Baseball & Softball Stats",

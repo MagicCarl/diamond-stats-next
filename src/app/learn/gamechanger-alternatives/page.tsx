@@ -432,6 +432,7 @@ export default async function GameChangerAlternativesPage() {
                 {t("ctaBtn")}
               </Link>
             </div>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">{tc("guarantee")}</p>
           </section>
 
           <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">

@@ -532,6 +532,7 @@ export default function BestBaseballStatsAppsPage() {
                 Create your free account
               </Link>
             </div>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">30-day money-back guarantee — no questions asked.</p>
           </section>
 
           <p className="mt-8 text-sm text-gray-500 dark:text-gray-400">

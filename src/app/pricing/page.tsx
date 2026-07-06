@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/layout/Footer";
+import Testimonials from "@/components/Testimonials";
 import { getTranslations } from "next-intl/server";
 import BuyButton from "@/components/ui/BuyButton";
 
@@ -103,6 +104,9 @@ export default async function PricingPage() {
           <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
             {t("securePayment")}
           </p>
+          <p className="mt-1 text-sm font-medium text-green-700 dark:text-green-400">
+            {tc("guarantee")}
+          </p>
         </div>
 
         {/* Value comparison */}
@@ -132,6 +136,8 @@ export default async function PricingPage() {
             </div>
           </div>
         </div>
+
+        <Testimonials />
 
         {/* FAQ */}
         <div className="mt-16">
