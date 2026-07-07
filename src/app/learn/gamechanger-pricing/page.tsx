@@ -214,6 +214,7 @@ function CtaCard() {
 function RelatedLinks() {
   return (
     <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">
+      <Link href="/learn/gamechanger-vs-baseball-stats-tracker" className="hover:underline">→ GameChanger vs Baseball Stats Tracker</Link>
       <Link href="/learn/gamechanger-alternatives" className="hover:underline">→ GameChanger alternatives</Link>
       <Link href="/compare" className="hover:underline">→ Compare apps</Link>
       <Link href="/pricing" className="hover:underline">→ Our pricing</Link>

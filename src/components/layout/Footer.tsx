@@ -2,12 +2,15 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 const guides = [
+  { href: "/learn/gamechanger-vs-baseball-stats-tracker", label: "GameChanger vs BST" },
   { href: "/learn/gamechanger-alternatives", label: "GameChanger Alternatives" },
   { href: "/learn/gamechanger-pricing", label: "GameChanger Pricing" },
   { href: "/learn/best-baseball-stats-apps", label: "Best Baseball Stats Apps" },
   { href: "/learn/baseball-stats-explained", label: "Baseball Stats Explained" },
   { href: "/learn/how-to-keep-score-in-baseball", label: "How to Keep Score" },
+  { href: "/learn/how-to-keep-score-in-softball", label: "Softball Scoring Guide" },
   { href: "/learn/baseball-spray-chart-guide", label: "Spray Chart Guide" },
+  { href: "/free-baseball-scorecard", label: "Free Printable Scorecard" },
 ];
 
 export default async function Footer() {

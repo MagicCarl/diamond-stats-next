@@ -264,6 +264,9 @@ export default function ComparePage() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">
+          <Link href="/learn/gamechanger-vs-baseball-stats-tracker" className="hover:underline">
+            → GameChanger vs Baseball Stats Tracker
+          </Link>
           <Link href="/learn/gamechanger-alternatives" className="hover:underline">
             → GameChanger alternatives
           </Link>

@@ -244,6 +244,8 @@ function CtaCard() {
 function RelatedLinks() {
   return (
     <div className="mt-10 flex flex-wrap gap-4 text-sm text-blue-600 dark:text-blue-400">
+      <Link href="/learn/how-to-keep-score-in-softball" className="hover:underline">→ Softball scoring guide</Link>
+      <Link href="/free-baseball-scorecard" className="hover:underline">→ Free printable scorecard</Link>
       <Link href="/learn/baseball-stats-explained" className="hover:underline">→ Baseball stats explained</Link>
       <Link href="/learn/baseball-spray-chart-guide" className="hover:underline">→ Spray chart guide</Link>
       <Link href="/compare" className="hover:underline">→ Compare apps</Link>

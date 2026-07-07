@@ -35,6 +35,13 @@ const articles = [
     updated: "May 2026",
   },
   {
+    href: "/learn/gamechanger-vs-baseball-stats-tracker",
+    title: "GameChanger vs Baseball Stats Tracker: The True Lifetime Math",
+    description:
+      "An honest head-to-head — features, who each app fits, and what a full youth-sports career costs on a subscription vs $39 once.",
+    updated: "July 2026",
+  },
+  {
     href: "/learn/gamechanger-pricing",
     title: "GameChanger Pricing in 2026: What It Actually Costs",
     description:
@@ -60,6 +67,13 @@ const articles = [
     title: "How to Keep Score in Baseball: A Beginner's Guide",
     description:
       "The scorebook grid, every symbol, and the easier way to do it live from your phone. A parent-friendly guide.",
+    updated: "July 2026",
+  },
+  {
+    href: "/learn/how-to-keep-score-in-softball",
+    title: "How to Keep Score in Softball: The Ultimate Scoring Guide",
+    description:
+      "Same symbols as baseball, different game — 7 innings, DP/Flex, bigger lineups, and mercy rules, explained for parents.",
     updated: "July 2026",
   },
   {
