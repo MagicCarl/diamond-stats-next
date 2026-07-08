@@ -29,6 +29,7 @@ export default async function Footer() {
           <Link href="/features" className={linkClass}>{tc("navFeatures")}</Link>
           <Link href="/pricing" className={linkClass}>{tc("navPricing")}</Link>
           <Link href="/compare" className={linkClass}>{tc("navCompare")}</Link>
+          <Link href="/faq" className={linkClass}>{tc("navFaq")}</Link>
           <Link href="/login" className={linkClass}>{tc("navSignIn")}</Link>
           <Link href="/signup" className={linkClass}>{tc("navSignUp")}</Link>
           <Link href="/privacy" className={linkClass}>{tf("privacy")}</Link>

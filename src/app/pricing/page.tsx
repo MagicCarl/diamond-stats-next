@@ -168,6 +168,13 @@ export default async function PricingPage() {
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{t("faqA6")}</p>
             </div>
           </div>
+          <p className="mt-6 text-sm text-gray-600 dark:text-gray-400">
+            Have more questions?{" "}
+            <Link href="/faq" className="text-blue-600 hover:underline dark:text-blue-400">
+              Read the full FAQ
+            </Link>{" "}
+            — live sharing, pitch tracking, stat formulas, devices, and more.
+          </p>
         </div>
 
         {/* Bottom CTA */}
