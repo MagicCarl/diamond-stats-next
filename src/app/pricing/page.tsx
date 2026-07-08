@@ -27,30 +27,47 @@ export default async function PricingPage() {
   const t = await getTranslations("marketing.pricing");
   const tc = await getTranslations("marketing.common");
   const feats = ["feat1", "feat2", "feat3", "feat4", "feat5", "feat6", "feat7", "feat8", "feat9", "feat10", "feat11"] as const;
+  // Built from the same translated strings the visible FAQ section renders,
+  // so the schema always matches the on-page content in every locale.
+  const faqs = ([1, 2, 3, 4, 5, 6] as const).map((n) => ({
+    q: t(`faqQ${n}`),
+    a: t(`faqA${n}`),
+  }));
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-gray-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                name: "Home",
-                item: "https://www.baseballstatstracker.com",
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                name: "Pricing",
-                item: "https://www.baseballstatstracker.com/pricing",
-              },
-            ],
-          }),
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://www.baseballstatstracker.com",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Pricing",
+                  item: "https://www.baseballstatstracker.com/pricing",
+                },
+              ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: faqs.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            },
+          ]),
         }}
       />
       <header className="flex items-center justify-between px-6 py-4">
