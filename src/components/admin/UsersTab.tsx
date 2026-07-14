@@ -18,6 +18,8 @@ interface AdminUser {
   isAdmin: boolean;
   deletedAt: string | null;
   createdAt: string;
+  loginCount: number;
+  lastLoginAt: string | null;
   _count: { organizations: number };
 }
 
@@ -141,6 +143,8 @@ export default function UsersTab() {
                 <th className="pb-2 pr-4">{t("email")}</th>
                 <th className="pb-2 pr-4">{t("signedUp")}</th>
                 <th className="pb-2 pr-4">{t("teams")}</th>
+                <th className="pb-2 pr-4">{t("logins")}</th>
+                <th className="pb-2 pr-4">{t("lastLogin")}</th>
                 <th className="pb-2">{t("action")}</th>
               </tr>
             </thead>
@@ -169,6 +173,14 @@ export default function UsersTab() {
                   </td>
                   <td className="py-2 pr-4 text-gray-500">
                     {u._count.organizations}
+                  </td>
+                  <td className="py-2 pr-4 text-gray-500">
+                    {u.loginCount}
+                  </td>
+                  <td className="py-2 pr-4 text-gray-500">
+                    {u.lastLoginAt
+                      ? new Date(u.lastLoginAt).toLocaleDateString()
+                      : t("neverLoggedIn")}
                   </td>
                   <td className="py-2">
                     <div className="flex gap-2">
