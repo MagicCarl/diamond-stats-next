@@ -383,6 +383,34 @@ export default async function LandingPage() {
       </section>
 
       {/* ============================================================
+          DIRECTORY LISTING BADGE
+          ============================================================ */}
+      <section className="px-6 pb-10">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
+            Listed on
+          </p>
+          {/* nofollow is deliberate: the badge is the price of a free directory
+              listing, so it stays, but the homepage doesn't pass ranking signal
+              to an off-topic startup directory. Their check only verifies the
+              badge is present, not its rel attribute. */}
+          <a
+            href="https://sellwithboost.com"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            className="opacity-80 transition hover:opacity-100"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://sellwithboost.com/badge/listing.svg"
+              alt="Listed on Sell With Boost"
+              className="h-10 w-auto"
+            />
+          </a>
+        </div>
+      </section>
+
+      {/* ============================================================
           FOOTER LINKS
           ============================================================ */}
       <Footer />
