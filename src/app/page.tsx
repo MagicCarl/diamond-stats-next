@@ -400,10 +400,17 @@ export default async function LandingPage() {
             rel="noopener noreferrer nofollow"
             className="opacity-80 transition hover:opacity-100"
           >
+            {/* loading="lazy" stops React from preloading a third-party asset
+                that sits below the fold; width/height are the SVG's intrinsic
+                160x40 so reserving the box avoids a shift when it does load. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://sellwithboost.com/badge/listing.svg"
               alt="Listed on Sell With Boost"
+              width={160}
+              height={40}
+              loading="lazy"
+              decoding="async"
               className="h-10 w-auto"
             />
           </a>
