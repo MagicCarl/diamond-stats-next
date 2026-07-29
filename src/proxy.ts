@@ -3,7 +3,13 @@ import type { NextRequest } from "next/server";
 
 const CANONICAL_HOST = "www.baseballstatstracker.com";
 
+/** Conservative slug shape, so `?post=` can't steer the redirect off /blog/. */
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/i;
+
 export function proxy(request: NextRequest) {
+  const redirect = blogDeepLinkRedirect(request);
+  if (redirect) return redirect;
+
   const response = NextResponse.next();
 
   // Block indexing of any host that isn't the canonical one (apex, vercel preview URLs)
@@ -51,6 +57,33 @@ export function proxy(request: NextRequest) {
   );
 
   return response;
+}
+
+/**
+ * Send the Soro widget's old `/?post=<slug>` deep links to the real article page.
+ *
+ * Those URLs served homepage HTML and then had a second `<link rel="canonical">`
+ * injected client-side by Soro's script. Two conflicting canonicals means Google
+ * ignores both, which is what put them in the "Duplicate without user-selected
+ * canonical" report. Articles now render at /blog/<slug>.
+ *
+ * Handled here rather than via next.config `redirects()` because that appends the
+ * source query string to the destination (`/blog/x?post=x`), creating exactly the
+ * kind of duplicate URL this is meant to remove. The proxy already runs on every
+ * request for the security headers below, so this costs no extra invocation.
+ */
+function blogDeepLinkRedirect(request: NextRequest): NextResponse | null {
+  if (request.nextUrl.pathname !== "/") return null;
+
+  const slug = request.nextUrl.searchParams.get("post");
+  if (!slug || !SLUG_PATTERN.test(slug)) return null;
+
+  const url = request.nextUrl.clone();
+  url.pathname = `/blog/${slug}`;
+  // Drop `post` but keep campaign params so shared tagged links stay attributable.
+  url.searchParams.delete("post");
+
+  return NextResponse.redirect(url, 308);
 }
 
 export const config = {
