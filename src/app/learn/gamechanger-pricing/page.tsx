@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 
 const URL = "https://www.baseballstatstracker.com/learn/gamechanger-pricing";
 const PUBLISHED = "2026-07-01";
-const MODIFIED = "2026-07-01";
+const MODIFIED = "2026-10-16";
 
 export const metadata: Metadata = {
   title: "GameChanger Pricing in 2026: What It Actually Costs",
@@ -44,7 +44,7 @@ const faqs = [
   },
   {
     q: "How much does GameChanger cost?",
-    a: "GameChanger's paid plan is billed on a recurring (typically annual) basis, and the exact price changes over time — check their official site for current rates. The key thing to understand is that it's a recurring cost, so it adds up every year your child plays.",
+    a: "As of October 2026, GameChanger's official pricing is: Plus at $9.99/month or $39.99/year, Premium at $14.99/month or $99.99/year, and the Premium Family Plan (up to 4 accounts) at $24.99/month or $179.99/year. All paid plans are subscriptions, so the cost repeats every year your child plays. Prices change, so confirm on GameChanger's site before buying.",
   },
   {
     q: "Who pays for GameChanger — the team or the parent?",
@@ -73,7 +73,7 @@ export default function GameChangerPricingPage() {
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
           GameChanger pricing in 2026: what you&apos;ll actually pay
         </h1>
-        <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">By Carl Andrews · Updated July 2026</p>
+        <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">By Carl Andrews · Updated October 2026</p>
 
         <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
           GameChanger is the default for a lot of youth teams — but the pricing catches
@@ -94,8 +94,56 @@ export default function GameChangerPricingPage() {
           <p>
             The features most stats-minded parents actually want — full season stats,
             advanced hitting and pitching breakdowns, and the video tools — are part of a paid
-            plan billed on a recurring basis. Prices change over time, so check their site for
-            the current rate, but the important part is the model: <strong>it recurs</strong>.
+            plan billed on a recurring basis. The important part is the model:{" "}
+            <strong>it recurs</strong>.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="mt-2 w-full text-left text-sm">
+              <caption className="pb-2 text-left text-gray-500 dark:text-gray-400">
+                GameChanger paid plans, from GameChanger&apos;s official pricing pages as of October 2026
+              </caption>
+              <thead>
+                <tr className="border-b border-gray-300 dark:border-gray-700">
+                  <th className="py-2 pr-4 font-semibold">Plan</th>
+                  <th className="py-2 pr-4 font-semibold">Monthly</th>
+                  <th className="py-2 pr-4 font-semibold">Yearly</th>
+                  <th className="py-2 font-semibold">5 seasons (yearly billing)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-200 dark:border-gray-800">
+                  <td className="py-2 pr-4">Plus</td>
+                  <td className="py-2 pr-4">$9.99</td>
+                  <td className="py-2 pr-4">$39.99</td>
+                  <td className="py-2">~$200</td>
+                </tr>
+                <tr className="border-b border-gray-200 dark:border-gray-800">
+                  <td className="py-2 pr-4">Premium</td>
+                  <td className="py-2 pr-4">$14.99</td>
+                  <td className="py-2 pr-4">$99.99</td>
+                  <td className="py-2">~$500</td>
+                </tr>
+                <tr className="border-b border-gray-200 dark:border-gray-800">
+                  <td className="py-2 pr-4">Premium Family (4 accounts)</td>
+                  <td className="py-2 pr-4">$24.99</td>
+                  <td className="py-2 pr-4">$179.99</td>
+                  <td className="py-2">~$900</td>
+                </tr>
+                <tr>
+                  <td className="py-2 pr-4 font-semibold">Baseball Stats Tracker</td>
+                  <td className="py-2 pr-4">—</td>
+                  <td className="py-2 pr-4">—</td>
+                  <td className="py-2 font-semibold">$39 once</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Prices change — confirm current rates on{" "}
+            <a href="https://gc.com/pricing" rel="nofollow noopener" target="_blank" className="text-blue-600 hover:underline dark:text-blue-400">
+              GameChanger&apos;s pricing page
+            </a>{" "}
+            before you buy.
           </p>
         </Section>
 

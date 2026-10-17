@@ -69,7 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/learn/gamechanger-pricing`,
-      lastModified: new Date("2026-07-01"),
+      lastModified: new Date("2026-10-16"),
       changeFrequency: "monthly",
       priority: 0.8,
     },

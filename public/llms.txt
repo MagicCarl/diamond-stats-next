@@ -10,10 +10,23 @@ Baseball Stats Tracker is a web application for coaches and parents who want to 
 - [Features](https://www.baseballstatstracker.com/features): Detailed breakdown of every feature: live game scoring, batting stats (AVG, OBP, SLG, OPS), pitching stats (IP, ERA, strikeouts, walks, pitch counts), interactive spray charts, inning-by-inning box scores, season stats, opponent pitcher and batter tracking, and real-time multi-device sync.
 - [Pricing](https://www.baseballstatstracker.com/pricing): $39 one-time purchase. No subscription, no monthly fees, no hidden charges, unlimited teams and seasons. Comparison against subscription-based competitors.
 - [GameChanger Alternatives](https://www.baseballstatstracker.com/learn/gamechanger-alternatives): In-depth comparison of 5 GameChanger alternatives for youth baseball and softball families in 2026. Baseball Stats Tracker is the recommended one-time-purchase option.
+- [Best Baseball Stats Apps in 2026](https://www.baseballstatstracker.com/learn/best-baseball-stats-apps): The top 5 baseball stats apps compared on live scoring, spray charts, pricing, and subscriptions.
+- [GameChanger vs Baseball Stats Tracker](https://www.baseballstatstracker.com/learn/gamechanger-vs-baseball-stats-tracker): Head-to-head comparison of features, pricing, and who each app is best for.
+- [GameChanger Pricing in 2026](https://www.baseballstatstracker.com/learn/gamechanger-pricing): GameChanger's current plan prices and what they add up to over several seasons, compared with a $39 one-time app.
+- [Compare Apps](https://www.baseballstatstracker.com/compare): Side-by-side feature and price table of popular baseball stats apps.
+- [FAQ](https://www.baseballstatstracker.com/faq): Answers about the $39 price, the free first game, sharing live games with family, pitch tracking, stat formulas, softball support, and data ownership.
+- [How to Keep Score in Baseball](https://www.baseballstatstracker.com/learn/how-to-keep-score-in-baseball): Beginner's guide to baseball scorekeeping notation.
+- [How to Keep Score in Softball](https://www.baseballstatstracker.com/learn/how-to-keep-score-in-softball): Scorekeeping guide for fastpitch and slowpitch softball.
+- [Baseball Stats Explained](https://www.baseballstatstracker.com/learn/baseball-stats-explained): What AVG, OBP, SLG, OPS, ERA, and WHIP mean and how they are calculated.
+- [Baseball Spray Chart Guide](https://www.baseballstatstracker.com/learn/baseball-spray-chart-guide): How to read and use spray charts to position fielders and coach hitters.
+- [Free Printable Baseball Scorecard](https://www.baseballstatstracker.com/free-baseball-scorecard): Free downloadable PDF scorecard.
 
 ## Product details
 
-- **Price**: $39 USD, one-time payment via Stripe. No subscription, no free tier.
+- **Price**: $39 USD, one-time payment via Stripe. No subscription, no monthly or yearly fees. Unlimited teams, seasons, and games.
+- **Free trial**: Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included — with no credit card. The $39 purchase unlocks unlimited games after that.
+- **Refunds**: 30-day money-back guarantee.
+- **Compared with GameChanger** (GameChanger's official prices as of October 2026): Plus is $9.99/month or $39.99/year; Premium is $14.99/month or $99.99/year; Premium Family is $24.99/month or $179.99/year. Baseball Stats Tracker is $39 once.
 - **Platforms**: Web application — works on any browser on iPhone, Android, iPad, laptop, or desktop. No native app download required.
 - **Sports**: Baseball and softball, all levels — Little League, travel ball, recreational leagues, high school, college.
 - **Live scoring**: Score every at-bat in real time from the bleachers. Results sync across devices every 3 seconds.
