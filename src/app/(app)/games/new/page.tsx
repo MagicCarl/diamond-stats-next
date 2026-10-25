@@ -40,7 +40,16 @@ export default function NewGamePage() {
   const [limitReached, setLimitReached] = useState(false);
 
   useEffect(() => {
-    apiFetch("/api/teams").then(setTeams).catch(() => {});
+    apiFetch("/api/teams")
+      .then((data: Team[]) => {
+        setTeams(data);
+        // Start from the preselected team's regulation game length.
+        setForm((f) => ({
+          ...f,
+          inningsCount: data.find((tm) => tm.id === f.teamId)?.defaultInnings ?? f.inningsCount,
+        }));
+      })
+      .catch(() => {});
   }, [apiFetch]);
 
   useEffect(() => {
@@ -120,7 +129,14 @@ export default function NewGamePage() {
               id="teamId"
               label={t("teamLabel")}
               value={form.teamId}
-              onChange={(e) => setForm({ ...form, teamId: e.target.value })}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  teamId: e.target.value,
+                  inningsCount:
+                    teams.find((tm) => tm.id === e.target.value)?.defaultInnings ?? form.inningsCount,
+                })
+              }
               options={[
                 { value: "", label: t("selectTeam") },
                 ...teams.map((t) => ({ value: t.id, label: t.name })),
@@ -197,7 +213,13 @@ export default function NewGamePage() {
               max={12}
               value={form.inningsCount}
               onChange={(e) =>
-                setForm({ ...form, inningsCount: parseInt(e.target.value) || 6 })
+                setForm({
+                  ...form,
+                  inningsCount:
+                    parseInt(e.target.value) ||
+                    teams.find((tm) => tm.id === form.teamId)?.defaultInnings ||
+                    6,
+                })
               }
             />
           </div>

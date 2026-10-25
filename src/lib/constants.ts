@@ -98,6 +98,19 @@ export const LEVELS = [
   { value: "college", label: "College" },
 ] as const;
 
+export const SPORTS = ["baseball", "softball"] as const;
+
+export const GAME_LENGTHS = [3, 4, 5, 6, 7, 8, 9] as const;
+
+// Typical regulation game length, used to pre-fill a new team's setting.
+// Coaches can change it, since leagues vary (e.g. 12U travel often plays 6).
+export function suggestedInnings(sport: string, level: string): number {
+  if (sport === "softball") return 7;
+  if (level === "college") return 9;
+  if (level === "high_school" || level === "travel") return 7;
+  return 6;
+}
+
 export const PITCH_RESULTS = [
   "called_strike",
   "swinging_strike",

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { trackServerEvent } from "@/lib/analytics";
+import { suggestedInnings } from "@/lib/constants";
 
 export async function GET(req: NextRequest) {
   const user = await getAuthUser(req);
@@ -49,10 +50,16 @@ export async function POST(req: NextRequest) {
   if (!user) return unauthorized();
 
   const body = await req.json();
-  const { name, sport = "baseball", level = "little_league" } = body;
+  const { name, sport = "baseball", level = "little_league", defaultInnings } = body;
 
   if (!name?.trim()) {
     return NextResponse.json({ error: "Team name is required" }, { status: 400 });
+  }
+  if (
+    defaultInnings !== undefined &&
+    (!Number.isInteger(defaultInnings) || defaultInnings < 1 || defaultInnings > 20)
+  ) {
+    return NextResponse.json({ error: "Game length must be 1-20 innings" }, { status: 400 });
   }
 
   // Find or create organization for this user
@@ -74,6 +81,7 @@ export async function POST(req: NextRequest) {
       name: name.trim(),
       sport,
       level,
+      defaultInnings: defaultInnings ?? suggestedInnings(sport, level),
       organizationId: org.id,
     },
     include: {

@@ -56,6 +56,8 @@ export default function SprayChartDiamond({
         viewBox={viewBox}
         width={size}
         height={size}
+        // Shrink to fit narrow containers (phones) but never grow past `size`.
+        style={{ width: "100%", maxWidth: size, height: "auto" }}
         onClick={handleClick}
         className={`${interactive ? "cursor-crosshair" : ""}`}
       >

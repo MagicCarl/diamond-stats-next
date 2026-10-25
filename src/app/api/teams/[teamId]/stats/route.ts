@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, unauthorized } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { calcBattingStats } from "@/lib/stats";
+import { calcBattingStats, calcPitchingStats } from "@/lib/stats";
 
 export async function GET(
   req: NextRequest,
@@ -60,7 +60,7 @@ export async function GET(
     orderBy: [{ lastName: "asc" }],
   });
 
-  const playerStats = await Promise.all(
+  const playerResults = await Promise.all(
     players.map(async (player: { id: string; firstName: string; lastName: string; jerseyNumber: number | null }) => {
       const atBats = await prisma.atBat.findMany({
         where: { ...atBatWhere, playerId: player.id },
@@ -77,6 +77,7 @@ export async function GET(
       const gameIds = [...new Set(atBats.map((ab: { gameId: string }) => ab.gameId))];
 
       return {
+        atBats,
         player: {
           id: player.id,
           firstName: player.firstName,
@@ -88,6 +89,50 @@ export async function GET(
     })
   );
 
+  const playerStats = playerResults.map(({ player, stats }) => ({ player, stats }));
+
+  // Team totals run the same formulas over every at-bat, so rate stats are
+  // weighted correctly instead of averaged across players.
+  const allTeamAtBats = playerResults.flatMap((r) => r.atBats);
+  const teamTotals = calcBattingStats(
+    allTeamAtBats,
+    new Set(allTeamAtBats.map((ab) => ab.gameId)).size
+  );
+
+  // Pitching uses the same game filters as batting (pitcher-based filters
+  // only apply to our hitters, so they're ignored here).
+  const pitchingAppearances = await prisma.pitchingAppearance.findMany({
+    where: { game: atBatWhere.game, player: { isActive: true } },
+    select: {
+      gameId: true,
+      playerId: true,
+      outsRecorded: true,
+      hitsAllowed: true,
+      runsAllowed: true,
+      earnedRuns: true,
+      walks: true,
+      strikeouts: true,
+      homeRunsAllowed: true,
+      pitchesThrown: true,
+    },
+  });
+
+  const pitchingStats = players
+    .map((player: { id: string; firstName: string; lastName: string; jerseyNumber: number | null }) => {
+      const apps = pitchingAppearances.filter((a) => a.playerId === player.id);
+      if (apps.length === 0) return null;
+      return {
+        player: {
+          id: player.id,
+          firstName: player.firstName,
+          lastName: player.lastName,
+          jerseyNumber: player.jerseyNumber,
+        },
+        stats: calcPitchingStats(apps, team.defaultInnings),
+      };
+    })
+    .filter((ps) => ps !== null);
+
   // Team record
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const gameWhere: Record<string, any> = { teamId, status: "final" };
@@ -98,6 +143,9 @@ export async function GET(
     select: { ourScore: true, opponentScore: true },
   });
 
+  const runsFor = games.reduce((sum: number, g: { ourScore: number }) => sum + g.ourScore, 0);
+  const runsAgainst = games.reduce((sum: number, g: { opponentScore: number }) => sum + g.opponentScore, 0);
+
   const wins = games.filter((g: { ourScore: number; opponentScore: number }) => g.ourScore > g.opponentScore).length;
   const losses = games.filter((g: { ourScore: number; opponentScore: number }) => g.ourScore < g.opponentScore).length;
   const ties = games.filter((g: { ourScore: number; opponentScore: number }) => g.ourScore === g.opponentScore).length;
@@ -105,6 +153,9 @@ export async function GET(
   return NextResponse.json({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     playerStats: playerStats.filter((ps: any) => ps.stats.plateAppearances > 0),
-    record: { wins, losses, ties, games: games.length },
+    teamTotals,
+    pitchingStats,
+    inningsPerGame: team.defaultInnings,
+    record: { wins, losses, ties, games: games.length, runsFor, runsAgainst },
   });
 }

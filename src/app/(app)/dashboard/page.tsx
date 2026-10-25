@@ -11,10 +11,10 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal";
-import Select from "@/components/ui/Select";
 import Spinner from "@/components/ui/Spinner";
 import BuyButton from "@/components/ui/BuyButton";
-import { LEVELS } from "@/lib/constants";
+import { LEVELS, suggestedInnings } from "@/lib/constants";
+import TeamSettingsFields, { TeamSettingsValues } from "@/components/teams/TeamSettingsFields";
 
 export default function DashboardPage() {
   const { appUser } = useAuth();
@@ -27,7 +27,11 @@ export default function DashboardPage() {
   const [showTeamModal, setShowTeamModal] = useState(false);
   const [modalView, setModalView] = useState<"pick" | "create">("pick");
   const [newTeamName, setNewTeamName] = useState("");
-  const [newTeamLevel, setNewTeamLevel] = useState("little_league");
+  const [newTeamSettings, setNewTeamSettings] = useState<TeamSettingsValues>({
+    sport: "baseball",
+    level: "little_league",
+    defaultInnings: suggestedInnings("baseball", "little_league"),
+  });
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // Set when the user lands back from a successful Stripe checkout. The webhook
@@ -68,7 +72,7 @@ export default function DashboardPage() {
         method: "POST",
         body: JSON.stringify({
           name: newTeamName,
-          level: newTeamLevel,
+          ...newTeamSettings,
         }),
       });
       setNewTeamName("");
@@ -111,7 +115,7 @@ export default function DashboardPage() {
         </div>
       )}
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{t("title")}</h1>
         <Button onClick={() => { setShowTeamModal(true); setModalView(teams.length > 0 ? "pick" : "create"); setError(null); }}>{t("newTeam")}</Button>
       </div>
 
@@ -128,15 +132,23 @@ export default function DashboardPage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {teams.map((team) => (
             <Link key={team.id} href={`/teams/${team.id}`}>
-              <Card className="cursor-pointer transition-shadow hover:shadow-md">
-                <h3 className="text-lg font-semibold">{team.name}</h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {LEVELS.find((l) => l.value === team.level)?.label || team.level}
-                </p>
-                <div className="mt-3 flex gap-4 text-sm text-gray-500 dark:text-gray-400">
-                  <span>{t("playersCount", { count: team._count?.players || 0 })}</span>
-                  <span>{t("gamesCount", { count: team._count?.games || 0 })}</span>
+              <Card className="group flex cursor-pointer items-center gap-4 transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:hover:border-blue-500/50">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white shadow-sm">
+                  {team.name.trim().charAt(0).toUpperCase()}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-lg font-semibold">{team.name}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {LEVELS.find((l) => l.value === team.level)?.label || team.level}
+                  </p>
+                  <div className="mt-1 flex gap-3 text-xs text-gray-500 dark:text-gray-400">
+                    <span>{t("playersCount", { count: team._count?.players || 0 })}</span>
+                    <span>{t("gamesCount", { count: team._count?.games || 0 })}</span>
+                  </div>
                 </div>
+                <svg className="h-5 w-5 shrink-0 text-gray-300 transition-colors group-hover:text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </Card>
             </Link>
           ))}
@@ -199,12 +211,10 @@ export default function DashboardPage() {
               placeholder={t("teamNamePlaceholder")}
               required
             />
-            <Select
-              id="teamLevel"
-              label={t("levelLabel")}
-              value={newTeamLevel}
-              onChange={(e) => setNewTeamLevel(e.target.value)}
-              options={LEVELS.map((l) => ({ value: l.value, label: l.label }))}
+            <TeamSettingsFields
+              idPrefix="newTeam"
+              value={newTeamSettings}
+              onChange={setNewTeamSettings}
             />
             <div className="flex justify-end gap-3">
               {teams.length > 0 && (

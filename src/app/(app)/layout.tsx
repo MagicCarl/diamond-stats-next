@@ -4,6 +4,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import NavBar from "@/components/layout/NavBar";
+import AppSidebar from "@/components/layout/AppSidebar";
 import Spinner from "@/components/ui/Spinner";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -27,9 +28,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen">
-      <NavBar />
-      <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+    <div className="min-h-screen bg-[#F7F6F3] dark:bg-gray-950">
+      <AppSidebar />
+      <div className="lg:pl-60">
+        {/* Phones and tablets keep the top bar; desktop uses the sidebar. */}
+        <div className="lg:hidden">
+          <NavBar />
+        </div>
+        <main className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:py-8">{children}</main>
+      </div>
     </div>
   );
 }

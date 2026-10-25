@@ -382,6 +382,10 @@ export default function InstructionsPage() {
             <h3 className="font-semibold">{t("sbPctHead")}</h3>
             <p>{t("sbPctText")}</p>
           </div>
+          <div>
+            <h3 className="font-semibold">{t("eraHead")}</h3>
+            <p>{t.rich("eraText", rich)}</p>
+          </div>
         </div>
       </Card>
 
