@@ -21,9 +21,16 @@ export async function POST(req: NextRequest) {
 
   const token = authHeader.split("Bearer ")[1];
 
+  let decoded;
   try {
-    const decoded = await getAdminAuth().verifyIdToken(token);
+    decoded = await getAdminAuth().verifyIdToken(token);
+  } catch {
+    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+  }
 
+  // From here on a failure is ours (usually the database), not a bad sign-in,
+  // so the login page can say so instead of blaming the password.
+  try {
     const errorFor = (code: string) =>
       code === "DELETED"
         ? "Account suspended"
@@ -89,10 +96,11 @@ export async function POST(req: NextRequest) {
     });
 
     return response;
-  } catch {
+  } catch (e) {
+    console.error("auth/verify: sign-in could not be completed", e);
     return NextResponse.json(
-      { error: "Invalid token" },
-      { status: 401 }
+      { error: "Service temporarily unavailable", code: "SERVER_ERROR" },
+      { status: 503 }
     );
   }
 }

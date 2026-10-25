@@ -457,6 +457,7 @@
     "login": {
       "title": "Baseball Stats Tracker에 로그인",
       "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다",
+      "serverError": "지금 로그인에 문제가 있습니다. 비밀번호는 맞습니다. 몇 분 후에 다시 시도해 주세요.",
       "networkError": "네트워크 오류입니다. 연결을 확인하고 다시 시도하세요.",
       "popupBlocked": "브라우저가 팝업을 차단했습니다. 이 사이트의 팝업을 허용하고 다시 시도하세요.",
       "unauthorizedDomain": "이 도메인은 Google 로그인에 대해 승인되지 않았습니다. 지원팀에 문의하세요.",

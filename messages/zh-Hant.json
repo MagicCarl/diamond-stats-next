@@ -457,6 +457,7 @@
     "login": {
       "title": "登入 Baseball Stats Tracker",
       "invalidCredentials": "電子郵件或密碼無效",
+      "serverError": "目前登入時發生問題。你的密碼沒有錯，請過幾分鐘再試一次。",
       "networkError": "網路錯誤。請檢查你的連線並再試一次。",
       "popupBlocked": "你的瀏覽器封鎖了彈出視窗。請允許此網站的彈出視窗並再試一次。",
       "unauthorizedDomain": "此網域未獲授權使用 Google 登入。請聯絡支援。",

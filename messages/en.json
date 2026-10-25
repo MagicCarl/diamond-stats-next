@@ -457,6 +457,7 @@
     "login": {
       "title": "Sign in to Baseball Stats Tracker",
       "invalidCredentials": "Invalid email or password",
+      "serverError": "We're having trouble signing you in right now. Your password is fine — please try again in a few minutes.",
       "networkError": "Network error. Please check your connection and try again.",
       "popupBlocked": "Popup was blocked by your browser. Please allow popups for this site and try again.",
       "unauthorizedDomain": "This domain is not authorized for Google sign-in. Please contact support.",

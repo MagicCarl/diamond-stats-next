@@ -79,6 +79,10 @@ export default function LoginPage() {
       } else if (code === "NAME_REQUIRED") {
         await signOut(auth);
         setError(t("nameMissing"));
+      } else if (code === "SERVER_ERROR" || res.status >= 500) {
+        // Their password was right; the problem is on our side.
+        await signOut(auth);
+        setError(t("serverError"));
       } else {
         await signOut(auth);
         setError(t("invalidCredentials"));
