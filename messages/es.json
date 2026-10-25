@@ -14,7 +14,12 @@
     "statsSearch": "Búsqueda de Estadísticas",
     "instructions": "Instrucciones",
     "admin": "Admin",
-    "signOut": "Cerrar Sesión"
+    "signOut": "Cerrar Sesión",
+    "myTeams": "Mis equipos",
+    "overview": "Resumen",
+    "seasonStats": "Estadísticas",
+    "sprayCharts": "Gráficos de bateo",
+    "team": "Equipo"
   },
   "settings": {
     "title": "Configuración",
@@ -39,7 +44,13 @@
     "levelLabel": "Nivel",
     "creating": "Creando...",
     "createError": "Error al crear el equipo",
-    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked.",
+    "sportLabel": "Deporte",
+    "baseball": "Béisbol",
+    "softball": "Sóftbol",
+    "gameLengthLabel": "Duración del juego",
+    "inningsOption": "{count} entradas",
+    "gameLengthHint": "Entradas reglamentarias de tu liga. Se usa para nuevos juegos y para calcular la ERA."
   },
   "games": {
     "new": {
@@ -212,7 +223,23 @@
       "deleting": "Eliminando...",
       "editPlayerTitle": "Editar Jugador",
       "saving": "Guardando...",
-      "saveChanges": "Guardar Cambios"
+      "saveChanges": "Guardar Cambios",
+      "record": "Récord",
+      "runs": "Carreras",
+      "runDiff": "{diff} diferencial de carreras",
+      "streak": "Últimos 5",
+      "nextUp": "Próximo",
+      "nothingScheduled": "Nada programado",
+      "live": "En vivo",
+      "tapToResume": "{score} · toca para seguir anotando",
+      "resumeLive": "Reanudar juego en vivo",
+      "battingLeaders": "Líderes de bateo",
+      "pitchingLeaders": "Líderes de pitcheo",
+      "player": "Jugador",
+      "noLeaders": "Los líderes aparecen después de tu primer juego anotado.",
+      "pos": "Pos",
+      "teamSettings": "Ajustes del equipo",
+      "gameLengthShort": "Juegos de {count} entradas"
     },
     "stats": {
       "backToTeam": "Volver al Equipo",
@@ -224,7 +251,12 @@
       "winPct": "% Victorias",
       "batting": "Bateo",
       "noStats": "Aún no hay estadísticas",
-      "player": "Jugador"
+      "player": "Jugador",
+      "pitching": "Pitcheo",
+      "exportCsv": "Exportar CSV",
+      "teamTotals": "Totales del equipo",
+      "noPitching": "Aún no hay estadísticas de pitcheo",
+      "eraNote": "La ERA se basa en juegos de {innings} entradas."
     },
     "sprayChart": {
       "backToStats": "Volver a Estadísticas",
@@ -233,7 +265,10 @@
       "allPlayers": "Todos los Jugadores",
       "out": "Out",
       "unknown": "Desconocido",
-      "hits": "{count, plural, one {# hit registrado} other {# hits registrados}}"
+      "hits": "{count, plural, one {# hit registrado} other {# hits registrados}}",
+      "subtitle": "Cada bola bateada, registrada en vivo. El color muestra el resultado.",
+      "ballsInPlay": "{count, plural, one {# bola en juego} other {# bolas en juego}}",
+      "noHits": "Aún no hay bolas bateadas registradas."
     }
   },
   "stats": {
@@ -263,7 +298,7 @@
   "instructions": {
     "title": "Cómo Usar Baseball Stats Tracker",
     "gettingStarted": "Primeros Pasos",
-    "gs1": "<b>Crea o Selecciona un Equipo</b> — Desde el Panel, toca <badge>+ Nuevo Equipo</badge>. Si ya tienes equipos, verás una lista de tus equipos existentes para cambiar entre ellos rápidamente. Toca cualquier equipo para ir a su página, o toca <b>+ Crear Nuevo Equipo</b> para agregar uno nuevo con un nombre y nivel (Little League, Travel, Recreacional, Preparatoria o Universidad).",
+    "gs1": "<b>Crea o Selecciona un Equipo</b> — Desde el Panel, toca <badge>+ Nuevo Equipo</badge>. Si ya tienes equipos, verás una lista de tus equipos existentes para cambiar entre ellos rápidamente. Toca cualquier equipo para ir a su página, o toca <b>+ Crear Nuevo Equipo</b> para agregar uno nuevo con un nombre y nivel (Little League, Travel, Recreacional, Preparatoria o Universidad). Elige también <b>Béisbol o Sóftbol</b> y la <b>Duración del juego</b>: el número de entradas que juega tu liga (por ejemplo 6 en Little League, 7 en sóftbol y preparatoria, 9 en universidad). Se sugiere según el deporte y el nivel, pero elige lo que realmente juega tu liga. Los nuevos juegos empiezan con esas entradas y se usa para calcular la ERA. Puedes cambiarla cuando quieras en <b>Ajustes del equipo</b> en la página de tu equipo.",
     "gs2": "<b>Agrega Jugadores</b> — Abre la página de tu equipo y toca <badge>+ Agregar Jugador</badge>. Ingresa el nombre, apellido, número, mano de bateo (Derecha, Izquierda o Ambidiestro), mano de lanzamiento y posición principal de cada jugador.",
     "gs3": "<b>Edita Jugadores</b> — ¿Necesitas hacer un cambio? Toca el botón <blue>Editar</blue> junto a cualquier jugador de la plantilla para actualizar su nombre, número, posición o lateralidad.",
     "gs4": "<b>Crea una Temporada</b> — Toca <badge>+ Temporada</badge> en la página de tu equipo para agregar una temporada (p. ej., “Primavera 2026”). Las temporadas te permiten agrupar juegos y filtrar estadísticas a lo largo del tiempo. Para eliminar una temporada ingresada por error, toca el enlace rojo <b>Eliminar</b> junto a ella en la lista de Temporadas de la página de tu equipo. Los juegos de esa temporada se conservan.",
@@ -416,6 +451,8 @@
     "opsText": "OBP + SLG. Una medida combinada de la capacidad de un bateador para embasarse y batear con poder.",
     "sbPctHead": "Porcentaje de Bases Robadas (SB%)",
     "sbPctText": "Bases Robadas ÷ (Bases Robadas + Atrapado Robando). Muestra la eficiencia en el corrido de bases.",
+    "eraHead": "Efectividad (ERA)",
+    "eraText": "(Carreras limpias × duración del juego de tu equipo) ÷ Entradas lanzadas. La ERA se calcula según las entradas que juega tu equipo —la <b>Duración del juego</b> que elegiste al configurar el equipo (por ejemplo 6, 7 o 9)— en lugar de usar siempre las 9 entradas de la MLB. Así muestra las carreras limpias permitidas por cada juego que tu equipo realmente juega. En juegos más cortos, la ERA resulta <em>más baja</em> que una ERA estilo MLB con el mismo pitcheo: 3 carreras limpias en 6 entradas es una ERA de 3.00 para un equipo de 6 entradas, pero 4.50 en la escala de 9 entradas. Tenlo en cuenta al comparar con otras apps o cifras de la MLB. La pestaña Pitcheo de Estadísticas muestra la duración usada y puedes cambiarla en <b>Ajustes del equipo</b>.",
     "gameMgmt": "Gestión del Juego",
     "mgmtUndo": "<b>Deshacer Último</b> — Elimina el turno más reciente y revierte el marcador, los outs y la entrada según sea necesario. Úsalo para corregir errores.",
     "mgmtEndGame": "<b>Finalizar Juego</b> — Marca el juego como final. El marcador final queda bloqueado y el juego aparece con una etiqueta verde de “Final” en tu lista de juegos.",
@@ -629,7 +666,13 @@
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
       "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
-      "trialSub": "Cuenta gratis — sin tarjeta de crédito. Anota un partido completo con estadísticas en vivo y gráficos de bateo."
+      "trialSub": "Cuenta gratis — sin tarjeta de crédito. Anota un partido completo con estadísticas en vivo y gráficos de bateo.",
+      "heroBadge": "Hecho para entrenadores y padres de béisbol y sóftbol",
+      "heroCheck1": "Cuenta gratis — sin tarjeta",
+      "heroCheck2": "Pago único de $39",
+      "heroCheck3": "Sin suscripciones, nunca",
+      "buyShort": "Cómpralo — $39",
+      "heroImageAlt": "Corredor de béisbol juvenil deslizándose en home mientras el receptor intenta tocarlo al atardecer"
     },
     "common": {
       "getStarted": "Comenzar",

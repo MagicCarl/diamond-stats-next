@@ -14,7 +14,12 @@
     "statsSearch": "기록 검색",
     "instructions": "사용법",
     "admin": "관리자",
-    "signOut": "로그아웃"
+    "signOut": "로그아웃",
+    "myTeams": "내 팀",
+    "overview": "개요",
+    "seasonStats": "시즌 기록",
+    "sprayCharts": "타구 분포",
+    "team": "팀"
   },
   "settings": {
     "title": "설정",
@@ -39,7 +44,13 @@
     "levelLabel": "레벨",
     "creating": "만드는 중...",
     "createError": "팀을 만들지 못했습니다",
-    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked.",
+    "sportLabel": "종목",
+    "baseball": "야구",
+    "softball": "소프트볼",
+    "gameLengthLabel": "경기 이닝",
+    "inningsOption": "{count}이닝",
+    "gameLengthHint": "리그의 정규 이닝 수입니다. 새 경기와 평균자책점 계산에 사용됩니다."
   },
   "games": {
     "new": {
@@ -212,7 +223,23 @@
       "deleting": "삭제 중...",
       "editPlayerTitle": "선수 편집",
       "saving": "저장 중...",
-      "saveChanges": "변경사항 저장"
+      "saveChanges": "변경사항 저장",
+      "record": "전적",
+      "runs": "득점 / 실점",
+      "runDiff": "득실차 {diff}",
+      "streak": "최근 5경기",
+      "nextUp": "다음 경기",
+      "nothingScheduled": "예정된 경기 없음",
+      "live": "진행 중",
+      "tapToResume": "{score} · 탭하여 기록 계속하기",
+      "resumeLive": "경기 기록 계속하기",
+      "battingLeaders": "타격 리더",
+      "pitchingLeaders": "투수 리더",
+      "player": "선수",
+      "noLeaders": "첫 경기를 기록하면 리더가 표시됩니다.",
+      "pos": "포지션",
+      "teamSettings": "팀 설정",
+      "gameLengthShort": "{count}이닝 경기"
     },
     "stats": {
       "backToTeam": "팀으로 돌아가기",
@@ -224,7 +251,12 @@
       "winPct": "승률",
       "batting": "타격",
       "noStats": "아직 기록이 없습니다",
-      "player": "선수"
+      "player": "선수",
+      "pitching": "투구",
+      "exportCsv": "CSV 내보내기",
+      "teamTotals": "팀 합계",
+      "noPitching": "아직 투구 기록이 없습니다",
+      "eraNote": "평균자책점은 {innings}이닝 경기 기준입니다."
     },
     "sprayChart": {
       "backToStats": "기록으로 돌아가기",
@@ -233,7 +265,10 @@
       "allPlayers": "전체 선수",
       "out": "아웃",
       "unknown": "알 수 없음",
-      "hits": "{count, plural, other {타구 #개 기록됨}}"
+      "hits": "{count, plural, other {타구 #개 기록됨}}",
+      "subtitle": "경기 중 실시간으로 기록한 모든 타구. 색상은 결과를 나타냅니다.",
+      "ballsInPlay": "타구 {count}개",
+      "noHits": "아직 기록된 타구가 없습니다."
     }
   },
   "stats": {
@@ -263,7 +298,7 @@
   "instructions": {
     "title": "Baseball Stats Tracker 사용법",
     "gettingStarted": "시작하기",
-    "gs1": "<b>팀 만들기 또는 선택</b> — 대시보드에서 <badge>+ 새 팀</badge>을 탭하세요. 이미 팀이 있다면 기존 팀 목록이 표시되어 빠르게 전환할 수 있습니다. 팀을 탭하여 해당 페이지로 이동하거나, <b>+ 새 팀 만들기</b>를 탭하여 팀 이름과 레벨(Little League, Travel, Recreational, High School, College)을 지정해 새 팀을 추가하세요.",
+    "gs1": "<b>팀 만들기 또는 선택</b> — 대시보드에서 <badge>+ 새 팀</badge>을 탭하세요. 이미 팀이 있다면 기존 팀 목록이 표시되어 빠르게 전환할 수 있습니다. 팀을 탭하여 해당 페이지로 이동하거나, <b>+ 새 팀 만들기</b>를 탭하여 팀 이름과 레벨(Little League, Travel, Recreational, High School, College)을 지정해 새 팀을 추가하세요. <b>야구 또는 소프트볼</b>과 <b>경기 이닝</b>(리그의 정규 이닝 수. 예: Little League 6, 소프트볼·고교 7, 대학 9)도 선택하세요. 종목과 레벨에 따라 자동으로 채워지지만, 실제로 리그에서 치르는 이닝 수를 선택하세요. 새 경기는 이 이닝 수로 시작하며 평균자책점 계산에도 사용됩니다. 팀 페이지의 <b>팀 설정</b>에서 언제든지 변경할 수 있습니다.",
     "gs2": "<b>선수 추가</b> — 팀 페이지를 열고 <badge>+ 선수 추가</badge>를 탭하세요. 각 선수의 이름, 성, 등번호, 타격손(우, 좌, 양손), 투구손, 주 포지션을 입력하세요.",
     "gs3": "<b>선수 편집</b> — 변경이 필요하신가요? 로스터에서 선수 옆의 <blue>편집</blue> 버튼을 탭하여 이름, 등번호, 포지션, 좌우 정보를 업데이트하세요.",
     "gs4": "<b>시즌 만들기</b> — 팀 페이지에서 <badge>+ 시즌</badge>을 탭하여 시즌(예: \"2026 봄\")을 추가하세요. 시즌을 사용하면 경기를 묶고 기간별로 기록을 필터링할 수 있습니다. 잘못 입력한 시즌을 제거하려면 팀 페이지의 시즌 목록에서 옆의 빨간 <b>삭제</b> 링크를 탭하세요. 해당 시즌의 경기는 보존됩니다.",
@@ -416,6 +451,8 @@
     "opsText": "OBP + SLG. 타자가 출루하고 장타를 치는 능력을 결합한 지표.",
     "sbPctHead": "도루 성공률 (SB%)",
     "sbPctText": "도루 ÷ (도루 + 도루 실패). 주루 효율성을 보여줍니다.",
+    "eraHead": "평균자책점 (ERA)",
+    "eraText": "(자책점 × 팀의 경기 이닝) ÷ 투구 이닝. 평균자책점은 항상 MLB의 9이닝을 쓰는 대신, 팀 설정 시 선택한 <b>경기 이닝</b>(예: 6, 7, 9)을 기준으로 계산합니다. 그래서 팀이 실제로 치르는 한 경기당 허용한 자책점을 보여줍니다. 경기가 짧을수록 같은 투구 내용이라도 MLB 방식보다 평균자책점이 <em>낮게</em> 나옵니다. 예: 6이닝 팀이 6이닝 3자책점이면 3.00이지만 9이닝 기준으로는 4.50입니다. 다른 앱이나 MLB 기록과 비교할 때 참고하세요. 시즌 기록의 투구 탭에 사용 중인 이닝 수가 표시되며 <b>팀 설정</b>에서 변경할 수 있습니다.",
     "gameMgmt": "경기 관리",
     "mgmtUndo": "<b>마지막 취소</b> — 가장 최근 타석을 제거하고 필요에 따라 점수, 아웃, 이닝을 되돌립니다. 실수를 수정할 때 사용하세요.",
     "mgmtEndGame": "<b>경기 종료</b> — 경기를 종료로 표시합니다. 최종 점수가 잠기고 경기가 경기 목록에 녹색 \"경기 종료\" 배지와 함께 표시됩니다.",
@@ -629,7 +666,13 @@
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
       "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
-      "trialSub": "무료 계정 — 신용카드 불필요. 실시간 통계와 스프레이 차트로 한 경기를 완전히 기록해 보세요."
+      "trialSub": "무료 계정 — 신용카드 불필요. 실시간 통계와 스프레이 차트로 한 경기를 완전히 기록해 보세요.",
+      "heroBadge": "야구·소프트볼 코치와 학부모를 위해 만든 앱",
+      "heroCheck1": "무료 계정 — 카드 불필요",
+      "heroCheck2": "1회 결제 $39",
+      "heroCheck3": "구독 없음",
+      "buyShort": "구매 — $39",
+      "heroImageAlt": "해 질 녘 홈플레이트로 슬라이딩하는 유소년 야구 주자와 태그를 시도하는 포수"
     },
     "common": {
       "getStarted": "시작하기",

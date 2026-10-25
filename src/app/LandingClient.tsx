@@ -12,19 +12,16 @@ import BuyButton from "@/components/ui/BuyButton";
 const features = [
   {
     id: "live",
-    icon: "⚾",
     imageLight: "/screenshots/live-scoring-light.svg",
     imageDark: "/screenshots/live-scoring.svg",
   },
   {
     id: "stats",
-    icon: "📊",
     imageLight: "/screenshots/season-stats-light.svg",
     imageDark: "/screenshots/season-stats.svg",
   },
   {
     id: "spray",
-    icon: "🎯",
     imageLight: "/screenshots/spray-chart-light.svg",
     imageDark: "/screenshots/spray-chart.svg",
   },
@@ -46,122 +43,176 @@ export default function LandingClient() {
 
   return (
     <>
-      <header className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8">
-            <circle cx="32" cy="32" r="30" fill="#f5f5f5" stroke="#cc0000" strokeWidth="2"/>
-            <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
-            <line x1="20" y1="10" x2="17" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="15" x2="16" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="20" x2="16" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="26" x2="16" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="19" y1="32" x2="15" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="38" x2="16" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="44" x2="16" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="20" y1="50" x2="17" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="10" x2="47" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="15" x2="48" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="20" x2="48" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="26" x2="48" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="45" y1="32" x2="49" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="38" x2="48" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="44" x2="48" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="44" y1="50" x2="47" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-          <span className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Mona Sans', sans-serif" }}>Baseball Stats Tracker</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher
-            placeholder={t("selectLanguage")}
-            className="rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
-          />
-          <ThemeToggle />
-          {user ? (
-            <Link
-              href="/dashboard"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-            >
-              {t("dashboard")}
-            </Link>
-          ) : (
-            <Link
-              href="/login"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-            >
-              {t("signIn")}
-            </Link>
-          )}
+      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#FAF8F5]/85 backdrop-blur-md dark:border-white/10 dark:bg-gray-950/80">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <Link href="/" className="flex min-w-0 items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8">
+              <circle cx="32" cy="32" r="30" fill="#f5f5f5" stroke="#cc0000" strokeWidth="2"/>
+              <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="20" y1="10" x2="17" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="15" x2="16" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="20" x2="16" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="26" x2="16" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="19" y1="32" x2="15" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="38" x2="16" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="44" x2="16" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="20" y1="50" x2="17" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="10" x2="47" y2="8" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="15" x2="48" y2="14" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="20" x2="48" y2="20" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="26" x2="48" y2="27" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="45" y1="32" x2="49" y2="33" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="38" x2="48" y2="38" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="44" x2="48" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="44" y1="50" x2="47" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            <span className="text-base font-bold leading-tight tracking-tight sm:text-xl" style={{ fontFamily: "'Mona Sans', sans-serif" }}>Baseball Stats Tracker</span>
+          </Link>
+          <nav className="hidden items-center gap-7 text-sm text-gray-600 lg:flex dark:text-gray-300">
+            <Link href="/features" className="hover:text-gray-900 dark:hover:text-white">{tc("navFeatures")}</Link>
+            <Link href="/pricing" className="hover:text-gray-900 dark:hover:text-white">{tc("navPricing")}</Link>
+            <Link href="/faq" className="hover:text-gray-900 dark:hover:text-white">{tc("navFaq")}</Link>
+          </nav>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
+            <LanguageSwitcher
+              placeholder={t("selectLanguage")}
+              className="w-28 rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-700 sm:w-auto sm:text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+            />
+            <ThemeToggle />
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="whitespace-nowrap rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+              >
+                {t("dashboard")}
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="whitespace-nowrap px-1 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                  {t("signIn")}
+                </Link>
+                <BuyButton className="hidden rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 md:inline-block">
+                  {t("buyShort")}
+                </BuyButton>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h1 className="text-6xl tracking-normal leading-tight sm:text-7xl" style={{ fontFamily: "'Mona Sans', sans-serif", fontWeight: 800 }}>
-          <span className="block text-[#1A1A1A] dark:text-white">{t("heroLine1")}</span>
-          <span className="block text-[#2563EB]">{t("heroLine2")}</span>
-          <span className="block text-[#16A34A]">{t("heroLine3")}</span>
-        </h1>
-        <h2 className="mx-auto mt-6 max-w-3xl text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
-          {t("subtitle")}
-        </h2>
-        <p className="mx-auto mt-8 max-w-2xl text-xl font-semibold text-gray-900 dark:text-gray-100">
-          {t("hook1")}
-          <br />
-          {t("hook2")}
-        </p>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-          {t("hookBody")}
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-2">
-          <Link
-            href="/signup"
-            className="rounded-lg bg-blue-600 px-8 py-3 text-base font-semibold text-white shadow-lg hover:bg-blue-700"
-          >
-            {t("tryFreeCta")}
-          </Link>
-          <p className="max-w-md text-sm text-gray-500 dark:text-gray-500">
-            {t("trialSub")}
-          </p>
-          <BuyButton className="mt-3 rounded-lg border-2 border-blue-600 px-8 py-2.5 text-base font-semibold text-blue-600 transition hover:bg-blue-50 dark:hover:bg-blue-900/20">
-            {t("ctaPrimary")}
-          </BuyButton>
-          <p className="text-sm text-gray-500 dark:text-gray-500">
-            {t("ctaSub")}
-          </p>
-        </div>
-        <p className="mt-6 text-lg font-bold text-gray-900 dark:text-gray-100">
-          {t("noSubs")}
-        </p>
+      <main>
+        <section className="relative isolate overflow-hidden">
+          <Image
+            src="/hero-slide-home.jpg"
+            alt={t("heroImageAlt")}
+            fill
+            priority
+            sizes="100vw"
+            className="-z-20 object-cover object-[70%_center]"
+          />
+          {/* Wash the photo out behind the copy: evenly on phones, left-to-right on desktop, then fade the bottom into the page. */}
+          <div className="absolute inset-0 -z-10 bg-[#FAF8F5]/80 lg:bg-transparent lg:bg-gradient-to-r lg:from-[#FAF8F5] lg:via-[#FAF8F5]/80 lg:to-[#FAF8F5]/10 dark:bg-gray-950/85 dark:lg:bg-transparent dark:lg:from-gray-950 dark:lg:via-gray-950/80 dark:lg:to-gray-950/20" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-[#FAF8F5] dark:to-gray-950" />
 
-        <div className="mt-20 grid gap-8 text-left sm:grid-cols-3">
+          <div className="mx-auto max-w-6xl px-4 pb-28 pt-14 sm:px-6 sm:pt-20 lg:pb-40 lg:pt-28">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-600/25 bg-white/60 px-3 py-1 text-xs font-medium text-blue-700 backdrop-blur sm:text-sm dark:border-blue-400/30 dark:bg-gray-900/60 dark:text-blue-300">
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                {t("heroBadge")}
+              </span>
+              <h1 className="mt-6 text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: "'Mona Sans', sans-serif", fontWeight: 800 }}>
+                <span className="block text-[#1A1A1A] dark:text-white">{t("heroLine1")}</span>
+                <span className="block text-[#2563EB]">{t("heroLine2")}</span>
+                <span className="block text-[#16A34A]">{t("heroLine3")}</span>
+              </h1>
+              <h2 className="mt-6 max-w-xl text-lg font-normal leading-relaxed text-gray-700 sm:text-xl dark:text-gray-300">
+                {t("subtitle")}
+              </h2>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700"
+                >
+                  {t("tryFreeCta")}
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+                <BuyButton className="rounded-lg border-2 border-gray-900/80 bg-white/50 px-6 py-2.5 text-base font-semibold text-gray-900 backdrop-blur transition hover:bg-white dark:border-white/70 dark:bg-gray-900/40 dark:text-white dark:hover:bg-gray-900">
+                  {t("ctaPrimary")}
+                </BuyButton>
+              </div>
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-700 dark:text-gray-300">
+                {(["heroCheck1", "heroCheck2", "heroCheck3"] as const).map((key) => (
+                  <li key={key} className="flex items-center gap-1.5">
+                    <svg className="h-4 w-4 text-[#16A34A]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {t(key)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-2xl px-6 text-center">
+          <p className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl dark:text-gray-100">
+            {t("hook1")}
+            <br />
+            {t("hook2")}
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+            {t("hookBody")}
+          </p>
+          <p className="mt-6 text-lg font-bold text-gray-900 dark:text-gray-100">
+            {t("noSubs")}
+          </p>
+        </section>
+
+        <section className="mx-auto mt-20 grid max-w-6xl gap-6 px-4 sm:grid-cols-3 sm:px-6">
           {features.map((feature) => (
             <button
               key={feature.id}
               onClick={() => setPreviewFeature(feature.id)}
-              className="rounded-xl border border-gray-200 bg-white p-6 text-left transition-all hover:shadow-lg hover:border-blue-300 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
+              className="group overflow-hidden rounded-2xl border border-gray-200 bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
             >
-              <div className="mb-3 text-3xl">{feature.icon}</div>
-              <h3 className="text-lg font-semibold">{t(featureKeys[feature.id].title)}</h3>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                {t(featureKeys[feature.id].desc)}
-              </p>
-              <span className="mt-3 inline-block text-sm font-medium text-blue-600 dark:text-blue-400">
-                {t("seeExample")}
-              </span>
+              <div className="aspect-[16/10] overflow-hidden border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={feature.imageLight} alt="" className="h-full w-full object-cover object-top dark:hidden" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={feature.imageDark} alt="" className="hidden h-full w-full object-cover object-top dark:block" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-semibold">{t(featureKeys[feature.id].title)}</h3>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  {t(featureKeys[feature.id].desc)}
+                </p>
+                <span className="mt-3 inline-block text-sm font-medium text-blue-600 group-hover:underline dark:text-blue-400">
+                  {t("seeExample")}
+                </span>
+              </div>
             </button>
           ))}
-        </div>
+        </section>
 
-        <div className="mx-auto mt-20 max-w-md">
+        <section className="mx-auto mt-20 max-w-md px-6 pb-20 text-center">
           <Image
             src="/baseballstatstracker_bannerAd.png"
-            alt="Baseball Stats Tracker app showing live game scoring, batting stats, and spray charts for youth baseball and softball teams"
+            alt="Cartoon baseball player holding a BaseballStatsTracker.com $39 banner"
             width={1536}
             height={1024}
             sizes="(max-width: 768px) 100vw, 448px"
-            className="mb-6 h-auto w-full rounded-lg shadow-2xl"
+            className="mb-6 h-auto w-full rounded-2xl shadow-2xl"
           />
-          <div className="rounded-xl border border-gray-200 bg-white p-8 text-center dark:border-gray-700 dark:bg-gray-800">
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <h3 className="text-2xl font-bold">{t("getAllFeatures")}</h3>
             <div className="mt-4">
               <span className="text-4xl font-bold">$39</span>
@@ -183,7 +234,7 @@ export default function LandingClient() {
               {tc("guarantee")}
             </p>
           </div>
-        </div>
+        </section>
       </main>
 
       {/* Feature preview modal */}

@@ -14,7 +14,12 @@
     "statsSearch": "成績検索",
     "instructions": "使い方",
     "admin": "管理",
-    "signOut": "ログアウト"
+    "signOut": "ログアウト",
+    "myTeams": "マイチーム",
+    "overview": "概要",
+    "seasonStats": "シーズン成績",
+    "sprayCharts": "打球方向",
+    "team": "チーム"
   },
   "settings": {
     "title": "設定",
@@ -39,7 +44,13 @@
     "levelLabel": "レベル",
     "creating": "作成中...",
     "createError": "チームの作成に失敗しました",
-    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked.",
+    "sportLabel": "競技",
+    "baseball": "野球",
+    "softball": "ソフトボール",
+    "gameLengthLabel": "試合のイニング数",
+    "inningsOption": "{count}イニング",
+    "gameLengthHint": "リーグの規定イニング数です。新しい試合と防御率の計算に使われます。"
   },
   "games": {
     "new": {
@@ -212,7 +223,23 @@
       "deleting": "削除中...",
       "editPlayerTitle": "選手を編集",
       "saving": "保存中...",
-      "saveChanges": "変更を保存"
+      "saveChanges": "変更を保存",
+      "record": "成績",
+      "runs": "得点 / 失点",
+      "runDiff": "得失点差 {diff}",
+      "streak": "直近5試合",
+      "nextUp": "次の試合",
+      "nothingScheduled": "予定なし",
+      "live": "試合中",
+      "tapToResume": "{score} · タップしてスコア記録を再開",
+      "resumeLive": "試合の記録を再開",
+      "battingLeaders": "打撃リーダー",
+      "pitchingLeaders": "投手リーダー",
+      "player": "選手",
+      "noLeaders": "最初の試合を記録するとリーダーが表示されます。",
+      "pos": "守備",
+      "teamSettings": "チーム設定",
+      "gameLengthShort": "{count}イニング制"
     },
     "stats": {
       "backToTeam": "チームに戻る",
@@ -224,7 +251,12 @@
       "winPct": "勝率",
       "batting": "打撃",
       "noStats": "まだ成績がありません",
-      "player": "選手"
+      "player": "選手",
+      "pitching": "投手",
+      "exportCsv": "CSVを書き出す",
+      "teamTotals": "チーム合計",
+      "noPitching": "投手成績はまだありません",
+      "eraNote": "防御率は{innings}イニング制で計算しています。"
     },
     "sprayChart": {
       "backToStats": "成績に戻る",
@@ -233,7 +265,10 @@
       "allPlayers": "全選手",
       "out": "アウト",
       "unknown": "不明",
-      "hits": "{count, plural, other {#本の打球を記録}}"
+      "hits": "{count, plural, other {#本の打球を記録}}",
+      "subtitle": "試合中に記録したすべての打球。色は結果を表します。",
+      "ballsInPlay": "打球 {count}",
+      "noHits": "記録された打球はまだありません。"
     }
   },
   "stats": {
@@ -263,7 +298,7 @@
   "instructions": {
     "title": "Baseball Stats Tracker の使い方",
     "gettingStarted": "はじめに",
-    "gs1": "<b>チームを作成または選択</b> — ダッシュボードで <badge>+ 新規チーム</badge> をタップします。すでにチームがある場合は、既存のチーム一覧が表示され、すばやく切り替えられます。任意のチームをタップしてそのページに移動するか、<b>+ 新規チームを作成</b> をタップして、チーム名とレベル（Little League、Travel、Recreational、High School、College）を指定して新しいチームを追加します。",
+    "gs1": "<b>チームを作成または選択</b> — ダッシュボードで <badge>+ 新規チーム</badge> をタップします。すでにチームがある場合は、既存のチーム一覧が表示され、すばやく切り替えられます。任意のチームをタップしてそのページに移動するか、<b>+ 新規チームを作成</b> をタップして、チーム名とレベル（Little League、Travel、Recreational、High School、College）を指定して新しいチームを追加します。 あわせて<b>野球かソフトボール</b>と<b>試合のイニング数</b>（リーグの規定イニング数。例:Little Leagueは6、ソフトボールと高校は7、大学は9）を選びます。競技とレベルから自動で入力されますが、実際にリーグで行うイニング数を選んでください。新しい試合はこのイニング数で始まり、防御率の計算にも使われます。チームページの<b>チーム設定</b>からいつでも変更できます。",
     "gs2": "<b>選手を追加</b> — チームページを開いて <badge>+ 選手を追加</badge> をタップします。各選手の名、姓、背番号、打席の利き手（右、左、両打）、投球の利き手、主な守備位置を入力します。",
     "gs3": "<b>選手を編集</b> — 変更が必要ですか？ロスター内の選手の横にある <blue>編集</blue> ボタンをタップして、名前、背番号、守備位置、利き手を更新します。",
     "gs4": "<b>シーズンを作成</b> — チームページで <badge>+ シーズン</badge> をタップしてシーズン（例：「2026年春」）を追加します。シーズンを使うと、試合をまとめたり、期間ごとに成績を絞り込んだりできます。誤って入力したシーズンを削除するには、チームページのシーズン一覧でその横にある赤い <b>削除</b> リンクをタップします。そのシーズンの試合は保持されます。",
@@ -416,6 +451,8 @@
     "opsText": "OBP + SLG。打者の出塁能力と長打力を組み合わせた指標。",
     "sbPctHead": "盗塁成功率（SB%）",
     "sbPctText": "盗塁 ÷（盗塁 + 盗塁刺）。走塁の効率を示します。",
+    "eraHead": "防御率 (ERA)",
+    "eraText": "(自責点 × チームの試合イニング数) ÷ 投球回。防御率は常にMLBの9イニングを使うのではなく、チーム設定時に選んだ<b>試合のイニング数</b>（例:6、7、9）を基準に計算します。そのため、実際にチームが戦う1試合あたりの自責点を表します。試合が短いほど、同じ投球内容でもMLB方式より防御率は<em>低く</em>なります。例:6イニング制のチームで6イニング自責点3なら防御率3.00ですが、9イニング基準では4.50です。他のアプリやMLBの数字と比べるときはご注意ください。シーズン成績の「投手」タブに使用中のイニング数が表示され、<b>チーム設定</b>で変更できます。",
     "gameMgmt": "試合の管理",
     "mgmtUndo": "<b>最後を取り消す</b> — 直近の打席を削除し、必要に応じてスコア、アウト、イニングを元に戻します。ミスの修正に使います。",
     "mgmtEndGame": "<b>試合終了</b> — 試合を終了として記録します。最終スコアがロックされ、試合一覧に緑の「試合終了」バッジ付きで表示されます。",
@@ -629,7 +666,13 @@
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
       "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
-      "trialSub": "無料アカウント — クレジットカード不要。ライブ統計とスプレーチャート付きで1試合まるごと記録できます。"
+      "trialSub": "無料アカウント — クレジットカード不要。ライブ統計とスプレーチャート付きで1試合まるごと記録できます。",
+      "heroBadge": "野球・ソフトボールのコーチと保護者のために",
+      "heroCheck1": "無料アカウント — カード不要",
+      "heroCheck2": "買い切り $39",
+      "heroCheck3": "サブスクなし",
+      "buyShort": "購入 — $39",
+      "heroImageAlt": "夕暮れのホームベースにスライディングする少年野球の走者とタッチを狙う捕手"
     },
     "common": {
       "getStarted": "始める",

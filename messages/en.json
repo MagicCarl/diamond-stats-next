@@ -14,7 +14,12 @@
     "statsSearch": "Stats Search",
     "instructions": "Instructions",
     "admin": "Admin",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "myTeams": "My Teams",
+    "overview": "Overview",
+    "seasonStats": "Season Stats",
+    "sprayCharts": "Spray Charts",
+    "team": "Team"
   },
   "settings": {
     "title": "Settings",
@@ -39,7 +44,13 @@
     "levelLabel": "Level",
     "creating": "Creating...",
     "createError": "Failed to create team",
-    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked.",
+    "sportLabel": "Sport",
+    "baseball": "Baseball",
+    "softball": "Softball",
+    "gameLengthLabel": "Game length",
+    "inningsOption": "{count} innings",
+    "gameLengthHint": "Regulation innings for your league. Used for new games and to calculate ERA."
   },
   "games": {
     "new": {
@@ -212,7 +223,23 @@
       "deleting": "Deleting...",
       "editPlayerTitle": "Edit Player",
       "saving": "Saving...",
-      "saveChanges": "Save Changes"
+      "saveChanges": "Save Changes",
+      "record": "Record",
+      "runs": "Runs",
+      "runDiff": "{diff} run differential",
+      "streak": "Last 5",
+      "nextUp": "Next up",
+      "nothingScheduled": "Nothing scheduled",
+      "live": "Live",
+      "tapToResume": "{score} · tap to resume scoring",
+      "resumeLive": "Resume live game",
+      "battingLeaders": "Batting leaders",
+      "pitchingLeaders": "Pitching leaders",
+      "player": "Player",
+      "noLeaders": "Leaders show up after your first scored game.",
+      "pos": "Pos",
+      "teamSettings": "Team Settings",
+      "gameLengthShort": "{count}-inning games"
     },
     "stats": {
       "backToTeam": "Back to Team",
@@ -224,7 +251,12 @@
       "winPct": "Win %",
       "batting": "Batting",
       "noStats": "No stats yet",
-      "player": "Player"
+      "player": "Player",
+      "pitching": "Pitching",
+      "exportCsv": "Export CSV",
+      "teamTotals": "Team totals",
+      "noPitching": "No pitching stats yet",
+      "eraNote": "ERA is based on {innings}-inning games."
     },
     "sprayChart": {
       "backToStats": "Back to Stats",
@@ -233,7 +265,10 @@
       "allPlayers": "All Players",
       "out": "Out",
       "unknown": "Unknown",
-      "hits": "{count, plural, one {# hit recorded} other {# hits recorded}}"
+      "hits": "{count, plural, one {# hit recorded} other {# hits recorded}}",
+      "subtitle": "Every batted ball, recorded live while scoring. Color shows the result.",
+      "ballsInPlay": "{count, plural, one {# ball in play} other {# balls in play}}",
+      "noHits": "No batted balls recorded yet."
     }
   },
   "stats": {
@@ -263,7 +298,7 @@
   "instructions": {
     "title": "How to Use Baseball Stats Tracker",
     "gettingStarted": "Getting Started",
-    "gs1": "<b>Create or Select a Team</b> — From the Dashboard, tap <badge>+ New Team</badge>. If you already have teams, you'll see a list of your existing teams to quickly switch between them. Tap any team to go to its page, or tap <b>+ Create New Team</b> to add a new one with a team name and level (Little League, Travel, Recreational, High School, or College).",
+    "gs1": "<b>Create or Select a Team</b> — From the Dashboard, tap <badge>+ New Team</badge>. If you already have teams, you'll see a list of your existing teams to quickly switch between them. Tap any team to go to its page, or tap <b>+ Create New Team</b> to add a new one with a team name and level (Little League, Travel, Recreational, High School, or College). Also choose <b>Baseball or Softball</b> and your <b>Game length</b> — the number of innings your league plays (for example 6 for Little League, 7 for softball and high school, 9 for college). It's pre-filled from your sport and level, but pick whatever your league actually plays. New games start with this many innings, and it's used to calculate ERA. You can change it anytime with <b>Team Settings</b> on your team page.",
     "gs2": "<b>Add Players</b> — Open your team page and tap <badge>+ Add Player</badge>. Enter each player's first name, last name, jersey number, batting hand (Right, Left, or Switch), throwing hand, and primary position.",
     "gs3": "<b>Edit Players</b> — Need to make a change? Tap the <blue>Edit</blue> button next to any player in the roster to update their name, jersey number, position, or handedness.",
     "gs4": "<b>Create a Season</b> — Tap <badge>+ Season</badge> on your team page to add a season (e.g., “Spring 2026”). Seasons let you group games and filter stats over time. To remove a season entered incorrectly, tap the red <b>Delete</b> link next to it in the Seasons list on your team page. Games in that season are preserved.",
@@ -416,6 +451,8 @@
     "opsText": "OBP + SLG. A combined measure of a hitter's ability to get on base and hit for power.",
     "sbPctHead": "Stolen Base Percentage (SB%)",
     "sbPctText": "Stolen Bases ÷ (Stolen Bases + Caught Stealing). Shows baserunning efficiency.",
+    "eraHead": "Earned Run Average (ERA)",
+    "eraText": "(Earned Runs × your team's game length) ÷ Innings Pitched. ERA is scaled to the number of innings your team plays — the <b>Game length</b> you chose when setting up the team (for example 6, 7, or 9) — instead of always using MLB's 9 innings. That way it shows earned runs allowed per game your team actually plays. For shorter games this makes ERA <em>lower</em> than an MLB-style ERA for the same pitching: 3 earned runs in 6 innings is a 3.00 ERA for a 6-inning team, but 4.50 on the 9-inning scale. Keep this in mind when comparing with other apps or MLB numbers. The Pitching tab on Season Stats shows the game length being used, and you can change it in <b>Team Settings</b>.",
     "gameMgmt": "Game Management",
     "mgmtUndo": "<b>Undo Last</b> — Removes the most recent at-bat and reverts the score, outs, and inning as needed. Use this to fix mistakes.",
     "mgmtEndGame": "<b>End Game</b> — Marks the game as final. The final score is locked and the game appears with a green “Final” badge in your games list.",
@@ -629,7 +666,13 @@
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
       "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
-      "trialSub": "Free account — no credit card. Score a full game with live stats & spray charts."
+      "trialSub": "Free account — no credit card. Score a full game with live stats & spray charts.",
+      "heroBadge": "Built for baseball & softball coaches and parents",
+      "heroCheck1": "Free account — no card",
+      "heroCheck2": "One-time $39",
+      "heroCheck3": "No subscriptions, ever",
+      "buyShort": "Get it — $39",
+      "heroImageAlt": "Youth baseball runner sliding into home plate as the catcher reaches for the tag at sunset"
     },
     "common": {
       "getStarted": "Get Started",

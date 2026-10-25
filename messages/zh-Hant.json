@@ -14,7 +14,12 @@
     "statsSearch": "數據搜尋",
     "instructions": "使用說明",
     "admin": "管理",
-    "signOut": "登出"
+    "signOut": "登出",
+    "myTeams": "我的球隊",
+    "overview": "總覽",
+    "seasonStats": "賽季數據",
+    "sprayCharts": "擊球分佈",
+    "team": "球隊"
   },
   "settings": {
     "title": "設定",
@@ -39,7 +44,13 @@
     "levelLabel": "級別",
     "creating": "建立中...",
     "createError": "建立球隊失敗",
-    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked."
+    "purchaseSuccess": "🎉 Purchase complete — you now have full access. Unlimited games, teams, and seasons are unlocked.",
+    "sportLabel": "運動項目",
+    "baseball": "棒球",
+    "softball": "壘球",
+    "gameLengthLabel": "比賽局數",
+    "inningsOption": "{count} 局",
+    "gameLengthHint": "聯盟的正式比賽局數，用於新比賽及計算防禦率。"
   },
   "games": {
     "new": {
@@ -212,7 +223,23 @@
       "deleting": "刪除中...",
       "editPlayerTitle": "編輯球員",
       "saving": "儲存中...",
-      "saveChanges": "儲存變更"
+      "saveChanges": "儲存變更",
+      "record": "戰績",
+      "runs": "得分 / 失分",
+      "runDiff": "得失分差 {diff}",
+      "streak": "最近 5 場",
+      "nextUp": "下一場",
+      "nothingScheduled": "尚無賽程",
+      "live": "進行中",
+      "tapToResume": "{score} · 點擊繼續記分",
+      "resumeLive": "繼續記錄比賽",
+      "battingLeaders": "打擊排行",
+      "pitchingLeaders": "投手排行",
+      "player": "球員",
+      "noLeaders": "記錄第一場比賽後即會顯示排行。",
+      "pos": "守位",
+      "teamSettings": "球隊設定",
+      "gameLengthShort": "{count} 局制比賽"
     },
     "stats": {
       "backToTeam": "返回球隊",
@@ -224,7 +251,12 @@
       "winPct": "勝率",
       "batting": "打擊",
       "noStats": "尚無數據",
-      "player": "球員"
+      "player": "球員",
+      "pitching": "投球",
+      "exportCsv": "匯出 CSV",
+      "teamTotals": "球隊總計",
+      "noPitching": "尚無投球數據",
+      "eraNote": "防禦率以 {innings} 局比賽計算。"
     },
     "sprayChart": {
       "backToStats": "返回數據",
@@ -233,7 +265,10 @@
       "allPlayers": "所有球員",
       "out": "出局",
       "unknown": "未知",
-      "hits": "{count, plural, other {已記錄 # 支打球}}"
+      "hits": "{count, plural, other {已記錄 # 支打球}}",
+      "subtitle": "比賽中即時記錄的每一顆擊球，顏色代表結果。",
+      "ballsInPlay": "擊球 {count} 顆",
+      "noHits": "尚未記錄任何擊球。"
     }
   },
   "stats": {
@@ -263,7 +298,7 @@
   "instructions": {
     "title": "如何使用 Baseball Stats Tracker",
     "gettingStarted": "開始使用",
-    "gs1": "<b>建立或選擇球隊</b> — 在儀表板上點擊 <badge>+ 新球隊</badge>。如果你已有球隊，會看到現有球隊清單可快速切換。點擊任一球隊前往其頁面，或點擊 <b>+ 建立新球隊</b> 以球隊名稱和級別（Little League、Travel、Recreational、High School 或 College）新增一支球隊。",
+    "gs1": "<b>建立或選擇球隊</b> — 在儀表板上點擊 <badge>+ 新球隊</badge>。如果你已有球隊，會看到現有球隊清單可快速切換。點擊任一球隊前往其頁面，或點擊 <b>+ 建立新球隊</b> 以球隊名稱和級別（Little League、Travel、Recreational、High School 或 College）新增一支球隊。 同時選擇<b>棒球或壘球</b>以及<b>比賽局數</b>（聯盟的正式局數，例如 Little League 6 局、壘球與高中 7 局、大學 9 局）。系統會依運動項目和級別預先填入，但請選擇聯盟實際打的局數。新比賽會以此局數開始，並用於計算防禦率。隨時可在球隊頁面的<b>球隊設定</b>中更改。",
     "gs2": "<b>新增球員</b> — 開啟球隊頁面並點擊 <badge>+ 新增球員</badge>。輸入每位球員的名字、姓氏、背號、打擊慣用手（右、左或左右開弓）、投球慣用手和主要守備位置。",
     "gs3": "<b>編輯球員</b> — 需要變更嗎？點擊名單中任一球員旁的 <blue>編輯</blue> 按鈕，以更新其姓名、背號、守備位置或慣用手。",
     "gs4": "<b>建立球季</b> — 在球隊頁面點擊 <badge>+ 球季</badge> 以新增球季（例如「2026 春季」）。球季讓你能分組比賽並依時間篩選數據。若要移除誤輸入的球季，請在球隊頁面的球季清單中點擊其旁的紅色 <b>刪除</b> 連結。該球季的比賽會被保留。",
@@ -416,6 +451,8 @@
     "opsText": "OBP + SLG。綜合衡量打者上壘與長打能力的指標。",
     "sbPctHead": "盜壘成功率（SB%）",
     "sbPctText": "盜壘 ÷（盜壘 + 盜壘失敗）。顯示跑壘效率。",
+    "eraHead": "防禦率 (ERA)",
+    "eraText": "(自責分 × 球隊比賽局數) ÷ 投球局數。防禦率並非一律使用 MLB 的 9 局，而是依你設定球隊時選擇的<b>比賽局數</b>（例如 6、7 或 9 局）計算，因此代表球隊實際每場比賽所失的自責分。比賽越短，在相同投球表現下防禦率會比 MLB 算法<em>更低</em>：6 局制球隊投 6 局失 3 個自責分，防禦率為 3.00，但以 9 局計算則是 4.50。與其他 App 或 MLB 數據比較時請留意這一點。賽季數據的「投球」分頁會顯示使用的局數，並可在<b>球隊設定</b>中更改。",
     "gameMgmt": "比賽管理",
     "mgmtUndo": "<b>復原上一筆</b> — 移除最近一次的打席，並視需要還原比分、出局數和局數。用於修正錯誤。",
     "mgmtEndGame": "<b>結束比賽</b> — 將比賽標記為終場。最終比分會被鎖定，比賽會在你的比賽清單中以綠色「終場」標籤顯示。",
@@ -629,7 +666,13 @@
       "introP6": "No subscription. No monthly fee. Just $39, once.",
       "introP7": "I'm a baseball dad who built the app I wished existed when my son started Little League.",
       "introP8": "Score your first game free. If it's for you, unlock the rest for a one-time $39.",
-      "trialSub": "免費帳戶 — 無需信用卡。完整記錄一場比賽，包含即時數據與擊球落點圖。"
+      "trialSub": "免費帳戶 — 無需信用卡。完整記錄一場比賽，包含即時數據與擊球落點圖。",
+      "heroBadge": "專為棒球與壘球教練及家長打造",
+      "heroCheck1": "免費帳號 — 無需信用卡",
+      "heroCheck2": "一次性 $39",
+      "heroCheck3": "永不訂閱",
+      "buyShort": "立即購買 — $39",
+      "heroImageAlt": "夕陽下青少年棒球跑者滑進本壘，捕手伸手觸殺"
     },
     "common": {
       "getStarted": "開始使用",
