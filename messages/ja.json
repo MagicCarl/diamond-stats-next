@@ -676,7 +676,9 @@
       "heroCheck2": "買い切り $39",
       "heroCheck3": "サブスクなし",
       "buyShort": "購入 — $39",
-      "heroImageAlt": "夕暮れのホームベースにスライディングする少年野球の走者とタッチを狙う捕手"
+      "heroImageAlt": "夕暮れのホームベースにスライディングする少年野球の走者とタッチを狙う捕手",
+      "backToApp": "マイチーム",
+      "backToAppLabel": "アプリに戻る"
     },
     "common": {
       "getStarted": "始める",

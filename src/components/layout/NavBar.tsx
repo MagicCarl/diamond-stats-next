@@ -27,7 +27,7 @@ export default function NavBar() {
         <div className="flex h-14 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link
-              href="/dashboard"
+              href={`/?from=${encodeURIComponent(pathname)}`}
               className="text-lg font-bold text-gray-900 dark:text-white"
             >
               Baseball Stats Tracker

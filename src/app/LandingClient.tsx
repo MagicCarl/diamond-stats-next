@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/providers/AuthProvider";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -38,6 +39,15 @@ export default function LandingClient() {
   const t = useTranslations("marketing.landing");
   const tc = useTranslations("marketing.common");
   const [previewFeature, setPreviewFeature] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Signed-in users reach this page from the app logo, which passes the page
+  // they were on as ?from. Only same-site paths are honored.
+  const backToApp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const from = new URLSearchParams(window.location.search).get("from");
+    router.push(from && from.startsWith("/") && !from.startsWith("//") ? from : "/dashboard");
+  };
 
   const activeFeature = features.find((f) => f.id === previewFeature);
 
@@ -46,7 +56,7 @@ export default function LandingClient() {
       <header className="sticky top-0 z-40 border-b border-black/5 bg-[#FAF8F5]/85 backdrop-blur-md dark:border-white/10 dark:bg-gray-950/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8 shrink-0">
               <circle cx="32" cy="32" r="30" fill="#f5f5f5" stroke="#cc0000" strokeWidth="2"/>
               <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
               <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
@@ -83,9 +93,14 @@ export default function LandingClient() {
             {user ? (
               <Link
                 href="/dashboard"
-                className="whitespace-nowrap rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                onClick={backToApp}
+                aria-label={t("backToAppLabel")}
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
               >
-                {t("dashboard")}
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                {t("backToApp")}
               </Link>
             ) : (
               <>

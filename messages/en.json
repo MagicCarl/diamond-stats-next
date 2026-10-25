@@ -676,7 +676,9 @@
       "heroCheck2": "One-time $39",
       "heroCheck3": "No subscriptions, ever",
       "buyShort": "Get it — $39",
-      "heroImageAlt": "Youth baseball runner sliding into home plate as the catcher reaches for the tag at sunset"
+      "heroImageAlt": "Youth baseball runner sliding into home plate as the catcher reaches for the tag at sunset",
+      "backToApp": "My Teams",
+      "backToAppLabel": "Back to the app"
     },
     "common": {
       "getStarted": "Get Started",

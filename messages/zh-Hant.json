@@ -676,7 +676,9 @@
       "heroCheck2": "一次性 $39",
       "heroCheck3": "永不訂閱",
       "buyShort": "立即購買 — $39",
-      "heroImageAlt": "夕陽下青少年棒球跑者滑進本壘，捕手伸手觸殺"
+      "heroImageAlt": "夕陽下青少年棒球跑者滑進本壘，捕手伸手觸殺",
+      "backToApp": "我的球隊",
+      "backToAppLabel": "返回 App"
     },
     "common": {
       "getStarted": "開始使用",

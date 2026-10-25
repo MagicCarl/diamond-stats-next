@@ -676,7 +676,9 @@
       "heroCheck2": "Pago único de $39",
       "heroCheck3": "Sin suscripciones, nunca",
       "buyShort": "Cómpralo — $39",
-      "heroImageAlt": "Corredor de béisbol juvenil deslizándose en home mientras el receptor intenta tocarlo al atardecer"
+      "heroImageAlt": "Corredor de béisbol juvenil deslizándose en home mientras el receptor intenta tocarlo al atardecer",
+      "backToApp": "Mis equipos",
+      "backToAppLabel": "Volver a la app"
     },
     "common": {
       "getStarted": "Comenzar",

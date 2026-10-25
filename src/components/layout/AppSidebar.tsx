@@ -93,7 +93,8 @@ export default function AppSidebar() {
 
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-black/[0.06] bg-[#F1EFEA] lg:flex dark:border-white/10 dark:bg-gray-900">
-      <Link href="/dashboard" className="flex items-center gap-2.5 px-5 pb-4 pt-5">
+      {/* The logo opens the splash page; its back arrow returns here via ?from. */}
+      <Link href={`/?from=${encodeURIComponent(pathname)}`} className="flex items-center gap-2.5 px-5 pb-4 pt-5">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm">
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
             <circle cx="12" cy="12" r="9" />
