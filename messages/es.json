@@ -154,7 +154,10 @@
       "shareExplain": "Cualquiera con este enlace puede ver el partido en vivo: marcador, box score y jugada a jugada. No necesitan cuenta, y la página se actualiza automáticamente mientras anotas.",
       "shareCopy": "Copiar enlace",
       "shareVia": "Compartir por…",
-      "shareNote": "Solo las personas a las que envíes este enlace pueden ver el partido. El enlace sigue siendo válido después del partido, así que la familia también puede ver el box score final."
+      "shareNote": "Solo las personas a las que envíes este enlace pueden ver el partido. El enlace sigue siendo válido después del partido, así que la familia también puede ver el box score final.",
+      "sideRetired": "3 outs — cambio de lado.",
+      "nowBattingUs": "Le toca batear a tu equipo.",
+      "nowBattingThem": "Le toca batear a {name}."
     },
     "box": {
       "gameNotFound": "Juego no encontrado",
@@ -313,7 +316,7 @@
     "scoreboard": "El Marcador",
     "scoreboardText": "El marcador en la parte superior muestra el puntaje actual, la entrada (Alta o Baja) y la cuenta de outs. Todo se actualiza automáticamente a medida que registras los turnos.",
     "modeToggle": "Interruptor de Modo de Anotación",
-    "modeToggleText": "Usa el interruptor de la parte superior para alternar entre <b>Nuestro Equipo al Bate</b> (azul) y <b>Rival al Bate</b> (rojo). Esto determina los turnos de quién estás registrando y asegura que el marcador se actualice para el equipo correcto.",
+    "modeToggleText": "La app cambia automáticamente entre <b>Nuestro Equipo al Bate</b> (azul) y <b>Rival al Bate</b> (rojo) según la mitad de la entrada: el visitante batea en la parte alta y el local en la baja. Si necesitas registrar un turno del otro equipo, toca el selector de arriba para cambiar manualmente.",
     "recordingOurs": "Registrar los Turnos de tu Equipo",
     "ro1": "El bateador actual se muestra automáticamente según tu orden al bate.",
     "ro2": "Selecciona al lanzador contrario del menú (o agrega uno nuevo si hay un cambio de lanzador).",
@@ -332,7 +335,7 @@
     "selectBatter": "Seleccionar un Bateador Diferente",
     "selectBatterText": "¿Necesitas registrar un turno para alguien fuera de orden? Toca cualquier jugador en la lista del orden al bate para seleccionarlo. Toca de nuevo o usa “Volver al siguiente” para regresar a la rotación automática.",
     "autoInning": "Seguimiento Automático de Entradas",
-    "autoInningText": "Tres outs terminan automáticamente la media entrada. La aplicación cambia de Alta a Baja (o de Baja a Alta con un incremento de entrada). Los outs se reinician a cero para la nueva media entrada. Los doble plays cuentan como 2 outs.",
+    "autoInningText": "Tres outs terminan automáticamente la mitad de la entrada. Aparece un aviso amarillo “3 outs — cambio de lado”, la app pasa de Alta a Baja (o de Baja a Alta sumando una entrada) y te lleva al equipo que ahora batea. Los outs vuelven a cero. Las dobles matanzas cuentan como 2 outs.",
     "realTimeSync": "Sincronización en Tiempo Real",
     "realTimeSyncText": "La página de anotación en vivo se actualiza automáticamente cada 3 segundos. Esto significa que varias personas pueden seguir el mismo juego desde diferentes dispositivos: una persona anota en el campo mientras entrenadores o padres ven las actualizaciones en tiempo real en su propio teléfono o computadora.",
     "pitchTracking": "Seguimiento de Lanzamientos",

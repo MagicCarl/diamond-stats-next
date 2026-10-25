@@ -88,6 +88,9 @@ export default function LiveScoringPage() {
   const [newBatterHand, setNewBatterHand] = useState("right");
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  // Shown briefly after the 3rd out so the out registers before the count resets.
+  const [sideRetired, setSideRetired] = useState<ScoringMode | null>(null);
+  const sideRetiredTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showEndGameConfirm, setShowEndGameConfirm] = useState(false);
   const [showLineupSetup, setShowLineupSetup] = useState(false);
   const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
@@ -103,7 +106,8 @@ export default function LiveScoringPage() {
   const [shareCopied, setShareCopied] = useState(false);
 
   const rosterAutoLoadedRef = useRef(false);
-  const initialModeSetRef = useRef(false);
+  // Last half-inning seen (inning * 2, +1 for the bottom), to detect changes.
+  const lastHalfRef = useRef<number | null>(null);
   const selectedPitcherIdRef = useRef(selectedPitcherId);
   const selectedOurPitcherIdRef = useRef(selectedOurPitcherId);
   selectedPitcherIdRef.current = selectedPitcherId;
@@ -147,12 +151,21 @@ export default function LiveScoringPage() {
 
       setGame(data);
 
-      // Set default scoring mode on first load (home team bats last)
-      if (!initialModeSetRef.current) {
-        initialModeSetRef.current = true;
-        if (data.atBats.length === 0) {
-          setScoringMode(data.isHome ? "opponent_batting" : "our_batting");
+      // Follow the game: whoever is batting in the current half-inning gets the
+      // scoring screen (home bats in the bottom). Runs on first load and whenever
+      // the half-inning changes — from a 3rd out here, another device, or undo.
+      // The toggle still lets the scorer override it within a half-inning.
+      const half = data.currentInning * 2 + (data.isTopOfInning ? 0 : 1);
+      if (lastHalfRef.current !== half) {
+        const weAreBatting = data.isHome ? !data.isTopOfInning : data.isTopOfInning;
+        const mode: ScoringMode = weAreBatting ? "our_batting" : "opponent_batting";
+        if (lastHalfRef.current !== null && half > lastHalfRef.current && data.status !== "final") {
+          setSideRetired(mode);
+          if (sideRetiredTimerRef.current) clearTimeout(sideRetiredTimerRef.current);
+          sideRetiredTimerRef.current = setTimeout(() => setSideRetired(null), 5000);
         }
+        lastHalfRef.current = half;
+        setScoringMode(mode);
       }
 
       if (data.opponentPitchers.length > 0 && !selectedPitcherIdRef.current) {
@@ -639,6 +652,27 @@ export default function LiveScoringPage() {
           </div>
         </div>
       </Card>
+
+      {sideRetired && !isFinal && (
+        <div
+          role="status"
+          className="flex items-center gap-3 rounded-lg border border-yellow-300 bg-yellow-50 px-4 py-3 dark:border-yellow-500/40 dark:bg-yellow-500/10"
+        >
+          <div className="flex gap-1">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="h-3 w-3 rounded-full border border-yellow-500 bg-yellow-500" />
+            ))}
+          </div>
+          <p className="text-sm font-semibold text-yellow-900 dark:text-yellow-200">
+            {t("sideRetired")}{" "}
+            <span className="font-normal">
+              {sideRetired === "our_batting"
+                ? t("nowBattingUs")
+                : t("nowBattingThem", { name: game.opponentName })}
+            </span>
+          </p>
+        </div>
+      )}
 
       {errorMsg && (
         <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">

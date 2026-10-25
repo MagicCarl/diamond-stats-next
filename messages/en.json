@@ -154,7 +154,10 @@
       "shareExplain": "Anyone with this link can watch the game live — scoreboard, box score, and play-by-play. They don't need an account, and the page updates automatically as you score.",
       "shareCopy": "Copy link",
       "shareVia": "Share via…",
-      "shareNote": "Only people you send this link to can see the game. The link stays valid after the game ends, so family can check the final box score too."
+      "shareNote": "Only people you send this link to can see the game. The link stays valid after the game ends, so family can check the final box score too.",
+      "sideRetired": "3 outs — side retired.",
+      "nowBattingUs": "Your team is up to bat.",
+      "nowBattingThem": "{name} is up to bat."
     },
     "box": {
       "gameNotFound": "Game not found",
@@ -313,7 +316,7 @@
     "scoreboard": "The Scoreboard",
     "scoreboardText": "The scoreboard at the top shows the current score, inning (Top or Bottom), and outs count. Everything updates automatically as you record at-bats.",
     "modeToggle": "Scoring Mode Toggle",
-    "modeToggleText": "Use the toggle at the top to switch between <b>Our Team Batting</b> (blue) and <b>Opponent Batting</b> (red). This determines whose at-bats you are recording and ensures the score updates for the correct team.",
+    "modeToggleText": "The app switches automatically between <b>Our Team Batting</b> (blue) and <b>Opponent Batting</b> (red) to match the half-inning — the away team bats in the top, the home team in the bottom. If you ever need to record an at-bat for the other side, tap the toggle at the top to switch by hand.",
     "recordingOurs": "Recording Your Team's At-Bats",
     "ro1": "The current batter is shown automatically based on your lineup order.",
     "ro2": "Select the opposing pitcher from the dropdown (or add a new one if a pitching change occurs).",
@@ -332,7 +335,7 @@
     "selectBatter": "Selecting a Different Batter",
     "selectBatterText": "Need to record an at-bat for someone out of order? Tap any player in the batting order list to select them. Tap again or use “Back to next up” to return to the automatic rotation.",
     "autoInning": "Automatic Inning Tracking",
-    "autoInningText": "Three outs automatically end the half-inning. The app switches from Top to Bottom (or Bottom to Top with an inning increment). Outs reset to zero for the new half-inning. Double plays count as 2 outs.",
+    "autoInningText": "Three outs automatically end the half-inning. A yellow “3 outs — side retired” banner appears, the app switches from Top to Bottom (or Bottom to Top with an inning increment), and it moves you to the team now batting. Outs reset to zero for the new half-inning. Double plays count as 2 outs.",
     "realTimeSync": "Real-Time Sync",
     "realTimeSyncText": "The live scoring page automatically refreshes every 3 seconds. This means multiple people can follow the same game from different devices — one person scores at the field while coaches or parents see updates in real time on their own phone or computer.",
     "pitchTracking": "Pitch Tracking",
