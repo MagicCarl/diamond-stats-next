@@ -328,7 +328,10 @@ export default function InstructionsPage() {
           </div>
         </div>
         <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
-          {t("seasonStatsRecord")}
+          {t.rich("seasonStatsRecord", rich)}
+        </p>
+        <p className="mt-3 text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+          {t.rich("teamSprayCharts", rich)}
         </p>
       </Card>
 
