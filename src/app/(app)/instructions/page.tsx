@@ -33,6 +33,7 @@ export default function InstructionsPage() {
           <li>{t.rich("gs3", rich)}</li>
           <li>{t.rich("gs4", rich)}</li>
           <li>{t.rich("gs5", rich)}</li>
+          <li>{t.rich("gsNav", rich)}</li>
         </ol>
       </Card>
 
