@@ -106,19 +106,23 @@ export default function LandingClient() {
 
       <main>
         <section className="relative isolate overflow-hidden">
-          <Image
-            src="/hero-slide-home.jpg"
-            alt={t("heroImageAlt")}
-            fill
-            priority
-            sizes="100vw"
-            className="-z-20 object-cover object-[70%_center]"
-          />
-          {/* Wash the photo out behind the copy: evenly on phones, left-to-right on desktop, then fade the bottom into the page. */}
-          <div className="absolute inset-0 -z-10 bg-[#FAF8F5]/80 lg:bg-transparent lg:bg-gradient-to-r lg:from-[#FAF8F5] lg:via-[#FAF8F5]/80 lg:to-[#FAF8F5]/10 dark:bg-gray-950/85 dark:lg:bg-transparent dark:lg:from-gray-950 dark:lg:via-gray-950/80 dark:lg:to-gray-950/20" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-[#FAF8F5] dark:to-gray-950" />
+          {/* Phones/tablets: the photo is a full-strength banner above the copy.
+              Desktop: it fills the right side and fades out behind the copy, so
+              the slide itself is never washed out. */}
+          <div className="relative aspect-[3/2] w-full lg:absolute lg:inset-y-0 lg:left-[30%] lg:right-0 lg:-z-10 lg:aspect-auto lg:w-auto">
+            <Image
+              src="/hero-slide-home.jpg"
+              alt={t("heroImageAlt")}
+              fill
+              priority
+              sizes="(min-width: 1024px) 70vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-y-0 left-0 hidden w-2/3 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/50 to-transparent lg:block dark:from-gray-950 dark:via-gray-950/50" />
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#FAF8F5] lg:h-40 dark:to-gray-950" />
+          </div>
 
-          <div className="mx-auto max-w-6xl px-4 pb-28 pt-14 sm:px-6 sm:pt-20 lg:pb-40 lg:pt-28">
+          <div className="mx-auto -mt-6 max-w-6xl px-4 pb-20 sm:px-6 lg:mt-0 lg:pb-40 lg:pt-28">
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-blue-600/25 bg-white/60 px-3 py-1 text-xs font-medium text-blue-700 backdrop-blur sm:text-sm dark:border-blue-400/30 dark:bg-gray-900/60 dark:text-blue-300">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
