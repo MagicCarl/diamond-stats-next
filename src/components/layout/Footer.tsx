@@ -24,7 +24,7 @@ export default async function Footer() {
   return (
     <footer className="border-t border-gray-200 px-6 py-8 dark:border-gray-800">
       <div className="mx-auto max-w-4xl text-center text-sm text-gray-500 dark:text-gray-400">
-        <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <nav aria-label="Site" className="flex flex-wrap justify-center gap-x-4 gap-y-2">
           <Link href="/" className={linkClass}>{tc("navHome")}</Link>
           <Link href="/features" className={linkClass}>{tc("navFeatures")}</Link>
           <Link href="/pricing" className={linkClass}>{tc("navPricing")}</Link>
@@ -34,7 +34,7 @@ export default async function Footer() {
           <Link href="/signup" className={linkClass}>{tc("navSignUp")}</Link>
           <Link href="/privacy" className={linkClass}>{tf("privacy")}</Link>
         </nav>
-        <nav className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <nav aria-label={tf("guides")} className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
           <Link href="/learn" className={`font-medium ${linkClass}`}>{tf("guides")}</Link>
           {guides.map((g) => (
             <Link key={g.href} href={g.href} className={linkClass}>

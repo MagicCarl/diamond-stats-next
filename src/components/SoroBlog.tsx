@@ -34,6 +34,9 @@ export default function SoroBlog() {
     if (!container) return;
 
     const rewriteLinks = () => {
+      // The widget marks its list role="list" but fills it with bare <a>
+      // cards (not listitems), which screen readers and axe flag as broken.
+      container.querySelectorAll(".soro-blog-list[role]").forEach((list) => list.removeAttribute("role"));
       container.querySelectorAll<HTMLAnchorElement>(CARD_SELECTOR).forEach((card) => {
         const slug = card.dataset.slug;
         if (slug) card.setAttribute("href", `/blog/${slug}`);

@@ -6,6 +6,7 @@ import BuyButton from "@/components/ui/BuyButton";
 import SoroBlog from "@/components/SoroBlog";
 import Footer from "@/components/layout/Footer";
 import Testimonials from "@/components/Testimonials";
+import LazyVideo from "@/components/LazyVideo";
 
 export const metadata: Metadata = {
   alternates: {
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
 
 export default async function LandingPage() {
   const t = await getTranslations("marketing.landing");
-  const tc = await getTranslations("marketing.common");
 
   const cmp = [
     ["cmpGet1", "cmpRep1"],
@@ -106,7 +106,7 @@ export default async function LandingPage() {
           }),
         }}
       />
-      <LandingClient />
+      <LandingClient>
 
       {/* ============================================================
           SECTION 1 — INTRO (skimmable hook + video)
@@ -123,14 +123,10 @@ export default async function LandingPage() {
 
           {/* Video — visual break (autoplay muted loop; tap to unmute via controls) */}
           <div className="my-8 flex justify-center">
-            <video
+            <LazyVideo
               src="/coach-ad.mp4"
               poster="/coach-ad-poster.jpg"
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
+              label="Coach scoring a youth baseball game with Baseball Stats Tracker"
               className="w-full max-w-[300px] rounded-2xl shadow-xl"
             />
           </div>
@@ -349,25 +345,22 @@ export default async function LandingPage() {
               <BuyButton className="w-full rounded-lg bg-blue-600 px-8 py-4 text-center text-lg font-semibold text-white shadow-lg transition hover:bg-blue-700 sm:w-auto">
                 {t("ctaPrimary")}
               </BuyButton>
-              <p className="text-sm text-gray-500 dark:text-gray-500">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t("ctaSub2")}
               </p>
-              <p className="text-sm font-medium text-green-700 dark:text-green-400">
-                {tc("guarantee")}
-              </p>
 
-              <div className="mt-4 flex items-center gap-3 text-sm text-gray-400">
+              <div className="mt-4 flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
                 <div className="h-px w-8 bg-gray-300 dark:bg-gray-700" />
                 <span>{t("tryFreeOr")}</span>
                 <div className="h-px w-8 bg-gray-300 dark:bg-gray-700" />
               </div>
               <Link
                 href="/signup"
-                className="w-full rounded-lg border-2 border-blue-600 px-8 py-3 text-center text-base font-semibold text-blue-600 transition hover:bg-blue-50 sm:w-auto dark:hover:bg-blue-900/20"
+                className="w-full rounded-lg border-2 border-blue-600 px-8 py-3 text-center text-base font-semibold text-blue-600 transition hover:bg-blue-50 sm:w-auto dark:border-blue-400 dark:text-blue-300 dark:hover:bg-blue-900/20"
               >
                 {t("tryFreeCta")}
               </Link>
-              <p className="max-w-md text-center text-sm text-gray-500 dark:text-gray-400">
+              <p className="max-w-md text-center text-sm text-gray-600 dark:text-gray-400">
                 {t("tryFreeNote")}
               </p>
             </div>
@@ -387,7 +380,7 @@ export default async function LandingPage() {
           ============================================================ */}
       <section className="px-6 pb-10">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
             Listed on
           </p>
           {/* nofollow is deliberate: the badge is the price of a free directory
@@ -416,6 +409,7 @@ export default async function LandingPage() {
           </a>
         </div>
       </section>
+      </LandingClient>
 
       {/* ============================================================
           FOOTER LINKS

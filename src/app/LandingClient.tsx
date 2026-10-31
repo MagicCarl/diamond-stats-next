@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,7 @@ const featureKeys: Record<string, { title: string; desc: string }> = {
   spray: { title: "featureSprayTitle", desc: "featureSprayDesc" },
 };
 
-export default function LandingClient() {
+export default function LandingClient({ children }: { children?: React.ReactNode }) {
   const { user } = useAuth();
   const t = useTranslations("marketing.landing");
   const tc = useTranslations("marketing.common");
@@ -51,12 +51,21 @@ export default function LandingClient() {
 
   const activeFeature = features.find((f) => f.id === previewFeature);
 
+  useEffect(() => {
+    if (!previewFeature) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPreviewFeature(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [previewFeature]);
+
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-black/5 bg-[#FAF8F5]/85 backdrop-blur-md dark:border-white/10 dark:bg-gray-950/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="h-8 w-8 shrink-0" aria-hidden="true">
               <circle cx="32" cy="32" r="30" fill="#f5f5f5" stroke="#cc0000" strokeWidth="2"/>
               <path d="M20 8 C22 14, 22 20, 20 26 C18 32, 18 38, 20 44 C22 50, 22 56, 20 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
               <path d="M44 8 C42 14, 42 20, 44 26 C46 32, 46 38, 44 44 C42 50, 42 56, 44 56" fill="none" stroke="#cc0000" strokeWidth="2" strokeLinecap="round"/>
@@ -77,7 +86,7 @@ export default function LandingClient() {
               <line x1="44" y1="44" x2="48" y2="44" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
               <line x1="44" y1="50" x2="47" y2="52" stroke="#cc0000" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
-            <span className="text-base font-bold leading-tight tracking-tight sm:text-xl" style={{ fontFamily: "'Mona Sans', sans-serif" }}>Baseball Stats Tracker</span>
+            <span className="font-display text-base font-bold leading-snug tracking-tight sm:text-xl">Baseball Stats Tracker</span>
           </Link>
           <nav className="hidden items-center gap-7 text-sm text-gray-600 lg:flex dark:text-gray-300">
             <Link href="/features" className="hover:text-gray-900 dark:hover:text-white">{tc("navFeatures")}</Link>
@@ -85,10 +94,22 @@ export default function LandingClient() {
             <Link href="/faq" className="hover:text-gray-900 dark:hover:text-white">{tc("navFaq")}</Link>
           </nav>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
-            <LanguageSwitcher
-              placeholder={t("selectLanguage")}
-              className="w-28 rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-xs text-gray-700 sm:w-auto sm:text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
-            />
+            <div className="hidden sm:block">
+              <LanguageSwitcher
+                placeholder={t("selectLanguage")}
+                className="rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+              />
+            </div>
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-lg text-gray-700 sm:hidden dark:text-gray-300">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z" />
+              </svg>
+              <LanguageSwitcher
+                placeholder={t("selectLanguage")}
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+              />
+            </div>
             <ThemeToggle />
             {user ? (
               <Link
@@ -119,7 +140,7 @@ export default function LandingClient() {
         </div>
       </header>
 
-      <main>
+      <main id="main">
         <section className="relative isolate overflow-hidden">
           {/* Phones/tablets: the photo is a full-strength banner above the copy.
               Desktop: it fills the right side and fades out behind the copy, so
@@ -146,7 +167,7 @@ export default function LandingClient() {
                 </svg>
                 {t("heroBadge")}
               </span>
-              <h1 className="mt-6 text-5xl leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl" style={{ fontFamily: "'Mona Sans', sans-serif", fontWeight: 800 }}>
+              <h1 className="font-display mt-6 text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
                 <span className="block text-[#1A1A1A] dark:text-white">{t("heroLine1")}</span>
                 <span className="block text-[#2563EB]">{t("heroLine2")}</span>
                 <span className="block text-[#16A34A]">{t("heroLine3")}</span>
@@ -205,9 +226,9 @@ export default function LandingClient() {
             >
               <div className="aspect-[16/10] overflow-hidden border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={feature.imageLight} alt="" className="h-full w-full object-cover object-top dark:hidden" />
+                <img src={feature.imageLight} alt={t(featureKeys[feature.id].title)} loading="lazy" decoding="async" className="h-full w-full object-cover object-top dark:hidden" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={feature.imageDark} alt="" className="hidden h-full w-full object-cover object-top dark:block" />
+                <img src={feature.imageDark} alt={t(featureKeys[feature.id].title)} loading="lazy" decoding="async" className="hidden h-full w-full object-cover object-top dark:block" />
               </div>
               <div className="p-6">
                 <h3 className="text-lg font-semibold">{t(featureKeys[feature.id].title)}</h3>
@@ -249,11 +270,9 @@ export default function LandingClient() {
             <BuyButton className="mt-6 inline-block w-full rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700">
               {t("purchaseNow")}
             </BuyButton>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-              {tc("guarantee")}
-            </p>
           </div>
         </section>
+        {children}
       </main>
 
       {/* Feature preview modal */}
@@ -263,18 +282,23 @@ export default function LandingClient() {
           onClick={() => setPreviewFeature(null)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="feature-preview-title"
             className="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl bg-white p-6 dark:bg-gray-800"
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              autoFocus
               onClick={() => setPreviewFeature(null)}
+              aria-label="Close"
               className="absolute right-4 top-4 rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300"
             >
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="mb-4 text-xl font-bold">{t(featureKeys[activeFeature.id].title)}</h3>
+            <h3 id="feature-preview-title" className="mb-4 text-xl font-bold">{t(featureKeys[activeFeature.id].title)}</h3>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={activeFeature.imageLight}

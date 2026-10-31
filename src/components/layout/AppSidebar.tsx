@@ -101,7 +101,7 @@ export default function AppSidebar() {
             <path d="M8 4.5c1.5 2 1.5 4.5 0 7.5s-1.5 5.5 0 7.5M16 4.5c-1.5 2-1.5 4.5 0 7.5s1.5 5.5 0 7.5" strokeLinecap="round" />
           </svg>
         </span>
-        <span className="text-[15px] font-bold leading-tight tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'Mona Sans', sans-serif" }}>
+        <span className="font-display text-[15px] font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
           Baseball Stats Tracker
         </span>
       </Link>
