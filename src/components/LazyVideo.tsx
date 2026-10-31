@@ -12,11 +12,14 @@ export default function LazyVideo({
   poster,
   className,
   label,
+  captions,
 }: {
   src: string;
   poster: string;
   className?: string;
   label: string;
+  /** WebVTT file with English captions for the spoken audio */
+  captions?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [visible, setVisible] = useState(false);
@@ -50,6 +53,8 @@ export default function LazyVideo({
       controls
       aria-label={label}
       className={className}
-    />
+    >
+      {captions && <track kind="captions" src={captions} srcLang="en" label="English" />}
+    </video>
   );
 }

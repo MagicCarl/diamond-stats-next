@@ -126,6 +126,7 @@ export default async function LandingPage() {
             <LazyVideo
               src="/coach-ad.mp4"
               poster="/coach-ad-poster.jpg"
+              captions="/coach-ad.vtt"
               label="Coach scoring a youth baseball game with Baseball Stats Tracker"
               className="w-full max-w-[300px] rounded-2xl shadow-xl"
             />

@@ -165,9 +165,9 @@ export default function LandingClient({
             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#FAF8F5] lg:h-40 dark:to-gray-950" />
           </div>
 
-          <div className="mx-auto -mt-6 max-w-6xl px-4 pb-20 sm:px-6 lg:mt-0 lg:pb-40 lg:pt-28">
+          <div className="relative mx-auto -mt-6 max-w-6xl px-4 pb-20 sm:px-6 lg:mt-0 lg:pb-40 lg:pt-28">
             <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-600/25 bg-white/60 px-3 py-1 text-xs font-medium text-blue-700 backdrop-blur sm:text-sm dark:border-blue-400/30 dark:bg-gray-900/60 dark:text-blue-300">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-600/25 bg-white px-3 py-1 text-xs font-medium text-blue-700 sm:text-sm dark:border-blue-400/30 dark:bg-gray-900 dark:text-blue-300">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
@@ -229,7 +229,7 @@ export default function LandingClient({
             <button
               key={feature.id}
               onClick={() => setPreviewFeature(feature.id)}
-              className="group overflow-hidden rounded-2xl border border-gray-200 bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
+              className="group overflow-hidden rounded-2xl border border-gray-200 bg-white text-left shadow-sm transition-[border-color,box-shadow] hover:border-blue-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600"
             >
               <div className="aspect-[16/10] overflow-hidden border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

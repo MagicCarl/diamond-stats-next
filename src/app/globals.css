@@ -20,6 +20,11 @@
   --font-display: var(--font-mona-sans);
 }
 
+/* Keep keyboard-focused links and #anchors from scrolling under the sticky header. */
+html {
+  scroll-padding-top: 5rem;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
