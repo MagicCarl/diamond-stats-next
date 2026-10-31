@@ -106,7 +106,7 @@ export default async function LandingPage() {
           }),
         }}
       />
-      <LandingClient>
+      <LandingClient testimonials={<Testimonials />}>
 
       {/* ============================================================
           SECTION 1 — INTRO (skimmable hook + video)
@@ -300,8 +300,6 @@ export default async function LandingPage() {
           </div>
         </div>
       </section>
-
-      <Testimonials />
 
       {/* ============================================================
           SECTION 3 — URGENCY (The Close)

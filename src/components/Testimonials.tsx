@@ -12,7 +12,7 @@ const testimonials: {
   {
     quote:
       "Baseball Stats Tracker has a clear value proposition, excellent pricing transparency, and good competitive readiness, making it a strong offering for its target audience.",
-    name: "Independent online review",
+    name: "Webelf.ai",
   },
   {
     quote: "Congrats — looks like a solid product",

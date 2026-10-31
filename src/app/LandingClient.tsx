@@ -34,7 +34,14 @@ const featureKeys: Record<string, { title: string; desc: string }> = {
   spray: { title: "featureSprayTitle", desc: "featureSprayDesc" },
 };
 
-export default function LandingClient({ children }: { children?: React.ReactNode }) {
+export default function LandingClient({
+  children,
+  testimonials,
+}: {
+  children?: React.ReactNode;
+  // Rendered just above the price card so the social proof sits next to the ask.
+  testimonials?: React.ReactNode;
+}) {
   const { user } = useAuth();
   const t = useTranslations("marketing.landing");
   const tc = useTranslations("marketing.common");
@@ -243,7 +250,9 @@ export default function LandingClient({ children }: { children?: React.ReactNode
           ))}
         </section>
 
-        <section className="mx-auto mt-20 max-w-md px-6 pb-20 text-center">
+        <div className="mt-20">{testimonials}</div>
+
+        <section className="mx-auto max-w-md px-6 pb-20 text-center">
           <Image
             src="/baseballstatstracker_bannerAd.png"
             alt="Cartoon baseball player holding a BaseballStatsTracker.com $39 banner"
