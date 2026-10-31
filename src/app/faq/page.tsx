@@ -46,10 +46,6 @@ const pricingFaqs: Faq[] = [
     a: "Yes. Create a free account and fully score your first game — live scoring, automatic stats, and spray charts included — with no credit card required. The first game is a real, complete trial of the product. After that, the one-time $39 purchase unlocks unlimited games.",
   },
   {
-    q: "What if it doesn't work out for me?",
-    a: "Every purchase comes with a 30-day money-back guarantee, no questions asked. Score real games with it for a month; if it isn't right for you, you get your money back.",
-  },
-  {
     q: "How do I pay, and how quickly is my account activated?",
     a: "Payment is processed securely through Stripe. Your account is activated automatically the moment your payment completes — no waiting and no manual steps. No credit card information is stored on our servers.",
   },
@@ -283,7 +279,7 @@ export default function FaqPage() {
             Try It Free — Score Your First Game
           </Link>
           <p className="mt-3 text-sm text-gray-400">
-            Then $39 once for unlimited games. 30-day money-back guarantee — no questions asked.
+            Then $39 once for unlimited games.
           </p>
         </div>
 

@@ -146,7 +146,7 @@ export default function FreeScorecardPage() {
             Try It Free — Score Your First Game
           </Link>
           <p className="mt-3 text-sm text-gray-400">
-            Then $39 once for unlimited games. 30-day money-back guarantee.
+            Then $39 once for unlimited games.
           </p>
         </div>
 

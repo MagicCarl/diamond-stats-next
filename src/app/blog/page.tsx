@@ -84,9 +84,6 @@ export default async function BlogIndexPage() {
           >
             Get Instant Access — $39
           </Link>
-          <p className="mt-3 text-sm text-gray-400">
-            30-day money-back guarantee — no questions asked.
-          </p>
         </div>
       </main>
       <Footer />

@@ -121,9 +121,6 @@ export default async function PricingPage() {
           <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
             {t("securePayment")}
           </p>
-          <p className="mt-1 text-sm font-medium text-green-700 dark:text-green-400">
-            {tc("guarantee")}
-          </p>
         </div>
 
         {/* Value comparison */}
