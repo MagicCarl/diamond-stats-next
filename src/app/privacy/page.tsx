@@ -20,7 +20,7 @@ export default async function PrivacyPolicyPage() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <Link
           href="/"
-          className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+          className="text-sm font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
         >
           &larr; {t("backHome")}
         </Link>

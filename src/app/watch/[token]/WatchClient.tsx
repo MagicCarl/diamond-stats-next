@@ -99,7 +99,7 @@ export default function WatchClient({ token }: { token: string }) {
         <p className="mt-3 text-gray-600 dark:text-gray-400">
           This share link is invalid or has been turned off by the scorekeeper.
         </p>
-        <Link href="/" className="mt-6 inline-block text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/" className="mt-6 inline-block text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
           Baseball Stats Tracker
         </Link>
       </div>

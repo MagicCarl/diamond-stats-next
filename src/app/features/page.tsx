@@ -285,7 +285,7 @@ export default async function FeaturesPage() {
           </div>
           <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
             Weighing your options?{" "}
-            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               See our honest breakdown of GameChanger alternatives
             </Link>{" "}
             — including who each app is actually right for.

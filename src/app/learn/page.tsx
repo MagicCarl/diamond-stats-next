@@ -119,7 +119,7 @@ export default function LearnIndexPage() {
                 Updated {a.updated} ·{" "}
                 <Link
                   href={a.href}
-                  className="font-medium text-blue-600 hover:underline dark:text-blue-400"
+                  className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                 >
                   Read the guide
                 </Link>
@@ -130,15 +130,15 @@ export default function LearnIndexPage() {
 
         <p className="mt-10 text-gray-600 dark:text-gray-300">
           Ready to track your own team? See{" "}
-          <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             what Baseball Stats Tracker does
           </Link>
           , check the{" "}
-          <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             one-time $39 pricing
           </Link>
           , or see{" "}
-          <Link href="/compare" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/compare" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             how it compares to GameChanger
           </Link>
           .

@@ -189,7 +189,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setShowForgotPassword(true)}
-              className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+              className="text-sm text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
             >
               {t("forgot")}
             </button>
@@ -223,7 +223,7 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
           {t("noAccount")}{" "}
-          <Link href="/signup" className="text-blue-600 hover:underline">
+          <Link href="/signup" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             {t("signUp")}
           </Link>
         </p>

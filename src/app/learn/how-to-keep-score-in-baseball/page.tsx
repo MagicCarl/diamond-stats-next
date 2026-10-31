@@ -153,16 +153,16 @@ export default function HowToKeepScorePage() {
         <Section title="The modern way: let your phone do it">
           <p>
             You don&apos;t have to draw a single diamond. With{" "}
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               Baseball Stats Tracker
             </Link>{" "}
             you tap the result of each at-bat as it happens, and the app builds the box
             score, batting and pitching stats, and{" "}
-            <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               spray charts
             </Link>{" "}
             automatically — no pencil math, nothing to lose. It&apos;s a{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               one-time $39 purchase
             </Link>
             , no subscription.

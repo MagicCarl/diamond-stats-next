@@ -96,7 +96,7 @@ export default async function BlogArticlePage({
         <CtaCard />
 
         <div className="mt-10 text-sm">
-          <Link href="/blog" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/blog" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             ← All articles
           </Link>
         </div>

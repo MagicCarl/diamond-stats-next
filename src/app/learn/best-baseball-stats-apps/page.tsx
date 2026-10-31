@@ -330,11 +330,11 @@ export default function BestBaseballStatsAppsPage() {
             <strong>Verdict:</strong> For most families and coaches who just want
             accurate stats without a recurring bill, this is the best value in 2026.
             See the{" "}
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               full feature list
             </Link>{" "}
             or{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               pricing
             </Link>
             .
@@ -364,7 +364,7 @@ export default function BestBaseballStatsAppsPage() {
             <strong>Verdict:</strong> Pick GameChanger if video clips or league
             standardization matter most, and the subscription is worth it to you.
             Not sure what it runs? See our{" "}
-            <Link href="/learn/gamechanger-pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/gamechanger-pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               full GameChanger pricing breakdown
             </Link>
             .
@@ -538,7 +538,7 @@ export default function BestBaseballStatsAppsPage() {
             Related:{" "}
             <Link
               href="/learn/gamechanger-alternatives"
-              className="text-blue-600 hover:underline dark:text-blue-400"
+              className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
             >
               GameChanger alternatives for youth baseball
             </Link>

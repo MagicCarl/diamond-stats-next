@@ -33,13 +33,13 @@ export default async function LandingPage() {
     red: (c: React.ReactNode) => <span className="text-red-600 dark:text-red-400">{c}</span>,
     green: (c: React.ReactNode) => <span className="text-green-600 dark:text-green-400">{c}</span>,
     featuresLink: (c: React.ReactNode) => (
-      <Link href="/features" className="font-medium text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+      <Link href="/features" className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{c}</Link>
     ),
     pricingLink: (c: React.ReactNode) => (
-      <Link href="/pricing" className="font-medium text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+      <Link href="/pricing" className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{c}</Link>
     ),
     learnLink: (c: React.ReactNode) => (
-      <Link href="/learn/gamechanger-alternatives" className="font-medium text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+      <Link href="/learn/gamechanger-alternatives" className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{c}</Link>
     ),
   };
 

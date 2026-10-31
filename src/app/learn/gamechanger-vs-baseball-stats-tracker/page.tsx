@@ -142,7 +142,7 @@ export default function GameChangerVsPage() {
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               Subscription prices change — check GameChanger&apos;s site for current rates
               and run the math for your own timeline. Our full{" "}
-              <Link href="/learn/gamechanger-pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+              <Link href="/learn/gamechanger-pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
                 GameChanger pricing breakdown
               </Link>{" "}
               covers what&apos;s free and what&apos;s paid.
@@ -172,7 +172,7 @@ export default function GameChangerVsPage() {
           </ul>
           <p className="mt-3">
             You don&apos;t have to take our word for it —{" "}
-            <Link href="/signup" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/signup" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               score your first game free
             </Link>
             , no credit card required, and compare the experience yourself.

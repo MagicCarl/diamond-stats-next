@@ -40,10 +40,10 @@ export default async function GameChangerAlternativesPage() {
     b: (c: React.ReactNode) => <strong>{c}</strong>,
     em: (c: React.ReactNode) => <em>{c}</em>,
     featuresLink: (c: React.ReactNode) => (
-      <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+      <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{c}</Link>
     ),
     pricingLink: (c: React.ReactNode) => (
-      <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">{c}</Link>
+      <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">{c}</Link>
     ),
   };
 

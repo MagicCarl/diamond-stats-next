@@ -120,7 +120,7 @@ export default function SprayChartGuidePage() {
           <p>
             Spray charts also reveal who actually drives the ball versus who just makes
             contact. Pair that with{" "}
-            <Link href="/learn/baseball-stats-explained" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/baseball-stats-explained" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               on-base and slugging numbers
             </Link>{" "}
             and your lineup decisions stop being guesses.
@@ -131,15 +131,15 @@ export default function SprayChartGuidePage() {
           <p>
             You never have to plot a dot by hand. Tap the field location for each batted ball
             as you{" "}
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               score with Baseball Stats Tracker
             </Link>
             , and the spray chart builds itself for every hitter, all season — part of a{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               one-time $39 purchase
             </Link>{" "}
             with no subscription. See how it{" "}
-            <Link href="/compare" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/compare" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               compares to other apps
             </Link>
             .

@@ -203,17 +203,17 @@ export default function BaseballStatsExplainedPage() {
           <p>
             Here&apos;s the good news: you never have to calculate any of this by hand.
             When you{" "}
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               score a game live with Baseball Stats Tracker
             </Link>
             , every one of these — AVG, OBP, SLG, OPS, ERA, and more — updates
             automatically after each at-bat, for every player, all season long. No
             spreadsheets, no scorebook math. And it&apos;s a{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               one-time $39 purchase
             </Link>{" "}
             — no subscription. See{" "}
-            <Link href="/compare" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/compare" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               how it compares to other apps
             </Link>
             .

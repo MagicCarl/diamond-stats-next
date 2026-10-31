@@ -55,7 +55,7 @@ const pricingFaqs: Faq[] = [
     more: (
       <>
         See the full breakdown in our{" "}
-        <Link href="/learn/gamechanger-vs-baseball-stats-tracker" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/learn/gamechanger-vs-baseball-stats-tracker" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
           GameChanger vs Baseball Stats Tracker comparison
         </Link>
         .
@@ -110,7 +110,7 @@ const scoringFaqs: Faq[] = [
     more: (
       <>
         New to keeping score? Start with our{" "}
-        <Link href="/learn/how-to-keep-score-in-softball" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/learn/how-to-keep-score-in-softball" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
           softball scoring guide
         </Link>
         .
@@ -145,7 +145,7 @@ const statsFaqs: Faq[] = [
     more: (
       <>
         Not sure what OPS or OBP actually mean? Our{" "}
-        <Link href="/learn/baseball-stats-explained" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/learn/baseball-stats-explained" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
           baseball stats explained guide
         </Link>{" "}
         covers every stat in plain English.
@@ -162,7 +162,7 @@ const statsFaqs: Faq[] = [
     more: (
       <>
         See examples in the{" "}
-        <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 hover:underline dark:text-blue-400">
+        <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
           spray chart guide
         </Link>
         .
@@ -244,7 +244,7 @@ export default function FaqPage() {
           Everything people ask before (and after) buying Baseball Stats Tracker — the
           one-time price, sharing games live with family, what gets tracked, and what
           happens to your data. If your question isn&apos;t here,{" "}
-          <Link href="/signup" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/signup" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             create a free account
           </Link>{" "}
           and see the answer for yourself: your first game is a full, free trial.

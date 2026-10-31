@@ -217,26 +217,26 @@ export default function HowToKeepScoreSoftballPage() {
             But it means carrying a clipboard, doing math between innings, and hoping the
             book doesn&apos;t get left in a dugout. A scoring app replaces all of it: tap
             the result of each at-bat and the box score, season stats, and{" "}
-            <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/baseball-spray-chart-guide" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               spray charts
             </Link>{" "}
             build themselves.
           </p>
           <p>
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               Baseball Stats Tracker
             </Link>{" "}
             works identically for softball and baseball — 7-inning games, any lineup size,
             batting the whole roster — and syncs live so the other parents can{" "}
-            <Link href="/learn/how-to-keep-score-in-baseball" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/how-to-keep-score-in-baseball" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               follow along
             </Link>{" "}
             from anywhere. It&apos;s a{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               one-time $39 purchase
             </Link>
             , not a subscription. Prefer paper? Grab our{" "}
-            <Link href="/free-baseball-scorecard" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/free-baseball-scorecard" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               free printable scorecard
             </Link>{" "}
             — it works for softball too.

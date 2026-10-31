@@ -120,11 +120,11 @@ export default function FreeScorecardPage() {
           <p className="mt-3 leading-relaxed">
             If the symbols are new to you, our guides walk through everything on this card
             step by step —{" "}
-            <Link href="/learn/how-to-keep-score-in-baseball" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/how-to-keep-score-in-baseball" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               how to keep score in baseball
             </Link>{" "}
             and{" "}
-            <Link href="/learn/how-to-keep-score-in-softball" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/how-to-keep-score-in-softball" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               the softball scoring guide
             </Link>
             , from position numbers to the backwards K.

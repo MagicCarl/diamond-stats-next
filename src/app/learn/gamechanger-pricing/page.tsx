@@ -140,7 +140,7 @@ export default function GameChangerPricingPage() {
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Prices change — confirm current rates on{" "}
-            <a href="https://gc.com/pricing" rel="nofollow noopener" target="_blank" className="text-blue-600 hover:underline dark:text-blue-400">
+            <a href="https://gc.com/pricing" rel="nofollow noopener" target="_blank" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               GameChanger&apos;s pricing page
             </a>{" "}
             before you buy.
@@ -170,19 +170,19 @@ export default function GameChangerPricingPage() {
             If the choice is yours and you mostly want clean stats, spray charts, and a live
             box score — without paying every year — a one-time purchase wins the long-run
             math. That&apos;s exactly why{" "}
-            <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               Baseball Stats Tracker
             </Link>{" "}
             is a single{" "}
-            <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               $39 payment
             </Link>{" "}
             with no subscription. See the full{" "}
-            <Link href="/compare" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/compare" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               side-by-side comparison
             </Link>{" "}
             or our deeper look at{" "}
-            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               GameChanger alternatives
             </Link>
             .

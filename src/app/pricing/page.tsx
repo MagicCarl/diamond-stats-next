@@ -184,7 +184,7 @@ export default async function PricingPage() {
           </div>
           <p className="mt-6 text-sm text-gray-600 dark:text-gray-400">
             Have more questions?{" "}
-            <Link href="/faq" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/faq" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               Read the full FAQ
             </Link>{" "}
             — live sharing, pitch tracking, stat formulas, devices, and more.
@@ -204,11 +204,11 @@ export default async function PricingPage() {
           </p>
           <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
             Not sure yet?{" "}
-            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/gamechanger-alternatives" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               Read our honest comparison of GameChanger alternatives
             </Link>{" "}
             to see how we stack up, or see{" "}
-            <Link href="/learn/gamechanger-pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+            <Link href="/learn/gamechanger-pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
               what GameChanger actually costs
             </Link>{" "}
             per year.

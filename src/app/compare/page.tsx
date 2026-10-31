@@ -227,11 +227,11 @@ export default function ComparePage() {
           choice is yours and you mostly want clean stats, spray charts, and a live box score
           your family can follow — without paying every single month — a one-time purchase wins
           the math over a full youth-sports career. That&apos;s exactly why we built{" "}
-          <Link href="/features" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/features" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             Baseball Stats Tracker
           </Link>{" "}
           as a{" "}
-          <Link href="/pricing" className="text-blue-600 hover:underline dark:text-blue-400">
+          <Link href="/pricing" className="text-blue-600 underline underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
             $39 one-time app
           </Link>
           : every at-bat, every game, every season — saved forever, no subscription.
